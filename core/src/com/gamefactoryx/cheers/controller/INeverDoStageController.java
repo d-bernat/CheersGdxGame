@@ -49,8 +49,10 @@ public final class INeverDoStageController extends AbstractController {
             getScreen().getClicked()[i] = false;
         }
 
-        if(screenX >= getScreen().getTextBox().getX() && screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
-                screenY >= getScreen().getTextBox().getY() && screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+        if(screenX >= getScreen().getTextBox().getX() &&
+                screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
+                screenY >= getScreen().getTextBox().getY() &&
+                screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
             StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
         }
 
