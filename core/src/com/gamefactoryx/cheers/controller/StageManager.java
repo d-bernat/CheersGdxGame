@@ -53,7 +53,7 @@ public class StageManager {
         }
 
 
-        game.setScreen(controller.getView());
+        game.setScreen(controller.getScreen());
 
         // Dispose previous screen
         if (currentScreen != null) {

@@ -12,27 +12,27 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 @SuppressWarnings("DefaultFileTemplate")
 public class NewGameStageController extends AbstractController {
 
-    private final AbstractScreen view;
+    private final AbstractScreen screen;
 
-    NewGameStageController(AbstractScreen view){
-        this.view = view;
+    NewGameStageController(AbstractScreen screen){
+        this.screen = screen;
         Gdx.input.setInputProcessor(this);
     }
 
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        for (int i = 0; i < view.getCountOfButtons(); i++) {
-            view.getClicked()[i] = (screenX >= view.getButtons()[i][0].getX() &&
-                    screenX <= view.getButtons()[i][0].getX() + view.getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= view.getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= view.getButtons()[i][0].getY() + view.getButtons()[i][0].getHeight() &&
+        for (int i = 0; i < screen.getCountOfButtons(); i++) {
+            screen.getClicked()[i] = (screenX >= screen.getButtons()[i][0].getX() &&
+                    screenX <= screen.getButtons()[i][0].getX() + screen.getButtons()[i][0].getWidth() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= screen.getButtons()[i][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= screen.getButtons()[i][0].getY() + screen.getButtons()[i][0].getHeight() &&
                     Orientation.getOrientation() == Input.Orientation.Portrait
                     ||
-                    screenX >= view.getButtons()[i][0].getX() &&
-                            screenX <= view.getButtons()[i][0].getX() + view.getButtons()[i][0].getWidth() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY >= view.getButtons()[i][0].getY() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY <= view.getButtons()[i][0].getY() + view.getButtons()[i][0].getHeight() &&
+                    screenX >= screen.getButtons()[i][0].getX() &&
+                            screenX <= screen.getButtons()[i][0].getX() + screen.getButtons()[i][0].getWidth() &&
+                            Resolution.getGameWorldHeightLandscape() - screenY >= screen.getButtons()[i][0].getY() &&
+                            Resolution.getGameWorldHeightLandscape() - screenY <= screen.getButtons()[i][0].getY() + screen.getButtons()[i][0].getHeight() &&
                             Orientation.getOrientation() == Input.Orientation.Landscape);
         }
         return true;
@@ -41,8 +41,8 @@ public class NewGameStageController extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        for (int i = 0; i < view.getCountOfButtons(); i++) {
-            if (view.getClicked()[i])
+        for (int i = 0; i < screen.getCountOfButtons(); i++) {
+            if (screen.getClicked()[i])
                 switch (i){
                     case 0:
                         StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
@@ -52,12 +52,12 @@ public class NewGameStageController extends AbstractController {
                         break;
                 }
 
-            view.getClicked()[i] = false;
+            screen.getClicked()[i] = false;
         }
         return true;
     }
 
     @Override
-    public AbstractScreen getView(){ return view; }
+    public AbstractScreen getScreen(){ return screen; }
 
 }

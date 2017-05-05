@@ -9,5 +9,5 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 @SuppressWarnings("DefaultFileTemplate")
 public abstract class AbstractController extends InputAdapter {
 
-    public abstract AbstractScreen getView();
+    public abstract AbstractScreen getScreen();
 }
