@@ -122,8 +122,16 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public final void dispose() {
+        for( int i = 0; i < getCountOfButtons(); i++ )
+            for( int j = 0; j < getButtons()[i].length; j++)
+                getButtons()[i][j].getTexture().dispose();
+
+        if(getTextBox() != null )
+            getTextBox().getTexture().dispose();
+
         portraitSprite.getTexture().dispose();
         landscapeSprite.getTexture().dispose();
+
         spriteBatch.dispose();
     }
 

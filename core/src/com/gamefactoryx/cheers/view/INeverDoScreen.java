@@ -79,7 +79,10 @@ public class INeverDoScreen extends AbstractScreen {
 
         parameter.size = FONT_SIZE;
         parameter.color = Color.BLACK;
+        BitmapFont temp = font;
         font = generator.generateFont(parameter);
+        if(temp != null)
+            temp.dispose();
         generator.dispose();
 
     }
