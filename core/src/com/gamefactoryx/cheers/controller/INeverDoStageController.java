@@ -11,30 +11,26 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public class INeverDoStageController extends AbstractController {
+public final class INeverDoStageController extends AbstractController {
 
-
-    private final AbstractScreen screen;
-
-    INeverDoStageController(AbstractScreen screen) {
-        this.screen = screen;
-        Gdx.input.setInputProcessor(this);
+    INeverDoStageController(final AbstractScreen screen) {
+        super(screen);
     }
 
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        for (int i = 0; i < screen.getCountOfButtons(); i++) {
-            screen.getClicked()[i] = (screenX >= screen.getButtons()[i][0].getX() &&
-                    screenX <= screen.getButtons()[i][0].getX() + screen.getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= screen.getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= screen.getButtons()[i][0].getY() + screen.getButtons()[i][0].getHeight() &&
+        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+            getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
+                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
                     Orientation.getOrientation() == Input.Orientation.Portrait
                     ||
-                    screenX >= screen.getButtons()[i][0].getX() &&
-                            screenX <= screen.getButtons()[i][0].getX() + screen.getButtons()[i][0].getWidth() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY >= screen.getButtons()[i][0].getY() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY <= screen.getButtons()[i][0].getY() + screen.getButtons()[i][0].getHeight() &&
+                    screenX >= getScreen().getButtons()[i][0].getX() &&
+                            screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                            Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                            Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
                             Orientation.getOrientation() == Input.Orientation.Landscape);
         }
         return true;
@@ -43,26 +39,26 @@ public class INeverDoStageController extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        for (int i = 0; i < screen.getCountOfButtons(); i++) {
-            if (screen.getClicked()[i])
+        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+            if (getScreen().getClicked()[i])
                 switch (i) {
                     case 0:
                         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
                 }
 
-            screen.getClicked()[i] = false;
+            getScreen().getClicked()[i] = false;
         }
 
-        if(screenX >= screen.getTextBox().getX() && screenX <= screen.getTextBox().getX() + screen.getTextBox().getWidth() &&
-                screenY >= screen.getTextBox().getY() && screenY <= screen.getTextBox().getY() + screen.getTextBox().getHeight()) {
+        if(screenX >= getScreen().getTextBox().getX() && screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
+                screenY >= getScreen().getTextBox().getY() && screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
             StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
         }
 
         return true;
     }
 
-    @Override
-    public AbstractScreen getScreen(){ return screen; }
+
+
 
 
 }

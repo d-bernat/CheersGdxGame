@@ -7,7 +7,7 @@ import com.badlogic.gdx.Screen;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public class StageManager {
+public final class StageManager {
 
     // Singleton: unique instance
     private static StageManager instance;

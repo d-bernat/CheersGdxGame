@@ -60,7 +60,8 @@ public class INeverDoScreen extends AbstractScreen {
         }
     }
 
-    @Override public void resize(int width, int height) {
+    @Override
+    public void resize(int width, int height) {
         super.resize(width, height);
         generator = new FreeTypeFontGenerator(fontFile);
         if(Orientation.getOrientation() == Input.Orientation.Portrait) {
