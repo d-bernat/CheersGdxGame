@@ -1,30 +1,29 @@
-package com.gamefactoryx.cheers.manager;
+package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.gamefactoryx.cheers.view.AbstractScreen;
 
 /**
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public class ScreenManager {
+public class StageManager {
 
     // Singleton: unique instance
-    private static ScreenManager instance;
+    private static StageManager instance;
 
     // Reference to game
     private Game game;
 
     // Singleton: private constructor
-    private ScreenManager() {
+    private StageManager() {
         super();
     }
 
     // Singleton: retrieve instance
-    public static ScreenManager getInstance() {
+    public static StageManager getInstance() {
         if (instance == null) {
-            instance = new ScreenManager();
+            instance = new StageManager();
         }
         return instance;
     }
@@ -35,26 +34,26 @@ public class ScreenManager {
     }
 
     // Show in the game the screen which enum type is received
-    public void showScreen(ScreenEnum screenEnum) {
+    public void showStage(StageEnum screenEnum) {
 
         // Get current screen to dispose it
         Screen currentScreen = game.getScreen();
-        AbstractScreen newScreen = null;
+        AbstractController controller = null;
         // Show new screen
         switch (screenEnum) {
-            case MAIN_SCREEN:
-                newScreen = ScreenEnum.MAIN_SCREEN.getScreen();
+            case MAIN_STAGE:
+                controller = StageEnum.MAIN_STAGE.getController();
                 break;
-            case NEW_GAME_SCREEN:
-                newScreen = ScreenEnum.NEW_GAME_SCREEN.getScreen();
+            case NEW_GAME_STAGE:
+                controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
-            case I_NEVER_DO_SCREEN:
-                newScreen = ScreenEnum.I_NEVER_DO_SCREEN.getScreen();
+            case I_NEVER_DO_STAGE:
+                controller = StageEnum.I_NEVER_DO_STAGE.getController();
                 break;
         }
 
 
-        game.setScreen(newScreen);
+        game.setScreen(controller.getView());
 
         // Dispose previous screen
         if (currentScreen != null) {

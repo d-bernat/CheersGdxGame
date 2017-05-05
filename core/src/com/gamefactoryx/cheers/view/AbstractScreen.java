@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.gamefactoryx.cheers.controller.ButtonController;
-import com.gamefactoryx.cheers.controller.TextController;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -30,22 +28,50 @@ public abstract class AbstractScreen implements Screen {
     private Sprite landscapeSprite;
     private Sprite portraitSprite;
     private Batch spriteBatch;
-    private final TextController controller;
+    private boolean[] clicked;
+    private Sprite[][] buttons;
+    private Sprite textBox;
 
+
+    public Sprite[][] getButtons() {
+        return buttons;
+    }
+    public boolean[] getClicked() {
+        return clicked;
+    }
+    public int getCountOfButtons() {
+        return buttons.length;
+    }
+    public Sprite getTextBox(){ return textBox; }
+
+    Sprite getLandscapeSprite() {
+        return landscapeSprite;
+    }
+    Sprite getPortraitSprite() {
+        return portraitSprite;
+    }
+    Batch getSpriteBatch(){
+        return spriteBatch;
+    }
+
+    void setClicked(boolean[] clicked) {
+        this.clicked = clicked;
+    }
+
+    void setButtons(Sprite[][] buttons) {
+        this.buttons = buttons;
+    }
+
+    void setTextBox(Sprite textBox) {
+        this.textBox = textBox;
+    }
 
     protected abstract void initSprites();
-
+    protected abstract void initButtons();
     protected abstract void drawButtons();
-
     protected abstract void drawText();
+    protected abstract void initTextBox();
 
-    AbstractScreen(TextController controller){
-        this.controller = controller;
-    }
-
-    TextController getController(){
-        return controller;
-    }
 
 
     @Override
@@ -61,7 +87,9 @@ public abstract class AbstractScreen implements Screen {
         viewport.apply();
 
         initSprites();
-        Gdx.input.setInputProcessor(controller);
+        initButtons();
+        initTextBox();
+
     }
 
     @Override
@@ -100,18 +128,8 @@ public abstract class AbstractScreen implements Screen {
     }
 
 
-    Sprite getLandscapeSprite() {
-        return landscapeSprite;
-    }
-
-    Sprite getPortraitSprite() {
-        return portraitSprite;
-    }
 
 
-    Batch getSpriteBatch(){
-        return spriteBatch;
-    }
 
     void setLandscapeSprite(Sprite landscapeSprite) {
         this.landscapeSprite = landscapeSprite;
