@@ -15,8 +15,8 @@ public class MainStageController extends AbstractController {
 
     private final AbstractScreen screen;
 
-    MainStageController(AbstractScreen view){
-        this.screen = view;
+    MainStageController(AbstractScreen screen){
+        this.screen = screen;
         Gdx.input.setInputProcessor(this);
     }
 
