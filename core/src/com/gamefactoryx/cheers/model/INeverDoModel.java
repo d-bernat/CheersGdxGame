@@ -11,11 +11,11 @@ public class INeverDoModel {
 
     private String[] tasks;
     private INeverDoModel(){}
-    public String[] getText() {
+    public String getLine() {
 
-        int index = (int)((Math.random()) * tasks.length );
-        return tasks[index].split(":");
+        return tasks[(int)((Math.random()) * tasks.length )];
     }
+
     private void setTasks(String[] tasks){
         this.tasks = tasks;
     }

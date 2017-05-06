@@ -12,6 +12,11 @@ import com.gamefactoryx.cheers.model.INeverDoModel;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by bernat on 28.04.2017.
  */
@@ -25,14 +30,41 @@ public class INeverDoScreen extends AbstractScreen {
     private float X, Y;
     private BitmapFont font;
     private INeverDoModel dataModel;
-    private String[] text;
+    private List<String> text;
+    private String line;
 
 
     @Override
     public void show() {
         super.show();
         dataModel = INeverDoModel.getInstance();
-        text = dataModel.getText();
+        line = dataModel.getLine();
+    }
+
+    private List<String> splitLine() {
+        List<String> text = new ArrayList<>();
+        int num_of_chars = (int) (getTextBox().getWidth()/font.getSpaceWidth() * 0.9f);
+        if(line.length() > num_of_chars) {
+            StringBuilder sb = new StringBuilder();
+            for(String s: line.split(" ")){
+               if(sb.length() == 0) {
+                    sb.append(s);
+                }
+                else if(sb.length() + s.length() + 1 < num_of_chars) {
+                    sb.append(" ");
+                    sb.append(s);
+                }else {
+                    text.add(sb.toString());
+                    sb.setLength(0);
+                    sb.append(s);
+                }
+            }
+            text.add(sb.toString());
+        }
+        else
+            text = Arrays.asList(line);
+
+        return text;
     }
 
     @Override
@@ -41,23 +73,6 @@ public class INeverDoScreen extends AbstractScreen {
         setPortraitSprite(new Sprite(new Texture("iNeverDoScreen/INeverDoScreenPortrait.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
-    }
-
-
-    @Override
-    protected void drawButtons() {
-        for (int i = 0; i < getCountOfButtons(); i++) {
-            int click_index = getClicked()[i] ? CLICKED : FREE;
-            if (Orientation.getOrientation() == Input.Orientation.Landscape) {
-                    getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthLandscape() * 0.01f,
-                            0f);
-
-            } else {
-                    getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthPortrait() * 0.01f,
-                            0f);
-            }
-            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
-        }
     }
 
     @Override
@@ -84,6 +99,7 @@ public class INeverDoScreen extends AbstractScreen {
         if(temp != null)
             temp.dispose();
         generator.dispose();
+        text = splitLine();
 
     }
 
@@ -91,26 +107,12 @@ public class INeverDoScreen extends AbstractScreen {
     protected void drawText() {
         getTextBox().setPosition(X * 0.1f,Y * 0.3f);
         getTextBox().draw(getSpriteBatch());
-        for(int i = 0; i < text.length; i++)
-            font.draw(getSpriteBatch(), text[i],
-                    (X - text[i].length()* font.getSpaceWidth() * 1.0f) * 0.5f,
-                    Y - (Y  - font.getCapHeight() * text.length) * 0.5f - font.getCapHeight() * 1.0f * i);
+        for(int i = 0; i < text.size(); i++)
+            font.draw(getSpriteBatch(), text.get(i),
+                    (X - text.get(i).length()* font.getSpaceWidth() * 1.0f) * 0.5f,
+                    Y - (Y  - font.getCapHeight() * text.size()) * 0.5f - font.getCapHeight() * 1.0f * i);
     }
 
-    @Override
-    protected void initButtons() {
-        setButtons(new Sprite[1][2]);
-
-        getButtons()[0][0] = new Sprite(new Texture("base/button_free_back_to_main.png"));
-        getButtons()[0][1] = new Sprite(new Texture("base/button_clicked_back_to_main.png"));
-
-        getButtons()[0][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
-                Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
-        getButtons()[0][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
-                Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
-
-        setClicked(new boolean[getCountOfButtons()]);
-    }
 
     @Override
     protected void initTextBox(){

@@ -4,9 +4,11 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamefactoryx.cheers.tool.Orientation;
@@ -32,6 +34,7 @@ public abstract class AbstractScreen implements Screen {
     private Sprite[][] buttons;
     private Sprite textBox;
 
+    private int yScrollPos;
 
     public Sprite[][] getButtons() {
         return buttons;
@@ -67,12 +70,46 @@ public abstract class AbstractScreen implements Screen {
     }
 
     protected abstract void initSprites();
-    protected abstract void initButtons();
-    protected abstract void drawButtons();
     protected abstract void drawText();
     protected abstract void initTextBox();
 
 
+    public int getYScrollPos() {
+        return yScrollPos;
+    }
+
+    public void setYScrollPos(int yScrollPos) {
+        this.yScrollPos = yScrollPos;
+    }
+
+    protected void drawButtons() {
+        for (int i = 0; i < getCountOfButtons(); i++) {
+            int click_index = getClicked()[i] ? CLICKED : FREE;
+            if (Orientation.getOrientation() == Input.Orientation.Landscape) {
+                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthLandscape() * 0.01f,
+                        0f);
+
+            } else {
+                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthPortrait() * 0.01f,
+                        0f);
+            }
+            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
+        }
+    }
+
+    protected void initButtons() {
+        setButtons(new Sprite[1][2]);
+
+        getButtons()[0][0] = new Sprite(new Texture("base/button_free_back_to_main.png"));
+        getButtons()[0][1] = new Sprite(new Texture("base/button_clicked_back_to_main.png"));
+
+        getButtons()[0][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
+                Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
+        getButtons()[0][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
+                Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
+
+        setClicked(new boolean[getCountOfButtons()]);
+    }
 
     @Override
     public void show() {
@@ -96,7 +133,6 @@ public abstract class AbstractScreen implements Screen {
     public final void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         drawSprite();
-
     }
 
     @Override

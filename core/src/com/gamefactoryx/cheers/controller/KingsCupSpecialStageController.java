@@ -5,13 +5,16 @@ import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
+
 /**
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public final class NewGameStageController extends AbstractController {
+public final class KingsCupSpecialStageController extends AbstractController {
 
-    NewGameStageController(final AbstractScreen screen){
+    private int lastYPointerPos;
+
+    KingsCupSpecialStageController(final AbstractScreen screen) {
         super(screen);
     }
 
@@ -39,22 +42,39 @@ public final class NewGameStageController extends AbstractController {
 
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
             if (getScreen().getClicked()[i])
-                switch (i){
+                switch (i) {
                     case 0:
-                        StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
-                        break;
-                    case 1:
-                        StageManager.getInstance().showStage(StageEnum.KINGS_CUP_SPECIAL_STAGE);
-                        break;
-                    case 2:
                         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-                        break;
                 }
 
             getScreen().getClicked()[i] = false;
         }
+
+
         return true;
     }
+
+    @Override
+    public boolean touchDragged (int screenX, int screenY, int pointer) {
+
+        if(screenX >= getScreen().getTextBox().getX() &&
+                screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
+                screenY >= getScreen().getTextBox().getY() &&
+                screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+            if(screenY < lastYPointerPos) {
+                //if (getScreen().getYScrollPos() > 0)
+                    getScreen().setYScrollPos(getScreen().getYScrollPos() - 1);
+            }
+            else
+                getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
+            lastYPointerPos = screenY;
+        }
+
+        return true;
+    }
+
+
+
 
 
 }

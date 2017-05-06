@@ -50,6 +50,9 @@ public final class StageManager {
             case I_NEVER_DO_STAGE:
                 controller = StageEnum.I_NEVER_DO_STAGE.getController();
                 break;
+            case KINGS_CUP_SPECIAL_STAGE:
+                controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
+                break;
         }
 
 

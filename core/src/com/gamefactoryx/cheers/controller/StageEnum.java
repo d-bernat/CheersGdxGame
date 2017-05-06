@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.controller;
 
 import com.gamefactoryx.cheers.view.INeverDoScreen;
+import com.gamefactoryx.cheers.view.KingsCupSpecialScreen;
 import com.gamefactoryx.cheers.view.MainScreen;
 import com.gamefactoryx.cheers.view.NewGameScreen;
 
@@ -23,6 +24,11 @@ public enum StageEnum {
     I_NEVER_DO_STAGE {
         public AbstractController getController() {
             return new INeverDoStageController(new INeverDoScreen());
+        }
+    },
+    KINGS_CUP_SPECIAL_STAGE {
+        public AbstractController getController() {
+            return new KingsCupSpecialStageController(new KingsCupSpecialScreen());
         }
     };
 

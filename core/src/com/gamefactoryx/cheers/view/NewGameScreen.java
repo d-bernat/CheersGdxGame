@@ -60,17 +60,18 @@ public class NewGameScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[2][2]);
+        setButtons(new Sprite[3][2]);
 
         getButtons()[0][0] = new Sprite(new Texture("newGameScreen/sekt_button_ididnot_free.png"));
         getButtons()[0][1] = new Sprite(new Texture("newGameScreen/sekt_button_ididnot_clicked.png"));
-
-        getButtons()[1][0] = new Sprite(new Texture("base/button_free_back_to_main.png"));
-        getButtons()[1][1] = new Sprite(new Texture("base/button_clicked_back_to_main.png"));
+        getButtons()[1][0] = new Sprite(new Texture("newGameScreen/sekt_button_kingscup_free.png"));
+        getButtons()[1][1] = new Sprite(new Texture("newGameScreen/sekt_button_kingscup_clicked.png"));
+        getButtons()[2][0] = new Sprite(new Texture("base/button_free_back_to_main.png"));
+        getButtons()[2][1] = new Sprite(new Texture("base/button_clicked_back_to_main.png"));
 
         for (int i = 0; i < getCountOfButtons(); i++) {
             for (int j = 0; j < 2; j++) {
-                if(i == 0)
+                if(i < getCountOfButtons() - 1)
                     getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait(),
                             Resolution.getGameWorldHeightPortrait() * 0.35f * Resolution.getAspectRatio());
                 else
