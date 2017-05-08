@@ -2,6 +2,7 @@ package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
 /**
@@ -18,6 +19,28 @@ abstract class AbstractController extends InputAdapter {
 
     }
 
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+            if (getScreen().getClicked()[i])
+                switch (i) {
+                    case 0:
+                        Configuration.setLanguage(Configuration.LanguageEnum.DE);
+                        StageManager.getInstance().showStage();
+                        break;
+                    case 1:
+                        Configuration.setLanguage(Configuration.LanguageEnum.EN);
+                        StageManager.getInstance().showStage();
+                        break;
+                    case 2:
+                        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
+                        break;
+                }
+
+            getScreen().getClicked()[i] = false;
+        }
+        return true;
+    }
     AbstractScreen getScreen(){ return screen; }
 
 }

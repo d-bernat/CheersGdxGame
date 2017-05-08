@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.model.INeverDoModel;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -23,7 +24,7 @@ import java.util.List;
 @SuppressWarnings("DefaultFileTemplate")
 public class INeverDoScreen extends AbstractScreen {
 
-    private final static FileHandle fontFile = Gdx.files.internal("base/SemirResimovicRukopisniFONT.otf");
+    private final static FileHandle fontFile = Gdx.files.internal("font/SemirResimovicRukopisniFONT.otf");
     private final static FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
@@ -69,8 +70,8 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture("iNeverDoScreen/INeverDoScreenLandscape.png")));
-        setPortraitSprite(new Sprite(new Texture("iNeverDoScreen/INeverDoScreenPortrait.png")));
+        setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/INeverDoScreenLandscape.png")));
+        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/INeverDoScreenPortrait.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
@@ -116,7 +117,7 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     protected void initTextBox(){
-        setTextBox(new Sprite(new Texture("base/TextBoxPortrait.png")));
+        setTextBox(new Sprite(new Texture("common/TextBoxPortrait.png")));
 
     }
 

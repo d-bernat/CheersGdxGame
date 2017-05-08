@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -85,11 +86,11 @@ public abstract class AbstractScreen implements Screen {
         for (int i = 0; i < getCountOfButtons(); i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;
             if (Orientation.getOrientation() == Input.Orientation.Landscape) {
-                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthLandscape() * 0.01f,
+                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthLandscape() * 0.01f +  i * getButtons()[i][0].getWidth(),
                         0f);
 
             } else {
-                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthPortrait() * 0.01f,
+                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthPortrait() * 0.01f  + i * getButtons()[i][0].getWidth(),
                         0f);
             }
             getButtons()[i][click_index].draw(getSpriteBatch(), 1);
@@ -97,15 +98,21 @@ public abstract class AbstractScreen implements Screen {
     }
 
     void initButtons() {
-        setButtons(new Sprite[1][2]);
+        setButtons(new Sprite[3][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture("base/button_free_back_to_main.png"));
-        getButtons()[0][1] = new Sprite(new Texture("base/button_clicked_back_to_main.png"));
+        getButtons()[0][0] = new Sprite(new Texture("common/button_free_de_lang.png"));
+        getButtons()[0][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+        getButtons()[1][0] = new Sprite(new Texture("common/button_free_eng_lang.png"));
+        getButtons()[1][1] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
+        getButtons()[2][0] = new Sprite(new Texture("common/button_free_back_to_main.png"));
+        getButtons()[2][1] = new Sprite(new Texture("common/button_clicked_back_to_main.png"));
 
-        getButtons()[0][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
-                Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
-        getButtons()[0][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
-                Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
+        for(int i = 0; i < getCountOfButtons(); i++) {
+            getButtons()[i][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
+                    Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
+            getButtons()[i][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
+                    Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
+        }
 
         setClicked(new boolean[getCountOfButtons()]);
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.model.KingsCupSpecialModel;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -22,7 +23,7 @@ import java.util.List;
 @SuppressWarnings("DefaultFileTemplate")
 public class KingsCupSpecialScreen extends AbstractScreen {
 
-    private final static FileHandle fontFile = Gdx.files.internal("base/SemirResimovicRukopisniFONT.otf");
+    private final static FileHandle fontFile = Gdx.files.internal("font/SemirResimovicRukopisniFONT.otf");
     private final static FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
@@ -76,8 +77,8 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture("kingsCupSpecial/KingsCupSpecialScreenLandscape.png")));
-        setPortraitSprite(new Sprite(new Texture("kingsCupSpecial/KingsCupSpecialScreenPortrait.png")));
+        setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialScreenLandscape.png")));
+        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() +  "/kingsCupSpecial/KingsCupSpecialScreenPortrait.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
@@ -90,12 +91,12 @@ public class KingsCupSpecialScreen extends AbstractScreen {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * 0.035f);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
-            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.7f);
+            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.70f);
         } else {
             FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * 0.035f);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
-            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.7f);
+            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.62f);
 
         }
 
@@ -114,7 +115,11 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     @Override
     protected void drawText() {
 
+        if (Orientation.getOrientation() == Input.Orientation.Portrait)
         getTextBox().setPosition(X * 0.1f, Y * 0.15f);
+        else
+            getTextBox().setPosition(X * 0.1f, Y * 0.18f);
+
         getTextBox().draw(getSpriteBatch());
         float y_offset = 0f;
         if(getYScrollPos() < 0) setYScrollPos(0);
@@ -123,7 +128,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
             font.draw(getSpriteBatch(), text.get(i),
                     (X - text.get(i).length() * font.getSpaceWidth() * 1.0f) * 0.5f,
-                    Y - getTextBox().getY() - font.getCapHeight()  - y_offset);
+                    Y - getTextBox().getY() - font.getCapHeight() * 0.3f  - y_offset);
 
             if (text.get(i).indexOf('\n') > -1)
                 y_offset += font.getCapHeight() * 1.5f;
@@ -137,7 +142,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture("base/TextBoxPortrait.png")));
+        setTextBox(new Sprite(new Texture("common/TextBoxPortrait.png")));
 
     }
 

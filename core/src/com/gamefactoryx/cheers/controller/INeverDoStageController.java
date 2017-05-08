@@ -38,15 +38,7 @@ final class INeverDoStageController extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            if (getScreen().getClicked()[i])
-                switch (i) {
-                    case 0:
-                        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-                }
-
-            getScreen().getClicked()[i] = false;
-        }
+        super.touchUp(screenX, screenY, pointer, button);
 
         if(screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&

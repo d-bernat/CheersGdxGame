@@ -3,6 +3,7 @@ package com.gamefactoryx.cheers.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -15,8 +16,8 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture("mainScreen/MainScreenLandscape.png")));
-        setPortraitSprite(new Sprite(new Texture("mainScreen/MainScreenPortrait.png")));
+        setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/MainScreenLandscape.png")));
+        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/MainScreenPortrait.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
@@ -61,17 +62,16 @@ public class MainScreen extends AbstractScreen {
     protected void initButtons() {
         setButtons(new Sprite[5][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture("mainScreen/sekt_button_free_new_game.png"));
-        getButtons()[0][1] = new Sprite(new Texture("mainScreen/sekt_button_clicked_new_game.png"));
-        getButtons()[1][0] = new Sprite(new Texture("mainScreen/sekt_button_free_add_task.png"));
-        getButtons()[1][1] = new Sprite(new Texture("mainScreen/sekt_button_clicked_add_task.png"));
-        getButtons()[2][0] = new Sprite(new Texture("mainScreen/sekt_button_free_settings.png"));
-        getButtons()[2][1] = new Sprite(new Texture("mainScreen/sekt_button_clicked_settings.png"));
-        getButtons()[3][0] = new Sprite(new Texture("mainScreen/sekt_button_free_help.png"));
-        getButtons()[3][1] = new Sprite(new Texture("mainScreen/sekt_button_clicked_help.png"));
-        getButtons()[4][0] = new Sprite(new Texture("mainScreen/sekt_button_free_hall_of_fame.png"));
-        getButtons()[4][1] = new Sprite(new Texture("mainScreen/sekt_button_clicked_hall_of_fame.png"));
-
+        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_new_game.png"));
+        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game.png"));
+        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_add_task.png"));
+        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_add_task.png"));
+        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_settings.png"));
+        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
+        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_help.png"));
+        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help.png"));
+        getButtons()[4][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_hall_of_fame.png"));
+        getButtons()[4][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
 
 
         for (int i = 0; i < 5; i++)
@@ -79,7 +79,7 @@ public class MainScreen extends AbstractScreen {
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.3f,
                         Resolution.getGameWorldHeightPortrait() * 0.3f * Resolution.getAspectRatio());
             }
-        setClicked( new boolean[5] );
+        setClicked(new boolean[5]);
     }
 
 }

@@ -25,7 +25,7 @@ public class INeverDoModel {
     public static INeverDoModel getInstance(){
         if(instance == null ) {
             instance = new INeverDoModel();
-            FileHandle taskFile = Gdx.files.internal("base/tasks.txt");
+            FileHandle taskFile = Gdx.files.internal(Configuration.getLanguage() + "/iNeverDoScreen/tasks.txt");
             instance.setTasks( taskFile.readString().split("\\n") );
 
         }

@@ -47,6 +47,12 @@ final class NewGameStageController extends AbstractController {
                         StageManager.getInstance().showStage(StageEnum.KINGS_CUP_SPECIAL_STAGE);
                         break;
                     case 2:
+                        //StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
+                        break;
+                    case 3:
+                        //StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
+                        break;
+                    case 4:
                         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
                         break;
                 }

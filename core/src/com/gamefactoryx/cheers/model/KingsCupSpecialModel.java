@@ -25,9 +25,9 @@ public class KingsCupSpecialModel {
     public static KingsCupSpecialModel getInstance(){
         if(instance == null ) {
             instance = new KingsCupSpecialModel();
-            FileHandle taskFile = Gdx.files.internal("base/KingsCupSpecialDescription.txt");
-            instance.setTasks( taskFile.readString());
         }
+        FileHandle taskFile = Gdx.files.internal(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialDescription.txt");
+        instance.setTasks( taskFile.readString());
         return instance;
     }
 

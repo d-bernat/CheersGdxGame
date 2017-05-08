@@ -38,23 +38,6 @@ final class KingsCupSpecialStageController extends AbstractController {
     }
 
     @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-
-        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            if (getScreen().getClicked()[i])
-                switch (i) {
-                    case 0:
-                        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-                }
-
-            getScreen().getClicked()[i] = false;
-        }
-
-
-        return true;
-    }
-
-    @Override
     public boolean touchDragged (int screenX, int screenY, int pointer) {
 
         if(screenX >= getScreen().getTextBox().getX() &&

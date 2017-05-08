@@ -14,6 +14,7 @@ public final class StageManager {
 
     // Reference to game
     private Game game;
+    private StageEnum currentStage;
 
     // Singleton: private constructor
     private StageManager() {
@@ -33,6 +34,9 @@ public final class StageManager {
         this.game = game;
     }
 
+    public void showStage(){
+        showStage(currentStage);
+    }
     // Show in the game the screen which enum type is received
     public void showStage(StageEnum screenEnum) {
 
@@ -55,7 +59,7 @@ public final class StageManager {
                 break;
         }
 
-
+        currentStage = screenEnum;
         game.setScreen(controller.getScreen());
 
         // Dispose previous screen
