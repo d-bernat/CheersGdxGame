@@ -62,7 +62,7 @@ public class INeverDoScreen extends AbstractScreen {
             text.add(sb.toString());
         }
         else
-            text = Arrays.asList(line);
+            text = Collections.singletonList(line);
 
         return text;
     }

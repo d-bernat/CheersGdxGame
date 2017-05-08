@@ -13,7 +13,7 @@ import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,7 +60,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
         } else {
             sb.append(plainText);
             sb.append('\n');
-            text = Arrays.asList(sb.toString());
+            text = Collections.singletonList(sb.toString());
         }
 
 
@@ -87,12 +87,12 @@ public class KingsCupSpecialScreen extends AbstractScreen {
         super.resize(width, height);
         generator = new FreeTypeFontGenerator(fontFile);
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
-            FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * 0.025f);
+            FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * 0.035f);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
             getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.7f);
         } else {
-            FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * 0.025f);
+            FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * 0.035f);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
             getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.7f);

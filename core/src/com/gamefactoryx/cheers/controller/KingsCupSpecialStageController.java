@@ -10,7 +10,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public final class KingsCupSpecialStageController extends AbstractController {
+final class KingsCupSpecialStageController extends AbstractController {
 
     private int lastYPointerPos;
 
@@ -62,11 +62,11 @@ public final class KingsCupSpecialStageController extends AbstractController {
                 screenY >= getScreen().getTextBox().getY() &&
                 screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
             if(screenY < lastYPointerPos) {
-                //if (getScreen().getYScrollPos() > 0)
-                    getScreen().setYScrollPos(getScreen().getYScrollPos() - 1);
+                getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
             }
             else
-                getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
+                getScreen().setYScrollPos(getScreen().getYScrollPos() - 1);
+
             lastYPointerPos = screenY;
         }
 

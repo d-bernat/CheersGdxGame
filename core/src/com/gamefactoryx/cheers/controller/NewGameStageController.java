@@ -9,7 +9,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public final class NewGameStageController extends AbstractController {
+final class NewGameStageController extends AbstractController {
 
     NewGameStageController(final AbstractScreen screen){
         super(screen);

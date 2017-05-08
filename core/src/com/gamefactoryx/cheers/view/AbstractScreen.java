@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamefactoryx.cheers.tool.Orientation;
@@ -82,7 +81,7 @@ public abstract class AbstractScreen implements Screen {
         this.yScrollPos = yScrollPos;
     }
 
-    protected void drawButtons() {
+    void drawButtons() {
         for (int i = 0; i < getCountOfButtons(); i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;
             if (Orientation.getOrientation() == Input.Orientation.Landscape) {
@@ -97,7 +96,7 @@ public abstract class AbstractScreen implements Screen {
         }
     }
 
-    protected void initButtons() {
+    void initButtons() {
         setButtons(new Sprite[1][2]);
 
         getButtons()[0][0] = new Sprite(new Texture("base/button_free_back_to_main.png"));

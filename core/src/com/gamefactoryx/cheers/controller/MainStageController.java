@@ -1,6 +1,5 @@
 package com.gamefactoryx.cheers.controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -11,7 +10,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public final class MainStageController extends AbstractController {
+final class MainStageController extends AbstractController {
 
     MainStageController(final AbstractScreen screen){
         super(screen);
