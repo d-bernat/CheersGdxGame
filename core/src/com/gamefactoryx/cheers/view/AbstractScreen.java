@@ -29,6 +29,7 @@ public abstract class AbstractScreen implements Screen {
 
     private Sprite landscapeSprite;
     private Sprite portraitSprite;
+    private Sprite logo;
     private Batch spriteBatch;
     private boolean[] clicked;
     private Sprite[][] buttons;
@@ -43,7 +44,7 @@ public abstract class AbstractScreen implements Screen {
         return clicked;
     }
     public int getCountOfButtons() {
-        return buttons.length;
+        return buttons != null ? buttons.length : 0;
     }
     public Sprite getTextBox(){ return textBox; }
 
@@ -55,6 +56,9 @@ public abstract class AbstractScreen implements Screen {
     }
     Batch getSpriteBatch(){
         return spriteBatch;
+    }
+    Sprite getLogo(){
+        return logo;
     }
 
     void setClicked(boolean[] clicked) {
@@ -68,11 +72,15 @@ public abstract class AbstractScreen implements Screen {
     void setTextBox(Sprite textBox) {
         this.textBox = textBox;
     }
+    void setLogo(Sprite logo){ this.logo = logo; }
 
     protected abstract void initSprites();
     protected abstract void drawText();
     protected abstract void initTextBox();
-
+    protected abstract void initButtons();
+    protected abstract void drawButtons();
+    protected abstract void initLogo();
+    protected abstract void drawLogo();
 
     public int getYScrollPos() {
         return yScrollPos;
@@ -82,40 +90,9 @@ public abstract class AbstractScreen implements Screen {
         this.yScrollPos = yScrollPos;
     }
 
-    void drawButtons() {
-        for (int i = 0; i < getCountOfButtons(); i++) {
-            int click_index = getClicked()[i] ? CLICKED : FREE;
-            if (Orientation.getOrientation() == Input.Orientation.Landscape) {
-                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthLandscape() * 0.01f +  i * getButtons()[i][0].getWidth(),
-                        0f);
 
-            } else {
-                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthPortrait() * 0.01f  + i * getButtons()[i][0].getWidth(),
-                        0f);
-            }
-            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
-        }
-    }
 
-    void initButtons() {
-        setButtons(new Sprite[3][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture("common/button_free_de_lang.png"));
-        getButtons()[0][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
-        getButtons()[1][0] = new Sprite(new Texture("common/button_free_eng_lang.png"));
-        getButtons()[1][1] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
-        getButtons()[2][0] = new Sprite(new Texture("common/button_free_back_to_main.png"));
-        getButtons()[2][1] = new Sprite(new Texture("common/button_clicked_back_to_main.png"));
-
-        for(int i = 0; i < getCountOfButtons(); i++) {
-            getButtons()[i][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
-                    Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
-            getButtons()[i][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
-                    Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
-        }
-
-        setClicked(new boolean[getCountOfButtons()]);
-    }
 
     @Override
     public void show() {
@@ -128,12 +105,12 @@ public abstract class AbstractScreen implements Screen {
             viewport = new FillViewport(Resolution.getGameWorldWidthLandscape() / Resolution.getAspectRatio(),
                     Resolution.getGameWorldHeightLandscape(), camera);
         viewport.apply();
-
+        initLogo();
         initSprites();
-        initButtons();
         initTextBox();
-
+        initButtons();
     }
+
 
     @Override
     public final void render(float delta) {
@@ -170,16 +147,14 @@ public abstract class AbstractScreen implements Screen {
 
         if(getTextBox() != null )
             getTextBox().getTexture().dispose();
-
+        if(logo != null)
+            logo.getTexture().dispose();
         portraitSprite.getTexture().dispose();
         landscapeSprite.getTexture().dispose();
 
+
         spriteBatch.dispose();
     }
-
-
-
-
 
     void setLandscapeSprite(Sprite landscapeSprite) {
         this.landscapeSprite = landscapeSprite;
@@ -196,11 +171,11 @@ public abstract class AbstractScreen implements Screen {
         spriteBatch.begin();
         spriteBatch.setProjectionMatrix(camera.combined);
         drawMainSprite();
+        drawLogo();
         drawButtons();
         drawText();
         spriteBatch.end();
     }
-
 
     private void setCameraPosition() {
         if (Orientation.getOrientation() == Input.Orientation.Landscape)

@@ -16,37 +16,13 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/MainScreenLandscape.png")));
-        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/MainScreenPortrait.png")));
+        setLandscapeSprite(new Sprite(new Texture("common/Landscapescreen.png")));
+        setPortraitSprite(new Sprite(new Texture("common/Portraitscreen.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
 
 
-    @Override
-    protected void drawButtons() {
-        int offset_index = 0;
-        for (int i = 0; i < getCountOfButtons(); i++) {
-            if (i == 3 && Orientation.getOrientation() == Input.Orientation.Landscape)
-                offset_index = 0;
-            float y_offset = offset_index++ * getButtons()[i][CLICKED].getHeight() * 1.0f;
-            int click_index = getClicked()[i] ? CLICKED : FREE;
-            if (Orientation.getOrientation() == Input.Orientation.Landscape) {
-                if (i < 3)
-                    getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthLandscape() * 0.01f,
-                            Resolution.getGameWorldHeightLandscape() - Resolution.getGameWorldHeightLandscape() * 0.35f - y_offset);
-                else
-                    getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthLandscape() * 0.01f + getButtons()[i][0].getWidth(),
-                            Resolution.getGameWorldHeightLandscape() - Resolution.getGameWorldHeightLandscape() * 0.35f -
-                                    y_offset - getButtons()[i][click_index].getHeight() * 0.5f);
-
-            } else {
-                getButtons()[i][click_index].setPosition(Resolution.getGameWorldWidthPortrait() * 0.01f,
-                        Resolution.getGameWorldHeightPortrait() - Resolution.getGameWorldHeightPortrait() * 0.20f - y_offset);
-            }
-            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
-        }
-    }
 
     @Override
     protected void drawText() {
@@ -60,26 +36,98 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[5][2]);
+        setButtons(new Sprite[8][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_new_game.png"));
-        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game.png"));
-        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_add_task.png"));
-        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_add_task.png"));
-        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_settings.png"));
-        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
-        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_help.png"));
-        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help.png"));
-        getButtons()[4][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_free_hall_of_fame.png"));
-        getButtons()[4][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
+        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory.png"));
+        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory.png"));
+        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
+        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
+        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
+        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
+        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game.png"));
+        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game.png"));
+        getButtons()[4][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_add_task.png"));
+        getButtons()[4][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_add_task.png"));
+        switch (Configuration.getLanguage()) {
+            case EN:
+                getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                break;
+            case DE:
+                getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
+                getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
+                break;
+            case SK:
+                getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                break;
+        }
+        getButtons()[6][0] = new Sprite(new Texture("common/Facebook_icon.png"));
+        getButtons()[6][1] = new Sprite(new Texture("common/Facebook_icon.png"));
+        getButtons()[7][0] = new Sprite(new Texture("common/Twitter_icon.png"));
+        getButtons()[7][1] = new Sprite(new Texture("common/Twitter_icon.png"));
 
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < getCountOfButtons(); i++)
             for (int j = 0; j < 2; j++) {
-                getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.3f,
-                        Resolution.getGameWorldHeightPortrait() * 0.3f * Resolution.getAspectRatio());
+                if(i < 5)
+                    getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
+                        Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
+                else
+                    getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.13f,
+                            Resolution.getGameWorldHeightPortrait() * 0.13f * Resolution.getAspectRatio());
             }
-        setClicked(new boolean[5]);
+        setClicked(new boolean[getCountOfButtons()]);
     }
+
+    @Override
+    protected void drawButtons() {
+        float SPACE_BETWEEN_BUTTONS = 1.2f;
+        int offset_index = 0;
+
+        float X = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
+        float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
+        float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.45f : 0.3f;
+        float DISTANCE_FROM_RIGHT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.03f : 0.06f;
+        float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.03f : 0.06f;
+        for (int i = 0; i < getCountOfButtons(); i++) {
+            if (i == 3)
+                offset_index = 0;
+            else if (i == 5)
+                offset_index = 0;
+
+            float y_offset = offset_index++ * getButtons()[i][CLICKED].getHeight() * SPACE_BETWEEN_BUTTONS;
+            int click_index = getClicked()[i] ? CLICKED : FREE;
+            if (i < 3)
+                getButtons()[i][click_index].setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY,
+                        Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY - y_offset);
+            else if (i >= 3 && i < 5)
+                getButtons()[i][click_index].setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY + getButtons()[i][0].getWidth() * SPACE_BETWEEN_BUTTONS,
+                        Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY - getButtons()[i][0].getHeight() * 0.5f - y_offset);
+            else
+                getButtons()[i][click_index].setPosition(X * (1.0f - DISTANCE_FROM_RIGHT_SCREEN_BOUNDARY) - getButtons()[i][0].getWidth(),
+                        Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY / 2.5f - y_offset);
+            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
+        }
+    }
+
+    @Override
+    protected void initLogo(){
+        setLogo(new Sprite(new Texture("common/CheersLogo.png")));
+    }
+
+    @Override
+    protected void drawLogo() {
+        float DISTANCE_FROM_BOTTOM_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.2f : 0.1f;
+        float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.30f : 0.12f;
+        float ZOOM_X = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.52f : 0.86f;
+        float ZOOM_Y = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.50f : 0.27f;
+        float X = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
+        float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
+        getLogo().setSize(X * ZOOM_X, Y * ZOOM_Y);
+        getLogo().setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY, Y * DISTANCE_FROM_BOTTOM_SCREEN_BOUNDARY);
+        getLogo().draw(getSpriteBatch(), 1.0f);
+    }
+
 
 }

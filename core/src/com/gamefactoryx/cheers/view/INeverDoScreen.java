@@ -24,7 +24,7 @@ import java.util.List;
 @SuppressWarnings("DefaultFileTemplate")
 public class INeverDoScreen extends AbstractScreen {
 
-    private final static FileHandle fontFile = Gdx.files.internal("font/SemirResimovicRukopisniFONT.otf");
+    private final static FileHandle fontFile = Gdx.files.internal("font/TIMESS.ttf");
     private final static FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
@@ -44,25 +44,23 @@ public class INeverDoScreen extends AbstractScreen {
 
     private List<String> splitLine() {
         List<String> text = new ArrayList<>();
-        int num_of_chars = (int) (getTextBox().getWidth()/font.getSpaceWidth() * 0.9f);
-        if(line.length() > num_of_chars) {
+        int num_of_chars = (int) (getTextBox().getWidth() / font.getSpaceWidth() * 0.6f);
+        if (line.length() > num_of_chars) {
             StringBuilder sb = new StringBuilder();
-            for(String s: line.split(" ")){
-               if(sb.length() == 0) {
-                    sb.append(s);
-                }
-                else if(sb.length() + s.length() + 1 < num_of_chars) {
+            for (String s : line.split(" ")) {
+                if (sb.length() == 0) {
+                    sb.append(s.trim());
+                } else if (sb.length() + s.length() + 1 < num_of_chars) {
                     sb.append(" ");
-                    sb.append(s);
-                }else {
+                    sb.append(s.trim());
+                } else {
                     text.add(sb.toString());
                     sb.setLength(0);
-                    sb.append(s);
+                    sb.append(s.trim());
                 }
             }
-            text.add(sb.toString());
-        }
-        else
+            text.add(sb.toString().trim());
+        } else
             text = Collections.singletonList(line);
 
         return text;
@@ -78,26 +76,31 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
+        float FONT_SIZE_ON_SCREEN = 0.04f;
+
         super.resize(width, height);
         generator = new FreeTypeFontGenerator(fontFile);
-        if(Orientation.getOrientation() == Input.Orientation.Portrait) {
-            FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * 0.05f);
+        if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+            FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
-            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.4f );
-        }else{
-            FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * 0.05f);
+        } else {
+            FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
-            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.4f );
-
         }
+        getTextBox().setSize(X * 0.8f, Y * 0.45f);
+        for (int i = 0; i < getCountOfButtons(); i++)
+            for (int j = 0; j < 2; j++) {
+                getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
+                        Resolution.getGameWorldHeightPortrait() * 0.17f * Resolution.getAspectRatio());
+            }
 
         parameter.size = FONT_SIZE;
-        parameter.color = Color.BLACK;
+        parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
         BitmapFont temp = font;
         font = generator.generateFont(parameter);
-        if(temp != null)
+        if (temp != null)
             temp.dispose();
         generator.dispose();
         text = splitLine();
@@ -106,19 +109,65 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     protected void drawText() {
-        getTextBox().setPosition(X * 0.1f,Y * 0.3f);
+        float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.6f;
+        float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.4f;
+        getTextBox().setPosition(X * 0.1f, Y * 0.35f);
         getTextBox().draw(getSpriteBatch());
-        for(int i = 0; i < text.size(); i++)
+        for (int i = 0; i < text.size(); i++)
             font.draw(getSpriteBatch(), text.get(i),
-                    (X - text.get(i).length()* font.getSpaceWidth() * 1.0f) * 0.5f,
-                    Y - (Y  - font.getCapHeight() * text.size()) * 0.5f - font.getCapHeight() * 1.0f * i);
+                    (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                    Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
     }
 
 
     @Override
-    protected void initTextBox(){
+    protected void initTextBox() {
         setTextBox(new Sprite(new Texture("common/TextBoxPortrait.png")));
+        //setTextBox(new Sprite(new Texture("de/iNeverDoScreen/Ineverdoscreenkasten.png")));
 
     }
 
+    @Override
+    protected void initButtons() {
+        setButtons(new Sprite[1][2]);
+
+        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
+        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
+
+       /* for (int i = 0; i < getCountOfButtons(); i++) {
+            for (int j = 0; j < 2; j++) {
+                getButtons()[i][j].setSize(X,
+                        Y * 0.18f * Resolution.getAspectRatio());
+            }
+        }*/
+
+        setClicked(new boolean[getCountOfButtons()]);
+    }
+
+    @Override
+    protected void drawButtons() {
+        float PORTRAIT_DISTANCE_FROM_TEXT_BOX = 0.22f;
+        float LANDSCAPE_DISTANCE_FROM_TEXT_BOX = 0.15f;
+        for (int i = 0; i < getCountOfButtons(); i++) {
+            int click_index = getClicked()[i] ? CLICKED : FREE;
+            if (Orientation.getOrientation() == Input.Orientation.Portrait)
+                getButtons()[i][click_index].setPosition(X * 0.115f,
+                        Y * PORTRAIT_DISTANCE_FROM_TEXT_BOX);
+            else
+                getButtons()[i][click_index].setPosition(0.5f * (X - getButtons()[i][click_index].getWidth()),
+                        Y * LANDSCAPE_DISTANCE_FROM_TEXT_BOX);
+
+            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
+        }
+    }
+
+    @Override
+    protected void initLogo() {
+
+    }
+
+    @Override
+    protected void drawLogo() {
+
+    }
 }
