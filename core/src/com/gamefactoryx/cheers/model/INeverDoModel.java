@@ -9,6 +9,7 @@ import com.badlogic.gdx.files.FileHandle;
 @SuppressWarnings("DefaultFileTemplate")
 public class INeverDoModel {
 
+    private static Configuration.LanguageEnum lastLanguage;
     private String[] tasks;
     private INeverDoModel(){}
     public String getLine() {
@@ -20,15 +21,17 @@ public class INeverDoModel {
         this.tasks = tasks;
     }
 
-
     private static INeverDoModel instance;
+
     public static INeverDoModel getInstance(){
         if(instance == null ) {
             instance = new INeverDoModel();
-            FileHandle taskFile = Gdx.files.internal(Configuration.getLanguage() + "/iNeverDoScreen/tasks.txt");
-            instance.setTasks( taskFile.readString().split("\\n") );
-
         }
+        if(lastLanguage == null || lastLanguage != Configuration.getLanguage()) {
+            FileHandle taskFile = Gdx.files.internal(Configuration.getLanguage() + "/iNeverDoScreen/tasks.txt");
+            instance.setTasks(taskFile.readString().split("\\n"));
+        }
+        lastLanguage = Configuration.getLanguage();
         return instance;
     }
 

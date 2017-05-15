@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
@@ -15,7 +16,6 @@ final class MainStageController extends AbstractController {
     MainStageController(final AbstractScreen screen){
         super(screen);
     }
-
 
 
 
@@ -43,11 +43,24 @@ final class MainStageController extends AbstractController {
         for (int i = 0; i < getScreen().getButtons().length; i++) {
             if (getScreen().getClicked()[i])
                 switch (i) {
-                    case 0:
+                    case 3:
                         StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
                         break;
-                    default:
+                    case 5:
+                        switch(Configuration.getLanguage())
+                        {
+                            case DE:
+                                Configuration.setLanguage(Configuration.LanguageEnum.EN);
+
+                                break;
+                            case EN:
+                                Configuration.setLanguage(Configuration.LanguageEnum.DE);
+                                break;
+                        }
                         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
+                        break;
+                    default:
+                        //StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
                 }
             getScreen().getClicked()[i] = false;
         }

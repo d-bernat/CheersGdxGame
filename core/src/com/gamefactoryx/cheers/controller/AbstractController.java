@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
@@ -16,7 +17,16 @@ abstract class AbstractController extends InputAdapter {
     AbstractController(final AbstractScreen screen){
         this.screen = screen;
         Gdx.input.setInputProcessor(this);
+        Gdx.input.setCatchBackKey(true);
 
+    }
+    @Override
+    public boolean keyDown(int keycode) {
+        switch (keycode){
+            case Input.Keys.BACK:
+                StageManager.getInstance().showLastStage();
+        }
+        return false;
     }
 
     @Override

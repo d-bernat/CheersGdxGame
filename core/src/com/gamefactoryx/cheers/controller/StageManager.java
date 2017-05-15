@@ -1,7 +1,11 @@
 package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.utils.Queue;
+
+import java.util.List;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -15,6 +19,7 @@ public final class StageManager {
     // Reference to game
     private Game game;
     private StageEnum currentStage;
+    private Queue<StageEnum> stageHistory = new Queue<>();
 
     // Singleton: private constructor
     private StageManager() {
@@ -37,8 +42,24 @@ public final class StageManager {
     public void showStage(){
         showStage(currentStage);
     }
-    // Show in the game the screen which enum type is received
+
+    public void showLastStage(){
+        try{
+            StageEnum stageEnum = stageHistory.removeLast();
+            showStage(stageEnum, true);
+        }catch(Exception e){
+            showStage(StageEnum.MAIN_STAGE);
+        }
+    }
+
     public void showStage(StageEnum screenEnum) {
+        showStage(screenEnum, false);
+    }
+    // Show in the game the screen which enum type is received
+    private void showStage(StageEnum screenEnum, boolean rollBack) {
+        if(screenEnum != currentStage && !rollBack){
+            stageHistory.addLast(currentStage);
+        }
 
         // Get current screen to dispose it
         Screen currentScreen = game.getScreen();
@@ -60,6 +81,7 @@ public final class StageManager {
         }
 
         currentStage = screenEnum;
+
         game.setScreen(controller.getScreen());
 
         // Dispose previous screen
