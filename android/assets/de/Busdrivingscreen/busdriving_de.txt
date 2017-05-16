@@ -1,0 +1,43 @@
+1.       Schwarz oder Rot?
+2.       Höher oder Tiefer?
+3.       Dazwischen oder außerhalb?
+4.       Welches Muster?
+
+overtime mode. Jetzt geht es in die Verlängerung! Abwechselnd sagt ihr ob die Karte höher oder tiefer ist. Der erste der falsch liegt hat verloren.
+x1.     -Spieler- du kannst eine Karte legen. Willst du es auch tun?
+
+
+x2.     -Spieler- du verteilst 1 Schluck.
+x2a.    -Spieler- du kannst auch einen Schluck verteilen.
+x2b.    -Spieler- du selbstverständlich auch.
+
+x3.     -Spieler- du verteilst 2 Schlücke.
+x3a.    -Spieler- du kannst auch 2 Schlücke verteilen.
+x3b.    -Spieler- du ebenfalls.
+
+x4.     -Spieler- du verteilst 3 Schlücke.
+x4a.    -Spieler- du verteilst auch 3 Schlücke.
+x4b.    -Spieler- verteil auch 3.
+
+x5.     -Spieler- du verteilst 4 Schlücke.
+x5a.    -Spieler- du kannst auch 4 Schlücke verteilen.
+x5b.    -Spieler- du darfst auch.
+
+x6.     -Spieler- Na Herzlichen Glückwunsch du darfst Busfahren! Viel Erfolg!
+
+x7.      Trink 1 mal
+x7/2.    Trink 1 mal und mach weiter!
+x7a.     Trink 2 mal
+x7a/2.   Trink 2 mal und mach weiter!
+x7b.     Trink 3 mal
+x7b/2.   Trink 3 mal und mach weiter!
+x7c.     Trink 4 mal
+x7c/2.   Trink 4 mal und mach weiter!
+x7d.     Trink 5 mal
+x7d/2.   Trink 5 mal und mach weiter!
+x7e.     Trink 6 mal
+x7e/2.   Trink 6 mal und mach weiter!
+x7f.     Trink 7 mal
+x7f/2.   Trink 7 mal und du hast es geschafft!!!
+
+x.8      Du bist wahrscheinlich etwas angeschwippst aber du hast es geschafft!

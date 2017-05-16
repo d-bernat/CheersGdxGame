@@ -1,0 +1,44 @@
+1.       Black or white?
+2.       Higher card or lower card?
+3.       Between or outside?
+4.       Which template? 
+
+overtime. It's overtime! -Player-,-Player- [etc.] alternately you'll estimate if the card is higher or lower. The first player which is wrong will lose. 
+
+x1.     -Player- you can lay a card. Do you want to do it?
+
+x2.     -Player- you distribute 1 sip.
+x2a.   - Player- you can also distribute 1 sips.
+x2b.    -Player- you of course also.
+
+x3.     -Player- you distribute 2 sips.
+x3a.    -Player- you can also distribute 2 sips.
+x3b.    -Player- you also
+
+x4.     -Player- you distribute 3 sips.
+x4a.    -Player- you can also distribute 3 sips.
+x4b.    -Player- distribute also 3.
+
+x5.     -Player- you distribute 4 sips.
+x5a.    -Player you can also distribute 4 sips.
+x5b.    -Player- you can also.
+
+x6.     -Player- Congratulations you are allowed to Bus Driving! I wish you success and good luck!
+
+x7.     Take 1 sip.
+x7/2.   Take 1 sip and go on!
+x7a.    Take 2 sips.
+x7a/2.  Take 2 sips and go on!
+x7b.    Take 3 sips.
+x7b/2.  Take 3 sips and go on!
+x7c.    Take 4 sips.
+x7c/2.  Take 4 sips and go on!
+x7d.    Take 5 sips.
+x7d/2.  Take 5 sips and go on!
+x7e.    Take 6 sips.
+x7e/2.  Take 6 sips and go on!
+x7f.    Take 7 sips.
+x7f/2.  Take 7 sips and go on!
+
+
+x8.     You are probably a little bit drunk but you made it!!! Congratulations!!!
