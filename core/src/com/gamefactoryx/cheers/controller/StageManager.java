@@ -78,6 +78,9 @@ public final class StageManager {
             case KINGS_CUP_SPECIAL_STAGE:
                 controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
                 break;
+            case BUS_DRIVING_STAGE:
+                controller = StageEnum.BUS_DRIVING_STAGE.getController();
+                break;
         }
 
         currentStage = screenEnum;
