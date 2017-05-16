@@ -41,15 +41,16 @@ final class KingsCupSpecialStageController extends AbstractController {
     @Override
     public boolean touchDragged (int screenX, int screenY, int pointer) {
 
+        int SCROLLING_SLOW_DOWN = 30;
         if(screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 screenY >= getScreen().getTextBox().getY() &&
                 screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
-            if(screenY < lastYPointerPos - 10) {
+            if(screenY < lastYPointerPos - SCROLLING_SLOW_DOWN) {
                 getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
                 lastYPointerPos = screenY;
             }
-            else if(screenY > lastYPointerPos + 10) {
+            else if(screenY > lastYPointerPos + SCROLLING_SLOW_DOWN) {
                 getScreen().setYScrollPos(getScreen().getYScrollPos() - 1);
                 lastYPointerPos = screenY;
             }
