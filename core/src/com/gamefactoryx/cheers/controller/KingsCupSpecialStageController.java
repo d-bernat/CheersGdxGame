@@ -21,6 +21,7 @@ final class KingsCupSpecialStageController extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        lastYPointerPos = screenY;
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
             getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
@@ -44,13 +45,15 @@ final class KingsCupSpecialStageController extends AbstractController {
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 screenY >= getScreen().getTextBox().getY() &&
                 screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
-            if(screenY < lastYPointerPos) {
+            if(screenY < lastYPointerPos - 10) {
                 getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
+                lastYPointerPos = screenY;
             }
-            else
+            else if(screenY > lastYPointerPos + 10) {
                 getScreen().setYScrollPos(getScreen().getYScrollPos() - 1);
+                lastYPointerPos = screenY;
+            }
 
-            lastYPointerPos = screenY;
         }
 
         return true;

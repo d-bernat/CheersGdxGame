@@ -122,7 +122,7 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture("common/TextBoxPortrait.png")));
+        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/INeverDoScreen-TextBox.png")));
         //setTextBox(new Sprite(new Texture("de/iNeverDoScreen/Ineverdoscreenkasten.png")));
 
     }

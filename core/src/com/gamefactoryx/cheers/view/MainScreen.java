@@ -16,7 +16,7 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture("common/Landscapescreen.png")));
+        setLandscapeSprite(new Sprite(new Texture("common/Landscapesreen.png")));
         setPortraitSprite(new Sprite(new Texture("common/Portraitscreen.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());

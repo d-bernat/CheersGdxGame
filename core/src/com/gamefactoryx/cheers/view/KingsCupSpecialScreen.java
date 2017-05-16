@@ -147,7 +147,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture("common/TextBoxPortrait.png")));
+        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecial-TextBox.png")));
 
     }
 
