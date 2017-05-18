@@ -14,6 +14,11 @@ import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by bernat on 28.04.2017.
  */
@@ -33,32 +38,57 @@ public abstract class AbstractScreen implements Screen {
     private Batch spriteBatch;
     private boolean[] clicked;
     private Sprite[][] buttons;
+    private Map<String, Sprite> cardSprites = new HashMap<>();
     private Sprite textBox;
+    private Object dataModel;
+
 
     private int yScrollPos;
+
 
     public Sprite[][] getButtons() {
         return buttons;
     }
+
     public boolean[] getClicked() {
         return clicked;
     }
+
     public int getCountOfButtons() {
         return buttons != null ? buttons.length : 0;
     }
-    public Sprite getTextBox(){ return textBox; }
+
+    public Sprite getTextBox() {
+        return textBox;
+    }
+
+    public Object getDataModel() {
+        return dataModel;
+    }
+
+
+    public void setDataModel(Object dataModel) {
+        this.dataModel = dataModel;
+    }
 
     Sprite getLandscapeSprite() {
         return landscapeSprite;
     }
+
     Sprite getPortraitSprite() {
         return portraitSprite;
     }
-    Batch getSpriteBatch(){
+
+    Batch getSpriteBatch() {
         return spriteBatch;
     }
-    Sprite getLogo(){
+
+    Sprite getLogo() {
         return logo;
+    }
+
+    Map<String, Sprite> getCardSprites() {
+        return cardSprites;
     }
 
     void setClicked(boolean[] clicked) {
@@ -72,15 +102,28 @@ public abstract class AbstractScreen implements Screen {
     void setTextBox(Sprite textBox) {
         this.textBox = textBox;
     }
-    void setLogo(Sprite logo){ this.logo = logo; }
+
+    void setLogo(Sprite logo) {
+        this.logo = logo;
+    }
 
     protected abstract void initSprites();
+
     protected abstract void drawText();
+
     protected abstract void initTextBox();
+
     protected abstract void initButtons();
+
     protected abstract void drawButtons();
+
     protected abstract void initLogo();
+
     protected abstract void drawLogo();
+
+    protected abstract void initCards();
+
+    protected abstract void drawCards();
 
     public int getYScrollPos() {
         return yScrollPos;
@@ -89,9 +132,6 @@ public abstract class AbstractScreen implements Screen {
     public void setYScrollPos(int yScrollPos) {
         this.yScrollPos = yScrollPos;
     }
-
-
-
 
 
     @Override
@@ -109,6 +149,7 @@ public abstract class AbstractScreen implements Screen {
         initSprites();
         initTextBox();
         initButtons();
+        initCards();
     }
 
 
@@ -141,13 +182,13 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public final void dispose() {
-        for( int i = 0; i < getCountOfButtons(); i++ )
-            for( int j = 0; j < getButtons()[i].length; j++)
+        for (int i = 0; i < getCountOfButtons(); i++)
+            for (int j = 0; j < getButtons()[i].length; j++)
                 getButtons()[i][j].getTexture().dispose();
 
-        if(getTextBox() != null )
+        if (getTextBox() != null)
             getTextBox().getTexture().dispose();
-        if(logo != null)
+        if (logo != null)
             logo.getTexture().dispose();
         portraitSprite.getTexture().dispose();
         landscapeSprite.getTexture().dispose();
@@ -174,6 +215,7 @@ public abstract class AbstractScreen implements Screen {
         drawLogo();
         drawButtons();
         drawText();
+        drawCards();
         spriteBatch.end();
     }
 

@@ -170,4 +170,14 @@ public class INeverDoScreen extends AbstractScreen {
     protected void drawLogo() {
 
     }
+
+    @Override
+    protected void initCards() {
+
+    }
+
+    @Override
+    protected void drawCards() {
+
+    }
 }
