@@ -186,7 +186,7 @@ public class Card {
     }
 
 
-    public String getFile(CardSize cardSize) {
+    public String getFileName(CardSize cardSize) {
         String prefix;
 
         if(cardIndex >= 2 && cardIndex <=14) {

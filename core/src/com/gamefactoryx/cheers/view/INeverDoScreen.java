@@ -1,8 +1,6 @@
 package com.gamefactoryx.cheers.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,11 +8,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.model.INeverDoModel;
+import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +22,6 @@ import java.util.List;
 @SuppressWarnings("DefaultFileTemplate")
 public class INeverDoScreen extends AbstractScreen {
 
-    private final static FileHandle fontFile = Gdx.files.internal("font/TIMESS.ttf");
     private final static FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
@@ -76,10 +73,9 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
-        float FONT_SIZE_ON_SCREEN = 0.04f;
-
         super.resize(width, height);
-        generator = new FreeTypeFontGenerator(fontFile);
+        float FONT_SIZE_ON_SCREEN = 0.04f;
+        generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Queue;
+import com.gamefactoryx.cheers.CheersGdxGame;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
  */
 @SuppressWarnings("DefaultFileTemplate")
 public final class StageManager {
+
+
 
     // Singleton: unique instance
     private static StageManager instance;
@@ -67,18 +70,28 @@ public final class StageManager {
         // Show new screen
         switch (screenEnum) {
             case MAIN_STAGE:
+                if(CheersGdxGame.getScreenLock() != null)
+                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.MAIN_STAGE.getController();
                 break;
             case NEW_GAME_STAGE:
+                if(CheersGdxGame.getScreenLock() != null)
+                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
             case I_NEVER_DO_STAGE:
+                if(CheersGdxGame.getScreenLock() != null)
+                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.I_NEVER_DO_STAGE.getController();
                 break;
             case KINGS_CUP_SPECIAL_STAGE:
+                if(CheersGdxGame.getScreenLock() != null)
+                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
                 break;
             case BUS_DRIVING_STAGE:
+                if(CheersGdxGame.getScreenLock() != null)
+                    CheersGdxGame.getScreenLock().lock(1);
                 controller = StageEnum.BUS_DRIVING_STAGE.getController();
                 break;
         }

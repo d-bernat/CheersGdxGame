@@ -8,7 +8,6 @@ import java.util.Random;
 public class Phase {
     private final String name;
     private final Board board;
-    private Random rand = new Random();
 
     public Phase(int index) {
         name = "PHASE_" + index;

@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
@@ -50,5 +51,6 @@ final class INeverDoStageController extends AbstractController {
         }
         return true;
     }
+
 
 }

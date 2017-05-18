@@ -1,5 +1,7 @@
 package com.gamefactoryx.cheers.model.bus_driving;
 
+import com.badlogic.gdx.utils.Queue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,16 +10,16 @@ import java.util.List;
  */
 public class Board {
 
-    private final List<Integer> iCards;
+    private final Queue<Integer> iCards;
 
     public Board(){
-        iCards = new ArrayList<>();
+        iCards = new Queue<>();
     }
-    public List<Integer> getCards() {
+    public Queue<Integer> getCards() {
         return iCards;
     }
     public void addCard(Integer iCard){
-        iCards.add(iCard);
+        iCards.addLast(iCard);
     }
 
 }

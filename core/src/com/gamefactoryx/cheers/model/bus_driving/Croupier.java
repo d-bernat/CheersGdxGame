@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model.bus_driving;
 
 import com.badlogic.gdx.utils.Queue;
+import com.gamefactoryx.cheers.model.BusDrivingModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,8 +20,8 @@ public class Croupier {
     public void shuffle(int min, int max) {
         cards.clear();
         List<Integer> temps = new ArrayList<>();
-        for (int i = min; i < max + 1; i++)
-            temps.add(i);
+        for (Integer iCard: BusDrivingModel.getInstance().getICards())
+            temps.add(iCard);
         Collections.shuffle(temps);
 
         for (int i : temps) {
