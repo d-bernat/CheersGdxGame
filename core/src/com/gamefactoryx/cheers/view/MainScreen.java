@@ -129,5 +129,15 @@ public class MainScreen extends AbstractScreen {
         getLogo().draw(getSpriteBatch(), 1.0f);
     }
 
+    @Override
+    protected void initCards() {
+
+    }
+
+    @Override
+    protected void drawCards() {
+
+    }
+
 
 }

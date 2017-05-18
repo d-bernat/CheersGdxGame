@@ -86,5 +86,15 @@ public class NewGameScreen extends AbstractScreen {
 
     }
 
+    @Override
+    protected void initCards() {
+
+    }
+
+    @Override
+    protected void drawCards() {
+
+    }
+
 
 }
