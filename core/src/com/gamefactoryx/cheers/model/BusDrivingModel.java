@@ -2,6 +2,7 @@ package com.gamefactoryx.cheers.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.gamefactoryx.cheers.model.bus_driving.*;
+import com.gamefactoryx.cheers.tool.Configuration;
 
 import java.util.*;
 
@@ -16,6 +17,8 @@ public final class BusDrivingModel {
     private Croupier croupier = new Croupier();
     private Map<String, Texture> cardTextures = new HashMap<>();
     private List<Integer> iCards = new ArrayList<>();
+    private List<String> deTasks = new ArrayList<>();
+    private List<String> enTasks = new ArrayList<>();
 
     private BusDrivingModel() {
     }
@@ -27,6 +30,15 @@ public final class BusDrivingModel {
             instance = new BusDrivingModel();
             instance.reset();
             instance.setCardTextures();
+            instance.deTasks.add("Rot oder Schwarz?");
+            instance.enTasks.add("Red or Black?");
+            instance.deTasks.add("Größer oder Kleiner?");
+            instance.enTasks.add("Bigger or Smaller?");
+            instance.deTasks.add("In oder Aus?");
+            instance.enTasks.add("In or Out?");
+            instance.deTasks.add("Welche Farbe?");
+            instance.enTasks.add("Which color?");
+
         }
 
         return instance;
@@ -47,7 +59,24 @@ public final class BusDrivingModel {
         instance.setPhases(instance.createPhases());
         firstPhase();
         firstPlayer();
+
     }
+
+    public String getTask() {
+        switch (phaseIndex) {
+            case 0:
+                switch (Configuration.getLanguage()) {
+                    case DE:
+                        return deTasks.get(getPhase().getRound());
+                    case EN:
+                        return enTasks.get(getPhase().getRound());
+                    default:
+                        return deTasks.get(getPhase().getRound());
+                }
+        }
+        return "";
+    }
+
 
     public List<Integer> getICards() {
         return iCards;
@@ -75,7 +104,7 @@ public final class BusDrivingModel {
 
         for (int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++) {
             String name = PlayerNameCache.getName(i);
-            if(name == null)
+            if (name == null)
                 String.format("%d", i + 1);
             players.add(new Player(name, i));
         }
@@ -117,6 +146,7 @@ public final class BusDrivingModel {
 
     public void firstPhase() {
         phaseIndex = 0;
+
     }
 
     public void lastPhase() {
