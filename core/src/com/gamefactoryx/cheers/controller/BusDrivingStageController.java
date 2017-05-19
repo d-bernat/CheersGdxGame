@@ -42,30 +42,46 @@ public class BusDrivingStageController extends AbstractController {
             enableKeyboard(true);
 
         } else {
+            //is keyboard on?
             if (keyboardOn) {
                 model.getPlayer().setName(typedName.toString());
                 typedName.setLength(0);
                 enableKeyboard(false);
-            } else {
-                boolean next = true;
+            }
+            //keyboard is off
+            else {
+                //should you restart phase?
                 if (screenX < 100) {
                     model.reset();
                     flag = false;
                     return true;
-                } else if (model.getPhase().isFinished()) {
-                    return true;
-                } else if (flag) {
-                    if (next) {
-                        if(model.getPlayer().getCards().size < 4 )
-                            model.getPlayer().addCard(model.getPhase().getBoard().getCards().removeLast());
-                        else
-                            model.getPhase().nextRound();
-                    }
-                } else {
-                    if (next)
-                        model.getPhase().getBoard().addCard(model.getCroupier().getCard());
                 }
-                flag = !flag;
+
+                //no restart, is your phase finished?
+                if (model.getPhase().isPhaseFinished()) {
+                    Gdx.app.log("Status", "Phase Finished");
+                    return true;
+                }
+
+                //phase is not finished, is  round completed?
+                if(model.getPhase().isRoundFinished()){
+                    Gdx.app.log("Status", "Round Finished, next round");
+                    model.getPhase().nextRound();
+                    return true;
+                }
+
+                //round is not completed, is card on the board?
+                if (model.getPhase().getBoard().getCards().size > 0) {
+                    model.getPlayer().addCard(model.getPhase().getBoard().getCards().removeLast());
+                    model.getPhase().nextTurn();
+                    return true;
+                }
+
+                //card is not on the board, has player all cards?
+                if (model.getPlayer().getCards().size < 4) {
+                    model.getPhase().getBoard().addCard(model.getCroupier().getCard());
+                    return true;
+                }
             }
         }
         return true;

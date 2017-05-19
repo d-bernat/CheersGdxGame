@@ -11,12 +11,13 @@ public class Phase {
     private final String name;
     private final Board board;
     private int round;
-    private boolean finished;
+    private int turn;
+    private boolean phase_finished;
+    private boolean round_finished;
 
     public Phase(int index) {
         name = "PHASE_" + index;
         board = new Board();
-        round = 0;
     }
 
     public String getName() {
@@ -27,23 +28,50 @@ public class Phase {
         return board;
     }
 
-    public int getRound(){ return round;}
-
-    public boolean isFinished() {
-        return finished;
+    public int getRound() {
+        return round;
     }
 
-    public void nextRound(){
-        switch(name){
+    public int getTurn() {
+        return turn;
+    }
+
+
+
+    public boolean isPhaseFinished() {
+        return phase_finished;
+    }
+
+    public boolean isRoundFinished() {
+        return round_finished;
+    }
+
+    public void nextRound() {
+        round_finished = false;
+        switch (name) {
             case "PHASE_1":
-                if(round < 3){
+                if (round < 3) {
+                    turn = 0;
                     ++round;
                     BusDrivingModel.getInstance().nextPlayer();
+                } else {
+                    round_finished = true;
+                    phase_finished = true;
                 }
-                else
-                    finished = true;
                 break;
         }
 
+    }
+
+    public void nextTurn() {
+        switch (name) {
+            case "PHASE_1":
+                if (turn < 3) {
+                    ++turn;
+                }
+                else
+                    round_finished = true;
+                break;
+        }
     }
 }
