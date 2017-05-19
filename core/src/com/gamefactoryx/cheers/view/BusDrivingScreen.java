@@ -4,10 +4,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
-import com.gamefactoryx.cheers.model.Configuration;
+import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.model.bus_driving.Card;
 import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
@@ -89,11 +90,11 @@ public class BusDrivingScreen extends AbstractScreen {
 
     @Override
     protected void drawText() {
-        float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.6f;
-        float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.168f;
+        float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.835f;
+
         switch (dataModel.getPhase().getName()) {
             case "PHASE_1":
-                getTextBox().setPosition(X * 0.14f, Y * 0.78f);
+                getTextBox().setPosition(X * 0.05f, Y * 0.78f);
                 getTextBox().draw(getSpriteBatch());
                 String name;
                 //if (name.length() <= 1)
@@ -108,15 +109,17 @@ public class BusDrivingScreen extends AbstractScreen {
                         name = "Spieler: " + dataModel.getPlayer().getName();
 
                 }
-                font.draw(getSpriteBatch(), name, (X - name.length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                        Y - (Y - font.getCapHeight() * 2) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * 0);
+                FontHelper.getGlyphLayout().setText(font, name);
+                font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
                 break;
         }
     }
 
+
     @Override
     protected void initTextBox() {
         setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_phase_1/text_box_horizontal.png")));
+        getTextBox().setSize(Resolution.getGameWorldWidthPortrait()*0.90f, Resolution.getGameWorldHeightPortrait() * 0.1f);
     }
 
     @Override

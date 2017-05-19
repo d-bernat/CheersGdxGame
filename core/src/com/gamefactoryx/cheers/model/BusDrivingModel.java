@@ -73,7 +73,7 @@ public final class BusDrivingModel {
 
     private List<Player> createPlayers() {
 
-        for (int i = 0; i < PlayerNameCache.getMaxPlayers(); i++) {
+        for (int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++) {
             String name = PlayerNameCache.getName(i);
             if(name == null)
                 String.format("%d", i + 1);

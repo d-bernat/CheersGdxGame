@@ -88,7 +88,7 @@ public class BusDrivingStageController extends AbstractController {
                 StageManager.getInstance().showLastStage();
                 return false;
             default:
-                if(keycode >=Input.Keys.A && keycode <= Input.Keys.Z) {
+                if(keycode >=Input.Keys.A && keycode <= Input.Keys.Z && typedName.length() < 8) {
 
                     typedName.append(shift ? Input.Keys.toString(keycode).toUpperCase() : Input.Keys.toString(keycode).toLowerCase());
                     model.getPlayer().setName(typedName.toString());

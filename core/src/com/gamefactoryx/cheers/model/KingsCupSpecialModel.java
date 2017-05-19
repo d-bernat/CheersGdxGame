@@ -26,7 +26,7 @@ public class KingsCupSpecialModel {
         if(instance == null ) {
             instance = new KingsCupSpecialModel();
         }
-        FileHandle taskFile = Gdx.files.internal(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialDescription.txt");
+        FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialDescription.txt");
         instance.setTasks( taskFile.readString());
         return instance;
     }

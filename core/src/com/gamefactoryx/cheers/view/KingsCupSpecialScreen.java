@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.gamefactoryx.cheers.model.Configuration;
+import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.model.KingsCupSpecialModel;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;

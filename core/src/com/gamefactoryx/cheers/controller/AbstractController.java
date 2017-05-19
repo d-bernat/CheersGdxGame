@@ -3,7 +3,7 @@ package com.gamefactoryx.cheers.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.gamefactoryx.cheers.model.Configuration;
+import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
 /**

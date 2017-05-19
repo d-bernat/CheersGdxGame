@@ -3,7 +3,7 @@ package com.gamefactoryx.cheers.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.gamefactoryx.cheers.model.Configuration;
+import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 

@@ -13,7 +13,7 @@ public class Card {
    // private final CardSize cardSize;
 
     public enum CardType{
-        CLUB("Kreuz"), DIAMOND("Karo"), HEART("Herz"), SPADE("Pik");
+        CLUB("clubs"), DIAMOND("diamond"), HEART("heart"), SPADE("spades");
         private String value;
         CardType(String value){
             this.value = value;
@@ -144,28 +144,28 @@ public class Card {
             case 37:
             case 50:
                 value = 11;
-                name = "B";
+                name = "b";
                 break;
             case 12:
             case 25:
             case 38:
             case 51:
                 value = 12;
-                name = "D";
+                name = "d";
                 break;
             case 13:
             case 26:
             case 39:
             case 52:
                 value = 13;
-                name = "K";
+                name = "k";
                 break;
             case 14:
             case 27:
             case 40:
             case 53:
                 value = 14;
-                name = "A";
+                name = "a";
                 break;
         }
 
@@ -205,7 +205,7 @@ public class Card {
             type = CardType.CLUB;
             prefix = "clubs";
         }
-        return  "common/busdriving_cards/" + prefix + cardSize.value() + "/" + type.value() + "-" + name + ".png";
+        return  "common/busdriving_cards/" + prefix + cardSize.value() + "/" + type.value() + "_" + name + ".png";
     }
 
     public CardOrientation getOrientation() {

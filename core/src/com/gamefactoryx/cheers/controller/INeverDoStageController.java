@@ -1,8 +1,6 @@
 package com.gamefactoryx.cheers.controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;

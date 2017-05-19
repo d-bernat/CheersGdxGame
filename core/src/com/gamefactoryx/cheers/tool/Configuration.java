@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.model;
+package com.gamefactoryx.cheers.tool;
 
 import com.badlogic.gdx.Gdx;
 
@@ -20,6 +20,7 @@ public class Configuration {
 
 
     private static LanguageEnum language;
+    private static int MAX_PLAYERS = 4;
 
     public static LanguageEnum getLanguage(){
         if(language == null)
@@ -29,7 +30,12 @@ public class Configuration {
     public static void setLanguage(LanguageEnum _language){
         language = _language;
     }
-
+    public static int getMaxPlayers(){
+        return MAX_PLAYERS;
+    }
+    public static void setMaxPlayers(int count){
+        MAX_PLAYERS = count;
+    }
 
     private Configuration(){}
 

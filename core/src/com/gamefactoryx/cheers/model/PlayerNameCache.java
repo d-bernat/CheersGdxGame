@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class PlayerNameCache {
     private static final Map<Integer, String> nameList = new HashMap<>();
-    private static final int MAX_PLAYERS = 4;
+
     public static void addName(String name, int position){
         nameList.put(position, name);
     }
@@ -19,9 +19,5 @@ public class PlayerNameCache {
             return nameList.get(position);
         else
             return "";
-    }
-
-    public static int getMaxPlayers(){
-        return MAX_PLAYERS;
     }
 }
