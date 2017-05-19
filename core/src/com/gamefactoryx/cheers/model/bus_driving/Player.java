@@ -11,13 +11,19 @@ public class Player {
     private String name;
     private final Queue<Integer> cards;
     private boolean alive;
+    private int position;
 
-    public Player(String name){
+    public Player(String name, int position){
         cards = new Queue<>();
         this.name = name;
+        this.position = position;
     }
     public String getName() {
         return name;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     public Queue<Integer> getCards() {

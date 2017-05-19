@@ -1,16 +1,31 @@
 package com.gamefactoryx.cheers;
 
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import android.view.View;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.gamefactoryx.cheers.CheersGdxGame;
 
-public class AndroidLauncher extends AndroidApplication {
+public class AndroidLauncher extends AndroidApplication implements ScreenLock{
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new CheersGdxGame(), config);
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+		View gameView = initializeForView(new CheersGdxGame(this), config);
+		setContentView(gameView);
+		//initialize(new CheersGdxGame(this), config);
+	}
+
+	@Override
+	public void lock(int type) {
+		this.setRequestedOrientation(type);
+	}
+
+	@Override
+	public void unlock() {
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 	}
 }

@@ -4,19 +4,15 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.gamefactoryx.cheers.model.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +36,7 @@ public abstract class AbstractScreen implements Screen {
     private Sprite[][] buttons;
     private Map<String, Sprite> cardSprites = new HashMap<>();
     private Sprite textBox;
-    private Object dataModel;
+   // private Object dataModel;
 
 
     private int yScrollPos;
@@ -62,14 +58,14 @@ public abstract class AbstractScreen implements Screen {
         return textBox;
     }
 
-    public Object getDataModel() {
-        return dataModel;
-    }
+    //public Object getDataModel() {
+    //    return dataModel;
+    //}
 
 
-    public void setDataModel(Object dataModel) {
-        this.dataModel = dataModel;
-    }
+    //public void setDataModel(Object dataModel) {
+    //    this.dataModel = dataModel;
+    //}
 
     Sprite getLandscapeSprite() {
         return landscapeSprite;
@@ -181,7 +177,7 @@ public abstract class AbstractScreen implements Screen {
     }
 
     @Override
-    public final void dispose() {
+    public void dispose() {
         for (int i = 0; i < getCountOfButtons(); i++)
             for (int j = 0; j < getButtons()[i].length; j++)
                 getButtons()[i][j].getTexture().dispose();

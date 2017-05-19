@@ -1,10 +1,8 @@
 package com.gamefactoryx.cheers.model;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.gamefactoryx.cheers.model.bus_driving.*;
 
-import javax.xml.soap.Text;
 import java.util.*;
 
 /**
@@ -13,36 +11,57 @@ import java.util.*;
 public final class BusDrivingModel {
     private int phaseIndex;
     private int playerIndex;
-    private List<Phase> phases;
-    private List<Player> players;
+    private List<Phase> phases = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
     private Croupier croupier = new Croupier();
     private Map<String, Texture> cardTextures = new HashMap<>();
+    private List<Integer> iCards = new ArrayList<>();
 
-    private BusDrivingModel(){}
+    private BusDrivingModel() {
+    }
 
     private static BusDrivingModel instance;
 
-    public static BusDrivingModel getInstance(){
-        if(instance == null ) {
+    public static BusDrivingModel getInstance() {
+        if (instance == null) {
             instance = new BusDrivingModel();
-            instance.croupier.shuffle();
+            instance.reset();
             instance.setCardTextures();
-            instance.setPlayers(instance.createPlayers());
-            instance.setPhases(instance.createPhases());
-
         }
+
         return instance;
     }
 
-    private void setCardTextures(){
-        for(Integer icard: getCroupier().getCards()) {
+    private void setICards() {
+        for (int i = 2; i < 53; i++)
+            iCards.add(i);
+    }
+
+    public void reset() {
+        instance.getICards().clear();
+        instance.setICards();
+        instance.croupier.shuffle();
+        instance.players.clear();
+        instance.setPlayers(instance.createPlayers());
+        instance.phases.clear();
+        instance.setPhases(instance.createPhases());
+        firstPhase();
+        firstPlayer();
+    }
+
+    public List<Integer> getICards() {
+        return iCards;
+    }
+
+    private void setCardTextures() {
+        for (Integer icard : iCards) {
             Card card = new Card(icard, Card.CardSize.BIG);
-            cardTextures.put(card.getFile(Card.CardSize.BIG), new Texture(card.getFile(Card.CardSize.BIG)));
+            cardTextures.put(card.getFileName(Card.CardSize.BIG), new Texture(card.getFileName(Card.CardSize.BIG)));
         }
 
-        for(Integer iCard: getCroupier().getCards()) {
+        for (Integer iCard : iCards) {
             Card card = new Card(iCard, Card.CardSize.SMALL);
-            cardTextures.put(card.getFile(Card.CardSize.SMALL), new Texture(card.getFile(Card.CardSize.SMALL)));
+            cardTextures.put(card.getFileName(Card.CardSize.SMALL), new Texture(card.getFileName(Card.CardSize.SMALL)));
         }
 
     }
@@ -53,16 +72,19 @@ public final class BusDrivingModel {
 
 
     private List<Player> createPlayers() {
-        players = new ArrayList<>();
-        for(int i = 0; i < 4; i++)
-            players.add( new Player("P" + i));
+
+        for (int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++) {
+            String name = PlayerNameCache.getName(i);
+            if(name == null)
+                String.format("%d", i + 1);
+            players.add(new Player(name, i));
+        }
         return players;
     }
 
     private List<Phase> createPhases() {
-        phases = new ArrayList<>();
-        for(int i = 0; i < 4; i++)
-            phases.add( new Phase(i));
+        for (int i = 1; i < 4; i++)
+            phases.add(new Phase(i));
         return phases;
     }
 
@@ -71,33 +93,33 @@ public final class BusDrivingModel {
         return phases;
     }
 
-    public Phase getPhase(){
+    public Phase getPhase() {
         return phases.get(phaseIndex);
     }
 
-    public boolean prevPhase(){
-        if(phaseIndex == 0){
+    public boolean prevPhase() {
+        if (phaseIndex == 0) {
             return false;
-        }else {
+        } else {
             --phaseIndex;
             return true;
         }
     }
 
-    public boolean nextPhase(){
-        if(phaseIndex == phases.size() -1){
+    public boolean nextPhase() {
+        if (phaseIndex == phases.size() - 1) {
             return false;
-        }else {
+        } else {
             ++phaseIndex;
             return true;
         }
     }
 
-    public void firstPhase(){
+    public void firstPhase() {
         phaseIndex = 0;
     }
 
-    public void lastPhase(){
+    public void lastPhase() {
         phaseIndex = phases.size() - 1;
     }
 
@@ -107,9 +129,9 @@ public final class BusDrivingModel {
     }
 
     public boolean prevPlayer() {
-        if(playerIndex == 0){
+        if (playerIndex == 0) {
             return false;
-        }else {
+        } else {
             --playerIndex;
             return true;
         }
@@ -117,9 +139,9 @@ public final class BusDrivingModel {
     }
 
     public boolean nextPlayer() {
-        if(playerIndex == players.size() -1){
+        if (playerIndex == players.size() - 1) {
             return false;
-        }else {
+        } else {
             ++playerIndex;
             return true;
         }
@@ -142,7 +164,7 @@ public final class BusDrivingModel {
         this.players = players;
     }
 
-    public Croupier getCroupier(){
+    public Croupier getCroupier() {
         return croupier;
     }
 

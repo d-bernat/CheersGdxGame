@@ -9,7 +9,7 @@ import com.badlogic.gdx.files.FileHandle;
 @SuppressWarnings("DefaultFileTemplate")
 public class INeverDoModel {
 
-    private static Configuration.LanguageEnum lastLanguage;
+    private static com.gamefactoryx.cheers.tool.Configuration.LanguageEnum lastLanguage;
     private String[] tasks;
     private INeverDoModel(){}
     public String getLine() {
@@ -27,11 +27,11 @@ public class INeverDoModel {
         if(instance == null ) {
             instance = new INeverDoModel();
         }
-        if(lastLanguage == null || lastLanguage != Configuration.getLanguage()) {
-            FileHandle taskFile = Gdx.files.internal(Configuration.getLanguage() + "/iNeverDoScreen/tasks.txt");
+        if(lastLanguage == null || lastLanguage != com.gamefactoryx.cheers.tool.Configuration.getLanguage()) {
+            FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/iNeverDoScreen/tasks.txt");
             instance.setTasks(taskFile.readString().split("\\n"));
         }
-        lastLanguage = Configuration.getLanguage();
+        lastLanguage = com.gamefactoryx.cheers.tool.Configuration.getLanguage();
         return instance;
     }
 
