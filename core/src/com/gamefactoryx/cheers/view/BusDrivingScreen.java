@@ -96,22 +96,8 @@ public class BusDrivingScreen extends AbstractScreen {
             case "PHASE_1":
                 getTextBox().setPosition(X * 0.05f, Y * 0.76f);
                 getTextBox().draw(getSpriteBatch());
-                String name =  dataModel.getPlayer().getName();;
+                String name = dataModel.getPlayer().getName();
                 String task = dataModel.getTask();
-                //if (name.length() <= 1)
-                //switch (Configuration.getLanguage()) {
-                //    case DE:
-                //        name = dataModel.getPlayer().getName();
-                //        task = dataModel.getTask();
-                 /*       break;
-                    case EN:
-                        name = "Player: " + dataModel.getPlayer().getName();
-                        task= "Task: " + dataModel.getTask();
-                        break;
-                    default:
-                        name = "Aufgabe: " + dataModel.getPlayer().getName();
-                        task = "Aufgabe: " + dataModel.getTask();*/
-                //}
                 FontHelper.getGlyphLayout().setText(font, name);
                 font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
                 FontHelper.getGlyphLayout().setText(font, task);
