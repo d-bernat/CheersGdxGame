@@ -20,4 +20,7 @@ public class PlayerNameCache {
         else
             return "";
     }
+    public static void clear(){
+        nameList.clear();
+    }
 }

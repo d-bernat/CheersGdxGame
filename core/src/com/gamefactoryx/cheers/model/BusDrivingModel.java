@@ -1,7 +1,10 @@
 package com.gamefactoryx.cheers.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.gamefactoryx.cheers.model.bus_driving.*;
+import com.gamefactoryx.cheers.tool.Configuration;
 
 import java.util.*;
 
@@ -16,6 +19,9 @@ public final class BusDrivingModel {
     private Croupier croupier = new Croupier();
     private Map<String, Texture> cardTextures = new HashMap<>();
     private List<Integer> iCards = new ArrayList<>();
+    private List<String> deTasks = new ArrayList<>();
+    private List<String> enTasks = new ArrayList<>();
+    private List<String> nameList;
 
     private BusDrivingModel() {
     }
@@ -27,6 +33,15 @@ public final class BusDrivingModel {
             instance = new BusDrivingModel();
             instance.reset();
             instance.setCardTextures();
+            instance.deTasks.add("Schwarz oder Rot?");
+            instance.enTasks.add("Black or red?");
+            instance.deTasks.add("Höher oder Tiefer?");
+            instance.enTasks.add("Higher card or lower card?");
+            instance.deTasks.add("Dazwischen oder Auserhalb?");
+            instance.enTasks.add("Between or Outside?");
+            instance.deTasks.add("Welches Muster?");
+            instance.enTasks.add("Which template?");
+
         }
 
         return instance;
@@ -42,12 +57,33 @@ public final class BusDrivingModel {
         instance.setICards();
         instance.croupier.shuffle();
         instance.players.clear();
+        instance.createFunnyNames();
+
         instance.setPlayers(instance.createPlayers());
         instance.phases.clear();
         instance.setPhases(instance.createPhases());
         firstPhase();
         firstPlayer();
+
     }
+
+
+    public String getTask() {
+
+        switch (phaseIndex) {
+            case 0:
+                switch (Configuration.getLanguage()) {
+                    case DE:
+                        return deTasks.get(getPhase().getTurn());
+                    case EN:
+                        return enTasks.get(getPhase().getTurn());
+                    default:
+                        return deTasks.get(getPhase().getTurn());
+                }
+        }
+        return "";
+    }
+
 
     public List<Integer> getICards() {
         return iCards;
@@ -74,12 +110,22 @@ public final class BusDrivingModel {
     private List<Player> createPlayers() {
 
         for (int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++) {
-            String name = PlayerNameCache.getName(i);
-            if(name == null)
-                String.format("%d", i + 1);
-            players.add(new Player(name, i));
+            PlayerNameCache.clear();
+            players.add(new Player(getFunnyName(i), i));
         }
         return players;
+    }
+    private void createFunnyNames() {
+        FileHandle nameFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/names.txt");
+        String fileContent = nameFile.readString();
+        String[] names = fileContent.split("\n");
+        nameList = Arrays.asList(names);
+        Collections.shuffle(nameList);
+    }
+
+    private String getFunnyName(int index) {
+
+        return nameList.get(index);
     }
 
     private List<Phase> createPhases() {
@@ -117,6 +163,7 @@ public final class BusDrivingModel {
 
     public void firstPhase() {
         phaseIndex = 0;
+
     }
 
     public void lastPhase() {

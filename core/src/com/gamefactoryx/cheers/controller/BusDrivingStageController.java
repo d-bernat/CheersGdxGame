@@ -18,6 +18,7 @@ public class BusDrivingStageController extends AbstractController {
     private static boolean flag;
     private StringBuilder typedName = new StringBuilder();
     private boolean shift;
+    private boolean keyboardOn;
 
     BusDrivingStageController(final AbstractScreen screen) {
         super(screen);
@@ -38,25 +39,50 @@ public class BusDrivingStageController extends AbstractController {
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
 
             model.getPlayer().setName("");
-            Gdx.input.setOnscreenKeyboardVisible(true);
-        } else {
+            enableKeyboard(true);
 
-            boolean next = true;
-            if (screenX < 100) {
-                model.reset();
-                flag = false;
-                return true;
-            } else if (model.getPlayer().getCards().size == 4) {
-                next = model.nextPlayer();
-                return true;
-            } else if (flag) {
-                if (next)
-                    model.getPlayer().addCard(model.getPhase().getBoard().getCards().removeLast());
-            } else {
-                if (next)
-                    model.getPhase().getBoard().addCard(model.getCroupier().getCard());
+        } else {
+            //is keyboard on?
+            if (keyboardOn) {
+                model.getPlayer().setName(typedName.toString());
+                typedName.setLength(0);
+                enableKeyboard(false);
             }
-            flag = !flag;
+            //keyboard is off
+            else {
+                //should you restart phase?
+                if (screenX < 100) {
+                    model.reset();
+                    flag = false;
+                    return true;
+                }
+
+                //no restart, is your phase finished?
+                if (model.getPhase().isPhaseFinished()) {
+                    Gdx.app.log("Status", "Phase Finished");
+                    return true;
+                }
+
+                //phase is not finished, is  round completed?
+                if(model.getPhase().isRoundFinished()){
+                    Gdx.app.log("Status", "Round Finished, next round");
+                    model.getPhase().nextRound();
+                    return true;
+                }
+
+                //round is not completed, is card on the board?
+                if (model.getPhase().getBoard().getCards().size > 0) {
+                    model.getPlayer().addCard(model.getPhase().getBoard().getCards().removeLast());
+                    model.getPhase().nextTurn();
+                    return true;
+                }
+
+                //card is not on the board, has player all cards?
+                if (model.getPlayer().getCards().size < 4) {
+                    model.getPhase().getBoard().addCard(model.getCroupier().getCard());
+                    return true;
+                }
+            }
         }
         return true;
     }
@@ -72,10 +98,10 @@ public class BusDrivingStageController extends AbstractController {
             case Input.Keys.ENTER:
                 model.getPlayer().setName(typedName.toString());
                 typedName.setLength(0);
-                Gdx.input.setOnscreenKeyboardVisible(false);
+                enableKeyboard(false);
                 break;
             case Input.Keys.BACKSPACE:
-                if(typedName.length() > 0){
+                if (typedName.length() > 0) {
                     typedName.setLength(typedName.length() - 1);
                     model.getPlayer().setName(typedName.toString());
                 }
@@ -88,18 +114,20 @@ public class BusDrivingStageController extends AbstractController {
                 StageManager.getInstance().showLastStage();
                 return false;
             default:
-                if(keycode >=Input.Keys.A && keycode <= Input.Keys.Z && typedName.length() < 8) {
+                if (keycode >= Input.Keys.A && keycode <= Input.Keys.Z && typedName.length() < 8) {
 
                     typedName.append(shift ? Input.Keys.toString(keycode).toUpperCase() : Input.Keys.toString(keycode).toLowerCase());
                     model.getPlayer().setName(typedName.toString());
                     PlayerNameCache.addName(typedName.toString(), model.getPlayer().getPosition());
                 }
                 break;
-
         }
-
-
         return false;
     }
 
+
+    private void enableKeyboard(boolean enabled) {
+        keyboardOn = enabled;
+        Gdx.input.setOnscreenKeyboardVisible(enabled);
+    }
 }
