@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model.bus_driving;
 
 import com.gamefactoryx.cheers.model.BusDrivingModel;
+import com.gamefactoryx.cheers.tool.Configuration;
 
 import java.util.Random;
 
@@ -50,7 +51,7 @@ public class Phase {
         round_finished = false;
         switch (name) {
             case "PHASE_1":
-                if (round < 3) {
+                if (round < Configuration.getMaxPlayers() - 1) {
                     turn = 0;
                     ++round;
                     BusDrivingModel.getInstance().nextPlayer();

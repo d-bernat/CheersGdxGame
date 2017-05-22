@@ -20,7 +20,7 @@ public class Configuration {
 
 
     private static LanguageEnum language;
-    private static int MAX_PLAYERS = 4;
+    private static int MAX_PLAYERS = 6;
 
     public static LanguageEnum getLanguage(){
         if(language == null)
