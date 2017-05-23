@@ -50,8 +50,8 @@ public class MainScreen extends AbstractScreen {
         getButtons()[4][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_add_task.png"));
         switch (Configuration.getLanguage()) {
             case EN:
-                getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
-                getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_sk_lang.png"));
+                getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_sk_lang.png"));
                 break;
             case DE:
                 getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));

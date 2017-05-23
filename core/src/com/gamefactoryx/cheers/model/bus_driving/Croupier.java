@@ -11,30 +11,30 @@ import java.util.List;
  * Created by bernat on 17.05.2017.
  */
 public class Croupier {
-    private final Queue<Integer> cards = new Queue<>();
+    private final Queue<VCard> vCards = new Queue<>();
 
     public void shuffle() {
         shuffle(2, 53);
     }
 
     public void shuffle(int min, int max) {
-        cards.clear();
-        List<Integer> temps = new ArrayList<>();
-        for (Integer iCard: BusDrivingModel.getInstance().getICards())
-            temps.add(iCard);
+        vCards.clear();
+        List<VCard> temps = new ArrayList<>();
+        for (VCard vCard: BusDrivingModel.getInstance().getVCards())
+            temps.add(vCard);
         Collections.shuffle(temps);
 
-        for (int i : temps) {
-            cards.addLast(i);
+        for (VCard vCard : temps) {
+            vCards.addLast(vCard);
         }
     }
 
-    public Integer getCard() {
-        return cards.removeFirst();
+    public VCard getVCard() {
+        return vCards.removeFirst();
     }
 
-    public Queue<Integer> getCards() {
-        return cards;
+    public Queue<VCard> getVCards() {
+        return vCards;
     }
 
 }

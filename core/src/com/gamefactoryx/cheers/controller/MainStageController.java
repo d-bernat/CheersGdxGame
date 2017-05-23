@@ -51,9 +51,11 @@ final class MainStageController extends AbstractController {
                         {
                             case DE:
                                 Configuration.setLanguage(Configuration.LanguageEnum.EN);
-
                                 break;
                             case EN:
+                                Configuration.setLanguage(Configuration.LanguageEnum.SK);
+                                break;
+                            case SK:
                                 Configuration.setLanguage(Configuration.LanguageEnum.DE);
                                 break;
                         }

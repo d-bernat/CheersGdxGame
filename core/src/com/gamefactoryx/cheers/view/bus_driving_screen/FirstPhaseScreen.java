@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.view.bus_driving_screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
+import com.gamefactoryx.cheers.model.bus_driving.Player;
+import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.model.bus_driving.Card;
 import com.gamefactoryx.cheers.tool.FontHelper;
@@ -56,7 +59,10 @@ public class FirstPhaseScreen extends AbstractScreen {
     public void resize(int width, int height) {
         super.resize(width, height);
         float FONT_SIZE_ON_SCREEN = 0.04f;
-        generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
+        if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
+            generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
+        else
+            generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
 
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
@@ -100,7 +106,7 @@ public class FirstPhaseScreen extends AbstractScreen {
     @Override
     protected void initTextBox() {
         setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_phase_1/text_box_horizontal.png")));
-        getTextBox().setSize(Resolution.getGameWorldWidthPortrait()*0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
+        getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
     }
 
     @Override
@@ -125,14 +131,16 @@ public class FirstPhaseScreen extends AbstractScreen {
 
     @Override
     protected void initCards() {
-        for (Integer iCard : dataModel.getICards()) {
-            Card card = new Card(iCard, Card.CardSize.BIG);
-            getCardSprites().put(card.getFileName(Card.CardSize.BIG), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.BIG))));
+        for (VCard vCard : dataModel.getVCards()) {
+            Card card = new Card(vCard.getCardIndex(), Card.CardSize.BIG);
+            getCardSprites().put(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.FACE), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.FACE))));
+            getCardSprites().put(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.BACK), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.BACK))));
         }
 
-        for (Integer iCard : dataModel.getICards()) {
-            Card card = new Card(iCard, Card.CardSize.SMALL);
-            getCardSprites().put(card.getFileName(Card.CardSize.SMALL), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.SMALL))));
+        for (VCard vCard : dataModel.getVCards()) {
+            Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
+            getCardSprites().put(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.FACE), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.FACE))));
+            getCardSprites().put(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.BACK), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.BACK))));
         }
         setFaceDownBigCard(new Sprite(new Texture("common/busdriving_cards/facedown_big_card.png")));
         setFaceDownSmallCard(new Sprite(new Texture("common/busdriving_cards/facedown_small_card.png")));
@@ -141,40 +149,91 @@ public class FirstPhaseScreen extends AbstractScreen {
 
     @Override
     protected void drawCards() {
+        int x_offset = 0;
+        int y_offset = 0;
         switch (dataModel.getPhase().getName()) {
             case "PHASE_1":
-                int x_offset = 0;
-                if (dataModel.getPhase().getBoard().getCards().size == 0) {
+
+                if (dataModel.getPhase().getBoard().getVCards().size == 0) {
                     getFaceDownBigCard().setPosition(X * 0.22f, Y * 0.23f);
                     getFaceDownBigCard().draw(getSpriteBatch(), 1.0f);
 
                 }
-                for (Integer iCard : dataModel.getPlayer().getCards()) {
-                    Sprite scard = getCardCache().get(String.format("%d_%s", iCard, Card.CardSize.SMALL.value()));
+                for (VCard vCard : dataModel.getPlayer().getCards()) {
+                    Sprite scard = getCardCache().get(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()));
                     if (scard == null) {
-                        Card card = new Card(iCard, Card.CardSize.SMALL);
-                        scard = getCardSprites().get(card.getFileName(Card.CardSize.SMALL));
-                        getCardCache().put(String.format("%d_%s", iCard, Card.CardSize.SMALL.value()), scard);
+                        Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
+                        scard = getCardSprites().get(card.getFileName(Card.CardSize.SMALL, vCard.getOrientation()));
+                        getCardCache().put(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()), scard);
                     }
                     scard.setSize(X * 0.2f, Y * 0.2f);
                     scard.setPosition(X * 0.1f + scard.getWidth() * x_offset++, Y * 0.02f);
                     scard.draw(getSpriteBatch(), 1.0f);
                 }
 
-                for (Integer iCard : dataModel.getPhase().getBoard().getCards()) {
-                    Sprite scard = getCardCache().get(String.format("%d_%s", iCard, Card.CardSize.BIG.value()));
+                for (VCard vCard : dataModel.getPhase().getBoard().getVCards()) {
+                    Sprite scard = getCardCache().get(String.format("%d_%s", vCard.getCardIndex(), Card.CardSize.BIG.value(), vCard.getOrientation().value()));
                     if (scard == null) {
-                        Card card = new Card(iCard, Card.CardSize.BIG);
-                        scard = getCardSprites().get(card.getFileName(Card.CardSize.BIG));
-                        getCardCache().put(String.format("%d_%s", iCard, Card.CardSize.BIG.value()), scard);
+                        Card card = new Card(vCard.getCardIndex(), Card.CardSize.BIG);
+                        scard = getCardSprites().get(card.getFileName(Card.CardSize.BIG, vCard.getOrientation()));
+                        getCardCache().put(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.BIG.value(), vCard.getOrientation().value()), scard);
                     }
                     scard.setPosition(X * 0.22f, Y * 0.23f);
                     scard.draw(getSpriteBatch(), 1.0f);
                 }
                 break;
+            case "PHASE_2":
+                dataModel.firstPlayer();
+                do {
+                    for (VCard vCard : dataModel.getPlayer().getCards()) {
+                        Sprite scard = getCardCache().get(String.format("%d_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()));
+                        if (scard == null) {
+                            Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
+                            scard = getCardSprites().get(card.getFileName(Card.CardSize.SMALL, vCard.getOrientation()));
+                            getCardCache().put(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()), scard);
+                        }
+                        scard.setSize(X * 0.15f, Y * 0.12f);
+                        scard.setPosition(X * 0.05f + scard.getWidth() * x_offset, Y * 0.78f - scard.getHeight() * 0.15f * y_offset++);
+                        scard.draw(getSpriteBatch(), 1.0f);
+                    }
+                    ++x_offset;
+                    y_offset = 0;
+                } while (dataModel.nextPlayer());
+
+                x_offset = 0;
+                y_offset = 0;
+                int index = 0;
+                for (VCard vCard : dataModel.getPhase().getBoard().getVCards()) {
+
+                    Sprite scard = getCardCache().get(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()));
+                    if (scard == null) {
+                        Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
+                        scard = getCardSprites().get(card.getFileName(Card.CardSize.SMALL, vCard.getOrientation()));
+                        getCardCache().put(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()), scard);
+                    }
+
+                    if (index == 0)
+                        y_offset = 0;
+                    else if (index == 4) {
+                        y_offset = 1;
+                        x_offset = 0;
+                    }
+                    else if (index == 7) {
+                        y_offset = 2;
+                        x_offset = 0;
+                    }
+                    else if(index == 9) {
+                        y_offset = 3;
+                        x_offset = 0;
+                    }
+
+                    scard.setSize(X * 0.15f, Y * 0.12f);
+                    scard.setPosition(X * 0.1f + scard.getWidth() * 0.7f * y_offset + scard.getWidth() * 1.4f * x_offset++, Y * 0.01f + scard.getHeight() * y_offset);
+                    scard.draw(getSpriteBatch(), 1.0f);
+                    ++index;
+                }
+                break;
         }
-
-
     }
 
     @Override

@@ -10,16 +10,16 @@ import java.util.List;
  */
 public class Board {
 
-    private final Queue<Integer> iCards;
+    private final Queue<VCard> vCards;
 
     public Board(){
-        iCards = new Queue<>();
+        vCards = new Queue<>();
     }
-    public Queue<Integer> getCards() {
-        return iCards;
+    public Queue<VCard> getVCards() {
+        return vCards;
     }
-    public void addCard(Integer iCard){
-        iCards.addLast(iCard);
+    public void addCard(VCard vCard){
+        vCards.addLast(vCard);
     }
 
 }

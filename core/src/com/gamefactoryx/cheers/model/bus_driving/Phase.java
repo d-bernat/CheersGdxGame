@@ -1,5 +1,7 @@
 package com.gamefactoryx.cheers.model.bus_driving;
 
+import com.badlogic.gdx.Gdx;
+import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
 import com.gamefactoryx.cheers.tool.Configuration;
 
@@ -19,6 +21,7 @@ public class Phase {
     public Phase(int index) {
         name = "PHASE_" + index;
         board = new Board();
+
     }
 
     public String getName() {
@@ -56,7 +59,6 @@ public class Phase {
                     ++round;
                     BusDrivingModel.getInstance().nextPlayer();
                 } else {
-                    round_finished = true;
                     phase_finished = true;
                 }
                 break;

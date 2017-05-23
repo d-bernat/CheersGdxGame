@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.model.KingsCupSpecialModel;
+import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -87,7 +88,12 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     public void resize(int width, int height) {
         float FONT_SIZE_ON_SCREEN = 0.03f;
         super.resize(width, height);
-        generator = new FreeTypeFontGenerator(fontFile);
+        if(Configuration.getLanguage() == Configuration.LanguageEnum.SK)
+            generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
+        else
+            generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
+
+
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();

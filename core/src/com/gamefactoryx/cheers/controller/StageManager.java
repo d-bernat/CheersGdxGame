@@ -87,8 +87,6 @@ public final class StageManager {
                 controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
                 break;
             case BUS_DRIVING_STAGE_FIRST_PHASE:
-                if(CheersGdxGame.getScreenLock() != null)
-                    CheersGdxGame.getScreenLock().lock(1);
                 controller = StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE.getController();
                 break;
         }

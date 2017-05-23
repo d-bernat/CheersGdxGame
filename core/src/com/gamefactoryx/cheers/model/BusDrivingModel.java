@@ -18,7 +18,7 @@ public final class BusDrivingModel {
     private List<Player> players = new ArrayList<>();
     private Croupier croupier = new Croupier();
     private Map<String, Texture> cardTextures = new HashMap<>();
-    private List<Integer> iCards = new ArrayList<>();
+    private List<VCard> vCards = new ArrayList<>();
     private List<String> deTasks = new ArrayList<>();
     private List<String> enTasks = new ArrayList<>();
     private List<String> nameList;
@@ -47,14 +47,14 @@ public final class BusDrivingModel {
         return instance;
     }
 
-    private void setICards() {
+    private void setVCards() {
         for (int i = 2; i < 53; i++)
-            iCards.add(i);
+            vCards.add(new VCard(i, VCard.CardOrientation.BACK));
     }
 
     public void reset() {
-        instance.getICards().clear();
-        instance.setICards();
+        instance.getVCards().clear();
+        instance.setVCards();
         instance.croupier.shuffle();
         instance.players.clear();
         instance.createFunnyNames();
@@ -85,20 +85,23 @@ public final class BusDrivingModel {
     }
 
 
-    public List<Integer> getICards() {
-        return iCards;
+    public List<VCard> getVCards() {
+        return vCards;
     }
 
     private void setCardTextures() {
-        for (Integer icard : iCards) {
-            Card card = new Card(icard, Card.CardSize.BIG);
-            cardTextures.put(card.getFileName(Card.CardSize.BIG), new Texture(card.getFileName(Card.CardSize.BIG)));
+        for (VCard vcard : vCards) {
+            Card card = new Card(vcard.getCardIndex(), Card.CardSize.BIG);
+            cardTextures.put(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.FACE), new Texture(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.FACE)));
+            cardTextures.put(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.BACK), new Texture(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.BACK)));
         }
 
-        for (Integer iCard : iCards) {
-            Card card = new Card(iCard, Card.CardSize.SMALL);
-            cardTextures.put(card.getFileName(Card.CardSize.SMALL), new Texture(card.getFileName(Card.CardSize.SMALL)));
+        for (VCard vCard : vCards) {
+            Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
+            cardTextures.put(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.FACE), new Texture(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.FACE)));
+            cardTextures.put(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.BACK), new Texture(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.BACK)));
         }
+
 
     }
 
@@ -157,6 +160,10 @@ public final class BusDrivingModel {
             return false;
         } else {
             ++phaseIndex;
+            if(phaseIndex == 1){
+                for(int i = 0; i < 10; i++)
+                    getPhase().getBoard().addCard(croupier.getVCard());
+            }
             return true;
         }
     }

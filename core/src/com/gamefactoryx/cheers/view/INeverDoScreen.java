@@ -75,7 +75,10 @@ public class INeverDoScreen extends AbstractScreen {
     public void resize(int width, int height) {
         super.resize(width, height);
         float FONT_SIZE_ON_SCREEN = 0.04f;
-        generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
+        if(Configuration.getLanguage() == Configuration.LanguageEnum.SK)
+            generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
+        else
+            generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();

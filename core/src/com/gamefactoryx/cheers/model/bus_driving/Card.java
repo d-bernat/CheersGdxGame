@@ -9,73 +9,62 @@ public class Card {
     private CardType type;
     private Integer cardIndex;
     private String file;
-    private CardOrientation orientation;
-   // private final CardSize cardSize;
+    // private final CardSize cardSize;
 
-    public enum CardType{
+    public enum CardType {
         CLUB("clubs"), DIAMOND("diamond"), HEART("heart"), SPADE("spades");
         private String value;
-        CardType(String value){
+
+        CardType(String value) {
             this.value = value;
 
         }
-        public String value(){
+
+        public String value() {
             return this.value;
         }
 
     }
 
-    public enum CardSize{
+    public enum CardSize {
         SMALL("_pyramid_side"), BIG("");
         private String value;
-        CardSize(String value){
+
+        CardSize(String value) {
             this.value = value;
 
         }
-        public String value(){
-            return this.value;
-        }
 
-    }
-    public enum CardOrientation{
-        FACE("face"), BACK("back");
-        private String value;
-        CardOrientation(String value){
-            this.value = value;
-
-        }
-        public String value(){
+        public String value() {
             return this.value;
         }
 
     }
 
-    public Card(int index, CardSize cardSize){
+
+
+    public Card(int index, CardSize cardSize) {
         this.cardIndex = index;
 
-       // this.cardSize = cardSize;
-        this.orientation = CardOrientation.BACK;
+        // this.cardSize = cardSize;
 
         String prefix;
-        if(index >= 2 && index <=14) {
+        if (index >= 2 && index <= 14) {
             type = CardType.HEART;
             prefix = "heart";
-        }
-        else if(index >=15 && index <= 27) {
+        } else if (index >= 15 && index <= 27) {
             type = CardType.SPADE;
             prefix = "spades";
-        }
-        else if(index >=28 && index <= 40) {
+        } else if (index >= 28 && index <= 40) {
             type = CardType.DIAMOND;
             prefix = "diamond";
-        }
-        else{
+        } else {
             type = CardType.CLUB;
             prefix = "clubs";
         }
 
 
-        switch(index){
+        switch (index) {
             case 2:
             case 15:
             case 28:
@@ -173,11 +162,12 @@ public class Card {
 //        file = "common/busdriving_cards/" + prefix + cardSize.value() + "/" + type.value() + "-" + name + ".png";
 
     }
+
     public String getName() {
         return name;
     }
 
-    public CardType getType(){
+    public CardType getType() {
         return this.type;
     }
 
@@ -186,29 +176,31 @@ public class Card {
     }
 
 
-    public String getFileName(CardSize cardSize) {
-        String prefix;
+    public String getFileName(CardSize cardSize, VCard.CardOrientation orientation) {
+        if (orientation == VCard.CardOrientation.BACK) {
+            if(cardSize == CardSize.BIG)
+                return "common/busdriving_cards/facedown_big_card.png";
+            else
+                return "common/busdriving_cards/facedown_small_card.png";
+        } else {
+            String prefix;
 
-        if(cardIndex >= 2 && cardIndex <=14) {
-            type = CardType.HEART;
-            prefix = "heart";
+            if (cardIndex >= 2 && cardIndex <= 14) {
+                type = CardType.HEART;
+                prefix = "heart";
+            } else if (cardIndex >= 15 && cardIndex <= 27) {
+                type = CardType.SPADE;
+                prefix = "spades";
+            } else if (cardIndex >= 28 && cardIndex <= 40) {
+                type = CardType.DIAMOND;
+                prefix = "diamond";
+            } else {
+                type = CardType.CLUB;
+                prefix = "clubs";
+            }
+            return "common/busdriving_cards/" + prefix + cardSize.value() + "/" + type.value() + "_" + name + ".png";
         }
-        else if(cardIndex >=15 && cardIndex <= 27) {
-            type = CardType.SPADE;
-            prefix = "spades";
-        }
-        else if(cardIndex >=28 && cardIndex <= 40) {
-            type = CardType.DIAMOND;
-            prefix = "diamond";
-        }
-        else{
-            type = CardType.CLUB;
-            prefix = "clubs";
-        }
-        return  "common/busdriving_cards/" + prefix + cardSize.value() + "/" + type.value() + "_" + name + ".png";
     }
 
-    public CardOrientation getOrientation() {
-        return orientation;
-    }
+
 }

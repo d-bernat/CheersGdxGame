@@ -10,11 +10,15 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
  */
 public class FontHelper {
     private final static FileHandle fontFile = Gdx.files.internal("font/TIMESS.ttf");
+    private final static FileHandle skFontFile = Gdx.files.internal("font/LiberationSans-Regular.ttf");
     private final static FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     private static GlyphLayout glyphLayout = new GlyphLayout();
 
     public static FileHandle getFontFile(){
         return fontFile;
+    }
+    public static FileHandle getSkFontFile(){
+        return skFontFile;
     }
 
     public static FreeTypeFontGenerator.FreeTypeFontParameter getParameter(){
