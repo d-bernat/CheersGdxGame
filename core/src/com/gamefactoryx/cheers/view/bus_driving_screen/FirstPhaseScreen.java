@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.view;
+package com.gamefactoryx.cheers.view.bus_driving_screen;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -13,6 +13,7 @@ import com.gamefactoryx.cheers.model.bus_driving.Card;
 import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
+import com.gamefactoryx.cheers.view.AbstractScreen;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,31 +22,19 @@ import java.util.Map;
 /**
  * Created by bernat on 16.05.2017.
  */
-public class BusDrivingScreen extends AbstractScreen {
+public class FirstPhaseScreen extends AbstractScreen {
 
 
     private float X, Y;
     private static BusDrivingModel dataModel = BusDrivingModel.getInstance();
-    private static Map<String, Sprite> cardCache = new HashMap<>();
-    private Sprite faceDownBigCard;
-    private Sprite faceDownSmallCard;
+
     private BitmapFont font;
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
 
-    public BusDrivingScreen() {
+    public FirstPhaseScreen() {
         super();
-        for (Integer iCard : dataModel.getICards()) {
-            Card card = new Card(iCard, Card.CardSize.BIG);
-            getCardSprites().put(card.getFileName(Card.CardSize.BIG), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.BIG))));
-        }
 
-        for (Integer iCard : dataModel.getICards()) {
-            Card card = new Card(iCard, Card.CardSize.SMALL);
-            getCardSprites().put(card.getFileName(Card.CardSize.SMALL), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.SMALL))));
-        }
-        faceDownBigCard = new Sprite(new Texture("common/busdriving_cards/facedown_big_card.png"));
-        faceDownSmallCard = new Sprite(new Texture("common/busdriving_cards/facedown_small_card.png"));
 
     }
 
@@ -136,7 +125,17 @@ public class BusDrivingScreen extends AbstractScreen {
 
     @Override
     protected void initCards() {
+        for (Integer iCard : dataModel.getICards()) {
+            Card card = new Card(iCard, Card.CardSize.BIG);
+            getCardSprites().put(card.getFileName(Card.CardSize.BIG), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.BIG))));
+        }
 
+        for (Integer iCard : dataModel.getICards()) {
+            Card card = new Card(iCard, Card.CardSize.SMALL);
+            getCardSprites().put(card.getFileName(Card.CardSize.SMALL), new Sprite(dataModel.getCardTextures().get(card.getFileName(Card.CardSize.SMALL))));
+        }
+        setFaceDownBigCard(new Sprite(new Texture("common/busdriving_cards/facedown_big_card.png")));
+        setFaceDownSmallCard(new Sprite(new Texture("common/busdriving_cards/facedown_small_card.png")));
 
     }
 
@@ -146,16 +145,16 @@ public class BusDrivingScreen extends AbstractScreen {
             case "PHASE_1":
                 int x_offset = 0;
                 if (dataModel.getPhase().getBoard().getCards().size == 0) {
-                    faceDownBigCard.setPosition(X * 0.22f, Y * 0.23f);
-                    faceDownBigCard.draw(getSpriteBatch(), 1.0f);
+                    getFaceDownBigCard().setPosition(X * 0.22f, Y * 0.23f);
+                    getFaceDownBigCard().draw(getSpriteBatch(), 1.0f);
 
                 }
                 for (Integer iCard : dataModel.getPlayer().getCards()) {
-                    Sprite scard = cardCache.get(String.format("%d_%s", iCard, Card.CardSize.SMALL.value()));
+                    Sprite scard = getCardCache().get(String.format("%d_%s", iCard, Card.CardSize.SMALL.value()));
                     if (scard == null) {
                         Card card = new Card(iCard, Card.CardSize.SMALL);
                         scard = getCardSprites().get(card.getFileName(Card.CardSize.SMALL));
-                        cardCache.put(String.format("%d_%s", iCard, Card.CardSize.SMALL.value()), scard);
+                        getCardCache().put(String.format("%d_%s", iCard, Card.CardSize.SMALL.value()), scard);
                     }
                     scard.setSize(X * 0.2f, Y * 0.2f);
                     scard.setPosition(X * 0.1f + scard.getWidth() * x_offset++, Y * 0.02f);
@@ -163,11 +162,11 @@ public class BusDrivingScreen extends AbstractScreen {
                 }
 
                 for (Integer iCard : dataModel.getPhase().getBoard().getCards()) {
-                    Sprite scard = cardCache.get(String.format("%d_%s", iCard, Card.CardSize.BIG.value()));
+                    Sprite scard = getCardCache().get(String.format("%d_%s", iCard, Card.CardSize.BIG.value()));
                     if (scard == null) {
                         Card card = new Card(iCard, Card.CardSize.BIG);
                         scard = getCardSprites().get(card.getFileName(Card.CardSize.BIG));
-                        cardCache.put(String.format("%d_%s", iCard, Card.CardSize.BIG.value()), scard);
+                        getCardCache().put(String.format("%d_%s", iCard, Card.CardSize.BIG.value()), scard);
                     }
                     scard.setPosition(X * 0.22f, Y * 0.23f);
                     scard.draw(getSpriteBatch(), 1.0f);
@@ -180,8 +179,8 @@ public class BusDrivingScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
-        faceDownBigCard.getTexture().dispose();
-        faceDownSmallCard.getTexture().dispose();
+        getFaceDownBigCard().getTexture().dispose();
+        getFaceDownSmallCard().getTexture().dispose();
     }
 
 }

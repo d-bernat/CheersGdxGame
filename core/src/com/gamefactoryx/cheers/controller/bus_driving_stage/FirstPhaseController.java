@@ -1,8 +1,10 @@
-package com.gamefactoryx.cheers.controller;
+package com.gamefactoryx.cheers.controller.bus_driving_stage;
 
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheers.controller.AbstractController;
+import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
 import com.gamefactoryx.cheers.tool.Orientation;
@@ -12,7 +14,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 /**
  * Created by bernat on 16.05.2017.
  */
-public class BusDrivingStageController extends AbstractController {
+public class  FirstPhaseController extends AbstractController {
 
     private BusDrivingModel model;
     private static boolean flag;
@@ -20,7 +22,7 @@ public class BusDrivingStageController extends AbstractController {
     private boolean shift;
     private boolean keyboardOn;
 
-    BusDrivingStageController(final AbstractScreen screen) {
+    public FirstPhaseController(final AbstractScreen screen) {
         super(screen);
         model = BusDrivingModel.getInstance();
     }
@@ -50,37 +52,42 @@ public class BusDrivingStageController extends AbstractController {
             }
             //keyboard is off
             else {
+
                 //should you restart phase?
                 if (screenX < 100) {
                     model.reset();
                     flag = false;
                     return true;
                 }
+                if (screenX >= getScreen().getFaceDownBigCard().getX() &&
+                        screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
+                    //no restart, is your phase finished?
+                    if (model.getPhase().isPhaseFinished()) {
+                        Gdx.app.log("Status", "Phase Finished");
+                        return true;
+                    }
 
-                //no restart, is your phase finished?
-                if (model.getPhase().isPhaseFinished()) {
-                    Gdx.app.log("Status", "Phase Finished");
-                    return true;
-                }
+                    //phase is not finished, is  round completed?
+                    if (model.getPhase().isRoundFinished()) {
+                        Gdx.app.log("Status", "Round Finished, next round");
+                        model.getPhase().nextRound();
+                        return true;
+                    }
 
-                //phase is not finished, is  round completed?
-                if(model.getPhase().isRoundFinished()){
-                    Gdx.app.log("Status", "Round Finished, next round");
-                    model.getPhase().nextRound();
-                    return true;
-                }
+                    //round is not completed, is card on the board?
+                    if (model.getPhase().getBoard().getCards().size > 0) {
+                        model.getPlayer().addCard(model.getPhase().getBoard().getCards().removeLast());
+                        model.getPhase().nextTurn();
+                        return true;
+                    }
 
-                //round is not completed, is card on the board?
-                if (model.getPhase().getBoard().getCards().size > 0) {
-                    model.getPlayer().addCard(model.getPhase().getBoard().getCards().removeLast());
-                    model.getPhase().nextTurn();
-                    return true;
-                }
-
-                //card is not on the board, has player all cards?
-                if (model.getPlayer().getCards().size < 4) {
-                    model.getPhase().getBoard().addCard(model.getCroupier().getCard());
-                    return true;
+                    //card is not on the board, has player all cards?
+                    if (model.getPlayer().getCards().size < 4) {
+                        model.getPhase().getBoard().addCard(model.getCroupier().getCard());
+                        return true;
+                    }
                 }
             }
         }
