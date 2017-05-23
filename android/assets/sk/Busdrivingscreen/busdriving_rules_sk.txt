@@ -1,0 +1,10 @@
+Hra Autobus sa hrá v troch fázach.
+
+Prvá fáza:
+Hrác dostane postupne 4 karty . Pred každou kartou musí zodpovedat otázku, ktorá sa ukáže na obrazovke.  Ak netrafil pije. Pokial je odpoved správna je na rade další hrác.
+
+Druhá fáza:
+Postaví sa pyramída z kariet (4-3-2-1). Zacína sa vlavo dolu a postupuje sa doprava. V prvom riadku sa rozdáva jeden hlt  . V druhom  riadku sa pijú dva hlty atd. Hrác môže odmietnut vyložit kartu  a dúfat, že sa mu to podarí o jednu alebo dve rady neskôr a môže tak rozdat viacej hltov. Kto má na konci najviac kariet musí “cestovat autobusom ” Pokial je stav nerozhodný musí sa predlžovat.
+
+Tretia fáza:
+Hrác si musí tipnút ci je zakrytá karta vyššia alebo nižšia ako karta v autobuse. Zacína sa vlavo hore a posúva sa dalej smerom dole a do prava. Ak je odpoved nesprávna hrác pije a presúva sa spät na zaciatok.
