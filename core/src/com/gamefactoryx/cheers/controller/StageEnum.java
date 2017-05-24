@@ -1,8 +1,7 @@
 package com.gamefactoryx.cheers.controller;
 
-import com.gamefactoryx.cheers.controller.bus_driving_stage.FirstPhaseController;
 import com.gamefactoryx.cheers.view.*;
-import com.gamefactoryx.cheers.view.bus_driving_screen.FirstPhaseScreen;
+import com.gamefactoryx.cheers.view.BusDrivingScreen;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -32,7 +31,7 @@ public enum StageEnum {
     },
     BUS_DRIVING_STAGE_FIRST_PHASE {
         public AbstractController getController() {
-            return new FirstPhaseController(new FirstPhaseScreen());
+            return new BusDrivingStageController(new BusDrivingScreen());
         }
     };
 

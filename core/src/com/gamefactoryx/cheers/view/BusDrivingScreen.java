@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.view.bus_driving_screen;
+package com.gamefactoryx.cheers.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -17,6 +17,7 @@ import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
+import com.sun.media.jfxmedia.events.PlayerEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ import java.util.Map;
 /**
  * Created by bernat on 16.05.2017.
  */
-public class FirstPhaseScreen extends AbstractScreen {
+public class BusDrivingScreen extends AbstractScreen {
 
 
     private float X, Y;
@@ -35,7 +36,7 @@ public class FirstPhaseScreen extends AbstractScreen {
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
 
-    public FirstPhaseScreen() {
+    public BusDrivingScreen() {
         super();
 
 
@@ -85,10 +86,11 @@ public class FirstPhaseScreen extends AbstractScreen {
 
     @Override
     protected void drawText() {
-        float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.89f;
+
 
         switch (dataModel.getPhase().getName()) {
-            case "PHASE_1":
+            case "PHASE_1": {
+                float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.89f;
                 getTextBox().setPosition(X * 0.05f, Y * 0.76f);
                 getTextBox().draw(getSpriteBatch());
                 String name = dataModel.getPlayer().getName();
@@ -98,7 +100,29 @@ public class FirstPhaseScreen extends AbstractScreen {
                 FontHelper.getGlyphLayout().setText(font, task);
                 font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
                         (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
-                break;
+            }
+            break;
+            case "PHASE_2": {
+                float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.65f;
+                getTextBox().setPosition(X * 0.05f, Y * 0.52f);
+                getTextBox().draw(getSpriteBatch());
+                dataModel.firstPlayer();
+                outer:
+                do {
+                    Player player = dataModel.getPlayer();
+                    for (VCard vCard : player.getVCards()) {
+                        if (vCard.getCredit() > 0) {
+                            FontHelper.getGlyphLayout().setText(font, dataModel.getPlayer().getName());
+                            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+                            FontHelper.getGlyphLayout().setText(font, getMessage(vCard.getCredit()));
+                            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                                    (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+                            break outer;
+                        }
+                    }
+                } while (dataModel.nextPlayer());
+            }
+            break;
         }
     }
 
@@ -159,7 +183,7 @@ public class FirstPhaseScreen extends AbstractScreen {
                     getFaceDownBigCard().draw(getSpriteBatch(), 1.0f);
 
                 }
-                for (VCard vCard : dataModel.getPlayer().getCards()) {
+                for (VCard vCard : dataModel.getPlayer().getVCards()) {
                     Sprite scard = getCardCache().get(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()));
                     if (scard == null) {
                         Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
@@ -185,7 +209,7 @@ public class FirstPhaseScreen extends AbstractScreen {
             case "PHASE_2":
                 dataModel.firstPlayer();
                 do {
-                    for (VCard vCard : dataModel.getPlayer().getCards()) {
+                    for (VCard vCard : dataModel.getPlayer().getVCards()) {
                         Sprite scard = getCardCache().get(String.format("%d_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()));
                         if (scard == null) {
                             Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
@@ -214,21 +238,31 @@ public class FirstPhaseScreen extends AbstractScreen {
 
                     if (index == 0)
                         y_offset = 0;
-                    else if (index == 4) {
+                    else if (index == 5) {
                         y_offset = 1;
                         x_offset = 0;
-                    }
-                    else if (index == 7) {
+                    } else if (index == 9) {
                         y_offset = 2;
                         x_offset = 0;
-                    }
-                    else if(index == 9) {
+                    } else if (index == 12) {
                         y_offset = 3;
+                        x_offset = 0;
+                    } else if (index == 14) {
+                        y_offset = 4;
                         x_offset = 0;
                     }
 
+                    float NEXT_FLOOR_X_OFFSET = 0.58f;
+                    float X_GAP_BETWEEN_TWO_CARDS = 1.2f;
+                    float DISTANCE_FROM_SCREEN_BOTTOM = 0.02f;
+                    float DISTANCE_FROM_SCREEN_LEFT = 0.08f;
+
                     scard.setSize(X * 0.15f, Y * 0.12f);
-                    scard.setPosition(X * 0.1f + scard.getWidth() * 0.7f * y_offset + scard.getWidth() * 1.4f * x_offset++, Y * 0.01f + scard.getHeight() * y_offset);
+                    if (dataModel.isScrollPyramide())
+                        scard.setPosition(X * DISTANCE_FROM_SCREEN_LEFT + scard.getWidth() * NEXT_FLOOR_X_OFFSET * y_offset + scard.getWidth() * X_GAP_BETWEEN_TWO_CARDS * x_offset++, -4.5f * Y * DISTANCE_FROM_SCREEN_BOTTOM + scard.getHeight() * y_offset);
+                    else
+                        scard.setPosition(X * DISTANCE_FROM_SCREEN_LEFT + scard.getWidth() * NEXT_FLOOR_X_OFFSET * y_offset + scard.getWidth() * X_GAP_BETWEEN_TWO_CARDS * x_offset++, Y * DISTANCE_FROM_SCREEN_BOTTOM + scard.getHeight() * y_offset);
+
                     scard.draw(getSpriteBatch(), 1.0f);
                     ++index;
                 }
@@ -240,6 +274,28 @@ public class FirstPhaseScreen extends AbstractScreen {
     public void dispose() {
         getFaceDownBigCard().getTexture().dispose();
         getFaceDownSmallCard().getTexture().dispose();
+    }
+
+    private String getMessage(int credit) {
+        switch (Configuration.getLanguage()) {
+            case DE:
+                if (credit == 1)
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                else
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+            case EN:
+                if (credit == 1)
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                else
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+            default:
+                if (credit == 1)
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                else
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+        }
+
+
     }
 
 }
