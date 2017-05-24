@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.view.bus_driving_screen;
+package com.gamefactoryx.cheers.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Created by bernat on 16.05.2017.
  */
-public class FirstPhaseScreen extends AbstractScreen {
+public class BusDrivingScreen extends AbstractScreen {
 
 
     private float X, Y;
@@ -36,7 +36,7 @@ public class FirstPhaseScreen extends AbstractScreen {
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
 
-    public FirstPhaseScreen() {
+    public BusDrivingScreen() {
         super();
 
 
@@ -114,7 +114,7 @@ public class FirstPhaseScreen extends AbstractScreen {
                         if (vCard.getCredit() > 0) {
                             FontHelper.getGlyphLayout().setText(font, dataModel.getPlayer().getName());
                             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
-                            FontHelper.getGlyphLayout().setText(font, "Du hast ein Kredit: " + vCard.getCredit());
+                            FontHelper.getGlyphLayout().setText(font, getMessage(vCard.getCredit()));
                             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
                                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
                             break outer;
@@ -258,7 +258,7 @@ public class FirstPhaseScreen extends AbstractScreen {
                     float DISTANCE_FROM_SCREEN_LEFT = 0.08f;
 
                     scard.setSize(X * 0.15f, Y * 0.12f);
-                    if(dataModel.isScrollPyramide())
+                    if (dataModel.isScrollPyramide())
                         scard.setPosition(X * DISTANCE_FROM_SCREEN_LEFT + scard.getWidth() * NEXT_FLOOR_X_OFFSET * y_offset + scard.getWidth() * X_GAP_BETWEEN_TWO_CARDS * x_offset++, -4.5f * Y * DISTANCE_FROM_SCREEN_BOTTOM + scard.getHeight() * y_offset);
                     else
                         scard.setPosition(X * DISTANCE_FROM_SCREEN_LEFT + scard.getWidth() * NEXT_FLOOR_X_OFFSET * y_offset + scard.getWidth() * X_GAP_BETWEEN_TWO_CARDS * x_offset++, Y * DISTANCE_FROM_SCREEN_BOTTOM + scard.getHeight() * y_offset);
@@ -274,6 +274,28 @@ public class FirstPhaseScreen extends AbstractScreen {
     public void dispose() {
         getFaceDownBigCard().getTexture().dispose();
         getFaceDownSmallCard().getTexture().dispose();
+    }
+
+    private String getMessage(int credit) {
+        switch (Configuration.getLanguage()) {
+            case DE:
+                if (credit == 1)
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                else
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+            case EN:
+                if (credit == 1)
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                else
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+            default:
+                if (credit == 1)
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                else
+                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+        }
+
+
     }
 
 }

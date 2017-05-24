@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.controller.bus_driving_stage;
+package com.gamefactoryx.cheers.controller;
 
 
 import com.badlogic.gdx.Gdx;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 /**
  * Created by bernat on 16.05.2017.
  */
-public class FirstPhaseController extends AbstractController {
+public class BusDrivingStageController extends AbstractController {
 
     private BusDrivingModel model;
     private static boolean flag;
@@ -30,7 +30,7 @@ public class FirstPhaseController extends AbstractController {
     private boolean keyboardOn;
     private Card activeCard;
 
-    public FirstPhaseController(final AbstractScreen screen) {
+    public BusDrivingStageController(final AbstractScreen screen) {
         super(screen);
         model = BusDrivingModel.getInstance();
         setScreenLockForPhase(model.getPhase().getName());
