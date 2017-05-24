@@ -22,6 +22,7 @@ public final class BusDrivingModel {
     private List<String> deTasks = new ArrayList<>();
     private List<String> enTasks = new ArrayList<>();
     private List<String> nameList;
+    private boolean scrollPyramide;
 
     private BusDrivingModel() {
     }
@@ -53,6 +54,7 @@ public final class BusDrivingModel {
     }
 
     public void reset() {
+        instance.setScrollPyramide(false);
         instance.getVCards().clear();
         instance.setVCards();
         instance.croupier.shuffle();
@@ -161,7 +163,7 @@ public final class BusDrivingModel {
         } else {
             ++phaseIndex;
             if(phaseIndex == 1){
-                for(int i = 0; i < 10; i++)
+                for(int i = 0; i < 15; i++)
                     getPhase().getBoard().addCard(croupier.getVCard());
             }
             return true;
@@ -222,5 +224,11 @@ public final class BusDrivingModel {
         return croupier;
     }
 
+    public boolean isScrollPyramide() {
+        return scrollPyramide;
+    }
 
+    public void setScrollPyramide(boolean scrollPyramide) {
+        this.scrollPyramide = scrollPyramide;
+    }
 }

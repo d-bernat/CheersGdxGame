@@ -8,11 +8,15 @@ import com.gamefactoryx.cheers.controller.AbstractController;
 import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
+import com.gamefactoryx.cheers.model.bus_driving.Card;
+import com.gamefactoryx.cheers.model.bus_driving.Player;
 import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
+
+import java.util.HashMap;
 
 /**
  * Created by bernat on 16.05.2017.
@@ -24,6 +28,7 @@ public class FirstPhaseController extends AbstractController {
     private StringBuilder typedName = new StringBuilder();
     private boolean shift;
     private boolean keyboardOn;
+    private Card activeCard;
 
     public FirstPhaseController(final AbstractScreen screen) {
         super(screen);
@@ -39,7 +44,7 @@ public class FirstPhaseController extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        switch(model.getPhase().getName()){
+        switch (model.getPhase().getName()) {
             case "PHASE_1":
                 touchUp1Phase(screenX, screenY, pointer, button);
                 break;
@@ -110,7 +115,7 @@ public class FirstPhaseController extends AbstractController {
         }
     }
 
-    private boolean touchUp1Phase(int screenX, int screenY, int pointer, int button){
+    private boolean touchUp1Phase(int screenX, int screenY, int pointer, int button) {
         if (screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
@@ -158,13 +163,13 @@ public class FirstPhaseController extends AbstractController {
                     if (model.getPhase().getBoard().getVCards().size > 0) {
                         VCard vCard = model.getPhase().getBoard().getVCards().removeLast();
                         vCard.setOrientation(VCard.CardOrientation.FACE);
-                        model.getPlayer().addCard(vCard);
+                        model.getPlayer().addVCard(vCard);
                         model.getPhase().nextTurn();
                         return true;
                     }
 
                     //card is not on the board, has player all cards?
-                    if (model.getPlayer().getCards().size < 4) {
+                    if (model.getPlayer().getVCards().size < 4) {
                         VCard vCard = model.getCroupier().getVCard();
                         vCard.setOrientation(VCard.CardOrientation.FACE);
                         model.getPhase().getBoard().addCard(vCard);
@@ -176,18 +181,87 @@ public class FirstPhaseController extends AbstractController {
         return true;
     }
 
-    private boolean touchUp2Phase(int screenX, int screenY, int pointer, int button){
-        model.reset();
-        setScreenLockForPhase(model.getPhase().getName());
-        flag = false;
+    private boolean touchUp2Phase(int screenX, int screenY, int pointer, int button) {
+        //turn the card
+        int vCard_index = -1;
+        if (screenY >= Resolution.getGameWorldHeightPortrait() / 2.0f) {
+            for (VCard vCard : model.getPhase().getBoard().getVCards()) {
+                ++vCard_index;
+                if(vCard_index == 9)
+                    model.setScrollPyramide(true);
+                if (vCard.getOrientation() == VCard.CardOrientation.BACK) {
+                    vCard.setOrientation(VCard.CardOrientation.FACE);
+                    activeCard = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
+                    model.firstPlayer();
+                    do {
+                        Player player = model.getPlayer();
+                        //player.getMessage().clear();
+                        for (VCard playerVCard : player.getVCards()) {
+                            Card playerCard = new Card(playerVCard.getCardIndex(), Card.CardSize.SMALL);
+                            //todo comparable
+                            if (activeCard.getValue() == playerCard.getValue()) {
+                                //playerVCard.setCredit(1);
+                                if (vCard_index < 5)
+                                    playerVCard.setCredit(1);
+                                else if (vCard_index < 9)
+                                    playerVCard.setCredit(2);
+                                else if (vCard_index < 12)
+                                    playerVCard.setCredit(3);
+                                else if (vCard_index < 14)
+                                    playerVCard.setCredit(4);
+
+                                else if (vCard_index == 14)
+                                    playerVCard.setCredit(5);
+                            } else
+                                playerVCard.setCredit(0);
+                        }
+                    } while (model.nextPlayer());
+                    break;
+                }
+            }
+
+        } else {
+            //yes I will do something
+            if (screenX >= getScreen().getTextBox().getX() &&
+                    screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+                if (activeCard != null){
+                    model.firstPlayer();
+                    outer:
+                    do {
+                        Player player = model.getPlayer();
+                        //todo continue
+                        for (VCard playerVCard : player.getVCards()) {
+                            Card playerCard = new Card(playerVCard.getCardIndex(), Card.CardSize.SMALL);
+                            //todo comparable
+                            if (activeCard.getValue() == playerCard.getValue()) {
+                                player.removeVCard(playerVCard);
+                                break outer;
+                            }
+                        }
+                    }
+                    while (model.nextPlayer());
+                }
+            } else {
+                model.reset();
+                setScreenLockForPhase(model.getPhase().getName());
+                flag = false;
+                activeCard = null;
+
+            }
+
+        }
+
+
         return true;
     }
 
-    private boolean touchUp3Phase(int screenX, int screenY, int pointer, int button){
+    private boolean touchUp3Phase(int screenX, int screenY, int pointer, int button) {
         return true;
     }
 
-    private boolean touchUp4Phase(int screenX, int screenY, int pointer, int button){
+    private boolean touchUp4Phase(int screenX, int screenY, int pointer, int button) {
         return true;
     }
 }

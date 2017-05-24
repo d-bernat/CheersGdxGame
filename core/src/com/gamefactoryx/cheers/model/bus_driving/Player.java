@@ -3,6 +3,7 @@ package com.gamefactoryx.cheers.model.bus_driving;
 import com.badlogic.gdx.utils.Queue;
 
 
+
 /**
  * Created by bernat on 17.05.2017.
  */
@@ -26,7 +27,7 @@ public class Player {
         return position;
     }
 
-    public Queue<VCard> getCards() {
+    public Queue<VCard> getVCards() {
         return cards;
     }
 
@@ -42,10 +43,13 @@ public class Player {
         this.alive = alive;
     }
 
-    public void addCard(VCard vCard){
+    public void addVCard(VCard vCard){
         cards.addLast(vCard);
     }
-    public void removeCard(VCard vCard){
+    public void removeVCard(VCard vCard){
         cards.removeIndex(cards.indexOf(vCard, true));
     }
+
+
+
 }

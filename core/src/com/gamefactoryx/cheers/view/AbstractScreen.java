@@ -238,8 +238,8 @@ public abstract class AbstractScreen implements Screen {
         drawMainSprite();
         drawLogo();
         drawButtons();
-        drawText();
         drawCards();
+        drawText();
         spriteBatch.end();
     }
 
