@@ -41,6 +41,10 @@ public abstract class AbstractScreen implements Screen {
 
     private int yScrollPos;
 
+    private static Map<String, Sprite> cardCache = new HashMap<>();
+    private Sprite faceDownBigCard;
+    private Sprite faceDownSmallCard;
+
 
     public Sprite[][] getButtons() {
         return buttons;
@@ -67,39 +71,39 @@ public abstract class AbstractScreen implements Screen {
     //    this.dataModel = dataModel;
     //}
 
-    Sprite getLandscapeSprite() {
+    public Sprite getLandscapeSprite() {
         return landscapeSprite;
     }
 
-    Sprite getPortraitSprite() {
+    public Sprite getPortraitSprite() {
         return portraitSprite;
     }
 
-    Batch getSpriteBatch() {
+    public Batch getSpriteBatch() {
         return spriteBatch;
     }
 
-    Sprite getLogo() {
+    public Sprite getLogo() {
         return logo;
     }
 
-    Map<String, Sprite> getCardSprites() {
+    public Map<String, Sprite> getCardSprites() {
         return cardSprites;
     }
 
-    void setClicked(boolean[] clicked) {
+    public void setClicked(boolean[] clicked) {
         this.clicked = clicked;
     }
 
-    void setButtons(Sprite[][] buttons) {
+    public void setButtons(Sprite[][] buttons) {
         this.buttons = buttons;
     }
 
-    void setTextBox(Sprite textBox) {
+    public void setTextBox(Sprite textBox) {
         this.textBox = textBox;
     }
 
-    void setLogo(Sprite logo) {
+    public void setLogo(Sprite logo) {
         this.logo = logo;
     }
 
@@ -129,6 +133,29 @@ public abstract class AbstractScreen implements Screen {
         this.yScrollPos = yScrollPos;
     }
 
+    public static Map<String, Sprite> getCardCache() {
+        return cardCache;
+    }
+
+    public static void setCardCache(Map<String, Sprite> cardCache) {
+        AbstractScreen.cardCache = cardCache;
+    }
+
+    public Sprite getFaceDownBigCard() {
+        return faceDownBigCard;
+    }
+
+    public void setFaceDownBigCard(Sprite faceDownBigCard) {
+        this.faceDownBigCard = faceDownBigCard;
+    }
+
+    public Sprite getFaceDownSmallCard() {
+        return faceDownSmallCard;
+    }
+
+    public void setFaceDownSmallCard(Sprite faceDownSmallCard) {
+        this.faceDownSmallCard = faceDownSmallCard;
+    }
 
     @Override
     public void show() {
@@ -143,9 +170,10 @@ public abstract class AbstractScreen implements Screen {
         viewport.apply();
         initLogo();
         initSprites();
+        initCards();
         initTextBox();
         initButtons();
-        initCards();
+
     }
 
 
@@ -193,12 +221,12 @@ public abstract class AbstractScreen implements Screen {
         spriteBatch.dispose();
     }
 
-    void setLandscapeSprite(Sprite landscapeSprite) {
+    public void setLandscapeSprite(Sprite landscapeSprite) {
         this.landscapeSprite = landscapeSprite;
         landscapeSprite.setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
     }
 
-    void setPortraitSprite(Sprite portraitSprite) {
+    public void setPortraitSprite(Sprite portraitSprite) {
         this.portraitSprite = portraitSprite;
         portraitSprite.setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }

@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Queue;
 public class Player {
 
     private String name;
-    private final Queue<Integer> cards;
+    private final Queue<VCard> cards;
     private boolean alive;
     private int position;
 
@@ -26,7 +26,7 @@ public class Player {
         return position;
     }
 
-    public Queue<Integer> getCards() {
+    public Queue<VCard> getCards() {
         return cards;
     }
 
@@ -42,10 +42,10 @@ public class Player {
         this.alive = alive;
     }
 
-    public void addCard(Integer iCard){
-        cards.addLast(iCard);
+    public void addCard(VCard vCard){
+        cards.addLast(vCard);
     }
-    public void removeCard(Integer iCard){
-        cards.removeIndex(cards.indexOf(iCard, true));
+    public void removeCard(VCard vCard){
+        cards.removeIndex(cards.indexOf(vCard, true));
     }
 }

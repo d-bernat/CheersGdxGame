@@ -1,12 +1,9 @@
 package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Queue;
 import com.gamefactoryx.cheers.CheersGdxGame;
-
-import java.util.List;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -89,10 +86,8 @@ public final class StageManager {
                     CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
                 break;
-            case BUS_DRIVING_STAGE:
-                if(CheersGdxGame.getScreenLock() != null)
-                    CheersGdxGame.getScreenLock().lock(1);
-                controller = StageEnum.BUS_DRIVING_STAGE.getController();
+            case BUS_DRIVING_STAGE_FIRST_PHASE:
+                controller = StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE.getController();
                 break;
         }
 
