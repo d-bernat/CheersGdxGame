@@ -202,5 +202,14 @@ public class Card {
         }
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o != null && o instanceof Card){
+            return ((Card)o).getValue() == this.getValue();
+        }
+
+        return false;
+    }
+
 
 }

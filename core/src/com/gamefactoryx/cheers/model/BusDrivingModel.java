@@ -76,11 +76,11 @@ public final class BusDrivingModel {
             case 0:
                 switch (Configuration.getLanguage()) {
                     case DE:
-                        return deTasks.get(getPhase().getTurn());
+                        return deTasks.get(getPhase().getRound());
                     case EN:
-                        return enTasks.get(getPhase().getTurn());
+                        return enTasks.get(getPhase().getRound());
                     default:
-                        return deTasks.get(getPhase().getTurn());
+                        return deTasks.get(getPhase().getRound());
                 }
         }
         return "";

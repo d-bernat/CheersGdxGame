@@ -15,8 +15,9 @@ public class Phase {
     private final Board board;
     private int round;
     private int turn;
+    private int step;
     private boolean phase_finished;
-    private boolean round_finished;
+
 
     public Phase(int index) {
         name = "PHASE_" + index;
@@ -36,45 +37,41 @@ public class Phase {
         return round;
     }
 
-    public int getTurn() {
-        return turn;
-    }
-
-
 
     public boolean isPhaseFinished() {
         return phase_finished;
     }
-
-    public boolean isRoundFinished() {
-        return round_finished;
-    }
-
-    public void nextRound() {
-        round_finished = false;
-        switch (name) {
-            case "PHASE_1":
-                if (round < Configuration.getMaxPlayers() - 1) {
-                    turn = 0;
-                    ++round;
-                    BusDrivingModel.getInstance().nextPlayer();
-                } else {
-                    phase_finished = true;
-                }
+    public void nextTurn(){
+        VCard vCard;
+        switch (step){
+            case 0:
+                vCard = BusDrivingModel.getInstance().getCroupier().getVCard();
+                vCard.setOrientation(VCard.CardOrientation.FACE);
+                BusDrivingModel.getInstance().getPhase().getBoard().addCard(vCard);
+                ++step;
                 break;
-        }
-
-    }
-
-    public void nextTurn() {
-        switch (name) {
-            case "PHASE_1":
-                if (turn < 3) {
+            case 1:
+                vCard = BusDrivingModel.getInstance().getPhase().getBoard().getVCards().removeLast();
+                vCard.setOrientation(VCard.CardOrientation.FACE);
+                BusDrivingModel.getInstance().getPlayer().addVCard(vCard);
+                ++step;
+                break;
+            case 2:
+                if(BusDrivingModel.getInstance().nextPlayer()){
                     ++turn;
                 }
+                else if (BusDrivingModel.getInstance().getPlayer().getVCards().size < 4) {
+                    BusDrivingModel.getInstance().firstPlayer();
+                    turn = 0;
+                    ++round;
+                }
                 else
-                    round_finished = true;
+                    phase_finished = true;
+                step = 0;
                 break;
         }
+
+
     }
+
 }

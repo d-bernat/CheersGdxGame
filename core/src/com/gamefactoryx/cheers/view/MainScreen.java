@@ -118,10 +118,10 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void drawLogo() {
-        float DISTANCE_FROM_BOTTOM_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.2f : 0.1f;
+        float DISTANCE_FROM_BOTTOM_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.15f : 0.15f;
         float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.30f : 0.12f;
-        float ZOOM_X = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.52f : 0.86f;
-        float ZOOM_Y = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.50f : 0.27f;
+        float ZOOM_X = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.42f : 0.76f;
+        float ZOOM_Y = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.7f : 0.35f;
         float X = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
         float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
         getLogo().setSize(X * ZOOM_X, Y * ZOOM_Y);

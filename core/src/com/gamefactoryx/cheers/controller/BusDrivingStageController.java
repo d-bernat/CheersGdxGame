@@ -148,32 +148,10 @@ public class BusDrivingStageController extends AbstractController {
                         Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
                         Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
 
-                    //is  round completed?
-                    if (model.getPhase().isRoundFinished()) {
-                        model.getPhase().nextRound();
-                        //is phase completed?
-                        if (model.getPhase().isPhaseFinished()) {
-                            model.nextPhase();
-                            setScreenLockForPhase(model.getPhase().getName());
-                        }
-                        return true;
-                    }
-
-                    //round is not completed, is card on the board?
-                    if (model.getPhase().getBoard().getVCards().size > 0) {
-                        VCard vCard = model.getPhase().getBoard().getVCards().removeLast();
-                        vCard.setOrientation(VCard.CardOrientation.FACE);
-                        model.getPlayer().addVCard(vCard);
-                        model.getPhase().nextTurn();
-                        return true;
-                    }
-
-                    //card is not on the board, has player all cards?
-                    if (model.getPlayer().getVCards().size < 4) {
-                        VCard vCard = model.getCroupier().getVCard();
-                        vCard.setOrientation(VCard.CardOrientation.FACE);
-                        model.getPhase().getBoard().addCard(vCard);
-                        return true;
+                    model.getPhase().nextTurn();
+                    if (model.getPhase().isPhaseFinished()) {
+                        model.nextPhase();
+                        setScreenLockForPhase(model.getPhase().getName());
                     }
                 }
             }
@@ -187,7 +165,7 @@ public class BusDrivingStageController extends AbstractController {
         if (screenY >= Resolution.getGameWorldHeightPortrait() / 2.0f) {
             for (VCard vCard : model.getPhase().getBoard().getVCards()) {
                 ++vCard_index;
-                if(vCard_index == 9)
+                if (vCard_index == 9)
                     model.setScrollPyramide(true);
                 if (vCard.getOrientation() == VCard.CardOrientation.BACK) {
                     vCard.setOrientation(VCard.CardOrientation.FACE);
@@ -199,7 +177,8 @@ public class BusDrivingStageController extends AbstractController {
                         for (VCard playerVCard : player.getVCards()) {
                             Card playerCard = new Card(playerVCard.getCardIndex(), Card.CardSize.SMALL);
                             //todo comparable
-                            if (activeCard.getValue() == playerCard.getValue()) {
+                            //if (activeCard.getValue() == playerCard.getValue()) {
+                            if(activeCard.equals(playerCard)){
                                 //playerVCard.setCredit(1);
                                 if (vCard_index < 5)
                                     playerVCard.setCredit(1);
@@ -226,7 +205,7 @@ public class BusDrivingStageController extends AbstractController {
                     screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
-                if (activeCard != null){
+                if (activeCard != null) {
                     model.firstPlayer();
                     outer:
                     do {
