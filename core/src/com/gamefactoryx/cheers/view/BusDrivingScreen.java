@@ -94,34 +94,48 @@ public class BusDrivingScreen extends AbstractScreen {
                 float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.89f;
                 getTextBox().setPosition(X * 0.05f, Y * 0.76f);
                 getTextBox().draw(getSpriteBatch());
-                String name = dataModel.getPlayer().getName();
-                String task = dataModel.getTask();
-                FontHelper.getGlyphLayout().setText(font, name);
-                font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
-                FontHelper.getGlyphLayout().setText(font, task);
-                font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
-                        (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+                if(dataModel.getMessage() == null || dataModel.getMessage().length() == 0) {
+                    String name = dataModel.getPlayer().getName();
+                    String task = dataModel.getTask();
+                    FontHelper.getGlyphLayout().setText(font, name);
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+                    FontHelper.getGlyphLayout().setText(font, task);
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                            (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+                }
+                else{
+                    FontHelper.getGlyphLayout().setText(font, dataModel.getMessage());
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                            (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 1.5f);
+                }
             }
             break;
             case "PHASE_2": {
                 float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.65f;
                 getTextBox().setPosition(X * 0.05f, Y * 0.52f);
                 getTextBox().draw(getSpriteBatch());
-                dataModel.firstPlayer();
-                outer:
-                do {
-                    Player player = dataModel.getPlayer();
-                    for (VCard vCard : player.getVCards()) {
-                        if (vCard.getCredit() > 0) {
-                            FontHelper.getGlyphLayout().setText(font, dataModel.getPlayer().getName());
-                            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
-                            FontHelper.getGlyphLayout().setText(font, getMessage(vCard.getCredit()));
-                            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
-                                    (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
-                            break outer;
+                if(dataModel.getMessage() == null || dataModel.getMessage().length() == 0) {
+                    dataModel.firstPlayer();
+                    outer:
+                    do {
+                        Player player = dataModel.getPlayer();
+                        for (VCard vCard : player.getVCards()) {
+                            if (vCard.getCredit() > 0) {
+                                FontHelper.getGlyphLayout().setText(font, dataModel.getPlayer().getName());
+                                font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+                                FontHelper.getGlyphLayout().setText(font, getMessage(vCard.getCredit()));
+                                font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                                        (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+                                break outer;
+                            }
                         }
-                    }
-                } while (dataModel.nextPlayer());
+                    } while (dataModel.nextPlayer());
+                }
+                else{
+                    FontHelper.getGlyphLayout().setText(font, dataModel.getMessage());
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                            (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 1.5f);
+                }
             }
             break;
         }

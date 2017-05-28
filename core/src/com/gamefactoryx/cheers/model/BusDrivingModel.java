@@ -23,6 +23,7 @@ public final class BusDrivingModel {
     private List<String> enTasks = new ArrayList<>();
     private List<String> nameList;
     private boolean scrollPyramide;
+    private String message;
 
     private BusDrivingModel() {
     }
@@ -64,6 +65,7 @@ public final class BusDrivingModel {
         instance.setPlayers(instance.createPlayers());
         instance.phases.clear();
         instance.setPhases(instance.createPhases());
+        instance.setMessage(null);
         firstPhase();
         firstPlayer();
 
@@ -230,5 +232,22 @@ public final class BusDrivingModel {
 
     public void setScrollPyramide(boolean scrollPyramide) {
         this.scrollPyramide = scrollPyramide;
+    }
+
+    public String getMessage() {
+        if( "GO_ON".equals(message))
+        switch (Configuration.getLanguage()) {
+            case DE:
+                return "Weiter?";
+            case EN:
+                return "Continue?";
+            case SK:
+                return "Pokračovať?";
+        }
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

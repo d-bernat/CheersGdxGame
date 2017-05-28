@@ -41,37 +41,49 @@ public class Phase {
     public boolean isPhaseFinished() {
         return phase_finished;
     }
-    public void nextTurn(){
-        VCard vCard;
-        switch (step){
-            case 0:
-                vCard = BusDrivingModel.getInstance().getCroupier().getVCard();
-                vCard.setOrientation(VCard.CardOrientation.FACE);
-                BusDrivingModel.getInstance().getPhase().getBoard().addCard(vCard);
-                ++step;
-                break;
-            case 1:
-                vCard = BusDrivingModel.getInstance().getPhase().getBoard().getVCards().removeLast();
-                vCard.setOrientation(VCard.CardOrientation.FACE);
-                BusDrivingModel.getInstance().getPlayer().addVCard(vCard);
-                ++step;
-                break;
-            case 2:
-                if(BusDrivingModel.getInstance().nextPlayer()){
-                    ++turn;
+
+    public void nextTurn() {
+        switch (name) {
+            case "PHASE_1":
+                VCard vCard;
+                switch (step) {
+                    case 0:
+                        vCard = BusDrivingModel.getInstance().getCroupier().getVCard();
+                        vCard.setOrientation(VCard.CardOrientation.FACE);
+                        BusDrivingModel.getInstance().getPhase().getBoard().addCard(vCard);
+                        ++step;
+                        break;
+                    case 1:
+                        vCard = BusDrivingModel.getInstance().getPhase().getBoard().getVCards().removeLast();
+                        vCard.setOrientation(VCard.CardOrientation.FACE);
+                        BusDrivingModel.getInstance().getPlayer().addVCard(vCard);
+                        ++step;
+                        break;
+                    case 2:
+                        if (BusDrivingModel.getInstance().nextPlayer()) {
+                            ++turn;
+                        } else if (BusDrivingModel.getInstance().getPlayer().getVCards().size < 4) {
+                            BusDrivingModel.getInstance().firstPlayer();
+                            turn = 0;
+                            ++round;
+                        } else {
+                            setMessageToContinue();
+                            phase_finished = true;
+                        }
+                        step = 0;
+
+                        break;
                 }
-                else if (BusDrivingModel.getInstance().getPlayer().getVCards().size < 4) {
-                    BusDrivingModel.getInstance().firstPlayer();
-                    turn = 0;
-                    ++round;
-                }
-                else
-                    phase_finished = true;
-                step = 0;
+                break;
+            case "PHASE_2":
+                setMessageToContinue();
+                phase_finished = true;
                 break;
         }
 
+    }
+    private void setMessageToContinue(){
+        BusDrivingModel.getInstance().setMessage("GO_ON");
 
     }
-
 }
