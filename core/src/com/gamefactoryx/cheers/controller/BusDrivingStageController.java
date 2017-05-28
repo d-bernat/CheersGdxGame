@@ -29,6 +29,7 @@ public class BusDrivingStageController extends AbstractController {
     private boolean shift;
     private boolean keyboardOn;
     private Card activeCard;
+    private String tempName;
 
     public BusDrivingStageController(final AbstractScreen screen) {
         super(screen);
@@ -65,8 +66,7 @@ public class BusDrivingStageController extends AbstractController {
     public boolean keyUp(int keycode) {
         switch (keycode) {
             case Input.Keys.ENTER:
-                model.getPlayer().setName(typedName.toString());
-                typedName.setLength(0);
+                setPlayerName();
                 enableKeyboard(false);
                 break;
             case Input.Keys.BACKSPACE:
@@ -121,37 +121,43 @@ public class BusDrivingStageController extends AbstractController {
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
 
-            model.getPlayer().setName("");
-            enableKeyboard(true);
+            if (model.getMessage() != null && model.getMessage().length() > 0) {
+                if (model.getPhase().isPhaseFinished()) {
+                    model.nextPhase();
+                    setScreenLockForPhase(model.getPhase().getName());
+                    model.setMessage("");
+                }
+            } else {
+                tempName = model.getPlayer().getName();
+                model.getPlayer().setName("");
+                enableKeyboard(true);
+            }
 
         } else {
-            //is keyboard on?
-            if (keyboardOn) {
-                model.getPlayer().setName(typedName.toString());
-                typedName.setLength(0);
-                enableKeyboard(false);
-            }
-            //keyboard is off
-            else {
-
-                //should you restart phase?
-                if (screenX < 100) {
-                    model.reset();
-                    setScreenLockForPhase(model.getPhase().getName());
-                    flag = false;
-                    return true;
+            if (model.getMessage() == null || model.getMessage().length() == 0) {
+                //is keyboard on?
+                if (keyboardOn) {
+                    setPlayerName();
+                    enableKeyboard(false);
                 }
+                //keyboard is off
+                else {
 
-
-                if (screenX >= getScreen().getFaceDownBigCard().getX() &&
-                        screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
-                        Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
-                        Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
-
-                    model.getPhase().nextTurn();
-                    if (model.getPhase().isPhaseFinished()) {
-                        model.nextPhase();
+                    //should you restart phase?
+                    if (screenX < 100) {
+                        model.reset();
                         setScreenLockForPhase(model.getPhase().getName());
+                        flag = false;
+                        return true;
+                    }
+
+
+                    if (screenX >= getScreen().getFaceDownBigCard().getX() &&
+                            screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
+                            Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
+                            Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
+
+                        model.getPhase().nextTurn();
                     }
                 }
             }
@@ -162,24 +168,23 @@ public class BusDrivingStageController extends AbstractController {
     private boolean touchUp2Phase(int screenX, int screenY, int pointer, int button) {
         //turn the card
         int vCard_index = -1;
+
         if (screenY >= Resolution.getGameWorldHeightPortrait() / 2.0f) {
+            // if (model.getMessage() == null || model.getMessage().length() == 0) {
             for (VCard vCard : model.getPhase().getBoard().getVCards()) {
                 ++vCard_index;
                 if (vCard_index == 9)
                     model.setScrollPyramide(true);
+
                 if (vCard.getOrientation() == VCard.CardOrientation.BACK) {
                     vCard.setOrientation(VCard.CardOrientation.FACE);
                     activeCard = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
                     model.firstPlayer();
                     do {
                         Player player = model.getPlayer();
-                        //player.getMessage().clear();
                         for (VCard playerVCard : player.getVCards()) {
                             Card playerCard = new Card(playerVCard.getCardIndex(), Card.CardSize.SMALL);
-                            //todo comparable
-                            //if (activeCard.getValue() == playerCard.getValue()) {
-                            if(activeCard.equals(playerCard)){
-                                //playerVCard.setCredit(1);
+                            if (activeCard.equals(playerCard)) {
                                 if (vCard_index < 5)
                                     playerVCard.setCredit(1);
                                 else if (vCard_index < 9)
@@ -191,12 +196,14 @@ public class BusDrivingStageController extends AbstractController {
 
                                 else if (vCard_index == 14)
                                     playerVCard.setCredit(5);
-                            } else
+                            } else {
                                 playerVCard.setCredit(0);
+                            }
                         }
                     } while (model.nextPlayer());
                     break;
                 }
+
             }
 
         } else {
@@ -205,33 +212,33 @@ public class BusDrivingStageController extends AbstractController {
                     screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
-                if (activeCard != null) {
-                    model.firstPlayer();
-                    outer:
-                    do {
-                        Player player = model.getPlayer();
-                        //todo continue
-                        for (VCard playerVCard : player.getVCards()) {
-                            Card playerCard = new Card(playerVCard.getCardIndex(), Card.CardSize.SMALL);
-                            //todo comparable
-                            if (activeCard.getValue() == playerCard.getValue()) {
-                                player.removeVCard(playerVCard);
-                                break outer;
+                if (model.getMessage() == null || model.getMessage().length() == 0) {
+                    if (activeCard != null) {
+                        model.firstPlayer();
+                        outer:
+                        do {
+                            Player player = model.getPlayer();
+                            //todo continue
+                            for (VCard playerVCard : player.getVCards()) {
+                                Card playerCard = new Card(playerVCard.getCardIndex(), Card.CardSize.SMALL);
+                                //todo comparable
+                                if (activeCard.getValue() == playerCard.getValue()) {
+                                    player.removeVCard(playerVCard);
+                                    break outer;
+                                }
                             }
                         }
+                        while (model.nextPlayer());
                     }
-                    while (model.nextPlayer());
+                } else {
+                    //todo next phase
+                    model.reset();
+                    setScreenLockForPhase(model.getPhase().getName());
+                    flag = false;
+                    activeCard = null;
                 }
-            } else {
-                model.reset();
-                setScreenLockForPhase(model.getPhase().getName());
-                flag = false;
-                activeCard = null;
-
             }
-
         }
-
 
         return true;
     }
@@ -242,5 +249,13 @@ public class BusDrivingStageController extends AbstractController {
 
     private boolean touchUp4Phase(int screenX, int screenY, int pointer, int button) {
         return true;
+    }
+
+    private void setPlayerName() {
+        if (typedName.toString().trim().length() > 0)
+            model.getPlayer().setName(typedName.toString());
+        else
+            model.getPlayer().setName(tempName);
+        typedName.setLength(0);
     }
 }
