@@ -1,16 +1,42 @@
-This is english version.
-Um Kings Cup Special zu spielen benötigst man ein Standart kartendeck, alkoholische Getränke und ein großes Glas, welches in die Mitte gestellt wird. Welche alkoholischen Getränke hierbei verwendet werden ist euch überlassen. Der Sinn des Spiels ist es, dass die Spieler reihum eine Karte ziehen und die mit der Karte verbundene Aufgabe erfüllen.
-2 --> Kategorie                                                                                                                                            Der Spieler sucht sich eine Kategorie aus wie Automarken, Fußballer, Modelabels oder ähnliches. Er nennt einen Begriff und es geht im Uhrzeigersinn, der erste dem nichts einfällt muss trinken.
-3 --> Trinkpartner                                                                                                                                               Du darfst dir nun einen Trinkpartner für den Rest des Spiels aussuchen. Dieser muss immer dann trinken, wenn du es auch musst.
-4 --> Dance Off                                                                                                                                                  Der Spieler, der die Karte zieht tanzt einen Tanzschritt, der Spieler links von ihm muss ihn nachtanzen und einen neuen erfinden und so geht es weiter bis einer einen Fehler gemacht hat.
-5 --> Counter                                                                                                                                                    Eine beliebige Zahl zwischen 1 – 8 darf ausgesuchen werden.  Anschließend wird reihum durchgezählt. Bei der ausgewählten Zahl und allen Zahlen, in denen die ausgewählte Zahl vorkommt oder durch die ausgewählte Zahl teilbar ist, muss ein vorher ausgedachtes Wort genannt werden.                                                                                                                     Beispielweise wählt der Spieler die Zahl 4 und das Wort Kuchen. So verläuft das Spiel wie folgt: 1, 2, 3,  Kuchen, 5, 6, 7, Kuchen, 9,10, 11 , Kuchen,13 und so weiter. Macht ein Spieler einen Fehler, muss er zur Strafe trinken.
-6 --> Keep Calm                                                                                                                                              Sei ruhig, falls es nicht geht musst du jedes Mal trinken, wenn du laut bist
-7 --> Selber trinken                                                                                                                                      Du musst selber trinken
-8 --> Chinman                                                                                                                                                     Im Laufe des Spieles kannst du dir ans Kinn fassen und die Mitspieler müssen darauf achten, wenn du es tust müssen sie es dir nachmachen. Der letzte Mitspieler trinkt.
-9 --> Regel ausdenken                                                                                                                               Denke dir eine eigene Regel aus, wird sie vergessen, dann muss man trinken.
-10 --> Alle trinken                                                                                                                                                    Alle trinken einmal.
-Bube --> Alle Männer trinken                                                                                                                      Alle Männer müssen trinken.
-Dame --> Alle Frauen trinken                                                                                                                            Alle Frauen müssen trinken.
-König --> In den Cup                                                                                                                                            Du musst den Kings Cup um ¼, mit deinem Getränk, befühlen. Hast du etwa den letzten König? Na dann Herzlichen Glückwunsch du darfst es austrinken!
-Ass --> Wasserfall                                                                                                                                   Fange an zutrinken, alle tun es dir solange gleich bis du das Glas ansetzt
+Kings Cup Special
 
+Kings Cup Special is a drinking game that uses playing cards.  Every player must drink and dispense drinks based on cards drawn. Each card has a rule. You need one deck of cards, some players, alcoholic beverages and a large cup which will be used as the King�s Cup.  You shuffle the cards into a circle around the cup. Each player takes turn drawing cards and the players must participate in the instructions corresponding to the drawn card.
+
+2 Category
+You will pick one category like sports, car brands and so on. The first player, which hasn�t any  answer need to drink.
+
+3 drinking partner
+You can choose your drinking bro. Everytime you need to drink your bro will drinking with you.
+
+4 dance off
+You�ll stand up and show the entire group your dance moves. The next one need to dance the same way as you and creates then another move.
+
+5 Counter
+You will pick one number between 1-8, maybe three and a word like cheesecake. Then you start to count. PlayerA: 1; PlayerB: 2 and so on. The next player need to say cheesecake instead of 3 or 6 or 9 or 12 or 13�. Every number you can divide with your number you need to say your word. And also every number where your number is in like 13 and 23 and 30,31�
+
+6 keep calm
+You need to keep calm until someone new will draw this card, You can�t? Everytime you can�t you need to drink.
+
+7 Drink
+You need to drink.
+
+8 chinman
+You can touch your chin everytime you want, if you touch than every player need to touch their chin too. The player which will be last need to drink.
+
+9 Think up a rule
+You can think up a rule and everytime someone forget it, they need to drink.
+
+10 Drink together
+Everyone need to take a sip.
+
+Jack  All men
+All men are drinking.
+
+Queen All women
+All women are drinking.
+
+King Kings Cup
+You need to fill the Kings Cup with � of your drink, if you have the last card with a king than congratulations you need to drink the whole cup.
+
+Ace Waterfall
+You start drinking and everyone will do the same as you. At the moment you stop to drink then the others can also stop. Otherwise they need to drink as long as you do.
