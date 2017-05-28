@@ -20,6 +20,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 import com.sun.media.jfxmedia.events.PlayerEvent;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -280,19 +281,19 @@ public class BusDrivingScreen extends AbstractScreen {
         switch (Configuration.getLanguage()) {
             case DE:
                 if (credit == 1)
-                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schluck!");
                 else
-                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
             case EN:
                 if (credit == 1)
-                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                    return String.format(Locale.ENGLISH,"%s %d %s", "Du verteilst ", credit, " Schluck!");
                 else
-                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+                    return String.format(Locale.ENGLISH,"%s %d %s", "Du verteilst ", credit, " Schlücke!");
             default:
                 if (credit == 1)
-                    return String.format("%s %d %s", "Du verteilst ", credit, " Schluck!");
+                    return String.format(Locale.GERMAN,"%s %d %s", "Du verteilst ", credit, " Schluck!");
                 else
-                    return String.format("%s %d %s", "Du verteilst ", credit, " Schlücke!");
+                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
         }
 
 
