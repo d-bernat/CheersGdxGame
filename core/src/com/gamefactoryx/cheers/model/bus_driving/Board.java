@@ -2,15 +2,13 @@ package com.gamefactoryx.cheers.model.bus_driving;
 
 import com.badlogic.gdx.utils.Queue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by bernat on 17.05.2017.
  */
 public class Board {
 
     private final Queue<VCard> vCards;
+    private boolean allCardsOnBoardFace;
 
     public Board(){
         vCards = new Queue<>();
@@ -22,4 +20,11 @@ public class Board {
         vCards.addLast(vCard);
     }
 
+    public boolean isAllCardsOnBoardFace() {
+        return allCardsOnBoardFace;
+    }
+
+    public void setAllCardsOnBoardFace(boolean allCardsOnBoardFace) {
+        this.allCardsOnBoardFace = allCardsOnBoardFace;
+    }
 }

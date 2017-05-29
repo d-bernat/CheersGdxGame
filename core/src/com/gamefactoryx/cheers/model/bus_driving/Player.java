@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Queue;
 /**
  * Created by bernat on 17.05.2017.
  */
-public class Player {
+public class Player implements Comparable<Player>{
 
     private String name;
     private final Queue<VCard> cards;
@@ -51,5 +51,8 @@ public class Player {
     }
 
 
-
+    @Override
+    public int compareTo(Player o) {
+        return o.getVCards().size - this.getVCards().size ;
+    }
 }
