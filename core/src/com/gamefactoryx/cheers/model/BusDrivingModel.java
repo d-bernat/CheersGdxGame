@@ -169,6 +169,17 @@ public final class BusDrivingModel {
             if (phaseIndex == 1) {
                 for (int i = 0; i < 15; i++)
                     getPhase().getBoard().addCard(croupier.getVCard());
+                instance.setMessage(null);
+            }else if(phaseIndex == 2){
+                instance.getVCards().clear();
+                instance.setVCards();
+                instance.croupier.shuffle();
+                instance.players.clear();
+                instance.setMessage(null);
+                instance.players.addAll(instance.getLoosers());
+                instance.firstPlayer();
+                getPhase().getBoard().addCard(croupier.getVCard());
+
             }
             return true;
         }

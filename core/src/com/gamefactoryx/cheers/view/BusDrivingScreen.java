@@ -149,6 +149,25 @@ public class BusDrivingScreen extends AbstractScreen {
                 }
             }
             break;
+            case "PHASE_3":
+                getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
+                float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.89f;
+                getTextBox().setPosition(X * 0.05f, Y * 0.76f);
+                getTextBox().draw(getSpriteBatch());
+                if (dataModel.getMessage() == null || dataModel.getMessage().length() == 0) {
+                    String name = dataModel.getPlayer().getName();
+                    String task = dataModel.getTask();
+                    FontHelper.getGlyphLayout().setText(font, name);
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+                    FontHelper.getGlyphLayout().setText(font, task);
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                            (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+                } else {
+                    FontHelper.getGlyphLayout().setText(font, dataModel.getMessage());
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f,
+                            (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 1.5f);
+                }
+                break;
         }
     }
 
@@ -289,6 +308,18 @@ public class BusDrivingScreen extends AbstractScreen {
 
                     scard.draw(getSpriteBatch(), 1.0f);
                     ++index;
+                }
+                break;
+            case "PHASE_3":
+                for (VCard vCard : dataModel.getPhase().getBoard().getVCards()) {
+                    Sprite scard = getCardCache().get(String.format("%d_%s", vCard.getCardIndex(), Card.CardSize.BIG.value(), vCard.getOrientation().value()));
+                    if (scard == null) {
+                        Card card = new Card(vCard.getCardIndex(), Card.CardSize.BIG);
+                        scard = getCardSprites().get(card.getFileName(Card.CardSize.BIG, vCard.getOrientation()));
+                        getCardCache().put(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.BIG.value(), vCard.getOrientation().value()), scard);
+                    }
+                    scard.setPosition(X * 0.22f, Y * 0.23f);
+                    scard.draw(getSpriteBatch(), 1.0f);
                 }
                 break;
         }

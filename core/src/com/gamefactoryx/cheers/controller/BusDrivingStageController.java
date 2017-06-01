@@ -7,6 +7,7 @@ import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
 import com.gamefactoryx.cheers.model.bus_driving.Card;
+import com.gamefactoryx.cheers.model.bus_driving.Croupier;
 import com.gamefactoryx.cheers.model.bus_driving.Player;
 import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -45,6 +46,9 @@ public class BusDrivingStageController extends AbstractController {
                 break;
             case "PHASE_2":
                 touchUp2Phase(screenX, screenY, pointer, button);
+                break;
+            case "PHASE_3":
+                touchUp3Phase(screenX, screenY, pointer, button);
                 break;
         }
 
@@ -106,6 +110,11 @@ public class BusDrivingStageController extends AbstractController {
                     CheersGdxGame.getScreenLock().lock(1);
                 }
                 break;
+            case "PHASE_3":
+                if (CheersGdxGame.getScreenLock() != null) {
+                    CheersGdxGame.getScreenLock().lock(1);
+                }
+                break;
         }
     }
 
@@ -118,7 +127,6 @@ public class BusDrivingStageController extends AbstractController {
                 if (model.getPhase().isPhaseFinished()) {
                     model.nextPhase();
                     setScreenLockForPhase(model.getPhase().getName());
-                    model.setMessage("");
                 }
             } else {
                 tempName = model.getPlayer().getName();
@@ -239,10 +247,10 @@ public class BusDrivingStageController extends AbstractController {
                     }
                 } else {
                     //todo next phase
-                    model.reset();
+                    model.nextPhase();
                     setScreenLockForPhase(model.getPhase().getName());
-                    flag = false;
-                    activeCard = null;
+
+
                 }
                /* Gdx.app.log("BUG424", "*********DEBUGGING***************");
                 Gdx.app.log("screenX", ":" + screenX);
@@ -269,6 +277,10 @@ public class BusDrivingStageController extends AbstractController {
     }
 
     private boolean touchUp3Phase(int screenX, int screenY, int pointer, int button) {
+        model.reset();
+        setScreenLockForPhase(model.getPhase().getName());
+        flag = false;
+        activeCard = null;
         return true;
     }
 

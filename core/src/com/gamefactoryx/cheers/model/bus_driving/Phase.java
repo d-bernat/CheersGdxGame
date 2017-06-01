@@ -80,6 +80,10 @@ public class Phase {
                 setMessageToContinue();
                 phase_finished = true;
                 break;
+            case "PHASE_3":
+                setMessageToContinue();
+                phase_finished = true;
+                break;
         }
 
     }
