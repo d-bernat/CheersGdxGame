@@ -277,10 +277,16 @@ public class BusDrivingStageController extends AbstractController {
     }
 
     private boolean touchUp3Phase(int screenX, int screenY, int pointer, int button) {
-        model.reset();
+        if (screenX >= getScreen().getFaceDownBigCard().getX() &&
+                screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
+            model.getPhase().nextTurn();
+        }
+        /*model.reset();
         setScreenLockForPhase(model.getPhase().getName());
         flag = false;
-        activeCard = null;
+        activeCard = null;*/
         return true;
     }
 

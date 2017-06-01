@@ -321,6 +321,18 @@ public class BusDrivingScreen extends AbstractScreen {
                     scard.setPosition(X * 0.22f, Y * 0.23f);
                     scard.draw(getSpriteBatch(), 1.0f);
                 }
+                for (VCard vCard : dataModel.getPlayer().getVCards()) {
+                    Sprite scard = getCardCache().get(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()));
+                    if (scard == null) {
+                        Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
+                        scard = getCardSprites().get(card.getFileName(Card.CardSize.SMALL, vCard.getOrientation()));
+                        getCardCache().put(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()), scard);
+                    }
+                    scard.setSize(X * 0.2f, Y * 0.2f);
+                    scard.setPosition(X * 0.1f + scard.getWidth() * x_offset++, Y * 0.02f);
+                    scard.draw(getSpriteBatch(), 1.0f);
+                }
+
                 break;
         }
     }

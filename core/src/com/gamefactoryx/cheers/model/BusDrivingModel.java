@@ -62,7 +62,6 @@ public final class BusDrivingModel {
         instance.croupier.shuffle();
         instance.players.clear();
         instance.createFunnyNames();
-
         instance.setPlayers(instance.createPlayers());
         instance.phases.clear();
         instance.setPhases(instance.createPhases());
@@ -84,6 +83,15 @@ public final class BusDrivingModel {
                         return enTasks.get(getPhase().getRound());
                     default:
                         return deTasks.get(getPhase().getRound());
+                }
+            case 2:
+                switch (Configuration.getLanguage()) {
+                    case DE:
+                        return deTasks.get(1);
+                    case EN:
+                        return enTasks.get(1);
+                    default:
+                        return deTasks.get(1);
                 }
         }
         return "";
@@ -175,10 +183,20 @@ public final class BusDrivingModel {
                 instance.setVCards();
                 instance.croupier.shuffle();
                 instance.players.clear();
+                VCard vcard = croupier.getVCard();
+                vcard.setOrientation(VCard.CardOrientation.FACE);
+                for(Player player: instance.getLoosers()) {
+                    player.getVCards().clear();
+                    player.getVCards().addLast(vcard);
+                }
                 instance.setMessage(null);
                 instance.players.addAll(instance.getLoosers());
+                Collections.shuffle(instance.players);
                 instance.firstPlayer();
+
                 getPhase().getBoard().addCard(croupier.getVCard());
+
+
 
             }
             return true;
