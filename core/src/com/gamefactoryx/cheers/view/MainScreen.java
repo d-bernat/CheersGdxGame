@@ -114,12 +114,12 @@ public class MainScreen extends AbstractScreen {
     @Override
     protected void initLogo(){
         //setLogo(new Sprite(new Texture("common/CheersLogo.png")));
-        setLogo(new Sprite(new Texture("common/cheerslogo2.png")));
+        //setLogo(new Sprite(new Texture("common/cheerslogo2.png")));
     }
 
     @Override
     protected void drawLogo() {
-        float DISTANCE_FROM_BOTTOM_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.15f : 0.15f;
+        /*float DISTANCE_FROM_BOTTOM_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.15f : 0.15f;
         float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.30f : 0.12f;
         float ZOOM_X = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.42f : 0.76f;
         float ZOOM_Y = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.7f : 0.35f;
@@ -127,7 +127,7 @@ public class MainScreen extends AbstractScreen {
         float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
         getLogo().setSize(X * ZOOM_X, Y * ZOOM_Y);
         getLogo().setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY, Y * DISTANCE_FROM_BOTTOM_SCREEN_BOUNDARY);
-        getLogo().draw(getSpriteBatch(), 1.0f);
+        getLogo().draw(getSpriteBatch(), 1.0f);*/
     }
 
     @Override
