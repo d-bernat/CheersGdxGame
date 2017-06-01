@@ -16,6 +16,7 @@ public final class BusDrivingModel {
     private int playerIndex;
     private List<Phase> phases = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
+    private List<Player> loosers = new ArrayList<>();
     private Croupier croupier = new Croupier();
     private Map<String, Texture> cardTextures = new HashMap<>();
     private List<VCard> vCards = new ArrayList<>();
@@ -122,6 +123,7 @@ public final class BusDrivingModel {
         }
         return players;
     }
+
     private void createFunnyNames() {
         FileHandle nameFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/names.txt");
         String fileContent = nameFile.readString();
@@ -164,8 +166,8 @@ public final class BusDrivingModel {
             return false;
         } else {
             ++phaseIndex;
-            if(phaseIndex == 1){
-                for(int i = 0; i < 15; i++)
+            if (phaseIndex == 1) {
+                for (int i = 0; i < 15; i++)
                     getPhase().getBoard().addCard(croupier.getVCard());
             }
             return true;
@@ -235,19 +237,40 @@ public final class BusDrivingModel {
     }
 
     public String getMessage() {
-        if( "GO_ON".equals(message))
-        switch (Configuration.getLanguage()) {
-            case DE:
-                return "Weiter?";
-            case EN:
-                return "Continue?";
-            case SK:
-                return "Pokračovať?";
-        }
+        if ("GO_ON".equals(message))
+            switch (Configuration.getLanguage()) {
+                case DE:
+                    return "Weiter?";
+                case EN:
+                    return "Continue?";
+                case SK:
+                    return "Pokračovať?";
+            }
         return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public  void result() {
+        Collections.sort(players);
+        loosers.clear();
+        for (Player player : players) {
+            if (loosers.size() == 0 && player.getVCards().size > 0){
+                loosers.add(player);
+            } else {
+                if(loosers.get(0).getVCards().size == player.getVCards().size)
+                    loosers.add(player);
+                else
+                    break;
+            }
+
+        }
+    }
+
+    public List<Player> getLoosers(){
+        return loosers;
+}
+
 }

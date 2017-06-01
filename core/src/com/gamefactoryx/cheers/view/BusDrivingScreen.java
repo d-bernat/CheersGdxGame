@@ -1,11 +1,9 @@
 package com.gamefactoryx.cheers.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
@@ -16,12 +14,8 @@ import com.gamefactoryx.cheers.model.bus_driving.Card;
 import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
-import com.gamefactoryx.cheers.view.AbstractScreen;
-import com.sun.media.jfxmedia.events.PlayerEvent;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 
 /**
@@ -91,10 +85,11 @@ public class BusDrivingScreen extends AbstractScreen {
 
         switch (dataModel.getPhase().getName()) {
             case "PHASE_1": {
+                getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
                 float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.89f;
                 getTextBox().setPosition(X * 0.05f, Y * 0.76f);
                 getTextBox().draw(getSpriteBatch());
-                if(dataModel.getMessage() == null || dataModel.getMessage().length() == 0) {
+                if (dataModel.getMessage() == null || dataModel.getMessage().length() == 0) {
                     String name = dataModel.getPlayer().getName();
                     String task = dataModel.getTask();
                     FontHelper.getGlyphLayout().setText(font, name);
@@ -102,19 +97,20 @@ public class BusDrivingScreen extends AbstractScreen {
                     FontHelper.getGlyphLayout().setText(font, task);
                     font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
                             (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
-                }
-                else{
+                } else {
                     FontHelper.getGlyphLayout().setText(font, dataModel.getMessage());
-                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f,
                             (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 1.5f);
                 }
             }
             break;
             case "PHASE_2": {
+                boolean isSomePlayerActive = false;
                 float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.65f;
                 getTextBox().setPosition(X * 0.05f, Y * 0.52f);
                 getTextBox().draw(getSpriteBatch());
-                if(dataModel.getMessage() == null || dataModel.getMessage().length() == 0) {
+                if (dataModel.getMessage() == null || dataModel.getMessage().length() == 0) {
+                    getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
                     dataModel.firstPlayer();
                     outer:
                     do {
@@ -126,15 +122,30 @@ public class BusDrivingScreen extends AbstractScreen {
                                 FontHelper.getGlyphLayout().setText(font, getMessage(vCard.getCredit()));
                                 font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
                                         (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+                                isSomePlayerActive = true;
                                 break outer;
                             }
                         }
+
                     } while (dataModel.nextPlayer());
-                }
-                else{
+                    if (dataModel.getPhase().getBoard().isAllCardsOnBoardFace() && !isSomePlayerActive) {
+                        dataModel.result();
+                        dataModel.setMessage("GO_ON");
+                    }
+                } else {
+
+//                    getTextBox().setPosition(X * 0.05f, Y * 0.52f);
+                    int y_offset = 0;
+                    for(Player player: dataModel.getLoosers()){
+                        FontHelper.getGlyphLayout().setText(font, player.getName());
+                        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f,
+                                (Y * DISTANCE_FROM_TEXTBOX_BOTTOM ) - FontHelper.getGlyphLayout().height * -1.65f *  y_offset++);
+                    }
+                    getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, FontHelper.getGlyphLayout().height * 1.65f * (1 + dataModel.getLoosers().size()) + FontHelper.getGlyphLayout().height * 2.5f);
                     FontHelper.getGlyphLayout().setText(font, dataModel.getMessage());
-                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
-                            (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 1.5f);
+                    font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f,
+                            (Y * DISTANCE_FROM_TEXTBOX_BOTTOM ) - FontHelper.getGlyphLayout().height * 3.0f);
+
                 }
             }
             break;
@@ -145,7 +156,6 @@ public class BusDrivingScreen extends AbstractScreen {
     @Override
     protected void initTextBox() {
         setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_phase_1/text_box_horizontal.png")));
-        getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
     }
 
     @Override
@@ -184,6 +194,7 @@ public class BusDrivingScreen extends AbstractScreen {
         setFaceDownBigCard(new Sprite(new Texture("common/busdriving_cards/facedown_big_card.png")));
         setFaceDownSmallCard(new Sprite(new Texture("common/busdriving_cards/facedown_small_card.png")));
 
+
     }
 
     @Override
@@ -192,11 +203,9 @@ public class BusDrivingScreen extends AbstractScreen {
         int y_offset = 0;
         switch (dataModel.getPhase().getName()) {
             case "PHASE_1":
-
+                getFaceDownBigCard().setPosition(X * 0.22f, Y * 0.23f);
                 if (dataModel.getPhase().getBoard().getVCards().size == 0) {
-                    getFaceDownBigCard().setPosition(X * 0.22f, Y * 0.23f);
                     getFaceDownBigCard().draw(getSpriteBatch(), 1.0f);
-
                 }
                 for (VCard vCard : dataModel.getPlayer().getVCards()) {
                     Sprite scard = getCardCache().get(String.format("%d_%s_%s", vCard.getCardIndex(), Card.CardSize.SMALL.value(), vCard.getOrientation().value()));
@@ -300,12 +309,12 @@ public class BusDrivingScreen extends AbstractScreen {
                     return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
             case EN:
                 if (credit == 1)
-                    return String.format(Locale.ENGLISH,"%s %d %s", "Du verteilst ", credit, " Schluck!");
+                    return String.format(Locale.ENGLISH, "%s %d %s", "Du verteilst ", credit, " Schluck!");
                 else
-                    return String.format(Locale.ENGLISH,"%s %d %s", "Du verteilst ", credit, " Schlücke!");
+                    return String.format(Locale.ENGLISH, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
             default:
                 if (credit == 1)
-                    return String.format(Locale.GERMAN,"%s %d %s", "Du verteilst ", credit, " Schluck!");
+                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schluck!");
                 else
                     return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
         }

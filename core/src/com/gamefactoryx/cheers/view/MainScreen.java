@@ -113,7 +113,8 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void initLogo(){
-        setLogo(new Sprite(new Texture("common/CheersLogo.png")));
+        //setLogo(new Sprite(new Texture("common/CheersLogo.png")));
+        setLogo(new Sprite(new Texture("common/cheerslogo2.png")));
     }
 
     @Override

@@ -4,19 +4,13 @@ package com.gamefactoryx.cheers.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.gamefactoryx.cheers.CheersGdxGame;
-import com.gamefactoryx.cheers.controller.AbstractController;
-import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.model.BusDrivingModel;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
 import com.gamefactoryx.cheers.model.bus_driving.Card;
 import com.gamefactoryx.cheers.model.bus_driving.Player;
 import com.gamefactoryx.cheers.model.bus_driving.VCard;
-import com.gamefactoryx.cheers.tool.Configuration;
-import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
-
-import java.util.HashMap;
 
 /**
  * Created by bernat on 16.05.2017.
@@ -28,7 +22,7 @@ public class BusDrivingStageController extends AbstractController {
     private StringBuilder typedName = new StringBuilder();
     private boolean shift;
     private boolean keyboardOn;
-    private Card activeCard;
+    private static Card activeCard;
     private String tempName;
 
     public BusDrivingStageController(final AbstractScreen screen) {
@@ -120,7 +114,6 @@ public class BusDrivingStageController extends AbstractController {
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
-
             if (model.getMessage() != null && model.getMessage().length() > 0) {
                 if (model.getPhase().isPhaseFinished()) {
                     model.nextPhase();
@@ -142,7 +135,6 @@ public class BusDrivingStageController extends AbstractController {
                 }
                 //keyboard is off
                 else {
-
                     //should you restart phase?
                     if (screenX < 100) {
                         model.reset();
@@ -151,13 +143,28 @@ public class BusDrivingStageController extends AbstractController {
                         return true;
                     }
 
-
                     if (screenX >= getScreen().getFaceDownBigCard().getX() &&
                             screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
                             Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
                             Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
-
+                        /*Gdx.app.log("BUG424", "*********DEBUGGING***************");
+                        Gdx.app.log("screenX", ":" +screenX);
+                        Gdx.app.log("screenY", ":" +screenY);
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getX()", ":" +getScreen().getFaceDownBigCard().getX());
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getY()", ":" +getScreen().getFaceDownBigCard().getY());
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getWidth()", ":" +getScreen().getFaceDownBigCard().getWidth());
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getHeight()", ":" +getScreen().getFaceDownBigCard().getHeight());
+                        Gdx.app.log("Resolution.getGameWorldHeightPortrait()", ":" +Resolution.getGameWorldHeightPortrait());*/
                         model.getPhase().nextTurn();
+                    } else {
+                        /*Gdx.app.log("screenX", ":" +screenX);
+                        Gdx.app.log("screenY", ":" +screenY);
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getX()", ":" +getScreen().getFaceDownBigCard().getX());
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getY()", ":" +getScreen().getFaceDownBigCard().getY());
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getWidth()", ":" +getScreen().getFaceDownBigCard().getWidth());
+                        Gdx.app.log("getScreen().getFaceDownBigCard().getHeight()", ":" +getScreen().getFaceDownBigCard().getHeight());
+                        Gdx.app.log("Resolution.getGameWorldHeightPortrait()", ":" +Resolution.getGameWorldHeightPortrait());*/
+
                     }
                 }
             }
@@ -175,9 +182,9 @@ public class BusDrivingStageController extends AbstractController {
                 ++vCard_index;
                 if (vCard_index == 9)
                     model.setScrollPyramide(true);
-
                 if (vCard.getOrientation() == VCard.CardOrientation.BACK) {
                     vCard.setOrientation(VCard.CardOrientation.FACE);
+                    model.getPhase().getBoard().setAllCardsOnBoardFace(vCard_index == 14);
                     activeCard = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
                     model.firstPlayer();
                     do {
@@ -237,6 +244,24 @@ public class BusDrivingStageController extends AbstractController {
                     flag = false;
                     activeCard = null;
                 }
+               /* Gdx.app.log("BUG424", "*********DEBUGGING***************");
+                Gdx.app.log("screenX", ":" + screenX);
+                Gdx.app.log("screenY", ":" + screenY);
+                Gdx.app.log("getScreen().getTextBox().getX()", ":" + getScreen().getTextBox().getX());
+                Gdx.app.log("getScreen().getTextBox().getY()", ":" + getScreen().getTextBox().getY());
+                Gdx.app.log("getScreen().getTextBox().getWidth()", ":" + getScreen().getTextBox().getWidth());
+                Gdx.app.log("getScreen().getTextBox().getHeight()", ":" + getScreen().getTextBox().getHeight());
+                Gdx.app.log("Resolution.getGameWorldHeightPortrait()", ":" + Resolution.getGameWorldHeightPortrait());*/
+            }else {
+                /*Gdx.app.log("BUG524", "*********DEBUGGING***************");
+                Gdx.app.log("screenX", ":" + screenX);
+                Gdx.app.log("screenY", ":" + screenY);
+                Gdx.app.log("getScreen().getTextBox().getX()", ":" + getScreen().getTextBox().getX());
+                Gdx.app.log("getScreen().getTextBox().getY()", ":" + getScreen().getTextBox().getY());
+                Gdx.app.log("getScreen().getTextBox().getWidth()", ":" + getScreen().getTextBox().getWidth());
+                Gdx.app.log("getScreen().getTextBox().getHeight()", ":" + getScreen().getTextBox().getHeight());
+                Gdx.app.log("Resolution.getGameWorldHeightPortrait()", ":" + Resolution.getGameWorldHeightPortrait());*/
+
             }
         }
 
