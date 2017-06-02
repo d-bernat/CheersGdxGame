@@ -14,6 +14,7 @@ import com.gamefactoryx.cheers.tool.Resolution;
 public class MainScreen extends AbstractScreen {
 
 
+
     @Override
     protected void initSprites() {
         setLandscapeSprite(new Sprite(new Texture("common/Landscapescreen.png")));

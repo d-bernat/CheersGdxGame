@@ -89,6 +89,9 @@ public final class StageManager {
             case BUS_DRIVING_STAGE_FIRST_PHASE:
                 controller = StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE.getController();
                 break;
+            case BUS_DRIVING_STAGE_SECOND_PHASE:
+                controller = StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE.getController();
+                break;
         }
 
         currentStage = screenEnum;

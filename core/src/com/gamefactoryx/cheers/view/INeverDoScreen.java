@@ -63,6 +63,7 @@ public class INeverDoScreen extends AbstractScreen {
         return text;
     }
 
+
     @Override
     protected void initSprites() {
         setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/INeverDoScreenLandscape.png")));

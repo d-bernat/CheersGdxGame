@@ -76,6 +76,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
         plainText = dataModel.getText();
     }
 
+
     @Override
     protected void initSprites() {
         setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialScreenLandscape.png")));

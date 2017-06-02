@@ -36,7 +36,6 @@ public abstract class AbstractScreen implements Screen {
     private Sprite[][] buttons;
     private Map<String, Sprite> cardSprites = new HashMap<>();
     private Sprite textBox;
-   // private Object dataModel;
 
 
     private int yScrollPos;
@@ -62,14 +61,7 @@ public abstract class AbstractScreen implements Screen {
         return textBox;
     }
 
-    //public Object getDataModel() {
-    //    return dataModel;
-    //}
 
-
-    //public void setDataModel(Object dataModel) {
-    //    this.dataModel = dataModel;
-    //}
 
     public Sprite getLandscapeSprite() {
         return landscapeSprite;

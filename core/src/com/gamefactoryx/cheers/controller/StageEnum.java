@@ -31,7 +31,12 @@ public enum StageEnum {
     },
     BUS_DRIVING_STAGE_FIRST_PHASE {
         public AbstractController getController() {
-            return new BusDrivingStageController(new BusDrivingScreen());
+            return new BusDrivingStagePhase1Controller(new BusDrivingPhase1Screen());
+        }
+    },
+    BUS_DRIVING_STAGE_SECOND_PHASE {
+        public AbstractController getController() {
+            return new BusDrivingStagePhase2Controller(new BusDrivingPhase2Screen());
         }
     };
 
