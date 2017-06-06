@@ -12,7 +12,6 @@ import com.gamefactoryx.cheers.CheersGdxGame;
 public final class StageManager {
 
 
-
     // Singleton: unique instance
     private static StageManager instance;
 
@@ -39,15 +38,24 @@ public final class StageManager {
         this.game = game;
     }
 
-    public void showStage(){
+    public void showStage() {
         showStage(currentStage);
     }
 
-    public void showLastStage(){
-        try{
+    public void showLastStage() {
+        try {
             StageEnum stageEnum = stageHistory.removeLast();
-            showStage(stageEnum, true);
-        }catch(Exception e){
+            switch (stageEnum) {
+                case BUS_DRIVING_STAGE_FIRST_PHASE:
+                case BUS_DRIVING_STAGE_SECOND_PHASE:
+                case BUS_DRIVING_STAGE_THIRD_PHASE:
+                    showStage(StageEnum.NEW_GAME_STAGE);
+                    break;
+                default:
+                    showStage(stageEnum, true);
+            }
+
+        } catch (Exception e) {
             showStage(StageEnum.MAIN_STAGE);
         }
     }
@@ -55,9 +63,10 @@ public final class StageManager {
     public void showStage(StageEnum screenEnum) {
         showStage(screenEnum, false);
     }
+
     // Show in the game the screen which enum type is received
     private void showStage(StageEnum screenEnum, boolean rollBack) {
-        if(screenEnum != currentStage && !rollBack){
+        if (screenEnum != currentStage && !rollBack) {
             stageHistory.addLast(currentStage);
         }
 
@@ -67,22 +76,22 @@ public final class StageManager {
         // Show new screen
         switch (screenEnum) {
             case MAIN_STAGE:
-                if(CheersGdxGame.getScreenLock() != null)
+                if (CheersGdxGame.getScreenLock() != null)
                     CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.MAIN_STAGE.getController();
                 break;
             case NEW_GAME_STAGE:
-                if(CheersGdxGame.getScreenLock() != null)
+                if (CheersGdxGame.getScreenLock() != null)
                     CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
             case I_NEVER_DO_STAGE:
-                if(CheersGdxGame.getScreenLock() != null)
+                if (CheersGdxGame.getScreenLock() != null)
                     CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.I_NEVER_DO_STAGE.getController();
                 break;
             case KINGS_CUP_SPECIAL_STAGE:
-                if(CheersGdxGame.getScreenLock() != null)
+                if (CheersGdxGame.getScreenLock() != null)
                     CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
                 break;
@@ -91,6 +100,9 @@ public final class StageManager {
                 break;
             case BUS_DRIVING_STAGE_SECOND_PHASE:
                 controller = StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE.getController();
+                break;
+            case BUS_DRIVING_STAGE_THIRD_PHASE:
+                controller = StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE.getController();
                 break;
         }
 

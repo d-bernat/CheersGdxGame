@@ -54,4 +54,10 @@ public class Player implements Comparable<Player>{
     public int compareTo(Player o) {
         return o.getVCards().size - this.getVCards().size ;
     }
+
+    public boolean equals(Player player){
+        return player != null && player.getName() != null && player.getName().trim().length() > 0 &&
+                this.getName() != null && this.getName().trim().length() > 0 &&
+                this.getName().toLowerCase().equals(player.getName().toLowerCase());
+    }
 }
