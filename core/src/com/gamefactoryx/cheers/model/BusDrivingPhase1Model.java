@@ -114,7 +114,7 @@ public final class BusDrivingPhase1Model {
                 this.finalMessage = "Continue ?";
                 break;
             default:
-                this.finalMessage = "Wieter ?";
+                this.finalMessage = "Weiter ?";
         }
     }
 

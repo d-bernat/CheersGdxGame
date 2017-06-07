@@ -38,8 +38,12 @@ public enum StageEnum {
         public AbstractController getController() {
             return new BusDrivingStagePhase2Controller(new BusDrivingPhase2Screen());
         }
+    },
+    BUS_DRIVING_STAGE_THIRD_PHASE {
+        public AbstractController getController() {
+            return new BusDrivingStagePhase3Controller(new BusDrivingPhase3Screen());
+        }
     };
-
     @SuppressWarnings("unused")
     public abstract AbstractController getController();
 }

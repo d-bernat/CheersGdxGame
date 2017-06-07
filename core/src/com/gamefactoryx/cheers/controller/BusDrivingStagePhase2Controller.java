@@ -107,11 +107,25 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
 
                 } else {
                     //todo next phase
-                    StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+                    if(isThereMoreThenOneLooser())
+                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
+                    else
+                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
                 }
             }
         }
         return true;
+    }
+
+    private boolean isThereMoreThenOneLooser() {
+        int counter = 0;
+        for(Player player: model.getPlayers()){
+            if(player.isAlive()) ++counter;
+            if(counter > 1) break;
+
+        }
+
+        return counter > 1;
     }
 
 
