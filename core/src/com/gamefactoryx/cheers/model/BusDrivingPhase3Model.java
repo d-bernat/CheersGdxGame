@@ -45,7 +45,7 @@ public final class BusDrivingPhase3Model {
         croupier.getBoard().getVCards().clear();
         croupier.getVCards().clear();
         for (int i = 2; i < 53; i++)
-            croupier.getVCards().addLast(new VCard(i, CardOrientation.BACK));
+            croupier.getVCards().addLast(new VCard(i, CardOrientation.FACE));
         croupier.shuffle();
         croupier.getBoard().addCard(croupier.getVCards().removeLast());
         firstPlayer();

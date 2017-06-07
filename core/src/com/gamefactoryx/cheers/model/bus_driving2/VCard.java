@@ -18,7 +18,7 @@ public class VCard {
         this.value = getValue();
     }
 
-    private int getValue() {
+    public int getValue() {
         int value = 0;
         switch (cardIndex) {
             case 2:
