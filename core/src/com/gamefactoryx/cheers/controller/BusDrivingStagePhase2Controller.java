@@ -3,14 +3,12 @@ package com.gamefactoryx.cheers.controller;
 
 import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.model.BusDrivingPhase2Model;
-import com.gamefactoryx.cheers.model.bus_driving2.Croupier;
-import com.gamefactoryx.cheers.model.bus_driving2.Player;
-import com.gamefactoryx.cheers.model.bus_driving2.VCard;
+import com.gamefactoryx.cheers.model.bus_driving.Croupier;
+import com.gamefactoryx.cheers.model.bus_driving.Player;
+import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.CardOrientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
-
-import java.util.Collections;
 
 /**
  * Created by bernat on 16.05.2017.

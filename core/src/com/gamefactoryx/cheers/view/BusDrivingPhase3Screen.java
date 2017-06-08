@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.gamefactoryx.cheers.model.BusDrivingPhase2Model;
 import com.gamefactoryx.cheers.model.BusDrivingPhase3Model;
-import com.gamefactoryx.cheers.model.bus_driving2.Player;
-import com.gamefactoryx.cheers.model.bus_driving2.VCard;
+import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.*;
 
 import java.util.Locale;
@@ -82,13 +80,20 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
         getTextBox().setPosition(X * 0.05f, Y * 0.76f);
         getTextBox().draw(getSpriteBatch());
 
-            String name = BusDrivingPhase3Model.getInstance().getActivePlayer().getName();
-            String task = BusDrivingPhase3Model.getInstance().getTask();
-            FontHelper.getGlyphLayout().setText(font, name);
-            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+        String name = BusDrivingPhase3Model.getInstance().getActivePlayer().getName();
+        String task = BusDrivingPhase3Model.getInstance().getTask();
+        FontHelper.getGlyphLayout().setText(font, name);
+        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+        if(BusDrivingPhase3Model.getInstance().isPhaseFinished()){
+            FontHelper.getGlyphLayout().setText(font, BusDrivingPhase3Model.getInstance().getFinalMessage());
+            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                    (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+
+        }else {
             FontHelper.getGlyphLayout().setText(font, task);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
+        }
     }
 
 
@@ -99,12 +104,27 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
+        setButtons(new Sprite[2][2]);
 
+        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
+        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
+        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
+        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
+        setClicked(new boolean[getCountOfButtons()]);
     }
 
     @Override
     protected void drawButtons() {
-
+        if(!BusDrivingPhase3Model.getInstance().isPhaseFinished()) {
+            float PORTRAIT_DISTANCE_FROM_BOTTOM = 0.05f;
+            int x_offset = 0;
+            for (int i = 0; i < getCountOfButtons(); i++) {
+                int click_index = getClicked()[i] ? CLICKED : FREE;
+                getButtons()[i][click_index].setPosition(X * 0.03f + X * 0.53f * x_offset++,
+                        Y * PORTRAIT_DISTANCE_FROM_BOTTOM);
+                getButtons()[i][click_index].draw(getSpriteBatch(), 50.0f);
+            }
+        }
     }
 
     @Override
@@ -125,12 +145,10 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
     @Override
     protected void drawCards() {
-
-        for (VCard vCard : BusDrivingPhase3Model.getInstance().getBoard().getVCards()) {
-            Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation());
-            scard.setPosition(X * 0.22f, Y * 0.23f);
-            scard.draw(getSpriteBatch(), 1.0f);
-        }
+        VCard vCard = BusDrivingPhase3Model.getInstance().getBoard().getVCards().last();
+        Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation());
+        scard.setPosition(X * 0.22f, Y * 0.23f);
+        scard.draw(getSpriteBatch(), 1.0f);
 
     }
 

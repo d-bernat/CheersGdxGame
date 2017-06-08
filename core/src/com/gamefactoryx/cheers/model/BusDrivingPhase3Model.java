@@ -1,14 +1,13 @@
 package com.gamefactoryx.cheers.model;
 
 import com.badlogic.gdx.utils.Queue;
-import com.gamefactoryx.cheers.model.bus_driving2.Board;
-import com.gamefactoryx.cheers.model.bus_driving2.Croupier;
-import com.gamefactoryx.cheers.model.bus_driving2.Player;
-import com.gamefactoryx.cheers.model.bus_driving2.VCard;
+import com.gamefactoryx.cheers.model.bus_driving.Board;
+import com.gamefactoryx.cheers.model.bus_driving.Croupier;
+import com.gamefactoryx.cheers.model.bus_driving.Player;
+import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.CardOrientation;
 import com.gamefactoryx.cheers.tool.Configuration;
 
-import java.util.Collections;
 import java.util.List;
 
 
@@ -45,7 +44,7 @@ public final class BusDrivingPhase3Model {
         croupier.getBoard().getVCards().clear();
         croupier.getVCards().clear();
         for (int i = 2; i < 53; i++)
-            croupier.getVCards().addLast(new VCard(i, CardOrientation.BACK));
+            croupier.getVCards().addLast(new VCard(i, CardOrientation.FACE));
         croupier.shuffle();
         croupier.getBoard().addCard(croupier.getVCards().removeLast());
         firstPlayer();
