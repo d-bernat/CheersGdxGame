@@ -87,9 +87,9 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
                 for (VCard vCard : player.getVCards()) {
                     if (vCard.getCredit() > 0) {
                         FontHelper.getGlyphLayout().setText(font, player.getName());
-                        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+                        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
                         FontHelper.getGlyphLayout().setText(font, getMessage(vCard.getCredit()));
-                        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+                        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
                                 (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
                         break outer;
                     }

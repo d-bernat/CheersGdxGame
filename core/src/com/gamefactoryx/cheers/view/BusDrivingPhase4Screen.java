@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.gamefactoryx.cheers.model.BusDrivingPhase3Model;
-import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.*;
 
 import java.util.Locale;
@@ -16,7 +14,7 @@ import java.util.Locale;
 /**
  * Created by bernat on 16.05.2017.
  */
-public class BusDrivingPhase3Screen extends AbstractScreen {
+public class BusDrivingPhase4Screen extends AbstractScreen {
 
 
     private float X, Y;
@@ -26,7 +24,7 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
     private int FONT_SIZE;
 
 
-    public BusDrivingPhase3Screen() {
+    public BusDrivingPhase4Screen() {
         super();
     }
 
@@ -75,7 +73,7 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
     @Override
     protected void drawText() {
-        getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
+        /*getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.89f;
         getTextBox().setPosition(X * 0.05f, Y * 0.76f);
         getTextBox().draw(getSpriteBatch());
@@ -83,17 +81,17 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
         String name = BusDrivingPhase3Model.getInstance().getActivePlayer().getName();
         String task = BusDrivingPhase3Model.getInstance().getTask();
         FontHelper.getGlyphLayout().setText(font, name);
-        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+        font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
         if(BusDrivingPhase3Model.getInstance().isPhaseFinished()){
             FontHelper.getGlyphLayout().setText(font, BusDrivingPhase3Model.getInstance().getFinalMessage());
-            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
+            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
 
         }else {
             FontHelper.getGlyphLayout().setText(font, task);
-            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
+            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
-        }
+        }*/
     }
 
 
@@ -104,18 +102,18 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[2][2]);
+        /*setButtons(new Sprite[2][2]);
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
         getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
         getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
-        setClicked(new boolean[getCountOfButtons()]);
+        setClicked(new boolean[getCountOfButtons()]);*/
     }
 
     @Override
     protected void drawButtons() {
-        if(!BusDrivingPhase3Model.getInstance().isPhaseFinished()) {
+        /*if(!BusDrivingPhase3Model.getInstance().isPhaseFinished()) {
             float PORTRAIT_DISTANCE_FROM_BOTTOM = 0.05f;
             int x_offset = 0;
             for (int i = 0; i < getCountOfButtons(); i++) {
@@ -124,7 +122,7 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM);
                 getButtons()[i][click_index].draw(getSpriteBatch(), 50.0f);
             }
-        }
+        }*/
     }
 
     @Override
@@ -145,10 +143,10 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
     @Override
     protected void drawCards() {
-        VCard vCard = BusDrivingPhase3Model.getInstance().getBoard().getVCards().last();
+        /*VCard vCard = BusDrivingPhase3Model.getInstance().getBoard().getVCards().last();
         Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation());
         scard.setPosition(X * 0.22f, Y * 0.23f);
-        scard.draw(getSpriteBatch(), 1.0f);
+        scard.draw(getSpriteBatch(), 1.0f);*/
 
     }
 

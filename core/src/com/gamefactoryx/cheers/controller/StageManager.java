@@ -49,6 +49,7 @@ public final class StageManager {
                 case BUS_DRIVING_STAGE_FIRST_PHASE:
                 case BUS_DRIVING_STAGE_SECOND_PHASE:
                 case BUS_DRIVING_STAGE_THIRD_PHASE:
+                case BUS_DRIVING_STAGE_FOURTH_PHASE:
                     showStage(StageEnum.NEW_GAME_STAGE);
                     break;
                 default:
@@ -103,6 +104,9 @@ public final class StageManager {
                 break;
             case BUS_DRIVING_STAGE_THIRD_PHASE:
                 controller = StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE.getController();
+                break;
+            case BUS_DRIVING_STAGE_FOURTH_PHASE:
+                controller = StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE.getController();
                 break;
         }
 

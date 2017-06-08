@@ -81,9 +81,9 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
             String name = BusDrivingPhase1Model.getInstance().getPlayers().get(BusDrivingPhase1Model.getInstance().getActivePlayer()).getName();
             String task = BusDrivingPhase1Model.getInstance().getTask();
             FontHelper.getGlyphLayout().setText(font, name);
-            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.45f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
+            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
             FontHelper.getGlyphLayout().setText(font, task);
-            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.42f - FontHelper.getGlyphLayout().width / 2.4f,
+            font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
         } else {
             FontHelper.getGlyphLayout().setText(font, BusDrivingPhase1Model.getInstance().getFinalMessage());

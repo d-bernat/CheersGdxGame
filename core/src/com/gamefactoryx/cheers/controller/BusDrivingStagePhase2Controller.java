@@ -108,7 +108,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                     if(isThereMoreThenOneLooser())
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
                     else
-                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
                 }
             }
         }
