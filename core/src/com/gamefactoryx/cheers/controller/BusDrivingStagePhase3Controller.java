@@ -1,16 +1,10 @@
 package com.gamefactoryx.cheers.controller;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.gamefactoryx.cheers.CheersGdxGame;
-import com.gamefactoryx.cheers.model.BusDrivingPhase2Model;
 import com.gamefactoryx.cheers.model.BusDrivingPhase3Model;
-import com.gamefactoryx.cheers.model.bus_driving2.Croupier;
-import com.gamefactoryx.cheers.model.bus_driving2.Player;
-import com.gamefactoryx.cheers.model.bus_driving2.VCard;
-import com.gamefactoryx.cheers.tool.CardOrientation;
-import com.gamefactoryx.cheers.tool.Orientation;
+import com.gamefactoryx.cheers.model.bus_driving.Croupier;
+import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 

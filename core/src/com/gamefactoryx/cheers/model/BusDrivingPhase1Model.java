@@ -1,7 +1,6 @@
 package com.gamefactoryx.cheers.model;
 
 import com.badlogic.gdx.utils.Queue;
-import com.gamefactoryx.cheers.model.bus_driving2.*;
 import com.gamefactoryx.cheers.tool.Configuration;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public final class BusDrivingPhase1Model {
 
     private int activePlayer;
     private int activeTask;
-    private Croupier croupier;
+    private com.gamefactoryx.cheers.model.bus_driving.Croupier croupier;
     private String finalMessage;
     private static BusDrivingPhase1Model instance;
 
@@ -46,20 +45,20 @@ public final class BusDrivingPhase1Model {
         enTasks.add("Between or Outside?");
         deTasks.add("Welches Muster?");
         enTasks.add("Which template?");
-        croupier = Croupier.getNewInstance();
+        croupier = com.gamefactoryx.cheers.model.bus_driving.Croupier.getNewInstance();
 
     }
 
-    public Queue<VCard> getvCards() {
+    public Queue<com.gamefactoryx.cheers.model.bus_driving.VCard> getvCards() {
         return croupier.getInstance().getVCards();
     }
 
-    public List<Player> getPlayers() {
+    public List<com.gamefactoryx.cheers.model.bus_driving.Player> getPlayers() {
         return croupier.getInstance().getPlayers();
     }
 
 
-    public Board getBoard() {
+    public com.gamefactoryx.cheers.model.bus_driving.Board getBoard() {
         return croupier.getInstance().getBoard();
     }
 
@@ -79,7 +78,7 @@ public final class BusDrivingPhase1Model {
     }
 
     public boolean isPhaseFinishend() {
-        for (Player player : getPlayers()) {
+        for (com.gamefactoryx.cheers.model.bus_driving.Player player : getPlayers()) {
             if (player.getVCards().size < 4)
                 return false;
         }

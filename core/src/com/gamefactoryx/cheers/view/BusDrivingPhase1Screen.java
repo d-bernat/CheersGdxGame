@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.BusDrivingPhase1Model;
 import com.gamefactoryx.cheers.tool.*;
-import com.gamefactoryx.cheers.model.bus_driving2.VCard;
+import com.gamefactoryx.cheers.model.bus_driving.VCard;
 
 
 /**
