@@ -3,7 +3,6 @@ package com.gamefactoryx.cheers.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.gamefactoryx.cheers.model.bus_driving.*;
 import com.gamefactoryx.cheers.tool.Configuration;
 
 import java.util.*;
@@ -14,12 +13,12 @@ import java.util.*;
 public final class BusDrivingModel {
     private int phaseIndex;
     private int playerIndex;
-    private List<Phase> phases = new ArrayList<>();
-    private List<Player> players = new ArrayList<>();
-    private List<Player> loosers = new ArrayList<>();
-    private Croupier croupier = new Croupier();
+    private List<com.gamefactoryx.cheers.model.bus_driving_OLD.Phase> phases = new ArrayList<>();
+    private List<com.gamefactoryx.cheers.model.bus_driving_OLD.Player> players = new ArrayList<>();
+    private List<com.gamefactoryx.cheers.model.bus_driving_OLD.Player> loosers = new ArrayList<>();
+    private com.gamefactoryx.cheers.model.bus_driving_OLD.Croupier croupier = new com.gamefactoryx.cheers.model.bus_driving_OLD.Croupier();
     private Map<String, Texture> cardTextures = new HashMap<>();
-    private List<VCard> vCards = new ArrayList<>();
+    private List<com.gamefactoryx.cheers.model.bus_driving_OLD.VCard> vCards = new ArrayList<>();
     private List<String> deTasks = new ArrayList<>();
     private List<String> enTasks = new ArrayList<>();
     private List<String> nameList;
@@ -52,7 +51,7 @@ public final class BusDrivingModel {
 
     private void setVCards() {
         for (int i = 2; i < 53; i++)
-            vCards.add(new VCard(i, VCard.CardOrientation.BACK));
+            vCards.add(new com.gamefactoryx.cheers.model.bus_driving_OLD.VCard(i, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.BACK));
     }
 
     public void reset() {
@@ -98,21 +97,21 @@ public final class BusDrivingModel {
     }
 
 
-    public List<VCard> getVCards() {
+    public List<com.gamefactoryx.cheers.model.bus_driving_OLD.VCard> getVCards() {
         return vCards;
     }
 
     private void setCardTextures() {
-        for (VCard vcard : vCards) {
-            Card card = new Card(vcard.getCardIndex(), Card.CardSize.BIG);
-            cardTextures.put(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.FACE), new Texture(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.FACE)));
-            cardTextures.put(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.BACK), new Texture(card.getFileName(Card.CardSize.BIG, VCard.CardOrientation.BACK)));
+        for (com.gamefactoryx.cheers.model.bus_driving_OLD.VCard vcard : vCards) {
+            com.gamefactoryx.cheers.model.bus_driving_OLD.Card card = new com.gamefactoryx.cheers.model.bus_driving_OLD.Card(vcard.getCardIndex(), com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.BIG);
+            cardTextures.put(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.BIG, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.FACE), new Texture(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.BIG, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.FACE)));
+            cardTextures.put(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.BIG, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.BACK), new Texture(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.BIG, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.BACK)));
         }
 
-        for (VCard vCard : vCards) {
-            Card card = new Card(vCard.getCardIndex(), Card.CardSize.SMALL);
-            cardTextures.put(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.FACE), new Texture(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.FACE)));
-            cardTextures.put(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.BACK), new Texture(card.getFileName(Card.CardSize.SMALL, VCard.CardOrientation.BACK)));
+        for (com.gamefactoryx.cheers.model.bus_driving_OLD.VCard vCard : vCards) {
+            com.gamefactoryx.cheers.model.bus_driving_OLD.Card card = new com.gamefactoryx.cheers.model.bus_driving_OLD.Card(vCard.getCardIndex(), com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.SMALL);
+            cardTextures.put(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.SMALL, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.FACE), new Texture(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.SMALL, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.FACE)));
+            cardTextures.put(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.SMALL, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.BACK), new Texture(card.getFileName(com.gamefactoryx.cheers.model.bus_driving_OLD.Card.CardSize.SMALL, com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.BACK)));
         }
 
 
@@ -123,11 +122,11 @@ public final class BusDrivingModel {
     }
 
 
-    private List<Player> createPlayers() {
+    private List<com.gamefactoryx.cheers.model.bus_driving_OLD.Player> createPlayers() {
 
         for (int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++) {
             PlayerNameCache.clear();
-            players.add(new Player(getFunnyName(i), i));
+            players.add(new com.gamefactoryx.cheers.model.bus_driving_OLD.Player(getFunnyName(i), i));
         }
         return players;
     }
@@ -145,18 +144,18 @@ public final class BusDrivingModel {
         return nameList.get(index);
     }
 
-    private List<Phase> createPhases() {
+    private List<com.gamefactoryx.cheers.model.bus_driving_OLD.Phase> createPhases() {
         for (int i = 1; i < 4; i++)
-            phases.add(new Phase(i));
+            phases.add(new com.gamefactoryx.cheers.model.bus_driving_OLD.Phase(i));
         return phases;
     }
 
 
-    public List<Phase> getPhases() {
+    public List<com.gamefactoryx.cheers.model.bus_driving_OLD.Phase> getPhases() {
         return phases;
     }
 
-    public Phase getPhase() {
+    public com.gamefactoryx.cheers.model.bus_driving_OLD.Phase getPhase() {
         return phases.get(phaseIndex);
     }
 
@@ -183,9 +182,9 @@ public final class BusDrivingModel {
                 instance.setVCards();
                 instance.croupier.shuffle();
                 instance.players.clear();
-                VCard vcard = croupier.getVCard();
-                vcard.setOrientation(VCard.CardOrientation.FACE);
-                for(Player player: instance.getLoosers()) {
+                com.gamefactoryx.cheers.model.bus_driving_OLD.VCard vcard = croupier.getVCard();
+                vcard.setOrientation(com.gamefactoryx.cheers.model.bus_driving_OLD.VCard.CardOrientation.FACE);
+                for(com.gamefactoryx.cheers.model.bus_driving_OLD.Player player: instance.getLoosers()) {
                     player.getVCards().clear();
                     player.getVCards().addLast(vcard);
                 }
@@ -213,7 +212,7 @@ public final class BusDrivingModel {
     }
 
 
-    public Player getPlayer() {
+    public com.gamefactoryx.cheers.model.bus_driving_OLD.Player getPlayer() {
         return players.get(playerIndex);
     }
 
@@ -245,15 +244,15 @@ public final class BusDrivingModel {
         playerIndex = players.size() - 1;
     }
 
-    protected void setPhases(List<Phase> phases) {
+    protected void setPhases(List<com.gamefactoryx.cheers.model.bus_driving_OLD.Phase> phases) {
         this.phases = phases;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(List<com.gamefactoryx.cheers.model.bus_driving_OLD.Player> players) {
         this.players = players;
     }
 
-    public Croupier getCroupier() {
+    public com.gamefactoryx.cheers.model.bus_driving_OLD.Croupier getCroupier() {
         return croupier;
     }
 
@@ -285,7 +284,7 @@ public final class BusDrivingModel {
     public  void result() {
         Collections.sort(players);
         loosers.clear();
-        for (Player player : players) {
+        for (com.gamefactoryx.cheers.model.bus_driving_OLD.Player player : players) {
             if (loosers.size() == 0 && player.getVCards().size > 0){
                 loosers.add(player);
             } else {
@@ -298,7 +297,7 @@ public final class BusDrivingModel {
         }
     }
 
-    public List<Player> getLoosers(){
+    public List<com.gamefactoryx.cheers.model.bus_driving_OLD.Player> getLoosers(){
         return loosers;
 }
 
