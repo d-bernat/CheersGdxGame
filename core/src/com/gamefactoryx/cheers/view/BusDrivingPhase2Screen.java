@@ -201,6 +201,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        super.dispose();
     }
     private String getMessage(int credit) {
         switch (Configuration.getLanguage()) {

@@ -150,6 +150,7 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     public void dispose() {
         getFaceDownBigCard().getTexture().dispose();
         getFaceDownSmallCard().getTexture().dispose();
+        super.dispose();
     }
 
 

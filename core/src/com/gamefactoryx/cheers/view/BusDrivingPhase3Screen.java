@@ -154,6 +154,7 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        super.dispose();
     }
 
     private String getMessage(int credit) {
