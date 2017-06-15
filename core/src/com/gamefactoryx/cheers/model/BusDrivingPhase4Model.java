@@ -21,7 +21,8 @@ public final class BusDrivingPhase4Model {
     private String finalMessage;
     private static BusDrivingPhase4Model instance;
     private boolean phaseIsFinished;
-    private Player activePlayer;
+    private Player busDriver;
+    private int drinkPoints;
 
 
     public static BusDrivingPhase4Model getInstance() {
@@ -46,10 +47,16 @@ public final class BusDrivingPhase4Model {
         for (int i = 2; i < 53; i++)
             croupier.getVCards().addLast(new VCard(i, CardOrientation.FACE));
         croupier.shuffle();
-       // croupier.getBoard().addCard(croupier.getVCards().removeLast());
-        firstPlayer();
-
+        for(int i = 0; i < 5; i++)
+            croupier.getBoard().addCard(croupier.getVCards().removeLast());
+        for (Player player : getPlayers()) {
+            if(player.isAlive()) {
+                busDriver = player;
+            }
+        }
     }
+
+
 
     public Queue<VCard> getvCards() {
         return croupier.getInstance().getVCards();
@@ -93,39 +100,10 @@ public final class BusDrivingPhase4Model {
         }
     }
 
-    public Player getActivePlayer() {
-        return activePlayer;
+
+    public Player getBusDriver(){
+        return busDriver;
     }
-
-
-    private void firstPlayer() {
-        for (Player player : croupier.getPlayers()) {
-            if (player.isAlive()) {
-                activePlayer = player;
-                break;
-            }
-        }
-    }
-
-    public void nextPlayer() {
-        boolean behind = false;
-        boolean newPlayerSet = false;
-        if (activePlayer != null) {
-            for (Player player : croupier.getPlayers()) {
-                if (behind && player.isAlive()) {
-                    activePlayer = player;
-                    newPlayerSet = true;
-                }
-
-                if (player.equals(activePlayer)) {
-                    behind = true;
-                }
-            }
-        }
-
-        if (!newPlayerSet) firstPlayer();
-    }
-
     private void setLoosers(Player looser) {
         for (Player player : getPlayers()) {
             player.setAlive(false);
@@ -144,5 +122,13 @@ public final class BusDrivingPhase4Model {
 
         }
 
+    }
+
+    public int getDrinkPoints() {
+        return drinkPoints;
+    }
+
+    public void setDrinkPoints(int drinkPoints) {
+        this.drinkPoints = drinkPoints;
     }
 }
