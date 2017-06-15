@@ -46,6 +46,7 @@ public class Resolution {
     public static float getAspectRatio(){
         float aspectRatio;
         if (Gdx.graphics.getWidth() < Gdx.graphics.getHeight())
+        //if (Orientation.getOrientation() == Input.Orientation.Portrait)
             aspectRatio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
         else
             aspectRatio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();

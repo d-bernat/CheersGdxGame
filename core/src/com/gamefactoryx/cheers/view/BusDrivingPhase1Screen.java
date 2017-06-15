@@ -132,14 +132,14 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
             getFaceDownBigCard().draw(getSpriteBatch(), 1.0f);
         } else {
             for (VCard vCard : BusDrivingPhase1Model.getInstance().getBoard().getVCards()) {
-                Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation());
+                Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
                 scard.setPosition(X * 0.22f, Y * 0.23f);
                 scard.draw(getSpriteBatch(), 1.0f);
             }
         }
 
         for (VCard vCard : BusDrivingPhase1Model.getInstance().getPlayers().get(BusDrivingPhase1Model.getInstance().getActivePlayer()).getVCards()) {
-            Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation());
+            Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
             scard.setSize(X * 0.2f, Y * 0.2f);
             scard.setPosition(X * 0.1f + scard.getWidth() * x_offset++, Y * 0.02f);
             scard.draw(getSpriteBatch(), 1.0f);

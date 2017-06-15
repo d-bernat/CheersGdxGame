@@ -26,7 +26,8 @@ public abstract class AbstractScreen implements Screen {
     final int CLICKED = 1;
 
     private Camera camera;
-    private Viewport viewport;
+    private Viewport landscapeViewport;
+    private Viewport portraitViewport;
 
     private Sprite landscapeSprite;
     private Sprite portraitSprite;
@@ -153,13 +154,13 @@ public abstract class AbstractScreen implements Screen {
     public void show() {
         spriteBatch = new SpriteBatch();
         camera = new OrthographicCamera();
-        if (Orientation.getOrientation() == Input.Orientation.Portrait)
-            viewport = new FillViewport(Resolution.getGameWorldWidthPortrait() / Resolution.getAspectRatio(),
+        //if (Orientation.getOrientation() == Input.Orientation.Portrait)
+            portraitViewport = new FillViewport(Resolution.getGameWorldWidthPortrait() / Resolution.getAspectRatio(),
                     Resolution.getGameWorldHeightPortrait(), camera);
-        else
-            viewport = new FillViewport(Resolution.getGameWorldWidthLandscape() / Resolution.getAspectRatio(),
+        //else
+            landscapeViewport = new FillViewport(Resolution.getGameWorldWidthLandscape() / Resolution.getAspectRatio(),
                     Resolution.getGameWorldHeightLandscape(), camera);
-        viewport.apply();
+        getViewport().apply();
         initLogo();
         initSprites();
         initCards();
@@ -177,7 +178,7 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+        getViewport().update(width, height);
         setCameraPosition();
     }
 
@@ -250,6 +251,13 @@ public abstract class AbstractScreen implements Screen {
         } else {
             portraitSprite.draw(spriteBatch, 1);
         }
+    }
+
+    private Viewport getViewport(){
+        if (Orientation.getOrientation() == Input.Orientation.Portrait)
+            return portraitViewport;
+        else
+            return landscapeViewport;
     }
 
 }

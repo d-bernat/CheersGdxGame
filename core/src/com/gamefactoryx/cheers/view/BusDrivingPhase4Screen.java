@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.BusDrivingPhase4Model;
+import com.gamefactoryx.cheers.model.bus_driving.Croupier;
 import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.*;
 
@@ -145,8 +146,8 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
 
     @Override
     protected void initCards() {
-        VCard vCard = BusDrivingPhase4Model.getInstance().getBoard().getVCards().last();
-        Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation());
+        VCard vCard = Croupier.getInstance().getVCards().last();
+        Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
         cardHight = scard.getHeight() * 0.35f;
         cardWidth = scard.getWidth() * 0.35f;
     }
@@ -155,7 +156,7 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
     protected void drawCards() {
         int x_offset = 0;
         for(VCard vCard : BusDrivingPhase4Model.getInstance().getBoard().getVCards()) {
-            Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation());
+            Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
             scard.setPosition(X * 0.08f + x_offset++ * cardWidth * 1.1f, Y * 0.19f);
             scard.setSize(cardWidth, cardHight);
             scard.draw(getSpriteBatch(), 1.0f);

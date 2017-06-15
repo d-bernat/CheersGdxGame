@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -58,11 +59,11 @@ public class NewGameScreen extends AbstractScreen {
     protected void drawButtons() {
         float SPACE_BETWEEN_BUTTONS = 1.2f;
         int offset_index = 0;
-
-        float X = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
-        float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
-        float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.45f : 0.3f;
-        float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.25f : 0.06f;
+        Input.Orientation orientation = Orientation.getOrientation();
+        float X = orientation == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
+        float Y = orientation == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
+        float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = orientation == Input.Orientation.Landscape ? 0.45f : 0.3f;
+        float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = orientation == Input.Orientation.Landscape ? 0.25f : 0.06f;
         for (int i = 0; i < getCountOfButtons(); i++) {
             if (i == 3)
                 offset_index = 0;

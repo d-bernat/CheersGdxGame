@@ -146,7 +146,7 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
     @Override
     protected void drawCards() {
         VCard vCard = BusDrivingPhase3Model.getInstance().getBoard().getVCards().last();
-        Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation());
+        Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
         scard.setPosition(X * 0.22f, Y * 0.23f);
         scard.draw(getSpriteBatch(), 1.0f);
 
@@ -155,6 +155,7 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
     @Override
     public void dispose() {
         super.dispose();
+
     }
 
     private String getMessage(int credit) {
