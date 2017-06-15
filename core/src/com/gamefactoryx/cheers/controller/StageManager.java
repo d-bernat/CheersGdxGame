@@ -45,19 +45,9 @@ public final class StageManager {
 
     public void showLastStage() {
         try {
-            StageEnum stageEnum = stageHistory.removeLast();
-            switch (stageEnum) {
-                case BUS_DRIVING_STAGE_FIRST_PHASE:
-                case BUS_DRIVING_STAGE_SECOND_PHASE:
-                case BUS_DRIVING_STAGE_THIRD_PHASE:
-                case BUS_DRIVING_STAGE_FOURTH_PHASE:
-                    showStage(StageEnum.NEW_GAME_STAGE, true);
-                    break;
-                default:
-                    showStage(stageEnum, true);
-            }
-
+            showStage(stageHistory.removeLast(), true);
         } catch (Exception e) {
+            stageHistory.clear();
             showStage(StageEnum.MAIN_STAGE);
         }
     }
@@ -68,7 +58,7 @@ public final class StageManager {
 
     // Show in the game the screen which enum type is received
     private void showStage(StageEnum screenEnum, boolean rollBack) {
-        if (screenEnum != currentStage && !rollBack) {
+        if (isRecordable(screenEnum) && screenEnum != currentStage && !rollBack) {
             stageHistory.addLast(currentStage);
         }
 
@@ -110,6 +100,17 @@ public final class StageManager {
         // Dispose previous screen
         if (currentScreen != null) {
             currentScreen.dispose();
+        }
+    }
+
+    private boolean isRecordable(StageEnum screenEnum) {
+        switch (screenEnum) {
+            case BUS_DRIVING_STAGE_SECOND_PHASE:
+            case BUS_DRIVING_STAGE_THIRD_PHASE:
+            case BUS_DRIVING_STAGE_FOURTH_PHASE:
+                return false;
+            default:
+                return true;
         }
     }
 }

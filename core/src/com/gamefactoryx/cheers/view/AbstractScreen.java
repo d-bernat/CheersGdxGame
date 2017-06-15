@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -155,10 +156,10 @@ public abstract class AbstractScreen implements Screen {
         spriteBatch = new SpriteBatch();
         camera = new OrthographicCamera();
         //if (Orientation.getOrientation() == Input.Orientation.Portrait)
-            portraitViewport = new FillViewport(Resolution.getGameWorldWidthPortrait() / Resolution.getAspectRatio(),
+            portraitViewport = new StretchViewport(Resolution.getGameWorldWidthPortrait(),
                     Resolution.getGameWorldHeightPortrait(), camera);
         //else
-            landscapeViewport = new FillViewport(Resolution.getGameWorldWidthLandscape() / Resolution.getAspectRatio(),
+            landscapeViewport = new StretchViewport(Resolution.getGameWorldWidthLandscape(),
                     Resolution.getGameWorldHeightLandscape(), camera);
         getViewport().apply();
         initLogo();
@@ -238,7 +239,7 @@ public abstract class AbstractScreen implements Screen {
 
     private void setCameraPosition() {
         if (Orientation.getOrientation() == Input.Orientation.Landscape)
-            camera.position.set(Resolution.getGameWorldWidthLandscape() / 2 - 1, Resolution.getGameWorldHeightLandscape() / 2, 0);
+            camera.position.set(Resolution.getGameWorldWidthLandscape() / 2, Resolution.getGameWorldHeightLandscape() / 2, 0);
         else
             camera.position.set(Resolution.getGameWorldWidthPortrait() / 2, Resolution.getGameWorldHeightPortrait() / 2, 0);
         camera.update();

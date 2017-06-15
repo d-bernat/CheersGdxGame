@@ -92,12 +92,12 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                             for (VCard playerVCard : player.getVCards()) {
                                 if (activeCard.equals(playerVCard)) {
                                     player.removeVCard(playerVCard);
+                                    model.checkAndSetPhaseFinished(activeCard);
                                     break outer;
                                 }
                             }
                         }
                     }
-
                 } else {
                     //todo next phase
                     if(isThereMoreThenOneLooser())
