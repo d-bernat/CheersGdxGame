@@ -59,7 +59,7 @@ public final class StageManager {
 
     // Show in the game the screen which enum type is received
     private void showStage(StageEnum screenEnum, boolean rollBack) {
-        if (isLogicalLeafStage(currentStage) && screenEnum != currentStage && !rollBack)
+        if (!isLogicalLeafStage(currentStage) && screenEnum != currentStage && !rollBack)
             stageHistory.addLast(currentStage);
 
         // Get current screen to dispose it
@@ -108,7 +108,7 @@ public final class StageManager {
 
     private boolean isLogicalLeafStage(StageEnum screenEnum) {
         if(screenEnum == null)
-            return false;
+            return true;
 
         switch (screenEnum) {
             case SPLASH_STAGE:
@@ -116,9 +116,9 @@ public final class StageManager {
             case BUS_DRIVING_STAGE_SECOND_PHASE:
             case BUS_DRIVING_STAGE_THIRD_PHASE:
             case BUS_DRIVING_STAGE_FOURTH_PHASE:
-                return false;
-            default:
                 return true;
+            default:
+                return false;
         }
     }
 }
