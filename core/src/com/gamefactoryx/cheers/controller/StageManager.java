@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Queue;
 import com.gamefactoryx.cheers.CheersGdxGame;
+import com.gamefactoryx.cheers.tool.Card;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -50,7 +51,7 @@ public final class StageManager {
                 case BUS_DRIVING_STAGE_SECOND_PHASE:
                 case BUS_DRIVING_STAGE_THIRD_PHASE:
                 case BUS_DRIVING_STAGE_FOURTH_PHASE:
-                    showStage(StageEnum.NEW_GAME_STAGE);
+                    showStage(StageEnum.NEW_GAME_STAGE, true);
                     break;
                 default:
                     showStage(stageEnum, true);

@@ -79,7 +79,7 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
         for (VCard vCard : model.getBoard().getVCards()) {
             if (model.getActiveCardIndex() == index++) {
                 //old active card back to croupier
-                Croupier.getInstance().getVCards().addFirst(vCard);
+                //Croupier.getInstance().getVCards().addFirst(vCard);
                 cards.add(Croupier.getInstance().getVCard());
 
             } else
