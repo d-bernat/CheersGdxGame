@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Queue;
 import com.gamefactoryx.cheers.CheersGdxGame;
@@ -58,15 +59,17 @@ public final class StageManager {
 
     // Show in the game the screen which enum type is received
     private void showStage(StageEnum screenEnum, boolean rollBack) {
-        if (isRecordable(screenEnum) && screenEnum != currentStage && !rollBack) {
+        if (isLogicalLeafStage(currentStage) && screenEnum != currentStage && !rollBack)
             stageHistory.addLast(currentStage);
-        }
 
         // Get current screen to dispose it
         Screen currentScreen = game.getScreen();
         AbstractController controller = null;
         // Show new screen
         switch (screenEnum) {
+            case SPLASH_STAGE:
+                controller = StageEnum.SPLASH_STAGE.getController();
+                break;
             case MAIN_STAGE:
                 controller = StageEnum.MAIN_STAGE.getController();
                 break;
@@ -103,8 +106,13 @@ public final class StageManager {
         }
     }
 
-    private boolean isRecordable(StageEnum screenEnum) {
+    private boolean isLogicalLeafStage(StageEnum screenEnum) {
+        if(screenEnum == null)
+            return false;
+
         switch (screenEnum) {
+            case SPLASH_STAGE:
+            case BUS_DRIVING_STAGE_FIRST_PHASE:
             case BUS_DRIVING_STAGE_SECOND_PHASE:
             case BUS_DRIVING_STAGE_THIRD_PHASE:
             case BUS_DRIVING_STAGE_FOURTH_PHASE:
