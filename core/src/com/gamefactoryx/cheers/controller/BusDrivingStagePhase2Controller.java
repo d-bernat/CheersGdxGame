@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.controller;
 
 
+import com.badlogic.gdx.Gdx;
 import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.model.BusDrivingPhase2Model;
 import com.gamefactoryx.cheers.model.bus_driving.Croupier;
@@ -47,6 +48,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
         int vCard_index = -1;
 
         if (screenY >= Resolution.getGameWorldHeightPortrait() / 2.0f) {
+            Gdx.input.vibrate(10);
             for (VCard vCard : model.getBoard().getVCards()) {
                 ++vCard_index;
                 if (vCard_index == 9)
@@ -91,6 +93,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                         for (Player player : model.getPlayers()) {
                             for (VCard playerVCard : player.getVCards()) {
                                 if (activeCard.equals(playerVCard)) {
+                                    Gdx.input.vibrate(10);
                                     player.removeVCard(playerVCard);
                                     model.checkAndSetPhaseFinished(activeCard);
                                     break outer;
@@ -100,6 +103,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                     }
                 } else {
                     //todo next phase
+                    Gdx.input.vibrate(10);
                     if(isThereMoreThenOneLooser())
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
                     else

@@ -46,13 +46,14 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
         if (!model.isPhaseFinished()) {
             for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
                 if (getScreen().getClicked()[i]) {
-
+                    Gdx.input.vibrate(10);
                     int oldValue = model.getBoard().getVCards().get(model.getActiveCardIndex()).getValue();
                     changeCardOnBoardAndGetOldToCroupier();
                     int newValue = model.getBoard().getVCards().get(model.getActiveCardIndex()).getValue();
 
                     if (i == 0 && oldValue < newValue || i == 1 && newValue < oldValue) {
                         model.setDrinkPoints(0);
+                        Gdx.input.vibrate(100);
                         if (model.getActiveCardIndex() == 6)
                             model.setPhaseFinished();
                         else
@@ -78,8 +79,6 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
         int index = 0;
         for (VCard vCard : model.getBoard().getVCards()) {
             if (model.getActiveCardIndex() == index++) {
-                //old active card back to croupier
-                //Croupier.getInstance().getVCards().addFirst(vCard);
                 cards.add(Croupier.getInstance().getVCard());
 
             } else

@@ -17,7 +17,11 @@ final class SplashStageController extends AbstractController {
     SplashStageController(final AbstractScreen screen){
         super(screen);
         setScreenLock(10);
+        Music mp3Music = Gdx.audio.newMusic(Gdx.files.internal("common/cheers_musik.mp3"));
+        mp3Music.play();
+
     }
+
 
 
 
@@ -29,8 +33,6 @@ final class SplashStageController extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        Music mp3Music = Gdx.audio.newMusic(Gdx.files.internal("common/cheers_musik.mp3"));
-        mp3Music.play();
         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
         return true;
     }

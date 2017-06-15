@@ -49,6 +49,7 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+            Gdx.input.vibrate(10);
             if (model.isPhaseFinishend()) {
                 StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
                 return true;
@@ -68,7 +69,7 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                 //keyboard is off
                 else {
                     //should you restart phase?
-                    if (screenX < 100) {
+                    if (screenX < 10) {
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
                         return true;
                     }
@@ -77,12 +78,13 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                             screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
                             Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
                             Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
-                        if(isBoardCardBack()){
+                        Gdx.input.vibrate(10);
+                        if (isBoardCardBack()) {
                             boardCardToFace();
-                        }else if(isBoardCardFace()) {
+                        } else if (isBoardCardFace()) {
                             boardCardToPlayer();
-                        }else{
-                            if(!model.isPhaseFinishend()) {
+                        } else {
+                            if (!model.isPhaseFinishend()) {
                                 putNewCardToBoard(CardOrientation.BACK);
                                 model.setActivePlayer(model.getActivePlayer() + 1);
                             }
@@ -106,12 +108,13 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
     }
 
     private boolean isBoardCardBack() {
-         return model.getBoard().getVCards().size != 0 && model.getBoard().getVCards().last().getOrientation() == CardOrientation.BACK;
+        return model.getBoard().getVCards().size != 0 && model.getBoard().getVCards().last().getOrientation() == CardOrientation.BACK;
     }
 
     private boolean isBoardCardFace() {
         return model.getBoard().getVCards().size != 0 && model.getBoard().getVCards().last().getOrientation() == CardOrientation.FACE;
     }
+
     @Override
     public boolean keyDown(int keycode) {
         return true;
