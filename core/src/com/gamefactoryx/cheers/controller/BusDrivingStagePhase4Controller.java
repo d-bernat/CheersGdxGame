@@ -89,7 +89,5 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
         model.getBoard().getVCards().clear();
         for (VCard vCard : cards)
             model.getBoard().getVCards().addLast(vCard);
-
-
     }
 }
