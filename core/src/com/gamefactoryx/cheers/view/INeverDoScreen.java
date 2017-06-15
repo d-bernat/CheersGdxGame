@@ -132,14 +132,7 @@ public class INeverDoScreen extends AbstractScreen {
         setButtons(new Sprite[1][2]);
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
-        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
-
-       /* for (int i = 0; i < getCountOfButtons(); i++) {
-            for (int j = 0; j < 2; j++) {
-                getButtons()[i][j].setSize(X,
-                        Y * 0.18f * Resolution.getAspectRatio());
-            }
-        }*/
+        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon_white.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }

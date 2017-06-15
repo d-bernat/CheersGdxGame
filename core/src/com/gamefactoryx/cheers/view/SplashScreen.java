@@ -50,6 +50,7 @@ public class SplashScreen extends AbstractScreen {
 
     @Override
     protected void initLogo() {
+
     }
 
     @Override
