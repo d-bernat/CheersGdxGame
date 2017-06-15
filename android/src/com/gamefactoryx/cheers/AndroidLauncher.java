@@ -1,6 +1,5 @@
 package com.gamefactoryx.cheers;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
