@@ -13,6 +13,7 @@ final class NewGameStageController extends AbstractController {
 
     NewGameStageController(final AbstractScreen screen){
         super(screen);
+        setScreenLock(10);
     }
 
 

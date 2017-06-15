@@ -14,6 +14,7 @@ final class INeverDoStageController extends AbstractController {
 
     INeverDoStageController(final AbstractScreen screen) {
         super(screen);
+        setScreenLock(10);
     }
 
 

@@ -16,6 +16,7 @@ final class KingsCupSpecialStageController extends AbstractController {
 
     KingsCupSpecialStageController(final AbstractScreen screen) {
         super(screen);
+        setScreenLock(10);
     }
 
 

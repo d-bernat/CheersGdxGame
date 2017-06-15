@@ -14,18 +14,11 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 public class BusDrivingStagePhase3Controller extends AbstractController {
 
     private BusDrivingPhase3Model model;
-    private static boolean flag;
-    private StringBuilder typedName = new StringBuilder();
-    private boolean shift;
-    private boolean keyboardOn;
-    private VCard activeCard;
-    private String tempName;
-
 
     public BusDrivingStagePhase3Controller(final AbstractScreen screen) {
         super(screen);
         model = BusDrivingPhase3Model.getNewInstance();
-        setScreenLock();
+        setScreenLock(1);
     }
 
 
@@ -58,7 +51,6 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
                             else {
                                 model.setPhaseFinished(model.getActivePlayer());
                                 model.setFinalMessage();
-                                //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
                             }
                             break;
                         case 1:
@@ -68,8 +60,6 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
                                 model.setPhaseFinished(model.getActivePlayer());
                                 model.setFinalMessage();
                             }
-                            //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
-
                             break;
                     }
 
@@ -88,12 +78,5 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
 
         return true;
     }
-
-
-    private void setScreenLock() {
-        if (CheersGdxGame.getScreenLock() != null)
-            CheersGdxGame.getScreenLock().lock(1);
-    }
-
 
 }

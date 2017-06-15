@@ -16,12 +16,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 public class BusDrivingStagePhase2Controller extends AbstractController {
 
     private BusDrivingPhase2Model model;
-    private static boolean flag;
-    private StringBuilder typedName = new StringBuilder();
-    private boolean shift;
-    private boolean keyboardOn;
     private VCard activeCard;
-    private String tempName;
 
 
     public BusDrivingStagePhase2Controller(final AbstractScreen screen) {
@@ -37,7 +32,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
         for(Player player: model.getPlayers())
             for(VCard vCard: player.getVCards())
                 vCard.setOrientation(CardOrientation.FACE);
-        setScreenLock();
+        setScreenLock(1);
     }
 
 
@@ -125,12 +120,5 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
 
         return counter > 1;
     }
-
-
-    private void setScreenLock() {
-        if (CheersGdxGame.getScreenLock() != null)
-            CheersGdxGame.getScreenLock().lock(1);
-    }
-
 
 }

@@ -3,6 +3,7 @@ package com.gamefactoryx.cheers.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
@@ -52,5 +53,11 @@ abstract public class AbstractController extends InputAdapter {
         return true;
     }
     protected AbstractScreen getScreen(){ return screen; }
+
+    protected void setScreenLock(int lockType) {
+        if (CheersGdxGame.getScreenLock() != null)
+            CheersGdxGame.getScreenLock().lock(lockType);
+    }
+
 
 }

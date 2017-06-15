@@ -15,6 +15,7 @@ final class MainStageController extends AbstractController {
 
     MainStageController(final AbstractScreen screen){
         super(screen);
+        setScreenLock(10);
     }
 
 

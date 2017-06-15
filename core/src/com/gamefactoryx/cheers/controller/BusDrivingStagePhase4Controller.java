@@ -19,18 +19,11 @@ import java.util.List;
 public class BusDrivingStagePhase4Controller extends AbstractController {
 
     private BusDrivingPhase4Model model;
-    private static boolean flag;
-    private StringBuilder typedName = new StringBuilder();
-    private boolean shift;
-    private boolean keyboardOn;
-    private VCard activeCard;
-    private String tempName;
-
 
     public BusDrivingStagePhase4Controller(final AbstractScreen screen) {
         super(screen);
         model = BusDrivingPhase4Model.getNewInstance();
-        setScreenLock();
+        setScreenLock(0);
     }
 
 
@@ -99,12 +92,4 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
 
 
     }
-
-
-    private void setScreenLock() {
-        if (CheersGdxGame.getScreenLock() != null)
-            CheersGdxGame.getScreenLock().lock(0);
-    }
-
-
 }
