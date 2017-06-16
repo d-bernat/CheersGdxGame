@@ -18,10 +18,12 @@ public final class BusDrivingPhase4Model {
 
 
     private Croupier croupier;
-    private String finalMessage;
     private static BusDrivingPhase4Model instance;
     private boolean phaseIsFinished;
-    private Player activePlayer;
+    private Player busDriver;
+    private int drinkPoints;
+    private int totalDrunk;
+    private int activeCardIndex;
 
 
     public static BusDrivingPhase4Model getInstance() {
@@ -46,10 +48,16 @@ public final class BusDrivingPhase4Model {
         for (int i = 2; i < 53; i++)
             croupier.getVCards().addLast(new VCard(i, CardOrientation.FACE));
         croupier.shuffle();
-       // croupier.getBoard().addCard(croupier.getVCards().removeLast());
-        firstPlayer();
-
+        for(int i = 0; i < 7; i++)
+            croupier.getBoard().addCard(croupier.getVCards().removeLast());
+        for (Player player : getPlayers()) {
+            if(player.isAlive()) {
+                busDriver = player;
+            }
+        }
     }
+
+
 
     public Queue<VCard> getvCards() {
         return croupier.getInstance().getVCards();
@@ -65,10 +73,7 @@ public final class BusDrivingPhase4Model {
     }
 
 
-    public void setPhaseFinished(Player looser) {
-
-        setFinalMessage();
-        setLoosers(looser);
+    public void setPhaseFinished() {
         phaseIsFinished = true;
     }
 
@@ -76,73 +81,28 @@ public final class BusDrivingPhase4Model {
         return phaseIsFinished;
     }
 
-    public String getFinalMessage() {
-        return finalMessage;
+    public Player getBusDriver(){
+        return busDriver;
     }
 
-    public void setFinalMessage() {
-        switch (Configuration.getLanguage()) {
-            case DE:
-                this.finalMessage = "Weiter ?";
-                break;
-            case EN:
-                this.finalMessage = "Continue ?";
-                break;
-            default:
-                this.finalMessage = "Weiter ?";
-        }
+    public int getDrinkPoints() {
+        return drinkPoints;
     }
 
-    public Player getActivePlayer() {
-        return activePlayer;
+    public void setDrinkPoints(int drinkPoints) {
+        this.drinkPoints = drinkPoints;
+        totalDrunk += drinkPoints;
     }
 
-
-    private void firstPlayer() {
-        for (Player player : croupier.getPlayers()) {
-            if (player.isAlive()) {
-                activePlayer = player;
-                break;
-            }
-        }
+    public int getActiveCardIndex() {
+        return activeCardIndex;
     }
 
-    public void nextPlayer() {
-        boolean behind = false;
-        boolean newPlayerSet = false;
-        if (activePlayer != null) {
-            for (Player player : croupier.getPlayers()) {
-                if (behind && player.isAlive()) {
-                    activePlayer = player;
-                    newPlayerSet = true;
-                }
-
-                if (player.equals(activePlayer)) {
-                    behind = true;
-                }
-            }
-        }
-
-        if (!newPlayerSet) firstPlayer();
+    public void setActiveCardIndex(int activeCardIndex) {
+        this.activeCardIndex = activeCardIndex;
     }
 
-    private void setLoosers(Player looser) {
-        for (Player player : getPlayers()) {
-            player.setAlive(false);
-        }
-        looser.setAlive(true);
-    }
-
-    public String getTask() {
-        switch (Configuration.getLanguage()) {
-            case DE:
-                return "Höher oder Tiefer?";
-            case EN:
-                return "Higher card or lower card?";
-            default:
-                return "Höher oder Tiefer?";
-
-        }
-
+    public int getTotalDrunk() {
+        return totalDrunk;
     }
 }

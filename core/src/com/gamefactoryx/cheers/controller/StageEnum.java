@@ -7,7 +7,11 @@ import com.gamefactoryx.cheers.view.*;
  */
 @SuppressWarnings("DefaultFileTemplate")
 public enum StageEnum {
-
+    SPLASH_STAGE {
+        public AbstractController getController() {
+            return new SplashStageController(new SplashScreen());
+        }
+    },
     MAIN_STAGE {
         public AbstractController getController() {
             return new MainStageController(new MainScreen());

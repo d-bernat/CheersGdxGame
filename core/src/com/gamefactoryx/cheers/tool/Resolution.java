@@ -43,6 +43,16 @@ public class Resolution {
         }
     }
 
+    public static float getNativeAspectRatio(){
+        float aspectRatio;
+        if ((Gdx.input.getNativeOrientation() == Input.Orientation.Portrait))
+            aspectRatio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
+        else
+            aspectRatio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
+
+        return aspectRatio;
+    }
+
     public static float getAspectRatio(){
         float aspectRatio;
         if (Gdx.graphics.getWidth() < Gdx.graphics.getHeight())
@@ -52,7 +62,4 @@ public class Resolution {
 
         return aspectRatio;
     }
-
-
-
 }

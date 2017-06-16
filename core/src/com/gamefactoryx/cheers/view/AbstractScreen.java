@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -26,7 +27,8 @@ public abstract class AbstractScreen implements Screen {
     final int CLICKED = 1;
 
     private Camera camera;
-    private Viewport viewport;
+    private Viewport landscapeViewport;
+    private Viewport portraitViewport;
 
     private Sprite landscapeSprite;
     private Sprite portraitSprite;
@@ -153,13 +155,13 @@ public abstract class AbstractScreen implements Screen {
     public void show() {
         spriteBatch = new SpriteBatch();
         camera = new OrthographicCamera();
-        if (Orientation.getOrientation() == Input.Orientation.Portrait)
-            viewport = new FillViewport(Resolution.getGameWorldWidthPortrait() / Resolution.getAspectRatio(),
+        //if (Orientation.getOrientation() == Input.Orientation.Portrait)
+            portraitViewport = new StretchViewport(Resolution.getGameWorldWidthPortrait(),
                     Resolution.getGameWorldHeightPortrait(), camera);
-        else
-            viewport = new FillViewport(Resolution.getGameWorldWidthLandscape() / Resolution.getAspectRatio(),
+        //else
+            landscapeViewport = new StretchViewport(Resolution.getGameWorldWidthLandscape(),
                     Resolution.getGameWorldHeightLandscape(), camera);
-        viewport.apply();
+        getViewport().apply();
         initLogo();
         initSprites();
         initCards();
@@ -177,7 +179,7 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+        getViewport().update(width, height);
         setCameraPosition();
     }
 
@@ -237,7 +239,7 @@ public abstract class AbstractScreen implements Screen {
 
     private void setCameraPosition() {
         if (Orientation.getOrientation() == Input.Orientation.Landscape)
-            camera.position.set(Resolution.getGameWorldWidthLandscape() / 2 - 1, Resolution.getGameWorldHeightLandscape() / 2, 0);
+            camera.position.set(Resolution.getGameWorldWidthLandscape() / 2, Resolution.getGameWorldHeightLandscape() / 2, 0);
         else
             camera.position.set(Resolution.getGameWorldWidthPortrait() / 2, Resolution.getGameWorldHeightPortrait() / 2, 0);
         camera.update();
@@ -250,6 +252,13 @@ public abstract class AbstractScreen implements Screen {
         } else {
             portraitSprite.draw(spriteBatch, 1);
         }
+    }
+
+    private Viewport getViewport(){
+        if (Orientation.getOrientation() == Input.Orientation.Portrait)
+            return portraitViewport;
+        else
+            return landscapeViewport;
     }
 
 }

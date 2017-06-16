@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.controller;
 
 
+import com.badlogic.gdx.Gdx;
 import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.model.BusDrivingPhase3Model;
 import com.gamefactoryx.cheers.model.bus_driving.Croupier;
@@ -14,18 +15,11 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 public class BusDrivingStagePhase3Controller extends AbstractController {
 
     private BusDrivingPhase3Model model;
-    private static boolean flag;
-    private StringBuilder typedName = new StringBuilder();
-    private boolean shift;
-    private boolean keyboardOn;
-    private VCard activeCard;
-    private String tempName;
-
 
     public BusDrivingStagePhase3Controller(final AbstractScreen screen) {
         super(screen);
         model = BusDrivingPhase3Model.getNewInstance();
-        setScreenLock();
+        setScreenLock(1);
     }
 
 
@@ -48,6 +42,7 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
         if (!model.isPhaseFinished()) {
             for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
                 if (getScreen().getClicked()[i]) {
+                    Gdx.input.vibrate(10);
                     int lastCard = model.getBoard().getVCards().last().getValue();
                     VCard vCard = Croupier.getInstance().getVCards().removeLast();
                     model.getBoard().addCard(vCard);
@@ -58,7 +53,6 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
                             else {
                                 model.setPhaseFinished(model.getActivePlayer());
                                 model.setFinalMessage();
-                                //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
                             }
                             break;
                         case 1:
@@ -68,8 +62,6 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
                                 model.setPhaseFinished(model.getActivePlayer());
                                 model.setFinalMessage();
                             }
-                            //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
-
                             break;
                     }
 
@@ -82,18 +74,12 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
                     screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+                Gdx.input.vibrate(10);
                 StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
             }
         }
 
         return true;
     }
-
-
-    private void setScreenLock() {
-        if (CheersGdxGame.getScreenLock() != null)
-            CheersGdxGame.getScreenLock().lock(1);
-    }
-
 
 }

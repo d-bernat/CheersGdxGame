@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Queue;
 import com.gamefactoryx.cheers.model.bus_driving.Board;
 import com.gamefactoryx.cheers.model.bus_driving.Croupier;
@@ -78,15 +79,12 @@ public final class BusDrivingPhase2Model {
             for (VCard vCard : player.getVCards())
                 if (activeCard.equals(vCard))
                     return false;
-
-
-            setFinalMessage();
-            setLoosers();
-            phaseIsFinished = true;
-            return true;
         }
 
-        return false;
+        setFinalMessage();
+        setLoosers();
+        phaseIsFinished = true;
+        return true;
     }
 
     public boolean isPhaseFinished() {

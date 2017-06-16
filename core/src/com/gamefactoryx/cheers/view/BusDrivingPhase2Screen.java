@@ -153,7 +153,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
         int y_offset = 0;
         for(Player player: BusDrivingPhase2Model.getInstance().getPlayers()){
             for (VCard vCard : player.getVCards()) {
-                Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation());
+                Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
                 scard.setSize(X * 0.15f, Y * 0.12f);
                 scard.setPosition(X * 0.05f + scard.getWidth() * x_offset, Y * 0.78f - scard.getHeight() * 0.15f * y_offset++);
                 scard.draw(getSpriteBatch(), 1.0f);
@@ -166,7 +166,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
         y_offset = 0;
         int index = 0;
         for (VCard vCard : BusDrivingPhase2Model.getInstance().getBoard().getVCards()) {
-            Sprite scard = Card.getCardSprite(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation());
+            Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
             if (index == 0)
                 y_offset = 0;
             else if (index == 5) {
@@ -201,6 +201,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        super.dispose();
     }
     private String getMessage(int credit) {
         switch (Configuration.getLanguage()) {

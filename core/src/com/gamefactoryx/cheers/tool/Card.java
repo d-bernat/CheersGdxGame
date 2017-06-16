@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.tool;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -10,24 +11,28 @@ import java.util.Map;
  * Created by bernat on 17.05.2017.
  */
 public class Card {
+    private static Card instance;
+    private Map<String, Texture> cardTextures;
 
-    static {
-        cardSprites = new HashMap<>();
-        setCardSprites();
+    public static Card getInstance()
+    {
+            if(instance == null)
+                instance = new Card();
+
+            return instance;
     }
 
-    public static Sprite getCardSprite(int cardIndex, CardSize cardSize, CardOrientation cardOrientation) {
+    public Texture getCardTexture(int cardIndex, CardSize cardSize, CardOrientation cardOrientation) {
 
-        return cardSprites.get(getFileName(cardIndex, cardSize, cardOrientation));
+        return cardTextures.get(getFileName(cardIndex, cardSize, cardOrientation));
     }
-
-
-    private static Map<String, Sprite> cardSprites;
 
     private Card() {
+        cardTextures = new HashMap<>();
+        setCardTextures();
     }
 
-    private static String getFileName(int cardIndex, CardSize cardSize, CardOrientation orientation) {
+    private String getFileName(int cardIndex, CardSize cardSize, CardOrientation orientation) {
         CardType type;
         if (orientation == CardOrientation.BACK) {
             if (cardSize == CardSize.BIG)
@@ -54,18 +59,18 @@ public class Card {
         }
     }
 
-    private static void setCardSprites() {
-        if (cardSprites.size() == 0) {
+    private void setCardTextures() {
+        if (cardTextures.size() == 0) {
             for (int i = 2; i < 53; i++) {
-                cardSprites.put(getFileName(i, CardSize.BIG, CardOrientation.FACE), new Sprite(new Texture(getFileName(i, CardSize.BIG, CardOrientation.FACE))));
-                cardSprites.put(getFileName(i, CardSize.BIG, CardOrientation.BACK), new Sprite(new Texture(getFileName(i, CardSize.BIG, CardOrientation.BACK))));
-                cardSprites.put(getFileName(i, CardSize.SMALL, CardOrientation.FACE), new Sprite(new Texture(getFileName(i, CardSize.SMALL, CardOrientation.FACE))));
-                cardSprites.put(getFileName(i, CardSize.SMALL, CardOrientation.BACK), new Sprite(new Texture(getFileName(i, CardSize.SMALL, CardOrientation.BACK))));
+                cardTextures.put(getFileName(i, CardSize.BIG, CardOrientation.FACE), new Texture(getFileName(i, CardSize.BIG, CardOrientation.FACE)));
+                cardTextures.put(getFileName(i, CardSize.BIG, CardOrientation.BACK), new Texture(getFileName(i, CardSize.BIG, CardOrientation.BACK)));
+                cardTextures.put(getFileName(i, CardSize.SMALL, CardOrientation.FACE), new Texture(getFileName(i, CardSize.SMALL, CardOrientation.FACE)));
+                cardTextures.put(getFileName(i, CardSize.SMALL, CardOrientation.BACK), new Texture(getFileName(i, CardSize.SMALL, CardOrientation.BACK)));
             }
         }
     }
 
-    private static String getName(int index) {
+    private String getName(int index) {
         switch (index) {
             case 2:
             case 15:
@@ -136,4 +141,7 @@ public class Card {
         return "X";
     }
 
+    private void dispose(){
+
+    }
 }

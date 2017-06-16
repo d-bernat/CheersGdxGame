@@ -1,9 +1,11 @@
 package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Queue;
 import com.gamefactoryx.cheers.CheersGdxGame;
+import com.gamefactoryx.cheers.tool.Card;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -44,19 +46,9 @@ public final class StageManager {
 
     public void showLastStage() {
         try {
-            StageEnum stageEnum = stageHistory.removeLast();
-            switch (stageEnum) {
-                case BUS_DRIVING_STAGE_FIRST_PHASE:
-                case BUS_DRIVING_STAGE_SECOND_PHASE:
-                case BUS_DRIVING_STAGE_THIRD_PHASE:
-                case BUS_DRIVING_STAGE_FOURTH_PHASE:
-                    showStage(StageEnum.NEW_GAME_STAGE);
-                    break;
-                default:
-                    showStage(stageEnum, true);
-            }
-
+            showStage(stageHistory.removeLast(), true);
         } catch (Exception e) {
+            stageHistory.clear();
             showStage(StageEnum.MAIN_STAGE);
         }
     }
@@ -66,34 +58,28 @@ public final class StageManager {
     }
 
     // Show in the game the screen which enum type is received
-    private void showStage(StageEnum screenEnum, boolean rollBack) {
-        if (screenEnum != currentStage && !rollBack) {
-            stageHistory.addLast(currentStage);
-        }
+    private void showStage(StageEnum screenEnum, boolean rollback) {
+        if (!rollback)
+            ifPossibleAddCurrentStageToStageHistory();
 
         // Get current screen to dispose it
         Screen currentScreen = game.getScreen();
         AbstractController controller = null;
         // Show new screen
         switch (screenEnum) {
+            case SPLASH_STAGE:
+                controller = StageEnum.SPLASH_STAGE.getController();
+                break;
             case MAIN_STAGE:
-                if (CheersGdxGame.getScreenLock() != null)
-                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.MAIN_STAGE.getController();
                 break;
             case NEW_GAME_STAGE:
-                if (CheersGdxGame.getScreenLock() != null)
-                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
             case I_NEVER_DO_STAGE:
-                if (CheersGdxGame.getScreenLock() != null)
-                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.I_NEVER_DO_STAGE.getController();
                 break;
             case KINGS_CUP_SPECIAL_STAGE:
-                if (CheersGdxGame.getScreenLock() != null)
-                    CheersGdxGame.getScreenLock().lock(10);
                 controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
                 break;
             case BUS_DRIVING_STAGE_FIRST_PHASE:
@@ -117,6 +103,35 @@ public final class StageManager {
         // Dispose previous screen
         if (currentScreen != null) {
             currentScreen.dispose();
+        }
+    }
+
+    private void ifPossibleAddCurrentStageToStageHistory() {
+        if (currentStage == null)
+            return;
+        if (isLogicalLeafStage(currentStage))
+            return;
+
+        if (stageHistory.size > 0) {
+            if (stageHistory.last() != currentStage)
+                stageHistory.addLast(currentStage);
+        } else
+            stageHistory.addLast(currentStage);
+    }
+
+    private boolean isLogicalLeafStage(StageEnum screenEnum) {
+        if (screenEnum == null)
+            return true;
+
+        switch (screenEnum) {
+            case SPLASH_STAGE:
+            case BUS_DRIVING_STAGE_FIRST_PHASE:
+            case BUS_DRIVING_STAGE_SECOND_PHASE:
+            case BUS_DRIVING_STAGE_THIRD_PHASE:
+            case BUS_DRIVING_STAGE_FOURTH_PHASE:
+                return true;
+            default:
+                return false;
         }
     }
 }

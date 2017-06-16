@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -13,6 +14,7 @@ final class NewGameStageController extends AbstractController {
 
     NewGameStageController(final AbstractScreen screen){
         super(screen);
+        setScreenLock(10);
     }
 
 
@@ -38,8 +40,9 @@ final class NewGameStageController extends AbstractController {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            if (getScreen().getClicked()[i])
-                switch (i){
+            if (getScreen().getClicked()[i]) {
+                Gdx.input.vibrate(10);
+                switch (i) {
                     case 0:
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
                         break;
@@ -50,7 +53,7 @@ final class NewGameStageController extends AbstractController {
                         StageManager.getInstance().showStage(StageEnum.KINGS_CUP_SPECIAL_STAGE);
                         break;
                 }
-
+            }
             getScreen().getClicked()[i] = false;
         }
         return true;

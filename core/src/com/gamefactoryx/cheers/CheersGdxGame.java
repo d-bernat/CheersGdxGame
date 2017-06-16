@@ -5,7 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
+import com.gamefactoryx.cheers.tool.Card;
 import com.gamefactoryx.cheers.tool.Resolution;
+
+import java.util.Timer;
 
 public class CheersGdxGame extends Game {
 
@@ -19,9 +22,8 @@ public class CheersGdxGame extends Game {
 		//screenLock.setOrientationPortrait();
 		StageManager.getInstance().initialize(this);
 		Resolution.setResolution();
-		Music mp3Music = Gdx.audio.newMusic(Gdx.files.internal("common/cheers_musik.mp3"));
-		mp3Music.play();
-		StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
+		StageManager.getInstance().showStage(StageEnum.SPLASH_STAGE);
+
 	}
 
 	public static ScreenLock getScreenLock(){

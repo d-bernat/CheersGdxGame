@@ -18,11 +18,9 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 public class BusDrivingStagePhase1Controller extends AbstractController {
 
     private BusDrivingPhase1Model model;
-    private static boolean flag;
     private StringBuilder typedName = new StringBuilder();
     private boolean shift;
     private boolean keyboardOn;
-    //private static Card activeCard;
     private String tempName;
 
 
@@ -30,7 +28,7 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
         super(screen);
         model = BusDrivingPhase1Model.getNewInstance();
         putNewCardToBoard(CardOrientation.BACK);
-        setScreenLock();
+        setScreenLock(1);
     }
 
     private void putNewCardToBoard(CardOrientation cardOrientation) {
@@ -51,10 +49,10 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+            Gdx.input.vibrate(10);
             if (model.isPhaseFinishend()) {
                 StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
                 return true;
-                //Gdx.app.log("Message", "First phase completed");
             } else {
                 tempName = model.getPlayers().get(model.getActivePlayer()).getName();
                 model.getPlayers().get(model.getActivePlayer()).setName("");
@@ -71,7 +69,7 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                 //keyboard is off
                 else {
                     //should you restart phase?
-                    if (screenX < 100) {
+                    if (screenX < 10) {
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
                         return true;
                     }
@@ -80,12 +78,13 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                             screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
                             Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
                             Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
-                        if(isBoardCardBack()){
+                        Gdx.input.vibrate(10);
+                        if (isBoardCardBack()) {
                             boardCardToFace();
-                        }else if(isBoardCardFace()) {
+                        } else if (isBoardCardFace()) {
                             boardCardToPlayer();
-                        }else{
-                            if(!model.isPhaseFinishend()) {
+                        } else {
+                            if (!model.isPhaseFinishend()) {
                                 putNewCardToBoard(CardOrientation.BACK);
                                 model.setActivePlayer(model.getActivePlayer() + 1);
                             }
@@ -109,12 +108,13 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
     }
 
     private boolean isBoardCardBack() {
-         return model.getBoard().getVCards().size != 0 && model.getBoard().getVCards().last().getOrientation() == CardOrientation.BACK;
+        return model.getBoard().getVCards().size != 0 && model.getBoard().getVCards().last().getOrientation() == CardOrientation.BACK;
     }
 
     private boolean isBoardCardFace() {
         return model.getBoard().getVCards().size != 0 && model.getBoard().getVCards().last().getOrientation() == CardOrientation.FACE;
     }
+
     @Override
     public boolean keyDown(int keycode) {
         return true;
@@ -158,11 +158,6 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
         Gdx.input.setOnscreenKeyboardVisible(enabled);
     }
 
-
-    private void setScreenLock() {
-        if (CheersGdxGame.getScreenLock() != null)
-            CheersGdxGame.getScreenLock().lock(1);
-    }
 
     private void setPlayerName() {
         if (typedName.toString().trim().length() > 0)
