@@ -58,9 +58,9 @@ public final class StageManager {
     }
 
     // Show in the game the screen which enum type is received
-    private void showStage(StageEnum screenEnum, boolean rollBack) {
-        if (!isLogicalLeafStage(currentStage) && screenEnum != currentStage && !rollBack)
-            stageHistory.addLast(currentStage);
+    private void showStage(StageEnum screenEnum, boolean rollback) {
+        if (!rollback)
+            ifPossibleAddCurrentStageToStageHistory();
 
         // Get current screen to dispose it
         Screen currentScreen = game.getScreen();
@@ -106,8 +106,21 @@ public final class StageManager {
         }
     }
 
+    private void ifPossibleAddCurrentStageToStageHistory() {
+        if (currentStage == null)
+            return;
+        if (isLogicalLeafStage(currentStage))
+            return;
+
+        if (stageHistory.size > 0) {
+            if (stageHistory.last() != currentStage)
+                stageHistory.addLast(currentStage);
+        } else
+            stageHistory.addLast(currentStage);
+    }
+
     private boolean isLogicalLeafStage(StageEnum screenEnum) {
-        if(screenEnum == null)
+        if (screenEnum == null)
             return true;
 
         switch (screenEnum) {
