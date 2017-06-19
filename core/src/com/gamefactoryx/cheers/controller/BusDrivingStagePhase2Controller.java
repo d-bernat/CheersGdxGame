@@ -47,8 +47,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
 
         int vCard_index = -1;
 
-        if (screenY >= Resolution.getGameWorldHeightPortrait() / 2.0f &&
-                !model.canAnyPlayerDropCard(activeCard) &&
+        if (    !model.canAnyPlayerDropCard(activeCard) &&
                 !model.isPhaseFinished()) {
             Gdx.input.vibrate(10);
             for (VCard vCard : model.getBoard().getVCards()) {
@@ -82,15 +81,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                 }
             }
             model.checkAndSetPhaseFinished(activeCard);
-
         } else {
-            //yes I will do something
-            if (screenX >= getScreen().getTextBox().getX() &&
-                    screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight() &&
-                    model.canAnyPlayerDropCard(activeCard) ||
-                    model.isPhaseFinished()) {
                 if (!model.isPhaseFinished()) {
                     outer:
                     for (Player player : model.getPlayers()) {
@@ -111,7 +102,6 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                     else
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
                 }
-            }
         }
         return true;
     }

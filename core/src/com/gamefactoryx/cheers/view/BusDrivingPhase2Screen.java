@@ -79,7 +79,6 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
        // boolean isSomePlayerActive = false;
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.65f;
         getTextBox().setPosition(X * 0.05f, Y * 0.52f);
-        getTextBox().draw(getSpriteBatch());
         if (!BusDrivingPhase2Model.getInstance().isPhaseFinished()) {
             getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.150f);
             outer:
@@ -87,6 +86,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
                 for (VCard vCard : player.getVCards()) {
                     if (vCard.getCredit() > 0) {
                         FontHelper.getGlyphLayout().setText(font, player.getName());
+                        getTextBox().draw(getSpriteBatch());
                         font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
                         FontHelper.getGlyphLayout().setText(font, getMessage(vCard.getCredit()));
                         font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
@@ -99,6 +99,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
         } else {
             int y_offset = 0;
             int counter = 0;
+            getTextBox().draw(getSpriteBatch());
             for(Player player: BusDrivingPhase2Model.getInstance().getPlayers()){
                 if(player.isAlive()) {
                     ++counter;
@@ -109,9 +110,9 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
             }
             getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, FontHelper.getGlyphLayout().height * 1.65f * (1 + counter) + FontHelper.getGlyphLayout().height * 2.5f);
             FontHelper.getGlyphLayout().setText(font, BusDrivingPhase2Model.getInstance().getFinalMessage());
+
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM ) - FontHelper.getGlyphLayout().height * 3.0f);
-
         }
     }
 

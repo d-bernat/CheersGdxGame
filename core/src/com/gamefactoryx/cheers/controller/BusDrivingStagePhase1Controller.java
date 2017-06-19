@@ -39,57 +39,25 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return true;
+        return !model.isPhaseFinishend();
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        if (screenX >= getScreen().getTextBox().getX() &&
-                screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
-            Gdx.input.vibrate(10);
-            if (model.isPhaseFinishend()) {
-                StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
-                return true;
-            } else {
-                tempName = model.getPlayers().get(model.getActivePlayer()).getName();
-                model.getPlayers().get(model.getActivePlayer()).setName("");
-                enableKeyboard(true);
-            }
-
+        Gdx.input.vibrate(10);
+        if (model.isPhaseFinishend()) {
+            StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
+            return true;
         } else {
-            if (!model.isPhaseFinishend()) {
-                //is keyboard on?
-                if (keyboardOn) {
-                    setPlayerName();
-                    enableKeyboard(false);
-                }
-                //keyboard is off
-                else {
-                    //should you restart phase?
-                    if (screenX < 10) {
-                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
-                        return true;
-                    }
-
-                    if (screenX >= getScreen().getFaceDownBigCard().getX() &&
-                            screenX <= getScreen().getFaceDownBigCard().getX() + getScreen().getFaceDownBigCard().getWidth() &&
-                            Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getFaceDownBigCard().getY() &&
-                            Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getFaceDownBigCard().getY() + getScreen().getFaceDownBigCard().getHeight()) {
-                        Gdx.input.vibrate(10);
-                        if (isBoardCardBack()) {
-                            boardCardToFace();
-                        } else if (isBoardCardFace()) {
-                            boardCardToPlayer();
-                        } else {
-                            if (!model.isPhaseFinishend()) {
-                                putNewCardToBoard(CardOrientation.BACK);
-                                model.setActivePlayer(model.getActivePlayer() + 1);
-                            }
-                        }
-                    }
+            if (isBoardCardBack()) {
+                boardCardToFace();
+            } else if (isBoardCardFace()) {
+                boardCardToPlayer();
+            } else {
+                if (!model.isPhaseFinishend()) {
+                    putNewCardToBoard(CardOrientation.BACK);
+                    model.setActivePlayer(model.getActivePlayer() + 1);
                 }
             }
         }
