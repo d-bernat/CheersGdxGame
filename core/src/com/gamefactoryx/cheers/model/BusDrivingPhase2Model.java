@@ -87,6 +87,20 @@ public final class BusDrivingPhase2Model {
         return true;
     }
 
+    public boolean canAnyPlayerDropCard(VCard activeCard) {
+
+        if(activeCard == null)
+            return false;
+
+        for (Player player : getPlayers()) {
+            for (VCard vCard : player.getVCards())
+                if (activeCard.equals(vCard))
+                    return true;
+        }
+
+        return false;
+    }
+
     public boolean isPhaseFinished() {
         return phaseIsFinished;
     }

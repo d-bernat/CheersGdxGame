@@ -24,14 +24,14 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
         super(screen);
         model = BusDrivingPhase2Model.getNewInstance();
         model.getBoard().getVCards().clear();
-        for(int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++) {
             VCard vCard = Croupier.getInstance().getVCard();
             vCard.setOrientation(CardOrientation.BACK);
             model.getBoard().getVCards().addLast(vCard);
         }
 
-        for(Player player: model.getPlayers())
-            for(VCard vCard: player.getVCards())
+        for (Player player : model.getPlayers())
+            for (VCard vCard : player.getVCards())
                 vCard.setOrientation(CardOrientation.FACE);
         setScreenLock(1);
     }
@@ -47,7 +47,9 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
 
         int vCard_index = -1;
 
-        if (screenY >= Resolution.getGameWorldHeightPortrait() / 2.0f) {
+        if (screenY >= Resolution.getGameWorldHeightPortrait() / 2.0f &&
+                !model.canAnyPlayerDropCard(activeCard) &&
+                !model.isPhaseFinished()) {
             Gdx.input.vibrate(10);
             for (VCard vCard : model.getBoard().getVCards()) {
                 ++vCard_index;
@@ -86,25 +88,25 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
             if (screenX >= getScreen().getTextBox().getX() &&
                     screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight() &&
+                    model.canAnyPlayerDropCard(activeCard) ||
+                    model.isPhaseFinished()) {
                 if (!model.isPhaseFinished()) {
-                    if (activeCard != null) {
-                        outer:
-                        for (Player player : model.getPlayers()) {
-                            for (VCard playerVCard : player.getVCards()) {
-                                if (activeCard.equals(playerVCard)) {
-                                    Gdx.input.vibrate(10);
-                                    player.removeVCard(playerVCard);
-                                    model.checkAndSetPhaseFinished(activeCard);
-                                    break outer;
-                                }
+                    outer:
+                    for (Player player : model.getPlayers()) {
+                        for (VCard playerVCard : player.getVCards()) {
+                            if (activeCard.equals(playerVCard)) {
+                                Gdx.input.vibrate(10);
+                                player.removeVCard(playerVCard);
+                                model.checkAndSetPhaseFinished(activeCard);
+                                break outer;
                             }
                         }
                     }
                 } else {
                     //todo next phase
                     Gdx.input.vibrate(10);
-                    if(isThereMoreThenOneLooser())
+                    if (isThereMoreThenOneLooser())
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
                     else
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
@@ -116,9 +118,9 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
 
     private boolean isThereMoreThenOneLooser() {
         int counter = 0;
-        for(Player player: model.getPlayers()){
-            if(player.isAlive()) ++counter;
-            if(counter > 1) break;
+        for (Player player : model.getPlayers()) {
+            if (player.isAlive()) ++counter;
+            if (counter > 1) break;
 
         }
 
