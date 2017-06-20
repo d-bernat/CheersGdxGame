@@ -100,7 +100,7 @@ public final class BusDrivingPhase3Model {
 
     private void firstPlayer() {
         for (Player player : croupier.getPlayers()) {
-            if (player.isAlive()) {
+            if (player.isAlive() && player.isActive()) {
                 activePlayer = player;
                 break;
             }
@@ -112,7 +112,7 @@ public final class BusDrivingPhase3Model {
         boolean newPlayerSet = false;
         if (activePlayer != null) {
             for (Player player : croupier.getPlayers()) {
-                if (behind && player.isAlive()) {
+                if (behind && player.isAlive() && player.isActive()) {
                     activePlayer = player;
                     newPlayerSet = true;
                 }

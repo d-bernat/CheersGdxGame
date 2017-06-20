@@ -11,12 +11,14 @@ public class Player implements Comparable<Player>{
     private String name;
     private final Queue<VCard> cards;
     private boolean alive;
+    private boolean active;
     private int position;
 
-    public Player(String name, int position){
+    public Player(String name, int position, boolean active){
         cards = new Queue<>();
         this.name = name;
         this.position = position;
+        this.active = active;
     }
     public String getName() {
         return name;
@@ -40,6 +42,14 @@ public class Player implements Comparable<Player>{
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void addVCard(VCard vCard){

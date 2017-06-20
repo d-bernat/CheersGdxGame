@@ -44,9 +44,9 @@ public class Croupier {
         for (int i = 2; i < 53; i++)
             vCards.addLast(new VCard(i, CardOrientation.BACK));
 
-        for (int i = 0; i < Configuration.getMaxPlayers(); i++) {
+        for (int i = 0; i < 6; i++) {
             PlayerNameCache.clear();
-            players.add(new com.gamefactoryx.cheers.model.bus_driving.Player(FunnyNameGenerator.getFunnyName(i), i));
+            players.add(new com.gamefactoryx.cheers.model.bus_driving.Player(FunnyNameGenerator.getFunnyName(i), i, i < Configuration.getMaxPlayers()));
         }
         shuffle();
     }

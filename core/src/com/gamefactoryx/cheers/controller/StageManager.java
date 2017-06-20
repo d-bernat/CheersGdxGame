@@ -82,6 +82,9 @@ public final class StageManager {
             case KINGS_CUP_SPECIAL_STAGE:
                 controller = StageEnum.KINGS_CUP_SPECIAL_STAGE.getController();
                 break;
+            case BUS_DRIVING_STAGE_ZERO_PHASE:
+                controller = StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE.getController();
+                break;
             case BUS_DRIVING_STAGE_FIRST_PHASE:
                 controller = StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE.getController();
                 break;
@@ -125,6 +128,7 @@ public final class StageManager {
 
         switch (screenEnum) {
             case SPLASH_STAGE:
+            case BUS_DRIVING_STAGE_ZERO_PHASE:
             case BUS_DRIVING_STAGE_FIRST_PHASE:
             case BUS_DRIVING_STAGE_SECOND_PHASE:
             case BUS_DRIVING_STAGE_THIRD_PHASE:

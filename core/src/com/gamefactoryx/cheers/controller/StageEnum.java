@@ -32,6 +32,11 @@ public enum StageEnum {
             return new KingsCupSpecialStageController(new KingsCupSpecialScreen());
         }
     },
+    BUS_DRIVING_STAGE_ZERO_PHASE {
+        public AbstractController getController() {
+            return new BusDrivingStagePhase0Controller(new BusDrivingPhase0Screen());
+        }
+    },
     BUS_DRIVING_STAGE_FIRST_PHASE {
         public AbstractController getController() {
             return new BusDrivingStagePhase1Controller(new BusDrivingPhase1Screen());

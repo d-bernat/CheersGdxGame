@@ -47,7 +47,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
 
         int vCard_index = -1;
 
-        if (    !model.canAnyPlayerDropCard(activeCard) &&
+        if (!model.canAnyPlayerDropCard(activeCard) &&
                 !model.isPhaseFinished()) {
             Gdx.input.vibrate(10);
             for (VCard vCard : model.getBoard().getVCards()) {
@@ -59,32 +59,34 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                     vCard.setOrientation(CardOrientation.FACE);
                     activeCard = vCard;
                     for (Player player : model.getPlayers()) {
-                        for (VCard vCardPlayer : player.getVCards()) {
-                            if (vCard.equals(vCardPlayer)) {
-                                if (vCard_index < 5)
-                                    vCardPlayer.setCredit(1);
-                                else if (vCard_index < 9)
-                                    vCardPlayer.setCredit(2);
-                                else if (vCard_index < 12)
-                                    vCardPlayer.setCredit(3);
-                                else if (vCard_index < 14)
-                                    vCardPlayer.setCredit(4);
+                        if (player.isActive())
+                            for (VCard vCardPlayer : player.getVCards()) {
+                                if (vCard.equals(vCardPlayer)) {
+                                    if (vCard_index < 5)
+                                        vCardPlayer.setCredit(1);
+                                    else if (vCard_index < 9)
+                                        vCardPlayer.setCredit(2);
+                                    else if (vCard_index < 12)
+                                        vCardPlayer.setCredit(3);
+                                    else if (vCard_index < 14)
+                                        vCardPlayer.setCredit(4);
 
-                                else if (vCard_index == 14)
-                                    vCardPlayer.setCredit(5);
-                            } else {
-                                vCardPlayer.setCredit(0);
+                                    else if (vCard_index == 14)
+                                        vCardPlayer.setCredit(5);
+                                } else {
+                                    vCardPlayer.setCredit(0);
+                                }
                             }
-                        }
                     }
                     break;
                 }
             }
             model.checkAndSetPhaseFinished(activeCard);
         } else {
-                if (!model.isPhaseFinished()) {
-                    outer:
-                    for (Player player : model.getPlayers()) {
+            if (!model.isPhaseFinished()) {
+                outer:
+                for (Player player : model.getPlayers()) {
+                    if (player.isActive())
                         for (VCard playerVCard : player.getVCards()) {
                             if (activeCard.equals(playerVCard)) {
                                 Gdx.input.vibrate(10);
@@ -93,15 +95,15 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                                 break outer;
                             }
                         }
-                    }
-                } else {
-                    //todo next phase
-                    Gdx.input.vibrate(10);
-                    if (isThereMoreThenOneLooser())
-                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
-                    else
-                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
                 }
+            } else {
+                //todo next phase
+                Gdx.input.vibrate(10);
+                if (isThereMoreThenOneLooser())
+                    StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
+                else
+                    StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
+            }
         }
         return true;
     }
@@ -109,7 +111,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
     private boolean isThereMoreThenOneLooser() {
         int counter = 0;
         for (Player player : model.getPlayers()) {
-            if (player.isAlive()) ++counter;
+            if (player.isAlive() && player.isActive()) ++counter;
             if (counter > 1) break;
 
         }
