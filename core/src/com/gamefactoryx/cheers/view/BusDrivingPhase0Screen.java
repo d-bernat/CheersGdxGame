@@ -49,7 +49,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-        float FONT_SIZE_ON_SCREEN = 0.04f;
+        float FONT_SIZE_ON_SCREEN = 0.03f;
         if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
             generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
         else
@@ -78,11 +78,11 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     protected void drawText() {
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.81f;
         int y_offset = 0;
-        for (int i = 0; i < getCountOfButtons(); i++) {
+        for (int i = 0; i < getCountOfButtons() - 1; i++) {
             String name = BusDrivingPhase0Model.getInstance().getPlayers().get(i).getName();
             FontHelper.getGlyphLayout().setText(font, name);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
-                    (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - y_offset++ * FontHelper.getGlyphLayout().height * 5.35f);
+                    (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - y_offset++ * FontHelper.getGlyphLayout().height * 5.72f);
         }
     }
 
@@ -94,29 +94,38 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[6][2]);
+        setButtons(new Sprite[7][2]);
 
-        for(int i = 0; i < getCountOfButtons(); i++)
-            for(int j = 0; j < 2; j++) {
+        for (int i = 0; i < getCountOfButtons() - 1; i++)
+            for (int j = 0; j < 2; j++) {
                 getButtons()[i][j] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png"));
-                if(i == 0 && j == 0)
-                    getButtons()[i][j].setSize(getButtons()[0][0].getWidth() * 1.4f, getButtons()[0][0].getHeight() * 1.4f);
+                if (i == 0 && j == 0)
+                    getButtons()[i][j].setSize(getButtons()[0][0].getWidth() * 1.15f, getButtons()[0][0].getHeight() * 1.15f);
                 else
                     getButtons()[i][j].setSize(getButtons()[0][0].getWidth(), getButtons()[0][0].getHeight());
             }
+
+        getButtons()[6][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
+        getButtons()[6][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
         setClicked(new boolean[getCountOfButtons()]);
     }
 
     @Override
     protected void drawButtons() {
-        float PORTRAIT_DISTANCE_FROM_BOTTOM = 0.74f;
+        float PORTRAIT_DISTANCE_FROM_BOTTOM = 0.76f;
         int y_offset = 0;
 
-        for (int i = 0; i < getCountOfButtons(); i++) {
+        for (int i = 0; i < Configuration.getMaxPlayers(); i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;
-            getButtons()[i][click_index].setPosition(X * 0.05f,
-                    Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset++ * getButtons()[i][click_index].getHeight() * 1.5f);
+            getButtons()[i][click_index].setPosition(X * 0.18f,
+                    Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][click_index].getHeight() * 1.475f);
             getButtons()[i][click_index].draw(getSpriteBatch(), Croupier.getInstance().getPlayers().get(i).isActive() ? 1.0f : 100.0f);
+            if(i > 1) {
+                getButtons()[6][Croupier.getInstance().getPlayers().get(i).isActive() ? 0 : 1].setPosition(X * 0.75f,
+                        Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
+                getButtons()[6][Croupier.getInstance().getPlayers().get(i).isActive() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+            }
+            ++y_offset;
         }
     }
 

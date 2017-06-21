@@ -45,7 +45,7 @@ public final class BusDrivingPhase1Model {
         enTasks.add("Between or Outside?");
         deTasks.add("Welches Muster?");
         enTasks.add("Which template?");
-        croupier = com.gamefactoryx.cheers.model.bus_driving.Croupier.getNewInstance();
+        croupier = com.gamefactoryx.cheers.model.bus_driving.Croupier.getInstance();
 
     }
 

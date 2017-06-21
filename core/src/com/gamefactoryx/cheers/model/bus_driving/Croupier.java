@@ -46,7 +46,7 @@ public class Croupier {
 
         for (int i = 0; i < 6; i++) {
             PlayerNameCache.clear();
-            players.add(new com.gamefactoryx.cheers.model.bus_driving.Player(FunnyNameGenerator.getFunnyName(i), i, i < Configuration.getMaxPlayers()));
+            players.add(new com.gamefactoryx.cheers.model.bus_driving.Player(FunnyNameGenerator.getFunnyName(i), i, i < 2));
         }
         shuffle();
     }
