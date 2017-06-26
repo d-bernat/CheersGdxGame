@@ -78,7 +78,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     protected void drawText() {
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.81f;
         int y_offset = 0;
-        for (int i = 0; i < getCountOfButtons() - 1; i++) {
+        for (int i = 0; i < getCountOfButtons() - 2; i++) {
             String name = BusDrivingPhase0Model.getInstance().getPlayers().get(i).getName();
             FontHelper.getGlyphLayout().setText(font, name);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
@@ -94,9 +94,9 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[7][2]);
+        setButtons(new Sprite[8][2]);
 
-        for (int i = 0; i < getCountOfButtons() - 1; i++)
+        for (int i = 0; i < getCountOfButtons() - 2; i++)
             for (int j = 0; j < 2; j++) {
                 getButtons()[i][j] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png"));
                 if (i == 0 && j == 0)
@@ -107,6 +107,12 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
         getButtons()[6][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
         getButtons()[6][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
+        getButtons()[7][0] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[7][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[7][0].setSize(getButtons()[7][0].getWidth()*2.0f, getButtons()[7][0].getHeight()*2.0f);
+        getButtons()[7][1].setSize(getButtons()[7][1].getWidth()*2.0f, getButtons()[7][1].getHeight()*2.0f);
+
+
         setClicked(new boolean[getCountOfButtons()]);
     }
 
@@ -127,6 +133,9 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
             }
             ++y_offset;
         }
+
+        getButtons()[7][0].setPosition(X * 0.75f, Y * 0.02f);
+        getButtons()[7][0].draw(getSpriteBatch(), 1.0f);
     }
 
     @Override

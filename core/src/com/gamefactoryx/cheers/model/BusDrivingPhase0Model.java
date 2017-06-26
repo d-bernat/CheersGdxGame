@@ -39,12 +39,12 @@ public final class BusDrivingPhase0Model {
         return croupier.getInstance().getPlayers();
     }
 
-    public int getActivePlayer() {
+   /* public int getActivePlayer() {
         return activePlayer;
     }
 
     public void setActivePlayer(int activePlayer) {
         if (activePlayer < getPlayers().size())
             this.activePlayer = activePlayer;
-    }
+    }*/
 }
