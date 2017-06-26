@@ -123,7 +123,6 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
 
     private void enableKeyboard(boolean enabled) {
-        Gdx.app.log("ssssss", "aaaaaaaaaaaaaaaaaaaaaa");
         keyboardOn = enabled;
         Gdx.input.setOnscreenKeyboardVisible(enabled);
     }
