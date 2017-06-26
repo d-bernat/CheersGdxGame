@@ -41,6 +41,13 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if(keyboardOn){
+            enableKeyboard(false);
+            setPlayerName();
+            return true;
+        }
+
+
         for (int i = 0; i < getScreen().getCountOfButtons() - 2; i++) {
 
             if (screenX >= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.9f &&
