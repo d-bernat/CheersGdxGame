@@ -98,11 +98,16 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                 }
             } else {
                 //todo next phase
-                Gdx.input.vibrate(10);
-                if (isThereMoreThenOneLooser())
-                    StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
-                else
-                    StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
+                if(screenX >= getScreen().getButtons()[0][0].getX() &&
+                        screenX <= getScreen().getButtons()[0][0].getX() + getScreen().getButtons()[0][0].getWidth()&&
+                        Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[0][0].getY() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
+                    Gdx.input.vibrate(10);
+                    if (isThereMoreThenOneLooser())
+                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);
+                    else
+                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
+                }
             }
         }
         return true;

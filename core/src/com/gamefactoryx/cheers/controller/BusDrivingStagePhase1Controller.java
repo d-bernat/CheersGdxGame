@@ -3,7 +3,6 @@ package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.model.BusDrivingPhase1Model;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
 import com.gamefactoryx.cheers.model.bus_driving.Croupier;
@@ -39,23 +38,30 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return !model.isPhaseFinishend();
+        return !model.isPhaseFinished();
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        Gdx.input.vibrate(10);
-        if (model.isPhaseFinishend()) {
-            StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
-            return true;
+
+        if (model.isPhaseFinished()) {
+            if(screenX >= getScreen().getButtons()[0][0].getX() &&
+                    screenX <= getScreen().getButtons()[0][0].getX() + getScreen().getButtons()[0][0].getWidth()&&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[0][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
+                Gdx.input.vibrate(10);
+                StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
+                return true;
+            }
         } else {
+            Gdx.input.vibrate(10);
             if (isBoardCardBack()) {
                 boardCardToFace();
             } else if (isBoardCardFace()) {
                 boardCardToPlayer();
             } else {
-                if (!model.isPhaseFinishend()) {
+                if (!model.isPhaseFinished()) {
                     putNewCardToBoard(CardOrientation.BACK);
                     model.setActivePlayer(model.getActivePlayer() + 1);
                 }

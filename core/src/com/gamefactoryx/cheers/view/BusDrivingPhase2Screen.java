@@ -124,12 +124,19 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-
+        setButtons(new Sprite[1][2]);
+        getButtons()[0][0] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[0][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[0][0].setSize(getButtons()[0][0].getWidth()*2.0f, getButtons()[0][0].getHeight()*2.0f);
+        getButtons()[0][1].setSize(getButtons()[0][1].getWidth()*2.0f, getButtons()[0][1].getHeight()*2.0f);
     }
 
     @Override
     protected void drawButtons() {
-
+        if(BusDrivingPhase2Model.getInstance().isPhaseFinished()) {
+            getButtons()[0][0].setPosition(X * 0.75f, Y * 0.02f);
+            getButtons()[0][0].draw(getSpriteBatch(), 1.0f);
+        }
     }
 
     @Override
@@ -195,7 +202,10 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
             else
                 scard.setPosition(X * DISTANCE_FROM_SCREEN_LEFT + scard.getWidth() * NEXT_FLOOR_X_OFFSET * y_offset + scard.getWidth() * X_GAP_BETWEEN_TWO_CARDS * x_offset++, Y * DISTANCE_FROM_SCREEN_BOTTOM + scard.getHeight() * y_offset);
 
-            scard.draw(getSpriteBatch(), 1.0f);
+            if(BusDrivingPhase2Model.getInstance().isPhaseFinished())
+                scard.draw(getSpriteBatch(), 100.0f);
+            else
+                scard.draw(getSpriteBatch(), 1.0f);
             ++index;
         }
     }

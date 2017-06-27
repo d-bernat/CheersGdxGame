@@ -23,7 +23,6 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
 
-
     public BusDrivingPhase1Screen() {
         super();
     }
@@ -77,7 +76,7 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.89f;
         getTextBox().setPosition(X * 0.05f, Y * 0.76f);
         getTextBox().draw(getSpriteBatch());
-        if (!BusDrivingPhase1Model.getInstance().isPhaseFinishend()) {
+        if (!BusDrivingPhase1Model.getInstance().isPhaseFinished()) {
             String name = BusDrivingPhase1Model.getInstance().getPlayers().get(BusDrivingPhase1Model.getInstance().getActivePlayer()).getName();
             String task = BusDrivingPhase1Model.getInstance().getTask();
             FontHelper.getGlyphLayout().setText(font, name);
@@ -100,12 +99,20 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
+        setButtons(new Sprite[1][2]);
+        getButtons()[0][0] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[0][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[0][0].setSize(getButtons()[0][0].getWidth()*2.0f, getButtons()[0][0].getHeight()*2.0f);
+        getButtons()[0][1].setSize(getButtons()[0][1].getWidth()*2.0f, getButtons()[0][1].getHeight()*2.0f);
 
     }
 
     @Override
     protected void drawButtons() {
-
+        if(BusDrivingPhase1Model.getInstance().isPhaseFinished()) {
+            getButtons()[0][0].setPosition(X * 0.75f, Y * 0.02f);
+            getButtons()[0][0].draw(getSpriteBatch(), 1.0f);
+        }
     }
 
     @Override
@@ -142,7 +149,10 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
             Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
             scard.setSize(X * 0.2f, Y * 0.2f);
             scard.setPosition(X * 0.1f + scard.getWidth() * x_offset++, Y * 0.02f);
-            scard.draw(getSpriteBatch(), 1.0f);
+            if(BusDrivingPhase1Model.getInstance().isPhaseFinished())
+                scard.draw(getSpriteBatch(), 100.0f);
+            else
+                scard.draw(getSpriteBatch(), 1.0f);
         }
     }
 

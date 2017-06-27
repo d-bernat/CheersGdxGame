@@ -70,8 +70,13 @@ public class BusDrivingStagePhase3Controller extends AbstractController {
                 getScreen().getClicked()[i] = false;
             }
         } else {
-            Gdx.input.vibrate(10);
-            StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
+            if (screenX >= getScreen().getButtons()[2][0].getX() &&
+                    screenX <= getScreen().getButtons()[2][0].getX() + getScreen().getButtons()[2][0].getWidth() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[2][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[2][0].getY() + getScreen().getButtons()[2][0].getHeight()) {
+                Gdx.input.vibrate(10);
+                StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FOURTH_PHASE);
+            }
         }
 
         return true;
