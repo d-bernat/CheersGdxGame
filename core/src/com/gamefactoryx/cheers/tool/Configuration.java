@@ -33,9 +33,6 @@ public class Configuration {
     public static int getMaxPlayers(){
         return MAX_PLAYERS;
     }
-    public static void setMaxPlayers(int count){
-        MAX_PLAYERS = count;
-    }
 
     private Configuration(){}
 
