@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.BusDrivingPhase2Model;
+import com.gamefactoryx.cheers.model.bus_driving.Croupier;
 import com.gamefactoryx.cheers.model.bus_driving.Player;
 import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.*;
@@ -163,7 +164,10 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
             for (VCard vCard : player.getVCards()) {
                 Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
                 scard.setSize(X * 0.15f, Y * 0.12f);
-                scard.setPosition(X * 0.05f + scard.getWidth() * x_offset, Y * 0.78f - scard.getHeight() * 0.15f * y_offset++);
+                scard.setPosition(X * 0.05f +
+                        (Configuration.getMaxPlayers() - BusDrivingPhase2Model.getInstance().getCountOfPlayers())/2.0f * scard.getWidth() +
+                        scard.getWidth() * x_offset,
+                        Y * 0.78f - scard.getHeight() * 0.15f * y_offset++);
                 scard.draw(getSpriteBatch(), 1.0f);
             }
             ++x_offset;

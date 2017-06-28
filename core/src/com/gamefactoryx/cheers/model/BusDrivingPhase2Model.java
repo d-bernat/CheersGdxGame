@@ -24,7 +24,7 @@ public final class BusDrivingPhase2Model {
     private static BusDrivingPhase2Model instance;
     private boolean scrolled;
     private boolean phaseIsFinished;
-
+    private int countOfPlayers;
 
     public boolean isScrolled() {
         return scrolled;
@@ -37,6 +37,7 @@ public final class BusDrivingPhase2Model {
     public static BusDrivingPhase2Model getInstance() {
         if (instance == null) {
             instance = new BusDrivingPhase2Model();
+
         }
 
         return instance;
@@ -49,6 +50,10 @@ public final class BusDrivingPhase2Model {
 
     private BusDrivingPhase2Model() {
         croupier = Croupier.getInstance();
+        for(Player player: croupier.getInstance().getPlayers())
+            if(player.getVCards().size > 0)
+                ++countOfPlayers;
+
     }
 
     public Queue<VCard> getvCards() {
@@ -59,6 +64,10 @@ public final class BusDrivingPhase2Model {
         return croupier.getInstance().getPlayers();
     }
 
+
+    public int getCountOfPlayers(){
+        return countOfPlayers;
+    }
 
     public Board getBoard() {
         return croupier.getInstance().getBoard();
