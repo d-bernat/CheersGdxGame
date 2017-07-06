@@ -49,17 +49,17 @@ final class MainStageController extends AbstractController {
                     case 3:
                         StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
                         break;
-                    case 5:
+                    case 4:
                         switch (Configuration.getLanguage()) {
                             case DE:
                                 Configuration.setLanguage(Configuration.LanguageEnum.EN);
                                 break;
                             case EN:
-                                Configuration.setLanguage(Configuration.LanguageEnum.SK);
-                                break;
-                            case SK:
                                 Configuration.setLanguage(Configuration.LanguageEnum.DE);
                                 break;
+                            //case SK:
+                            //    Configuration.setLanguage(Configuration.LanguageEnum.DE);
+                            //    break;
                         }
                         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
                         break;
