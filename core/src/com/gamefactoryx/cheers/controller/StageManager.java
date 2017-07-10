@@ -73,6 +73,9 @@ public final class StageManager {
             case MAIN_STAGE:
                 controller = StageEnum.MAIN_STAGE.getController();
                 break;
+            case HALL_OF_FAME_STAGE:
+                controller = StageEnum.HALL_OF_FAME_STAGE.getController();
+                break;
             case NEW_GAME_STAGE:
                 controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
