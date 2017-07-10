@@ -13,10 +13,10 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-final class MainStageController extends AbstractController {
+final class HallOfFameController extends AbstractController {
 
     private static int counter;
-    MainStageController(final AbstractScreen screen){
+    HallOfFameController(final AbstractScreen screen){
         super(screen);
         setScreenLock(10);
     }
@@ -25,7 +25,7 @@ final class MainStageController extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+        /*for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
             getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
@@ -37,19 +37,19 @@ final class MainStageController extends AbstractController {
                             Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
                             Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
                             Orientation.getOrientation() == Input.Orientation.Landscape);
-        }
+        }*/
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-
-        for (int i = 0; i < getScreen().getButtons().length; i++) {
+        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
+        /*for (int i = 0; i < getScreen().getButtons().length; i++) {
             if (getScreen().getClicked()[i]) {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 2:
-                        StageManager.getInstance().showStage(StageEnum.HALL_OF_FAME_STAGE);
+                        HallOfFameModel.getInstance().put(++HallOfFameController.counter, "dusanbe" + HallOfFameController.counter);
                         break;
                     case 3:
                         StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
@@ -73,7 +73,7 @@ final class MainStageController extends AbstractController {
                 }
             }
             getScreen().getClicked()[i] = false;
-        }
+        }*/
 
 
         return true;

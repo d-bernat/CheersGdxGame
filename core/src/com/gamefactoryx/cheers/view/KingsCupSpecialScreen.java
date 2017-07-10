@@ -29,11 +29,10 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
     private float X, Y;
-    private BitmapFont font;
+    private BitmapFont font, fontLabel;
     private KingsCupSpecialModel dataModel;
     private String plainText;
     private List<String> text;
-
 
 
     private List<String> splitLine() {
@@ -80,7 +79,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     @Override
     protected void initSprites() {
         setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialScreenLandscape.png")));
-        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() +  "/kingsCupSpecial/KingsCupSpecialScreenPortrait.png")));
+        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialScreenPortrait.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
@@ -89,7 +88,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     public void resize(int width, int height) {
         float FONT_SIZE_ON_SCREEN = 0.03f;
         super.resize(width, height);
-        if(Configuration.getLanguage() == Configuration.LanguageEnum.SK)
+        if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
             generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
         else
             generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
@@ -99,22 +98,31 @@ public class KingsCupSpecialScreen extends AbstractScreen {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
-            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.70f);
+            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.92f, Resolution.getGameWorldHeightPortrait() * 0.85f);
         } else {
             FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
-            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.62f);
+            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.92f, Resolution.getGameWorldHeightLandscape() * 0.85f);
 
         }
 
         parameter.size = FONT_SIZE;
-        parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);;
+        parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
+
         BitmapFont temp = font;
         font = generator.generateFont(parameter);
 
+        parameter.size = FONT_SIZE + 10;
+        BitmapFont tempLabel = fontLabel;
+        fontLabel = generator.generateFont(parameter);
+
         if (temp != null)
             temp.dispose();
+        if (tempLabel != null)
+            tempLabel.dispose();
+
+
         generator.dispose();
         text = splitLine();
 
@@ -124,30 +132,35 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     protected void drawText() {
 
         float MAX_LINES_VISIBLE = 0.85f;
-        float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.35f;
-        float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 1.7f;
+        float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
+        float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 2.5f;
         float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
         if (Orientation.getOrientation() == Input.Orientation.Portrait)
-        getTextBox().setPosition(X * 0.1f, Y * 0.15f);
+            getTextBox().setPosition(X * 0.05f, Y * 0.02f);
         else
-            getTextBox().setPosition(X * 0.1f, Y * 0.18f);
+            getTextBox().setPosition(X * 0.05f, Y * 0.02f);
 
         getTextBox().draw(getSpriteBatch());
         float y_offset = 0f;
-        if(getYScrollPos() < 0) setYScrollPos(0);
-        else if(getYScrollPos() > text.size() - 10) setYScrollPos(text.size() - 10);
+        if (getYScrollPos() < 0) setYScrollPos(0);
+        else if (getYScrollPos() > text.size() - 10) setYScrollPos(text.size() - 10);
         for (int i = getYScrollPos(); i < text.size(); i++) {
 
-            font.draw(getSpriteBatch(), text.get(i),
-                    (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                    Y - getTextBox().getY() - font.getCapHeight() * 1.3f  - y_offset);
+            if (text.get(i).contains(":"))
+                fontLabel.draw(getSpriteBatch(), text.get(i),
+                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                        getTextBox().getHeight() - font.getCapHeight() * 1.3f - y_offset);
+            else
+                font.draw(getSpriteBatch(), text.get(i),
+                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                        getTextBox().getHeight() - font.getCapHeight() * 1.3f - y_offset);
 
             if (text.get(i).indexOf('\n') > -1)
                 y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITH_ENTER;
             else
                 y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
 
-            if(y_offset > getTextBox().getHeight() * MAX_LINES_VISIBLE) break;
+            if (y_offset > getTextBox().getHeight() * MAX_LINES_VISIBLE) break;
         }
     }
 

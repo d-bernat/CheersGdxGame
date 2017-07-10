@@ -104,12 +104,16 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[2][2]);
+        setButtons(new Sprite[3][2]);
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
         getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
         getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
+        getButtons()[2][0] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[2][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[2][0].setSize(getButtons()[2][0].getWidth()*2.0f, getButtons()[2][0].getHeight()*2.0f);
+        getButtons()[2][1].setSize(getButtons()[2][1].getWidth()*2.0f, getButtons()[2][1].getHeight()*2.0f);
         setClicked(new boolean[getCountOfButtons()]);
     }
 
@@ -124,6 +128,9 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM);
                 getButtons()[i][click_index].draw(getSpriteBatch(), 50.0f);
             }
+        }else{
+            getButtons()[2][0].setPosition(X * 0.75f, Y * 0.02f);
+            getButtons()[2][0].draw(getSpriteBatch(), 1.0f);
         }
     }
 

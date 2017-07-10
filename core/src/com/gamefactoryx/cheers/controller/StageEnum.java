@@ -56,7 +56,13 @@ public enum StageEnum {
         public AbstractController getController() {
             return new BusDrivingStagePhase4Controller(new BusDrivingPhase4Screen());
         }
+    },
+    HALL_OF_FAME_STAGE {
+        public AbstractController getController() {
+            return new HallOfFameController(new HallOfFameScreen());
+        }
     };
+
     @SuppressWarnings("unused")
     public abstract AbstractController getController();
 }

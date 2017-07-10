@@ -21,6 +21,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
     private boolean keyboardOn;
     private String tempName;
     private BusDrivingPhase0Model model;
+    private int activeBoxIndex;
 
 
     public BusDrivingStagePhase0Controller(final AbstractScreen screen) {
@@ -33,40 +34,60 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        int index = 0;
-        for (int i = 0; i < getScreen().getCountOfButtons() - 1; i++) {
 
-            if (screenX >= getScreen().getButtons()[i][0].getX() &&
-                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight())
-                index = i;
-        }
-
-        if(index > 1) {
-            if (Croupier.getInstance().getPlayers().get(index).isActive())
-                for (int i = index; i < Configuration.getMaxPlayers(); i++)
-                    model.getPlayers().get(i).setActive(false);
-            else
-                for (int i = 0; i <= index; i++)
-                    model.getPlayers().get(i).setActive(true);
-        }
 
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        for (int i = 0; i < getScreen().getCountOfButtons() - 1; i++) {
-            if (screenX >= getScreen().getButtons()[i][0].getX() &&
-                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight())
-                return true;
+        if(keyboardOn){
+            enableKeyboard(false);
+            setPlayerName();
+            return true;
         }
 
 
-        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+        for (int i = 0; i < getScreen().getCountOfButtons() - 2; i++) {
+
+            if (screenX >= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.9f &&
+                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+
+                activeBoxIndex = i;
+
+                if (Croupier.getInstance().getPlayers().get(activeBoxIndex).isActive()) {
+                    for (int j = activeBoxIndex; j < Configuration.getMaxPlayers(); j++)
+                        model.getPlayers().get(j).setActive(false);
+                }
+                else {
+                    for (int j = 0; j <= activeBoxIndex; j++)
+                        model.getPlayers().get(j).setActive(true);
+                }
+
+
+
+            } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
+                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.85f &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+
+                if(model.getPlayers().get(i).isActive()) {
+                    activeBoxIndex = i;
+                    tempName = model.getPlayers().get(activeBoxIndex).getName();
+                    model.getPlayers().get(activeBoxIndex).setName("");
+                    enableKeyboard(true);
+                }
+            }
+        }
+
+        if(screenX >= getScreen().getButtons()[7][0].getX() &&
+                screenX <= getScreen().getButtons()[7][0].getX() + getScreen().getButtons()[7][0].getWidth()&&
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[7][0].getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[7][0].getY() + getScreen().getButtons()[7][0].getHeight())
+            StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+
         return true;
     }
 
@@ -99,8 +120,8 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                 if (keycode >= Input.Keys.A && keycode <= Input.Keys.Z && typedName.length() < 8) {
 
                     typedName.append(shift ? Input.Keys.toString(keycode).toUpperCase() : Input.Keys.toString(keycode).toLowerCase());
-                    model.getPlayers().get(model.getActivePlayer()).setName(typedName.toString());
-                    PlayerNameCache.addName(typedName.toString(), model.getPlayers().get(model.getActivePlayer()).getPosition());
+                    model.getPlayers().get(activeBoxIndex).setName(typedName.toString());
+                    PlayerNameCache.addName(typedName.toString(), model.getPlayers().get(activeBoxIndex).getPosition());
                 }
                 break;
         }
@@ -116,9 +137,9 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
     private void setPlayerName() {
         if (typedName.toString().trim().length() > 0)
-            model.getPlayers().get(model.getActivePlayer()).setName(typedName.toString());
+            model.getPlayers().get(activeBoxIndex).setName(typedName.toString());
         else
-            model.getPlayers().get(model.getActivePlayer()).setName(tempName);
+            model.getPlayers().get(activeBoxIndex).setName(tempName);
         typedName.setLength(0);
     }
 

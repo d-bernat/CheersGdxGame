@@ -164,10 +164,9 @@ public abstract class AbstractScreen implements Screen {
         getViewport().apply();
         initLogo();
         initSprites();
+        initButtons();
         initCards();
         initTextBox();
-        initButtons();
-
     }
 
 
@@ -231,8 +230,8 @@ public abstract class AbstractScreen implements Screen {
         spriteBatch.setProjectionMatrix(camera.combined);
         drawMainSprite();
         drawLogo();
-        drawButtons();
         drawCards();
+        drawButtons();
         drawText();
         spriteBatch.end();
     }

@@ -4,6 +4,7 @@ package com.gamefactoryx.cheers.controller;
 import com.badlogic.gdx.Gdx;
 import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.model.BusDrivingPhase4Model;
+import com.gamefactoryx.cheers.model.HallOfFameModel;
 import com.gamefactoryx.cheers.model.bus_driving.Croupier;
 import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -54,8 +55,10 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
                     if (i == 0 && oldValue < newValue || i == 1 && newValue < oldValue) {
                         model.setDrinkPoints(0);
                         Gdx.input.vibrate(100);
-                        if (model.getActiveCardIndex() == 6)
+                        if (model.getActiveCardIndex() == 6) {
                             model.setPhaseFinished();
+                            updateHallOfFame();
+                        }
                         else
                             model.setActiveCardIndex(model.getActiveCardIndex() + 1);
                     } else if (oldValue == newValue) {
@@ -68,10 +71,17 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
                 getScreen().getClicked()[i] = false;
             }
         } else {
-            StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
+            StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
         }
 
         return true;
+    }
+
+    private void updateHallOfFame() {
+        String name = BusDrivingPhase4Model.getInstance().getBusDriver().getName();
+        int  drunk =  BusDrivingPhase4Model.getInstance().getTotalDrunk();
+        HallOfFameModel.getInstance().put(drunk, name);
+
     }
 
     private void changeCardOnBoardAndGetOldToCroupier() {

@@ -23,7 +23,7 @@ final class KingsCupSpecialStageController extends AbstractController {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         lastYPointerPos = screenY;
-        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+        /*for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
             getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
@@ -35,7 +35,7 @@ final class KingsCupSpecialStageController extends AbstractController {
                             Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
                             Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
                             Orientation.getOrientation() == Input.Orientation.Landscape);
-        }
+        }*/
         return true;
     }
 
@@ -45,8 +45,16 @@ final class KingsCupSpecialStageController extends AbstractController {
         int SCROLLING_SLOW_DOWN = 30;
         if(screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
-                screenY >= getScreen().getTextBox().getY() &&
-                screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight() &&
+                Orientation.getOrientation() == Input.Orientation.Portrait ||
+
+                screenX >= getScreen().getTextBox().getX() &&
+                        screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
+                        Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getTextBox().getY() &&
+                        Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight() &&
+                        Orientation.getOrientation() == Input.Orientation.Landscape
+                ) {
             if(screenY < lastYPointerPos - SCROLLING_SLOW_DOWN) {
                 getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
                 lastYPointerPos = screenY;

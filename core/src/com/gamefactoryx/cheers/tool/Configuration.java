@@ -21,6 +21,7 @@ public class Configuration {
 
     private static LanguageEnum language;
     private static int MAX_PLAYERS = 6;
+    private static int MAX_TOP_SCORERS = 6;
 
     public static LanguageEnum getLanguage(){
         if(language == null)
@@ -33,8 +34,8 @@ public class Configuration {
     public static int getMaxPlayers(){
         return MAX_PLAYERS;
     }
-    public static void setMaxPlayers(int count){
-        MAX_PLAYERS = count;
+    public static int getMaxTopScorers(){
+        return MAX_TOP_SCORERS;
     }
 
     private Configuration(){}

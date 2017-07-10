@@ -77,7 +77,7 @@ public final class BusDrivingPhase1Model {
         return null;
     }
 
-    public boolean isPhaseFinishend() {
+    public boolean isPhaseFinished() {
         for (com.gamefactoryx.cheers.model.bus_driving.Player player : getPlayers()) {
             if (player.isActive() && player.getVCards().size < 4)
                 return false;

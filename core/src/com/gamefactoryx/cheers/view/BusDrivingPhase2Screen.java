@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.BusDrivingPhase2Model;
+import com.gamefactoryx.cheers.model.bus_driving.Croupier;
 import com.gamefactoryx.cheers.model.bus_driving.Player;
 import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.*;
@@ -124,12 +125,19 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-
+        setButtons(new Sprite[1][2]);
+        getButtons()[0][0] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[0][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[0][0].setSize(getButtons()[0][0].getWidth()*2.0f, getButtons()[0][0].getHeight()*2.0f);
+        getButtons()[0][1].setSize(getButtons()[0][1].getWidth()*2.0f, getButtons()[0][1].getHeight()*2.0f);
     }
 
     @Override
     protected void drawButtons() {
-
+        if(BusDrivingPhase2Model.getInstance().isPhaseFinished()) {
+            getButtons()[0][0].setPosition(X * 0.75f, Y * 0.02f);
+            getButtons()[0][0].draw(getSpriteBatch(), 1.0f);
+        }
     }
 
     @Override
@@ -156,7 +164,10 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
             for (VCard vCard : player.getVCards()) {
                 Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
                 scard.setSize(X * 0.15f, Y * 0.12f);
-                scard.setPosition(X * 0.05f + scard.getWidth() * x_offset, Y * 0.78f - scard.getHeight() * 0.15f * y_offset++);
+                scard.setPosition(X * 0.05f +
+                        (Configuration.getMaxPlayers() - BusDrivingPhase2Model.getInstance().getCountOfPlayers())/2.0f * scard.getWidth() +
+                        scard.getWidth() * x_offset,
+                        Y * 0.78f - scard.getHeight() * 0.15f * y_offset++);
                 scard.draw(getSpriteBatch(), 1.0f);
             }
             ++x_offset;
@@ -195,7 +206,10 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
             else
                 scard.setPosition(X * DISTANCE_FROM_SCREEN_LEFT + scard.getWidth() * NEXT_FLOOR_X_OFFSET * y_offset + scard.getWidth() * X_GAP_BETWEEN_TWO_CARDS * x_offset++, Y * DISTANCE_FROM_SCREEN_BOTTOM + scard.getHeight() * y_offset);
 
-            scard.draw(getSpriteBatch(), 1.0f);
+            if(BusDrivingPhase2Model.getInstance().isPhaseFinished())
+                scard.draw(getSpriteBatch(), 100.0f);
+            else
+                scard.draw(getSpriteBatch(), 1.0f);
             ++index;
         }
     }
