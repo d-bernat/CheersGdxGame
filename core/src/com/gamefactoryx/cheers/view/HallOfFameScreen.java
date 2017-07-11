@@ -42,8 +42,8 @@ public class HallOfFameScreen extends AbstractScreen {
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/HallofFame/hall_of_fame_screen_busdriving.png")));
-        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/HallofFame/hall_of_fame_screen_busdriving.png")));
+        setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/HallofFame/hall_of_fame_landscape.png")));
+        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/HallofFame/hall_of_fame_screen.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
@@ -65,12 +65,16 @@ public class HallOfFameScreen extends AbstractScreen {
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
         }
-/*        getTextBox().setSize(X * 0.8f, Y * 0.45f);
+        if(Orientation.getOrientation() == Input.Orientation.Portrait)
+            getTextBox().setSize(X * 0.85f, Y * 0.065f);
+        else
+            getTextBox().setSize(X * 0.75f, Y * 0.105f);
+
         for (int i = 0; i < getCountOfButtons(); i++)
             for (int j = 0; j < 2; j++) {
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
                         Resolution.getGameWorldHeightPortrait() * 0.17f * Resolution.getAspectRatio());
-            }*/
+            }
 
         parameter.size = FONT_SIZE;
         parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
@@ -85,26 +89,27 @@ public class HallOfFameScreen extends AbstractScreen {
     @Override
     protected void drawText() {
         float DISTANCE_FROM_UP = 0.8f;
-        float DISTANCE_FROM_LEFT = Orientation.getOrientation() == Input.Orientation.Portrait ?  0.15f : 0.28f;
-        //getTextBox().setPosition(X * 0.1f, Y * 0.35f);
-        //getTextBox().draw(getSpriteBatch());
-        List<String> scorers =  dataModel.get();
+        float DISTANCE_FROM_LEFT = Orientation.getOrientation() == Input.Orientation.Portrait ? 0.15f : 0.28f;
+
+        List<String> scorers = dataModel.get();
         int y_offset = 0;
-        for (String scorer : scorers){
-                String[] s = scorer.split(":");
-                String val = String.format("%3s:    %s", s[0], s[1]);
-                font.draw(getSpriteBatch(), val,
-                        X * DISTANCE_FROM_LEFT,
-                        Y * DISTANCE_FROM_UP - font.getCapHeight() * 1.9f * y_offset++);
+        for (String scorer : scorers) {
+            String[] s = scorer.split(":");
+            String val = String.format("%3s:    %s", s[0], s[1]);
+            float xx = X * DISTANCE_FROM_LEFT;
+            float yy = Y * DISTANCE_FROM_UP - font.getCapHeight() * 2.3f * y_offset++;
+            //if(y_offset <= 2) {
+                getTextBox().setPosition(xx * 0.5f, yy - getTextBox().getHeight()/1.5f);
+                getTextBox().draw(getSpriteBatch());
+            //}
+            font.draw(getSpriteBatch(), val, xx, yy);
         }
     }
 
 
     @Override
     protected void initTextBox() {
-        //setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/INeverDoScreen-TextBox.png")));
-        //setTextBox(new Sprite(new Texture("de/iNeverDoScreen/Ineverdoscreenkasten.png")));
-
+        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_phase_1/text_box_horizontal.png")));
     }
 
     @Override
