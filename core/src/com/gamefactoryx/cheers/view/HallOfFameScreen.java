@@ -31,7 +31,7 @@ public class HallOfFameScreen extends AbstractScreen {
     private float X, Y;
     private BitmapFont font;
     private HallOfFameModel dataModel;
-
+    private Sprite[] medals = new Sprite[3];
 
     @Override
     public void show() {
@@ -46,6 +46,10 @@ public class HallOfFameScreen extends AbstractScreen {
         setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/HallofFame/hall_of_fame_screen.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
+        medals[0] = new Sprite(new Texture("common/HallofFame/1place.png"));
+        medals[1] = new Sprite(new Texture("common/HallofFame/2place.png"));
+        medals[2] = new Sprite(new Texture("common/HallofFame/3place.png"));
+
     }
 
     @Override
@@ -75,6 +79,11 @@ public class HallOfFameScreen extends AbstractScreen {
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
                         Resolution.getGameWorldHeightPortrait() * 0.17f * Resolution.getAspectRatio());
             }
+        for(Sprite medal: medals)
+            if(Orientation.getOrientation() == Input.Orientation.Portrait)
+                medal.setSize(X * 0.2f, X * 0.2f);
+            else
+                medal.setSize(Y * 0.2f, Y * 0.2f);
 
         parameter.size = FONT_SIZE;
         parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
@@ -90,18 +99,23 @@ public class HallOfFameScreen extends AbstractScreen {
     protected void drawText() {
         float DISTANCE_FROM_UP = 0.8f;
         float DISTANCE_FROM_LEFT = Orientation.getOrientation() == Input.Orientation.Portrait ? 0.15f : 0.28f;
+        float DISTANCE_FROM_LEFT_FOR_MEDALS = Orientation.getOrientation() == Input.Orientation.Portrait ? 0.2f : 0.5f;
 
         List<String> scorers = dataModel.get();
         int y_offset = 0;
+        int index = 0;
         for (String scorer : scorers) {
             String[] s = scorer.split(":");
             String val = String.format("%3s:    %s", s[0], s[1]);
             float xx = X * DISTANCE_FROM_LEFT;
             float yy = Y * DISTANCE_FROM_UP - font.getCapHeight() * 2.3f * y_offset++;
-            //if(y_offset <= 2) {
-                getTextBox().setPosition(xx * 0.5f, yy - getTextBox().getHeight()/1.5f);
-                getTextBox().draw(getSpriteBatch());
-            //}
+            getTextBox().setPosition(xx * 0.5f, yy - getTextBox().getHeight()/1.5f);
+            getTextBox().draw(getSpriteBatch());
+            if(index < 3) {
+                medals[index].setPosition(xx * DISTANCE_FROM_LEFT_FOR_MEDALS, yy - getTextBox().getHeight()/1.5f);
+                medals[index].draw(getSpriteBatch());
+            }
+            ++index;
             font.draw(getSpriteBatch(), val, xx, yy);
         }
     }
@@ -114,29 +128,10 @@ public class HallOfFameScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-       /* setButtons(new Sprite[1][2]);
-
-        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
-        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon_white.png"));
-
-        setClicked(new boolean[getCountOfButtons()]);*/
     }
 
     @Override
     protected void drawButtons() {
-       /* float PORTRAIT_DISTANCE_FROM_TEXT_BOX = 0.22f;
-        float LANDSCAPE_DISTANCE_FROM_TEXT_BOX = 0.15f;
-        for (int i = 0; i < getCountOfButtons(); i++) {
-            int click_index = getClicked()[i] ? CLICKED : FREE;
-            if (Orientation.getOrientation() == Input.Orientation.Portrait)
-                getButtons()[i][click_index].setPosition(X * 0.115f,
-                        Y * PORTRAIT_DISTANCE_FROM_TEXT_BOX);
-            else
-                getButtons()[i][click_index].setPosition(0.5f * (X - getButtons()[i][click_index].getWidth()),
-                        Y * LANDSCAPE_DISTANCE_FROM_TEXT_BOX);
-
-            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
-        }*/
     }
 
     @Override
@@ -157,5 +152,13 @@ public class HallOfFameScreen extends AbstractScreen {
     @Override
     protected void drawCards() {
 
+    }
+
+    @Override
+    public void dispose() {
+        for(Sprite medal: medals)
+            medal.getTexture().dispose();
+
+        super.dispose();
     }
 }
