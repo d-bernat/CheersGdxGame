@@ -47,12 +47,15 @@ final class NewGameStageController extends AbstractController {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 0:
-                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE);
+                        //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE);
                         break;
                     case 1:
-                        StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
+                        StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE);
                         break;
                     case 2:
+                        StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
+                        break;
+                    case 3:
                         StageManager.getInstance().showStage(StageEnum.KINGS_CUP_SPECIAL_STAGE);
                         break;
                 }

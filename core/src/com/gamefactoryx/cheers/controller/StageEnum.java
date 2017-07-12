@@ -1,5 +1,9 @@
 package com.gamefactoryx.cheers.controller;
 
+import com.gamefactoryx.cheers.controller.busdriving.BusDrivingStagePhase1Controller;
+import com.gamefactoryx.cheers.controller.busdriving.BusDrivingStagePhase2Controller;
+import com.gamefactoryx.cheers.controller.busdriving.BusDrivingStagePhase3Controller;
+import com.gamefactoryx.cheers.controller.busdriving.BusDrivingStagePhase4Controller;
 import com.gamefactoryx.cheers.view.*;
 
 /**
@@ -34,27 +38,27 @@ public enum StageEnum {
     },
     BUS_DRIVING_STAGE_ZERO_PHASE {
         public AbstractController getController() {
-            return new BusDrivingStagePhase0Controller(new BusDrivingPhase0Screen());
+            return new com.gamefactoryx.cheers.controller.busdriving.BusDrivingStagePhase0Controller(new com.gamefactoryx.cheers.view.busdriving.BusDrivingPhase0Screen());
         }
     },
     BUS_DRIVING_STAGE_FIRST_PHASE {
         public AbstractController getController() {
-            return new BusDrivingStagePhase1Controller(new BusDrivingPhase1Screen());
+            return new BusDrivingStagePhase1Controller(new com.gamefactoryx.cheers.view.busdriving.BusDrivingPhase1Screen());
         }
     },
     BUS_DRIVING_STAGE_SECOND_PHASE {
         public AbstractController getController() {
-            return new BusDrivingStagePhase2Controller(new BusDrivingPhase2Screen());
+            return new BusDrivingStagePhase2Controller(new com.gamefactoryx.cheers.view.busdriving.BusDrivingPhase2Screen());
         }
     },
     BUS_DRIVING_STAGE_THIRD_PHASE {
         public AbstractController getController() {
-            return new BusDrivingStagePhase3Controller(new BusDrivingPhase3Screen());
+            return new BusDrivingStagePhase3Controller(new com.gamefactoryx.cheers.view.busdriving.BusDrivingPhase3Screen());
         }
     },
     BUS_DRIVING_STAGE_FOURTH_PHASE {
         public AbstractController getController() {
-            return new BusDrivingStagePhase4Controller(new BusDrivingPhase4Screen());
+            return new BusDrivingStagePhase4Controller(new com.gamefactoryx.cheers.view.busdriving.BusDrivingPhase4Screen());
         }
     },
     HALL_OF_FAME_STAGE {
