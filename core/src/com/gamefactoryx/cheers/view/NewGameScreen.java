@@ -15,7 +15,6 @@ import com.gamefactoryx.cheers.tool.Resolution;
 public class NewGameScreen extends AbstractScreen {
 
 
-
     @Override
     protected void initSprites() {
         setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/NewGameScreenLandscape.png")));
@@ -37,14 +36,16 @@ public class NewGameScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[3][2]);
+        setButtons(new Sprite[4][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving.png"));
-        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving_white.png"));
-        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked.png"));
-        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked_white.png"));
-        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked.png"));
-        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked_white.png"));
+        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drunk_clicked.png"));
+        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drunk_clicked_white.png"));
+        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving.png"));
+        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving_white.png"));
+        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked.png"));
+        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked_white.png"));
+        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked.png"));
+        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked_white.png"));
 
         for (int i = 0; i < getCountOfButtons(); i++)
             for (int j = 0; j < 2; j++) {
@@ -58,22 +59,17 @@ public class NewGameScreen extends AbstractScreen {
     @Override
     protected void drawButtons() {
         float SPACE_BETWEEN_BUTTONS = 1.2f;
-        int offset_index = 0;
+        int y_offset = 0;
         Input.Orientation orientation = Orientation.getOrientation();
         float X = orientation == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
         float Y = orientation == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
         float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = orientation == Input.Orientation.Landscape ? 0.45f : 0.3f;
         float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = orientation == Input.Orientation.Landscape ? 0.25f : 0.06f;
         for (int i = 0; i < getCountOfButtons(); i++) {
-            if (i == 3)
-                offset_index = 0;
-            else if (i == 5)
-                offset_index = 0;
-
-            float y_offset = offset_index++ * getButtons()[i][CLICKED].getHeight() * SPACE_BETWEEN_BUTTONS;
+            float dy = y_offset++ * getButtons()[i][CLICKED].getHeight() * SPACE_BETWEEN_BUTTONS;
             int click_index = getClicked()[i] ? CLICKED : FREE;
             getButtons()[i][click_index].setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY,
-                    Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY - y_offset);
+                    Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY - dy);
             getButtons()[i][click_index].draw(getSpriteBatch(), 1);
         }
     }

@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.view;
+package com.gamefactoryx.cheers.view.busdriving;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.gamefactoryx.cheers.model.BusDrivingPhase4Model;
-import com.gamefactoryx.cheers.model.bus_driving.Croupier;
-import com.gamefactoryx.cheers.model.bus_driving.VCard;
+import com.gamefactoryx.cheers.model.busdriving.BusDrivingPhase4Model;
+import com.gamefactoryx.cheers.model.busdriving.Croupier;
+import com.gamefactoryx.cheers.model.busdriving.VCard;
 import com.gamefactoryx.cheers.tool.*;
+import com.gamefactoryx.cheers.view.AbstractScreen;
 
 import java.util.Locale;
 

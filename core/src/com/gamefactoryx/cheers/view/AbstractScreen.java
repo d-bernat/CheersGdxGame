@@ -23,8 +23,8 @@ import java.util.Map;
 public abstract class AbstractScreen implements Screen {
 
 
-    final int FREE = 0;
-    final int CLICKED = 1;
+    protected final int FREE = 0;
+    protected final int CLICKED = 1;
 
     private Camera camera;
     private Viewport landscapeViewport;
