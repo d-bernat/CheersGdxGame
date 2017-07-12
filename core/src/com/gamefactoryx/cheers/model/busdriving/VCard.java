@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.model.bus_driving;
+package com.gamefactoryx.cheers.model.busdriving;
 
 import com.gamefactoryx.cheers.tool.CardOrientation;
 

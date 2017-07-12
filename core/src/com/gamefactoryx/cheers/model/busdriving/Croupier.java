@@ -1,10 +1,9 @@
-package com.gamefactoryx.cheers.model.bus_driving;
+package com.gamefactoryx.cheers.model.busdriving;
 
 import com.badlogic.gdx.utils.Queue;
 //import com.gamefactoryx.cheers.model.BusDrivingModel;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
 import com.gamefactoryx.cheers.tool.CardOrientation;
-import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.FunnyNameGenerator;
 
 
@@ -35,8 +34,8 @@ public class Croupier {
 
 
     private final Queue<VCard> vCards = new Queue<>();
-    private final List<com.gamefactoryx.cheers.model.bus_driving.Player> players = new ArrayList<>();
-    private final com.gamefactoryx.cheers.model.bus_driving.Board board = new com.gamefactoryx.cheers.model.bus_driving.Board();
+    private final List<Player> players = new ArrayList<>();
+    private final Board board = new Board();
 
 
     private Croupier(){
@@ -46,7 +45,7 @@ public class Croupier {
 
         for (int i = 0; i < 6; i++) {
             PlayerNameCache.clear();
-            players.add(new com.gamefactoryx.cheers.model.bus_driving.Player(FunnyNameGenerator.getFunnyName(i), i, i < 2));
+            players.add(new Player(FunnyNameGenerator.getFunnyName(i), i, i < 2));
         }
         shuffle();
     }
@@ -78,11 +77,11 @@ public class Croupier {
     //    return vCards;
     //}
 
-    public List<com.gamefactoryx.cheers.model.bus_driving.Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public com.gamefactoryx.cheers.model.bus_driving.Board getBoard() {
+    public Board getBoard() {
         return board;
     }
 

@@ -1,11 +1,6 @@
-package com.gamefactoryx.cheers.model;
+package com.gamefactoryx.cheers.model.busdriving;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Queue;
-import com.gamefactoryx.cheers.model.bus_driving.Board;
-import com.gamefactoryx.cheers.model.bus_driving.Croupier;
-import com.gamefactoryx.cheers.model.bus_driving.Player;
-import com.gamefactoryx.cheers.model.bus_driving.VCard;
 import com.gamefactoryx.cheers.tool.CardOrientation;
 import com.gamefactoryx.cheers.tool.Configuration;
 

@@ -1,7 +1,4 @@
-package com.gamefactoryx.cheers.model;
-
-import com.gamefactoryx.cheers.model.bus_driving.Croupier;
-import com.gamefactoryx.cheers.model.bus_driving.Player;
+package com.gamefactoryx.cheers.model.busdriving;
 
 import java.util.List;
 
