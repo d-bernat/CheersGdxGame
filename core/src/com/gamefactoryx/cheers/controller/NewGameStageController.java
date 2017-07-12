@@ -14,7 +14,7 @@ final class NewGameStageController extends AbstractController {
 
     NewGameStageController(final AbstractScreen screen){
         super(screen);
-        setScreenLock(10);
+        setScreenLock(1);
     }
 
 
@@ -47,7 +47,7 @@ final class NewGameStageController extends AbstractController {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 0:
-                        //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE);
+                        StageManager.getInstance().showStage(StageEnum.KONGOS_DRINK_MAIN_STAGE);
                         break;
                     case 1:
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE);

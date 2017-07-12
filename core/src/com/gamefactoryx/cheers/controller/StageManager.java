@@ -79,6 +79,9 @@ public final class StageManager {
             case NEW_GAME_STAGE:
                 controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
+            case KONGOS_DRINK_MAIN_STAGE:
+                controller = StageEnum.KONGOS_DRINK_MAIN_STAGE.getController();
+                break;
             case I_NEVER_DO_STAGE:
                 controller = StageEnum.I_NEVER_DO_STAGE.getController();
                 break;
