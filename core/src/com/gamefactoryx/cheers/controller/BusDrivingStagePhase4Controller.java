@@ -30,6 +30,8 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        super.touchDown(screenX, screenY, pointer, button);
+
         if (model.isPhaseFinished())
             return true;
 
@@ -44,6 +46,9 @@ public class BusDrivingStagePhase4Controller extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if(!super.touchUp(screenX, screenY, pointer, button))
+            return true;
+
         if (!model.isPhaseFinished()) {
             for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
                 if (getScreen().getClicked()[i]) {

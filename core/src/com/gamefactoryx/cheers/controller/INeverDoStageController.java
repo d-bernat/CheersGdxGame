@@ -21,6 +21,7 @@ final class INeverDoStageController extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        super.touchDown(screenX, screenY, pointer, button);
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
             getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
@@ -39,6 +40,9 @@ final class INeverDoStageController extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if(!super.touchUp(screenX, screenY, pointer, button))
+            return true;
+
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
             if (getScreen().getClicked()[i]) {
                 Gdx.input.vibrate(10);

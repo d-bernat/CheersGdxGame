@@ -22,20 +22,14 @@ final class KingsCupSpecialStageController extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        super.touchDown(screenX, screenY, pointer, button);
         lastYPointerPos = screenY;
-        /*for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
-                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
-                    Orientation.getOrientation() == Input.Orientation.Portrait
-                    ||
-                    screenX >= getScreen().getButtons()[i][0].getX() &&
-                            screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
-                            Orientation.getOrientation() == Input.Orientation.Landscape);
-        }*/
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        super.touchUp(screenX, screenY, pointer, button);
         return true;
     }
 

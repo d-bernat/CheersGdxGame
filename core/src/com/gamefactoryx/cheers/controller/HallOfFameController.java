@@ -25,58 +25,12 @@ final class HallOfFameController extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        /*for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
-                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
-                    Orientation.getOrientation() == Input.Orientation.Portrait
-                    ||
-                    screenX >= getScreen().getButtons()[i][0].getX() &&
-                            screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
-                            Orientation.getOrientation() == Input.Orientation.Landscape);
-        }*/
-        return true;
+        return super.touchDown(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-        /*for (int i = 0; i < getScreen().getButtons().length; i++) {
-            if (getScreen().getClicked()[i]) {
-                Gdx.input.vibrate(10);
-                switch (i) {
-                    case 2:
-                        HallOfFameModel.getInstance().put(++HallOfFameController.counter, "dusanbe" + HallOfFameController.counter);
-                        break;
-                    case 3:
-                        StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
-                        break;
-                    case 4:
-                        switch (Configuration.getLanguage()) {
-                            case DE:
-                                Configuration.setLanguage(Configuration.LanguageEnum.EN);
-                                break;
-                            case EN:
-                                Configuration.setLanguage(Configuration.LanguageEnum.DE);
-                                break;
-                            //case SK:
-                            //    Configuration.setLanguage(Configuration.LanguageEnum.DE);
-                            //    break;
-                        }
-                        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-                        break;
-                    default:
-                        //StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-                }
-            }
-            getScreen().getClicked()[i] = false;
-        }*/
-
-
-        return true;
+        return super.touchUp(screenX, screenY, pointer, button);
     }
 
 }

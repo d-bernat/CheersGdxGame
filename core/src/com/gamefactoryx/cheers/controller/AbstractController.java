@@ -14,6 +14,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 abstract public class AbstractController extends InputAdapter {
 
     private final AbstractScreen screen;
+    private int downXCoor;
 
     protected AbstractController(final AbstractScreen screen){
         this.screen = screen;
@@ -23,6 +24,7 @@ abstract public class AbstractController extends InputAdapter {
     }
     @Override
     public boolean keyDown(int keycode) {
+
         switch (keycode){
             case Input.Keys.BACK:
                 StageManager.getInstance().showLastStage();
@@ -31,8 +33,20 @@ abstract public class AbstractController extends InputAdapter {
     }
 
     @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        downXCoor = screenX;
+        return true;
+    }
+
+    @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+        if(downXCoor - screenX > 400 ){
+            Gdx.input.vibrate(10);
+            StageManager.getInstance().showLastStage();
+            return false;
+        }
+
+       /* for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
             if (getScreen().getClicked()[i])
                 switch (i) {
                     case 0:
@@ -49,7 +63,7 @@ abstract public class AbstractController extends InputAdapter {
                 }
 
             getScreen().getClicked()[i] = false;
-        }
+        }*/
         return true;
     }
     protected AbstractScreen getScreen(){ return screen; }
