@@ -1,20 +1,12 @@
 package com.gamefactoryx.cheers.view.kongosdrink;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.gamefactoryx.cheers.model.HallOfFameModel;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
-import com.gamefactoryx.cheers.tool.Configuration;
-import com.gamefactoryx.cheers.tool.FontHelper;
-import com.gamefactoryx.cheers.tool.Orientation;
-import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
-import java.util.List;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -27,22 +19,38 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     private int FONT_SIZE;*/
     private float X, Y;
     /*private BitmapFont font;*/
-    private KongosDrinkMainModel dataModel;
+    private KongosDrinkMainModel dataModel = KongosDrinkMainModel.getInstance();
     /*private Sprite[] medals = new Sprite[3];*/
+
+    private OrthographicCamera camera;
+    private SpriteBatch batch;
+    private Texture[] texture;
+    private Sprite[] sprite;
 
     @Override
     public void show() {
-        super.show();
-      //  dataModel = HallOfFameModel.getInstance();
+        camera = new OrthographicCamera(960, 540);
+        batch = new SpriteBatch();
+        texture = new Texture[]{ new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.1.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.2.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.4.jpg"))};
+
+        sprite = new Sprite[texture.length];
+        for(int i = 0; i < sprite.length; i++) {
+            sprite[i] = new Sprite(texture[i]);
+            sprite[i].setOrigin(0, 0);
+            sprite[i].setPosition(-sprite[i].getWidth() / 4, -sprite[i].getHeight() / 2);
+        }
     }
 
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture("common/kongos_ride/background.jpg")));
+    /*    setLandscapeSprite(new Sprite(new Texture("common/kongos_ride/background.jpg")));
         setPortraitSprite(new Sprite(new Texture("common/kongos_ride/background.jpg")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
-        getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
+        getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());*/
        /* medals[0] = new Sprite(new Texture("common/HallofFame/1place.png"));
         medals[1] = new Sprite(new Texture("common/HallofFame/2place.png"));
         medals[2] = new Sprite(new Texture("common/HallofFame/3place.png"));*/
@@ -51,21 +59,21 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
+       // super.resize(width, height);
         //float FONT_SIZE_ON_SCREEN = 0.05f;
        /* if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
             generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
         else
             generator = new FreeTypeFontGenerator(FontHelper.getFontFile());*/
-        if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+        //if (Orientation.getOrientation() == Input.Orientation.Portrait) {
             //FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
-            X = Resolution.getGameWorldWidthPortrait();
-            Y = Resolution.getGameWorldHeightPortrait();
-        } else {
+          //  X = Resolution.getGameWorldWidthPortrait();
+           // Y = Resolution.getGameWorldHeightPortrait();
+        //} else {
         //    FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * FONT_SIZE_ON_SCREEN);
-            X = Resolution.getGameWorldWidthLandscape();
-            Y = Resolution.getGameWorldHeightLandscape();
-        }
+         //   X = Resolution.getGameWorldWidthLandscape();
+         //   Y = Resolution.getGameWorldHeightLandscape();
+       // }
 /*        if(Orientation.getOrientation() == Input.Orientation.Portrait)
             getTextBox().setSize(X * 0.85f, Y * 0.065f);
         else
@@ -90,6 +98,18 @@ public class KongosDrinkMainScreen extends AbstractScreen {
             temp.dispose();
         generator.dispose();*/
 
+    }
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        sprite[dataModel.getIndex()].setPosition(-sprite[dataModel.getIndex()].getWidth()/4 - dataModel.getXcoor(),-sprite[dataModel.getIndex()].getHeight()/2);
+
+        //batch.draw(textureRegion, -100, -100);
+        sprite[dataModel.getIndex()].draw(batch);
+        batch.end();
     }
 
     @Override
@@ -153,9 +173,13 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        batch.dispose();
+        for(Texture txt: texture)
+            txt.dispose();
+
         /*for(Sprite medal: medals)
             medal.getTexture().dispose();
 */
-        super.dispose();
+        //super.dispose();
     }
 }

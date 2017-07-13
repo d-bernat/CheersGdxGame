@@ -38,8 +38,8 @@ public class NewGameScreen extends AbstractScreen {
     protected void initButtons() {
         setButtons(new Sprite[4][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drunk_clicked.png"));
-        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drunk_clicked_white.png"));
+        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drink_clicked.png"));
+        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drink_clicked_white.png"));
         getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving.png"));
         getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving_white.png"));
         getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked.png"));
