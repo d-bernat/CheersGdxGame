@@ -29,11 +29,11 @@ public enum StageEnum {
             return new NewGameStageController(new NewGameScreen());
         }
     },
-    KONGOS_DRINK_MAIN_STAGE {
+    /*KONGOS_DRINK_MAIN_STAGE {
         public AbstractController getController() {
             return new KongosDrinkMainController(new KongosDrinkMainScreen());
         }
-    },
+    },*/
     I_NEVER_DO_STAGE {
         public AbstractController getController() {
             return new INeverDoStageController(new INeverDoScreen());

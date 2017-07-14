@@ -2,6 +2,8 @@ package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheers.controller.kongosdrink.KongosDrinkStageEnum;
+import com.gamefactoryx.cheers.controller.kongosdrink.KongosDrinkStageManager;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
@@ -47,7 +49,7 @@ final class NewGameStageController extends AbstractController {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 0:
-                        StageManager.getInstance().showStage(StageEnum.KONGOS_DRINK_MAIN_STAGE);
+                        KongosDrinkStageManager.getInstance().showStage(KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
                         break;
                     case 1:
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE);
