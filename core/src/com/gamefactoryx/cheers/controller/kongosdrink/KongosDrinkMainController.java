@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.controller.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.gamefactoryx.cheers.controller.AbstractController;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
@@ -12,14 +13,15 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-final public class KongosDrinkMainController extends AbstractController {
+final public class KongosDrinkMainController extends KongosDrinkAbstractController {
 
     private static int counter;
     private int screenX;
     private boolean forward = true;
     private boolean isRunning = false;
+    private boolean suspend = false;
 
-    public KongosDrinkMainController(final AbstractScreen screen) {
+    public KongosDrinkMainController(final Screen screen) {
         super(screen);
         setScreenLock(0);
     }
@@ -38,45 +40,35 @@ final public class KongosDrinkMainController extends AbstractController {
             KongosDrinkMainModel.getInstance().setIndex(1);
         else
             KongosDrinkMainModel.getInstance().setIndex(0);*/
+        if(!super.touchUp(screenX, screenY, pointer, button)) {
+            KongosDrinkMainModel.getInstance().setXxcoor(0);
+            KongosDrinkMainModel.getInstance().setXcoor(0);
+            suspend = true;
+            return false;
+        }
+        suspend = false;
+
         if (!isRunning) {
             isRunning = true;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
+                    while (!suspend) {
 
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() == 960 && forward) {
-                            KongosDrinkMainModel.getInstance().setIndex(1);
-                            KongosDrinkMainModel.getInstance().setXcoor(0);
+                        for (int i = 1; i < 9; i++) {
+                            if (KongosDrinkMainModel.getInstance().getXxcoor() == 960 * i && forward) {
+                                KongosDrinkMainModel.getInstance().setIndex(i);
+                                KongosDrinkMainModel.getInstance().setXcoor(0);
+                            }
+
+
+                            if (KongosDrinkMainModel.getInstance().getXxcoor() == 960 * i && !forward) {
+                                KongosDrinkMainModel.getInstance().setIndex(i - 1);
+                                KongosDrinkMainModel.getInstance().setXcoor(960);
+                            }
                         }
 
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() == 960 && !forward) {
-                            KongosDrinkMainModel.getInstance().setIndex(0);
-                            KongosDrinkMainModel.getInstance().setXcoor(960);
-                        }
-
-
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() == 1920 && forward) {
-                            KongosDrinkMainModel.getInstance().setIndex(2);
-                            KongosDrinkMainModel.getInstance().setXcoor(0);
-                        }
-
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() == 1920 && !forward) {
-                            KongosDrinkMainModel.getInstance().setIndex(1);
-                            KongosDrinkMainModel.getInstance().setXcoor(960);
-                        }
-
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() == 2880 && forward) {
-                            KongosDrinkMainModel.getInstance().setIndex(3);
-                            KongosDrinkMainModel.getInstance().setXcoor(0);
-                        }
-
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() == 2880 && !forward) {
-                            KongosDrinkMainModel.getInstance().setIndex(2);
-                            KongosDrinkMainModel.getInstance().setXcoor(960);
-                        }
-
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() >= 3840 && forward)
+                        if (KongosDrinkMainModel.getInstance().getXxcoor() >= 960 * 9 && forward)
                             forward = false;
 
                         if (KongosDrinkMainModel.getInstance().getXxcoor() <= 0 && !forward) {
@@ -98,11 +90,14 @@ final public class KongosDrinkMainController extends AbstractController {
                         }
                     }
                     isRunning = false;
+                    KongosDrinkMainModel.getInstance().setXxcoor(0);
+                    KongosDrinkMainModel.getInstance().setXcoor(0);
+                    KongosDrinkMainModel.getInstance().setIndex(0);
                 }
             }).start();
         }
 
-        return super.touchUp(screenX, screenY, pointer, button);
+        return false;
 
     }
 
