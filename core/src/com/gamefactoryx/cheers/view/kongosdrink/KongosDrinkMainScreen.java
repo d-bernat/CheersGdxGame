@@ -29,12 +29,17 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
     @Override
     public void show() {
-        camera = new OrthographicCamera(960, 540);
+       // camera = new OrthographicCamera(960, 540);
         batch = new SpriteBatch();
         texture = new Texture[]{ new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.1.jpg")),
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.2.jpg")),
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.jpg")),
-                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.4.jpg"))};
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.4.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.5.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.6.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.7.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.8.jpg")),
+                    new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.9.jpg"))};
 
         sprite = new Sprite[texture.length];
         for(int i = 0; i < sprite.length; i++) {
@@ -59,6 +64,7 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
+        camera = new OrthographicCamera(960, 540);
        // super.resize(width, height);
         //float FONT_SIZE_ON_SCREEN = 0.05f;
        /* if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
@@ -101,7 +107,7 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     }
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        //Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
