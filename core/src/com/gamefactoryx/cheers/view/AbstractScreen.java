@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamefactoryx.cheers.tool.Orientation;
@@ -159,8 +160,8 @@ public abstract class AbstractScreen implements Screen {
             portraitViewport = new StretchViewport(Resolution.getGameWorldWidthPortrait(),
                     Resolution.getGameWorldHeightPortrait(), camera);
         //else
-            landscapeViewport = new StretchViewport(Resolution.getGameWorldWidthLandscape(),
-                    Resolution.getGameWorldHeightLandscape(), camera);
+            landscapeViewport = new FillViewport(Resolution.getGameWorldWidthPortrait(),
+                    Resolution.getGameWorldHeightPortrait(), camera);
         getViewport().apply();
         initLogo();
         initSprites();
@@ -171,7 +172,7 @@ public abstract class AbstractScreen implements Screen {
 
 
     @Override
-    public final void render(float delta) {
+    public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         drawSprite();
     }
@@ -207,11 +208,12 @@ public abstract class AbstractScreen implements Screen {
             getTextBox().getTexture().dispose();
         if (logo != null)
             logo.getTexture().dispose();
-        portraitSprite.getTexture().dispose();
-        landscapeSprite.getTexture().dispose();
-
-
-        spriteBatch.dispose();
+        if(portraitSprite != null)
+            portraitSprite.getTexture().dispose();
+        if(landscapeSprite != null)
+            landscapeSprite.getTexture().dispose();
+        if(spriteBatch != null)
+            spriteBatch.dispose();
     }
 
     public void setLandscapeSprite(Sprite landscapeSprite) {

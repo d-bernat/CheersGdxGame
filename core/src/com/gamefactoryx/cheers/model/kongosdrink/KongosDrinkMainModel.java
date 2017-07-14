@@ -5,6 +5,9 @@ package com.gamefactoryx.cheers.model.kongosdrink;
  */
 public class KongosDrinkMainModel {
     private static KongosDrinkMainModel instance;
+    private int index;
+    private int xxcoor;
+    private int xcoor;
    // private OrderedMap<Integer, String> getTopScorers = new OrderedMap<>();
 
     public static KongosDrinkMainModel getInstance() {
@@ -20,7 +23,30 @@ public class KongosDrinkMainModel {
         return instance;
     }
 
-   /* public void put(int score, String name){
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getXcoor() {
+        return xcoor;
+    }
+
+    public void setXcoor(int xcoor) {
+        this.xcoor = xcoor;
+    }
+
+    public int getXxcoor() {
+        return xxcoor;
+    }
+
+    public void setXxcoor(int xxcoor) {
+        this.xxcoor = xxcoor;
+    }
+    /* public void put(int score, String name){
         FileHandle fHandle = Gdx.files.local("high_score.txt");
         String old_content = "";
         if(fHandle.exists()){
