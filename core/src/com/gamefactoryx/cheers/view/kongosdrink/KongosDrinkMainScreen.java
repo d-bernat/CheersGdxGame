@@ -27,6 +27,9 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     private Texture[] texture;
     private Sprite[] sprite;
 
+    private Texture[] player;
+    private Sprite playerSprite;
+
     @Override
     public void show() {
        // camera = new OrthographicCamera(960, 540);
@@ -41,12 +44,21 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.8.jpg")),
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.9.jpg"))};
 
+        player = new Texture[]{new Texture(Gdx.files.internal("common/kongos_drink/player/germany/germany_1.png"))};
+
+
         sprite = new Sprite[texture.length];
         for(int i = 0; i < sprite.length; i++) {
             sprite[i] = new Sprite(texture[i]);
             sprite[i].setOrigin(0, 0);
             sprite[i].setPosition(-sprite[i].getWidth() / 4, -sprite[i].getHeight() / 2);
         }
+
+        playerSprite = new Sprite(player[dataModel.getPlayerIndex()]);
+        playerSprite.setSize(playerSprite.getWidth() * 0.5f, playerSprite.getHeight() * 0.5f);
+        playerSprite.setOrigin(playerSprite.getWidth()/2,playerSprite.getHeight()/2);
+        playerSprite.setPosition(-playerSprite.getWidth() / 4, -playerSprite.getHeight() / 2 * 3.9f);
+
     }
 
 
@@ -115,6 +127,11 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
         //batch.draw(textureRegion, -100, -100);
         sprite[dataModel.getIndex()].draw(batch);
+        if(dataModel.getRotate() != 0)
+            playerSprite.rotate(dataModel.getRotate());
+        else
+            playerSprite.rotate(0.0f - playerSprite.getRotation());
+        playerSprite.draw(batch);
         batch.end();
     }
 
@@ -183,6 +200,8 @@ public class KongosDrinkMainScreen extends AbstractScreen {
         for(Texture txt: texture)
             txt.dispose();
 
+        for(Texture txt: player)
+            txt.dispose();
         /*for(Sprite medal: medals)
             medal.getTexture().dispose();
 */

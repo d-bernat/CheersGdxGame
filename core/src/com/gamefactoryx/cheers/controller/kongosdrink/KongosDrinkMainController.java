@@ -15,34 +15,31 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 @SuppressWarnings("DefaultFileTemplate")
 final public class KongosDrinkMainController extends KongosDrinkAbstractController {
 
-    private static int counter;
-    private int screenX;
     private boolean forward = true;
     private boolean isRunning = false;
     private boolean suspend = false;
+    private int delay = 3;
+    private static final int DISTANCE_BETWEEN_TWO_FIELDS = 187;
 
     public KongosDrinkMainController(final Screen screen) {
         super(screen);
         setScreenLock(0);
+        KongosDrinkMainModel.getInstance().setPosition(49);
     }
 
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        this.screenX = screenX;
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        /*if(KongosDrinkMainModel.getInstance().getIndex() == 0)
-            KongosDrinkMainModel.getInstance().setIndex(1);
-        else
-            KongosDrinkMainModel.getInstance().setIndex(0);*/
         if(!super.touchUp(screenX, screenY, pointer, button)) {
             KongosDrinkMainModel.getInstance().setXxcoor(0);
             KongosDrinkMainModel.getInstance().setXcoor(0);
+            KongosDrinkMainModel.getInstance().setPlayerIndex(0);
             suspend = true;
             return false;
         }
@@ -53,7 +50,9 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    KongosDrinkMainModel.getInstance().setRotate(-4.0f);
                     while (!suspend) {
+
 
                         for (int i = 1; i < 9; i++) {
                             if (KongosDrinkMainModel.getInstance().getXxcoor() == 960 * i && forward) {
@@ -68,11 +67,28 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                             }
                         }
 
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() >= 960 * 9 && forward)
+                        if (KongosDrinkMainModel.getInstance().getXxcoor() >= 960 * 9 &&
+                                forward
+                                && KongosDrinkMainModel.getInstance().getPosition() == -1) {
                             forward = false;
+                            KongosDrinkMainModel.getInstance().setRotate(4.0f);
+                        }
+
+                        if (KongosDrinkMainModel.getInstance().getPosition() != -1 &&
+                                KongosDrinkMainModel.getInstance().getXxcoor() == (KongosDrinkMainModel.getInstance().getPosition() - 1) * DISTANCE_BETWEEN_TWO_FIELDS  &&
+                                forward) {
+                            forward = false;
+                            KongosDrinkMainModel.getInstance().setRotate(4.0f);
+                            delay = 1000;
+                        }
 
                         if (KongosDrinkMainModel.getInstance().getXxcoor() <= 0 && !forward) {
                             forward = true;
+                            KongosDrinkMainModel.getInstance().setXxcoor(0);
+                            KongosDrinkMainModel.getInstance().setXcoor(0);
+                            KongosDrinkMainModel.getInstance().setIndex(0);
+                            KongosDrinkMainModel.getInstance().setRotate(0f);
+                            isRunning = false;
                             break;
                         }
 
@@ -86,13 +102,10 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                         }
 
                         long time = System.currentTimeMillis();
-                        while (System.currentTimeMillis() < time + 3) {
+                        while (System.currentTimeMillis() < time + delay) {
                         }
+                        delay = 3;
                     }
-                    isRunning = false;
-                    KongosDrinkMainModel.getInstance().setXxcoor(0);
-                    KongosDrinkMainModel.getInstance().setXcoor(0);
-                    KongosDrinkMainModel.getInstance().setIndex(0);
                 }
             }).start();
         }
