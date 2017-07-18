@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
  */
 public class Configuration {
 
-    public static final int DISTANCE_BETWEEN_TWO_FIELDS = 187;
+
     public static enum LanguageEnum{
         DE("de"), EN("en"), SK("sk");
         private final String name;
@@ -41,4 +41,7 @@ public class Configuration {
 
     private Configuration(){}
 
+    public static class KongosDrink{
+        public static final int DISTANCE_BETWEEN_TWO_FIELDS = 187;
+    }
 }

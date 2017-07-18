@@ -1,39 +1,23 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.gamefactoryx.cheers.tool.Configuration;
 
 /**
  * Created by Bernat on 18.07.2017.
  */
 public class PlayerModel {
-    private int screenIndex;
-    private int screenXCoor;
     private int position;
     private boolean active;
     private float rotate;
-
-    public int getScreenIndex() {
-        return screenIndex;
-    }
-
-    public void setScreenIndex(int screenIndex) {
-        this.screenIndex = screenIndex;
-    }
-
-    public int getScreenXCoor() {
-        return screenXCoor;
-    }
-
-    public void setScreenXCoor(int screenXCoor) {
-        this.screenXCoor = screenXCoor;
-    }
+    private Texture avatar;
 
     public int getPosition() {
         return position;
     }
 
     public float getNormPosition(){
-        return (position - 1) * Configuration.DISTANCE_BETWEEN_TWO_FIELDS;
+        return (position - 1) * Configuration.KongosDrink.DISTANCE_BETWEEN_TWO_FIELDS;
     }
 
     public void setPosition(int position) {
@@ -54,5 +38,13 @@ public class PlayerModel {
 
     public void setRotate(float rotate) {
         this.rotate = rotate;
+    }
+
+    public Texture getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Texture avatar) {
+        this.avatar = avatar;
     }
 }
