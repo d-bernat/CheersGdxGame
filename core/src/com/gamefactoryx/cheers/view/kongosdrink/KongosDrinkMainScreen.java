@@ -28,7 +28,8 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     private Sprite[] sprite;
 
     private Texture[] player;
-    private Sprite playerSprite;
+    private Sprite[] playerSprite;
+
 
     @Override
     public void show() {
@@ -44,7 +45,9 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.8.jpg")),
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.9.jpg"))};
 
-        player = new Texture[]{new Texture(Gdx.files.internal("common/kongos_drink/player/germany/germany_1.png"))};
+        player = new Texture[]{ new Texture(Gdx.files.internal("common/kongos_drink/player/germany/germany_1.png")),
+                                new Texture(Gdx.files.internal("common/kongos_drink/player/slovakia/slovakia_1.png")),
+                                new Texture(Gdx.files.internal("common/kongos_drink/player/argentina/argentina_1.png"))};
 
 
         sprite = new Sprite[texture.length];
@@ -54,10 +57,13 @@ public class KongosDrinkMainScreen extends AbstractScreen {
             sprite[i].setPosition(-sprite[i].getWidth() / 4, -sprite[i].getHeight() / 2);
         }
 
-        playerSprite = new Sprite(player[dataModel.getPlayerIndex()]);
-        playerSprite.setSize(playerSprite.getWidth() * 0.5f, playerSprite.getHeight() * 0.5f);
-        playerSprite.setOrigin(playerSprite.getWidth()/2,playerSprite.getHeight()/2);
-        playerSprite.setPosition(-playerSprite.getWidth() / 4, -playerSprite.getHeight() / 2 * 3.9f);
+        playerSprite = new Sprite[player.length];
+        for(int i = 0; i < playerSprite.length; i++){
+            playerSprite[i] = new Sprite(player[i]);
+            playerSprite[i].setSize(playerSprite[i].getWidth() * 0.5f, playerSprite[i].getHeight() * 0.5f);
+            playerSprite[i].setOrigin(playerSprite[i].getWidth() / 2, playerSprite[i].getHeight() / 2);
+            playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4, -playerSprite[i].getHeight() / 2 * 3.9f);
+        }
 
     }
 
@@ -127,11 +133,20 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
         //batch.draw(textureRegion, -100, -100);
         sprite[dataModel.getIndex()].draw(batch);
-        if(dataModel.getRotate() != 0)
-            playerSprite.rotate(dataModel.getRotate());
-        else
-            playerSprite.rotate(0.0f - playerSprite.getRotation());
-        playerSprite.draw(batch);
+
+        for(int i =0; i < playerSprite.length; ++i) {
+            if(KongosDrinkMainModel.getInstance().getPlayers()[i].isActive())
+                playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4,
+                        -playerSprite[i].getHeight() / 2 * 3.9f);
+            else
+                playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4 + KongosDrinkMainModel.getInstance().getPlayers()[i].getNormPosition() - dataModel.getXxcoor(),
+                    -playerSprite[i].getHeight() / 2 * 3.9f);
+            if (dataModel.getPlayers()[i].getRotate() != 0)
+                playerSprite[i].rotate(dataModel.getPlayers()[i].getRotate());
+            else
+                playerSprite[i].rotate(0.0f - playerSprite[i].getRotation());
+            playerSprite[i].draw(batch);
+        }
         batch.end();
     }
 

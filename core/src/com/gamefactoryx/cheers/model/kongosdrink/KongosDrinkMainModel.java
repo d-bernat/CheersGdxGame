@@ -5,12 +5,22 @@ package com.gamefactoryx.cheers.model.kongosdrink;
  */
 public class KongosDrinkMainModel {
     private static KongosDrinkMainModel instance;
+    //which screen
     private int index;
+    //total x coor
     private int xxcoor;
+    //screen x coor
     private int xcoor;
+    //rotation of player
     private float rotate;
+    //which player
     private int playerIndex;
     private int position = -1;
+    //player
+    private int playerXCoor;
+
+    private PlayerModel[] players;
+
 
    // private OrderedMap<Integer, String> getTopScorers = new OrderedMap<>();
 
@@ -74,4 +84,23 @@ public class KongosDrinkMainModel {
     public void setPosition(int position) {
         this.position = position;
     }
+
+    public int getPlayerXCoor() {
+        return playerXCoor;
+    }
+
+    public void setPlayerXCoor(int playerXCoor) {
+        this.playerXCoor = playerXCoor;
+    }
+
+
+    public PlayerModel[] getPlayers() {
+        return players;
+    }
+
+
+    public void setPlayers(PlayerModel[] players) {
+        this.players = players;
+    }
+
 }
