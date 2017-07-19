@@ -26,8 +26,8 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
         KongosDrinkMainModel.getInstance().setPosition(1);
         KongosDrinkMainModel.getInstance().getPlayers()[0].setPosition(11);
         KongosDrinkMainModel.getInstance().getPlayers()[0].setAvatar(new Texture(Gdx.files.internal("common/kongos_drink/player/canada/canada_1.png")));
-        KongosDrinkMainModel.getInstance().getPlayers()[1].setPosition(15);
-        KongosDrinkMainModel.getInstance().getPlayers()[1].setAvatar(new Texture(Gdx.files.internal("common/kongos_drink/player/slovakia/slovakia_1.png")));
+        KongosDrinkMainModel.getInstance().getPlayers()[1].setPosition(14);
+        KongosDrinkMainModel.getInstance().getPlayers()[1].setAvatar(new Texture(Gdx.files.internal("common/kongos_drink/player/australia/australia_1.png")));
         KongosDrinkMainModel.getInstance().getPlayers()[2].setPosition(3);
         KongosDrinkMainModel.getInstance().getPlayers()[2].setAvatar(new Texture(Gdx.files.internal("common/kongos_drink/player/austria/austria_1.png")));
     }
@@ -60,12 +60,12 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 gotoPlayer(2);
                 break;
             case 3:
-                movePlayer(2, 10);
+                movePlayer(2, 23);
                 break;
-            case 10:
+            case 23:
                 gotoPlayer(1);
                 break;
-            case 15:
+            case 14:
                 movePlayer(1, 2);
                 break;
         }

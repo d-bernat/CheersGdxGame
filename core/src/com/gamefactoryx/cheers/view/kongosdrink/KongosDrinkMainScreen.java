@@ -87,8 +87,8 @@ public class KongosDrinkMainScreen extends AbstractScreen {
         foregroundTexture = new Texture[]{ null,
                 null,
                 new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.1.jpg")),
-                null,
-                null,
+                new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.4.1.png")),
+                new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.5.1.png")),
                 null,
                 null,
                 null,
@@ -137,10 +137,10 @@ public class KongosDrinkMainScreen extends AbstractScreen {
         for(int i =0; i < playerSprite.length; ++i) {
             if(KongosDrinkMainModel.getInstance().getPlayers()[i].isActive())
                 playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4,
-                        -playerSprite[i].getHeight() / 2 * 3.9f);
+                        -playerSprite[i].getHeight() / 2 * 2.9f);
             else
                 playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4 + KongosDrinkMainModel.getInstance().getPlayers()[i].getNormPosition() - dataModel.getXxcoor(),
-                    -playerSprite[i].getHeight() / 2 * 3.9f);
+                    -playerSprite[i].getHeight() / 2 * 2.9f);
             if (dataModel.getPlayers()[i].getRotate() != 0)
                 playerSprite[i].rotate(dataModel.getPlayers()[i].getRotate());
             else
