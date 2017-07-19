@@ -19,8 +19,9 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Texture[] texture;
+    private Texture[] foregroundTexture;
     private Sprite[] sprite;
-
+    private Sprite[] foregroundSprite;
     private Sprite[] playerSprite;
 
 
@@ -83,6 +84,17 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.8.jpg")),
                     new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.9.jpg"))};
 
+        foregroundTexture = new Texture[]{ null,
+                null,
+                new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.1.jpg")),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null};
+
+
 
         sprite = new Sprite[texture.length];
         for(int i = 0; i < sprite.length; i++) {
@@ -98,6 +110,16 @@ public class KongosDrinkMainScreen extends AbstractScreen {
             playerSprite[i].setOrigin(playerSprite[i].getWidth() / 2, playerSprite[i].getHeight() / 2);
             playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4, -playerSprite[i].getHeight() / 2 * 3.9f);
         }
+
+        foregroundSprite = new Sprite[foregroundTexture.length];
+        for(int i = 0; i < sprite.length; i++) {
+            if(foregroundTexture[i] != null) {
+                foregroundSprite[i] = new Sprite(foregroundTexture[i]);
+                foregroundSprite[i].setOrigin(0, 0);
+                foregroundSprite[i].setPosition(-foregroundSprite[i].getWidth() / 4, -foregroundSprite[i].getHeight() / 2);
+            }
+        }
+
 
     }
 
@@ -125,6 +147,10 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                 playerSprite[i].rotate(0.0f - playerSprite[i].getRotation());
             playerSprite[i].draw(batch);
         }
+        if(foregroundSprite[dataModel.getIndex()] != null){
+            foregroundSprite[dataModel.getIndex()].setPosition(-foregroundSprite[dataModel.getIndex()].getWidth() / 4 - dataModel.getXcoor(), -foregroundSprite[dataModel.getIndex()].getHeight() / 2);
+            foregroundSprite[dataModel.getIndex()].draw(batch);
+        }
         batch.end();
     }
 
@@ -136,6 +162,10 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
         for(PlayerModel player: KongosDrinkMainModel.getInstance().getPlayers())
             player.getAvatar().dispose();
+
+        for(Texture ftxt: foregroundTexture)
+            if(ftxt != null)
+                ftxt.dispose();
 
         super.dispose();
     }
