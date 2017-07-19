@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
+import com.gamefactoryx.cheers.controller.kongosdrink.KongosDrinkStageManager;
 import com.gamefactoryx.cheers.tool.Card;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -21,6 +22,7 @@ public class CheersGdxGame extends Game {
 	public void create () {
 		//screenLock.setOrientationPortrait();
 		StageManager.getInstance().initialize(this);
+		KongosDrinkStageManager.getInstance().initialize(this);
 		Resolution.setResolution();
 		StageManager.getInstance().showStage(StageEnum.SPLASH_STAGE);
 

@@ -27,9 +27,9 @@ public abstract class AbstractScreen implements Screen {
     protected final int FREE = 0;
     protected final int CLICKED = 1;
 
-    private Camera camera;
-    private Viewport landscapeViewport;
-    private Viewport portraitViewport;
+    private static Camera camera;
+    private static Viewport landscapeViewport;
+    private static Viewport portraitViewport;
 
     private Sprite landscapeSprite;
     private Sprite portraitSprite;
@@ -154,15 +154,16 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void show() {
+        if(camera == null) {
+            camera = new OrthographicCamera();
+            portraitViewport = new StretchViewport(Resolution.getGameWorldWidthPortrait() ,
+                    Resolution.getGameWorldHeightPortrait(), camera);
+            landscapeViewport = new StretchViewport(Resolution.getGameWorldWidthLandscape(),
+                    Resolution.getGameWorldHeightLandscape(), camera);
+            getViewport().apply(true);
+        }
         spriteBatch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        //if (Orientation.getOrientation() == Input.Orientation.Portrait)
-            portraitViewport = new StretchViewport(Resolution.getGameWorldWidthPortrait(),
-                    Resolution.getGameWorldHeightPortrait(), camera);
-        //else
-            landscapeViewport = new FillViewport(Resolution.getGameWorldWidthPortrait(),
-                    Resolution.getGameWorldHeightPortrait(), camera);
-        getViewport().apply();
+
         initLogo();
         initSprites();
         initButtons();
