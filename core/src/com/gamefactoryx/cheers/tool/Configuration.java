@@ -40,8 +40,4 @@ public class Configuration {
     }
 
     private Configuration(){}
-
-    public static class KongosDrink{
-        public static final int DISTANCE_BETWEEN_TWO_FIELDS = 187;
-    }
 }

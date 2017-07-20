@@ -1,7 +1,8 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.gamefactoryx.cheers.tool.Configuration;
+import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
+
 
 /**
  * Created by Bernat on 18.07.2017.
@@ -10,7 +11,7 @@ public class PlayerModel {
     private int position;
     private boolean active;
     private float rotate;
-    private Texture avatar;
+    private AvatarType avatar;
 
     public int getPosition() {
         return position;
@@ -40,11 +41,11 @@ public class PlayerModel {
         this.rotate = rotate;
     }
 
-    public Texture getAvatar() {
+    public AvatarType getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(Texture avatar) {
+    public void setAvatar(AvatarType avatar) {
         this.avatar = avatar;
     }
 }

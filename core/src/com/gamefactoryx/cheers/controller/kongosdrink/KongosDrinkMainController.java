@@ -2,10 +2,8 @@ package com.gamefactoryx.cheers.controller.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
-import com.gamefactoryx.cheers.model.kongosdrink.PlayerModel;
-import com.gamefactoryx.cheers.tool.Configuration;
+import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 
 /**
@@ -22,14 +20,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
     public KongosDrinkMainController(final Screen screen) {
         super(screen);
         setScreenLock(0);
-        KongosDrinkMainModel.getInstance().setPlayers(new PlayerModel[]{new PlayerModel(), new PlayerModel(), new PlayerModel()});
-        KongosDrinkMainModel.getInstance().setPosition(1);
-        KongosDrinkMainModel.getInstance().getPlayers()[0].setPosition(11);
-        KongosDrinkMainModel.getInstance().getPlayers()[0].setAvatar(new Texture(Gdx.files.internal("common/kongos_drink/player/canada/canada_1.png")));
-        KongosDrinkMainModel.getInstance().getPlayers()[1].setPosition(14);
-        KongosDrinkMainModel.getInstance().getPlayers()[1].setAvatar(new Texture(Gdx.files.internal("common/kongos_drink/player/australia/australia_1.png")));
-        KongosDrinkMainModel.getInstance().getPlayers()[2].setPosition(3);
-        KongosDrinkMainModel.getInstance().getPlayers()[2].setAvatar(new Texture(Gdx.files.internal("common/kongos_drink/player/austria/austria_1.png")));
+
     }
 
 
@@ -45,6 +36,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             KongosDrinkMainModel.getInstance().setXxcoor(0);
             KongosDrinkMainModel.getInstance().setXcoor(0);
             KongosDrinkMainModel.getInstance().setPlayerIndex(0);
+            KongosDrinkMainModel.getInstance().setPosition(1);
             suspend = true;
             return false;
         }
@@ -92,15 +84,15 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
 
     private void movePlayground(final int  position){
-        if( KongosDrinkMainModel.getInstance().getPosition() == position)
+        if( KongosDrinkMainModel.getInstance().getPosition() == position) {
             return;
+        }
 
 
         suspend = false;
 
         if (!isRunning) {
             isRunning = true;
-
             forward = KongosDrinkMainModel.getInstance().getPosition() < position;
             new Thread(new Runnable() {
                 @Override
@@ -141,7 +133,6 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                             KongosDrinkMainModel.getInstance().setXxcoor(0);
                             KongosDrinkMainModel.getInstance().setXcoor(0);
                             KongosDrinkMainModel.getInstance().setIndex(0);
-                            KongosDrinkMainModel.getInstance().setRotate(0f);
                             isRunning = false;
                             break;
                         }
