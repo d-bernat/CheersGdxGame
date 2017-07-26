@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
-import com.gamefactoryx.cheers.model.kongosdrink.PlayerModel;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 

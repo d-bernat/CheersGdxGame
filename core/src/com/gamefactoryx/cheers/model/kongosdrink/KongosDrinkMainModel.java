@@ -1,7 +1,5 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 /**
@@ -21,7 +19,7 @@ public class KongosDrinkMainModel {
     //which player
     private int playerIndex;
 
-    private PlayerModel[] players;
+    private Player[] players;
 
 
 
@@ -40,30 +38,30 @@ public class KongosDrinkMainModel {
     }
 
     private KongosDrinkMainModel(){
-        PlayerModel[] playerModel = new PlayerModel[Configuration.getPlayersInGame()];
+        Player[] player = new Player[Configuration.getPlayersInGame()];
         for(int i = 0; i < Configuration.getPlayersInGame(); i++) {
-            playerModel[i] = new PlayerModel();
+            player[i] = new Player();
             switch(i){
                 case 0:
-                    playerModel[i].setAvatar(AvatarType.BULGARIA);
-                    playerModel[i].setPosition(11);
+                    player[i].setAvatar(AvatarType.BULGARIA);
+                    player[i].setPosition(11);
                     break;
                 case 1:
-                    playerModel[i].setAvatar(AvatarType.SLOVAKIA);
-                    playerModel[i].setPosition(14);
+                    player[i].setAvatar(AvatarType.SLOVAKIA);
+                    player[i].setPosition(14);
                     break;
                 case 2:
-                    playerModel[i].setAvatar(AvatarType.GERMANY);
-                    playerModel[i].setPosition(3);
+                    player[i].setAvatar(AvatarType.GERMANY);
+                    player[i].setPosition(3);
                     break;
                 case 3:
-                    playerModel[i].setAvatar(AvatarType.CZECH);
-                    playerModel[i].setPosition(5);
+                    player[i].setAvatar(AvatarType.CZECH);
+                    player[i].setPosition(5);
                     break;
             }
         }
 
-        setPlayers(playerModel);
+        setPlayers(player);
         setPosition(1);
         setPlayerIndex(0);
         setIndex(0);
@@ -111,11 +109,11 @@ public class KongosDrinkMainModel {
         this.position = position;
     }
 
-    public PlayerModel[] getPlayers() {
+    public Player[] getPlayers() {
         return players;
     }
 
-    public void setPlayers(PlayerModel[] players) {
+    public void setPlayers(Player[] players) {
         this.players = players;
     }
 

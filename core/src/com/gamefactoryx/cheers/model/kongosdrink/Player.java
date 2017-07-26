@@ -7,11 +7,12 @@ import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 /**
  * Created by Bernat on 18.07.2017.
  */
-public class PlayerModel {
+public class Player {
     private int position;
     private boolean active;
     private float rotate;
     private AvatarType avatar;
+    private String name;
 
     public int getPosition() {
         return position;
@@ -47,5 +48,13 @@ public class PlayerModel {
 
     public void setAvatar(AvatarType avatar) {
         this.avatar = avatar;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,5 +1,8 @@
 package com.gamefactoryx.cheers.tool.kongosdrink;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by Bernat on 08.05.2017.
  */
@@ -16,19 +19,8 @@ public class Configuration {
         }
     }
 
-    public enum GameCreditEnum{
-        POINT("point"), SIP("sip");
-        private final String name;
-        GameCreditEnum(String name){
-            this.name = name;
-        }
-        public String toString(){
-            return name;
-        }
-    }
-
     public enum GameType {
-        DOGFIGHT("dogfight"), TEAM_DOGFIGHT("team dogfight"), TEAM_VS_TEAM("team vs team");
+        DOGFIGHT("dogfight"), TEAMOFTWO_VS_TEAMOFTWO("2team vs 2team"), TEAM_VS_TEAM("team vs team");
         private String value;
 
         GameType(String value) {
@@ -47,7 +39,8 @@ public class Configuration {
     private static boolean penalty;
     private static int sound;
     private static int playersInGame = 4;
-    private static GameType gameType = GameType.DOGFIGHT;
+    private static String[] playerNames = {"Samko", "Kajka", "Baska", "Dusan"};
+    private static GameType gameType = GameType.TEAM_VS_TEAM;
 
     public static GameSizeEnum getGameSize(){
         return gameSize;
@@ -93,5 +86,16 @@ public class Configuration {
         gameType = _gameType;
     }
 
+    public static String getPlayerName(int index){
+        return playerNames[index];
+    }
+
+    public static String getRandomPlayerName(int excluded){
+        int randomNum;
+        do {
+            randomNum = (new Random()).nextInt(playersInGame);
+        }while(randomNum == excluded);
+        return playerNames[randomNum];
+    }
 
 }
