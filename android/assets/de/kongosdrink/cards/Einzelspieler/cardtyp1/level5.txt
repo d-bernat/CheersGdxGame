@@ -10,6 +10,6 @@ Greife einem Mitspieler in den Schritt oder trinke 2 Schlücke.;5;2;0
 Hey Magic Mike! Gib für 30 Sekunde dein bestes! Trinke sonst 4 Schlücke.;5;4;30
 Du musst dich von den anderen Mitspielern schminken lassen, na guut trink 4 mal!;5;4;0
 Versuche für 20 Sekunden zu Breakdancen, obwohl 4 Schlücke klingen auch nice!;5;4;20
-
-
-
+Flaschenhustler! Du musst zwei Biere nehmen und sie sich an die Hände kleben lassen bis du sie austrinkst. Trinke andernfalls 6 Schlücke.;5;6;0
+Dir wird eine Person genannt, welche du anrufen musst und ihr einen Streich spielst. Deine Mitspieler sagen dir noch 5 Wörter, welche du im Gespräch benutzen musst aber auch 5 Mal trinken kannst du.;5;5;0
+Für alle Raucher ist das rauchen für 30 Minuten untersagt. Jeder der dennoch raucht muss 7 Strafschlücke trinken!;0;7;0

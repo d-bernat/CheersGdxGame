@@ -12,5 +12,8 @@ Erkläre den anderen wie ein Frosch aussieht ohne die Wörter grün, eklig, klein, 
 Füttere -oPlayer- mit etwas leckerem, ihr könnt selbstverständlich auch beide 3 mal trinken.;2;3;0
 Geh ins Badezimmer und zieh dich um. Deine Klamotten trägst du nun umgekehrt. Unterwäsche außen oder du trinkst für jeden Spieler einen Schluck.;2;1;0
 Lass dir von -oPlayer- die Haare machen oder trinkt zusammen 2 Schlücke.
+Du trinkst einen Bodyshot von -oPlayer- oder trinke 4 Schlücke.;2;4;0
+Tausche dein Oberteil mit -oPlayer-. Selbstverständlich schmecken 3 Schlücke auch wunderbar.;2;3;0
+Wenn du nicht 2 mal trinken willst, dann musst du dein T-shirt ausziehen.;2;2;0
 
 

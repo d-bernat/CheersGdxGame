@@ -10,6 +10,7 @@ Kuschle mit dem linken Nachbarn für 2 Runden. Ihr könnt auch 3 Mal trinken, Pros
 Du hast eine Minute Zeit um heraus zu finden wessen Haare am besten duften, der Gewinner verteilt 5 Schlücke.;1;5;60
 Führe eine Unterhaltung mit einem Stuhl und tu so als ob er antworten würde, sonst 2 Schlücke.;1;2;0
 Ich packe meinen Koffer und nehme mit... spielt es solange weiter bis es einer nicht mehr weiß. Der Verlierer trinkt 3 Schlücke. Du fängst an!;1;3;0
-Wer weniger als 20Eur in Bar dabei hat muss 2 Schlücke trinken.;1;2;0
+Wer weniger als 20Euro in Bar dabei hat muss 2 Schlücke trinken.;1;2;0
 Alle Spieler mit einem ungeraden Alter müssen 2 Schlücke trinken.;1;2;0
 Lass dir von deinem rechten Nachbarn mit geschlossenen Augen Lippenstift auftragen (dein Nachbar hat die Augen natürlich geschlossen). Er sollte sich Mühe geben sonst müsst ihr 2 Mal trinken.;1;2;0
+Ex dein Glas aus oder zieh ein Kleidungsstück aus.;1;0;0
