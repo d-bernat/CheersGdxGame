@@ -14,3 +14,4 @@ Wer weniger als 20Euro in Bar dabei hat muss 2 Schlücke trinken.;1;2;0
 Alle Spieler mit einem ungeraden Alter müssen 2 Schlücke trinken.;1;2;0
 Lass dir von deinem rechten Nachbarn mit geschlossenen Augen Lippenstift auftragen (dein Nachbar hat die Augen natürlich geschlossen). Er sollte sich Mühe geben sonst müsst ihr 2 Mal trinken.;1;2;0
 Ex dein Glas aus oder zieh ein Kleidungsstück aus.;1;0;0
+Hahaha du musst die nächsten 2 Runden stehen. Wenn du 2 Mal trinkst würdest du denn vorwurf, dass du Faul bist nur bestätigen.;2;2;0

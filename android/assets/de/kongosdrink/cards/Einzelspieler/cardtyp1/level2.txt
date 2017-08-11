@@ -15,5 +15,4 @@ Lass dir von -oPlayer- die Haare machen oder trinkt zusammen 2 Schlücke.
 Du trinkst einen Bodyshot von -oPlayer- oder trinke 4 Schlücke.;2;4;0
 Tausche dein Oberteil mit -oPlayer-. Selbstverständlich schmecken 3 Schlücke auch wunderbar.;2;3;0
 Wenn du nicht 2 mal trinken willst, dann musst du dein T-shirt ausziehen.;2;2;0
-
-
+Du redest abjetzt mit französischen Akzent, falls nicht dann trinkst du 3 mal.;2;3;0
