@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
+import java.util.Random;
+
 
 /**
  * Created by bernat on 28.04.2017.
@@ -20,6 +22,23 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
     public KongosDrinkMainController(final Screen screen) {
         super(screen);
         setScreenLock(0);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(!KongosDrinkMainModel.getInstance().isFinished()){
+                    long time = System.currentTimeMillis();
+                    while (System.currentTimeMillis() < time + 10_000 &&
+                            !KongosDrinkMainModel.getInstance().isFinished()) {
+
+                    }
+                    if(!KongosDrinkMainModel.getInstance().isFinished()) {
+                        Random rd = new Random();
+                        KongosDrinkMainModel.getInstance().setModus(rd.nextInt(9));
+                    }
+
+                }
+            }
+        }).start();
 
     }
 
@@ -38,6 +57,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             KongosDrinkMainModel.getInstance().setPlayerIndex(0);
             KongosDrinkMainModel.getInstance().setPosition(1);
             suspend = true;
+            KongosDrinkMainModel.getInstance().setFinished(true);
             return false;
         }
 

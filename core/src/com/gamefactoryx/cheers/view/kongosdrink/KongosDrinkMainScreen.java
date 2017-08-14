@@ -1,10 +1,13 @@
 package com.gamefactoryx.cheers.view.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
+import com.gamefactoryx.cheers.tool.Orientation;
+import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
@@ -23,9 +26,12 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     private SpriteBatch batch;
     private Texture[] backgroundTexture;
     private Texture[] foregroundTexture;
+    private Texture[] modusTexture;
     private Sprite[] sprite;
     private Sprite[] foregroundSprite;
     private Sprite[] playerSprite;
+    private Sprite[] modusSprite;
+
 
 
     @Override
@@ -76,10 +82,15 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     @Override
     public void show() {
         // camera = new OrthographicCamera(960, 540);
+        float X = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
+        float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
+        float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.45f : 0.3f;
+        float DISTANCE_FROM_RIGHT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.03f : 0.06f;
 
         batch = new SpriteBatch();
         setBackgroudTexture();
         setForegroundTexture();
+        setModusTexture();
         sprite = new Sprite[backgroundTexture.length];
         for (int i = 0; i < sprite.length; i++) {
             sprite[i] = new Sprite(backgroundTexture[i]);
@@ -105,6 +116,12 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                 foregroundSprite[i].setOrigin(0, 0);
                 foregroundSprite[i].setPosition(-foregroundSprite[i].getWidth() / 4, -foregroundSprite[i].getHeight() / 2);
             }
+        }
+        modusSprite = new Sprite[9];
+        for(int i = 1; i <=8; i++){
+            modusSprite[i] = new Sprite(modusTexture[i]);
+            modusSprite[i].setSize(modusSprite[i].getWidth() * 0.3f, modusSprite[i].getHeight() * 0.3f);
+            modusSprite[i].setPosition(300, 100);
         }
 
 
@@ -139,6 +156,12 @@ public class KongosDrinkMainScreen extends AbstractScreen {
             foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].setPosition(-foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].getWidth() / 4 - KongosDrinkMainModel.getInstance().getXcoor(), -foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].getHeight() / 2);
             foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].draw(batch);
         }
+
+        if(KongosDrinkMainModel.getInstance().getModus() >= 1 &&
+                KongosDrinkMainModel.getInstance().getModus() <= 8){
+            modusSprite[KongosDrinkMainModel.getInstance().getModus()].draw(batch);
+        }
+
         batch.end();
     }
 
@@ -151,9 +174,13 @@ public class KongosDrinkMainScreen extends AbstractScreen {
         for (Sprite sprite : playerSprite)
             sprite.getTexture().dispose();
 
-        for (Texture ftxt : foregroundTexture)
-            if (ftxt != null)
-                ftxt.dispose();
+        for (Texture txt : foregroundTexture)
+            if (txt != null)
+                txt.dispose();
+
+        for (Texture txt : modusTexture)
+            if (txt != null)
+                txt.dispose();
 
         super.dispose();
     }
@@ -195,4 +222,19 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                 break;
         }
     }
+
+    private void setModusTexture(){
+     modusTexture = new Texture[]{
+             null,
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/changes.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/drink_together.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/notalking.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/pig.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/rules.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/star.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/WC.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/yoda.png"))
+     };
+    }
+
 }

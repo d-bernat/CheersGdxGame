@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.gamefactoryx.cheers.tool.FunnyNameGenerator;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 /**
@@ -21,7 +22,9 @@ public class KongosDrinkMainModel {
 
     private Player[] players;
 
+    private int modus;
 
+    private boolean finished;
 
 
     public static KongosDrinkMainModel getInstance() {
@@ -59,6 +62,7 @@ public class KongosDrinkMainModel {
                     player[i].setPosition(5);
                     break;
             }
+            player[i].setName(FunnyNameGenerator.getFunnyName(i));
         }
 
         setPlayers(player);
@@ -117,5 +121,19 @@ public class KongosDrinkMainModel {
         this.players = players;
     }
 
+    public int getModus() {
+        return modus;
+    }
 
+    public void setModus(int modus) {
+        this.modus = modus;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
 }

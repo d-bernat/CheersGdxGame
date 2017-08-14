@@ -1,5 +1,7 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.ArrayList;
@@ -24,6 +26,10 @@ public class CardFactory {
     }
 
     private CardFactory() {
+        FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() +
+                "/kongosdrink/cards/Einzelspieler.cardtyp1/Kartentyp1.txt");
+        taskFile.readString("UTF-8");
+
         switch (Configuration.getGameType()) {
             case DOGFIGHT:
                 for (int i = 1; i <= 1; i++) {
