@@ -11,6 +11,9 @@ import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by bernat on 28.04.2017.
@@ -117,11 +120,10 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                 foregroundSprite[i].setPosition(-foregroundSprite[i].getWidth() / 4, -foregroundSprite[i].getHeight() / 2);
             }
         }
-        modusSprite = new Sprite[9];
-        for(int i = 1; i <=8; i++){
+        modusSprite = new Sprite[10];
+        for(int i = 0; i < 10; i++){
             modusSprite[i] = new Sprite(modusTexture[i]);
-            modusSprite[i].setSize(modusSprite[i].getWidth() * 0.3f, modusSprite[i].getHeight() * 0.3f);
-            modusSprite[i].setPosition(300, 100);
+            modusSprite[i].setSize(modusSprite[i].getWidth() * 0.25f, modusSprite[i].getHeight() * 0.25f);
         }
 
 
@@ -157,9 +159,32 @@ public class KongosDrinkMainScreen extends AbstractScreen {
             foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].draw(batch);
         }
 
-        if(KongosDrinkMainModel.getInstance().getModus() >= 1 &&
-                KongosDrinkMainModel.getInstance().getModus() <= 8){
-            modusSprite[KongosDrinkMainModel.getInstance().getModus()].draw(batch);
+        List<Integer> indexes = new ArrayList<>();
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.CAP) == KongosDrinkMainModel.CAP)
+            indexes.add(0);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.CHANGES) == KongosDrinkMainModel.CHANGES)
+            indexes.add(1);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.DRINK_TOGETHER) == KongosDrinkMainModel.DRINK_TOGETHER)
+            indexes.add(2);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.MIRROR) == KongosDrinkMainModel.MIRROR)
+            indexes.add(3);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.NO_TALKING) == KongosDrinkMainModel.NO_TALKING)
+            indexes.add(4);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.PIG) == KongosDrinkMainModel.PIG)
+            indexes.add(5);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.RULES) == KongosDrinkMainModel.RULES)
+            indexes.add(6);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.STAR) == KongosDrinkMainModel.STAR)
+            indexes.add(7);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.WC) == KongosDrinkMainModel.WC)
+            indexes.add(8);
+        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.YODA) == KongosDrinkMainModel.YODA)
+            indexes.add(9);
+
+        int i = 0;
+        for(int index: indexes) {
+            modusSprite[index].setPosition(300 - 120 * i++, 120);
+            modusSprite[index].draw(batch);
         }
 
         batch.end();
@@ -225,9 +250,10 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
     private void setModusTexture(){
      modusTexture = new Texture[]{
-             null,
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/cap.png")),
              new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/changes.png")),
              new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/drink_together.png")),
+             new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/mirror.png")),
              new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/notalking.png")),
              new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/pig.png")),
              new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/rules.png")),

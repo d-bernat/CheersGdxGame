@@ -7,6 +7,19 @@ import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
  * Created by Bernat on 10.07.2017.
  */
 public class KongosDrinkMainModel {
+
+    public static final int CAP = 2;
+    public static final int CHANGES = 4;
+    public static final int DRINK_TOGETHER = 8;
+    public static final int MIRROR = 16;
+    public static final int NO_TALKING = 32;
+    public static final int PIG = 64;
+    public static final int RULES = 128;
+    public static final int STAR = 256;
+    public static final int WC = 512;
+    public static final int YODA = 1024;
+
+
     private static KongosDrinkMainModel instance;
     //which screen elem
     private int index;

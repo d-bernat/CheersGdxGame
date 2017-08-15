@@ -5,6 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 
@@ -22,18 +25,34 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
     public KongosDrinkMainController(final Screen screen) {
         super(screen);
         setScreenLock(0);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
+                long interval = 2_000L;
+                long accInterval  = 0L;
+                List<Integer> rnds = new ArrayList<>();
+                for(int i = 0; i < 11; i++)
+                    rnds.add(i);
                 while(!KongosDrinkMainModel.getInstance().isFinished()){
                     long time = System.currentTimeMillis();
-                    while (System.currentTimeMillis() < time + 10_000 &&
-                            !KongosDrinkMainModel.getInstance().isFinished()) {
 
+                    while (System.currentTimeMillis() < time + interval &&
+                            !KongosDrinkMainModel.getInstance().isFinished()) {
                     }
+                    accInterval += interval;
                     if(!KongosDrinkMainModel.getInstance().isFinished()) {
-                        Random rd = new Random();
-                        KongosDrinkMainModel.getInstance().setModus(rd.nextInt(9));
+                        Collections.shuffle(rnds);
+                        if(accInterval/interval < 4)
+                            KongosDrinkMainModel.getInstance().setModus((int)(Math.pow(2.0d,rnds.get(0))));
+                        else if(accInterval/interval < 8){
+                            int modus = (int)(Math.pow(2.0d, rnds.get(0))) + (int)(Math.pow(2.0d, rnds.get(1)));
+                            KongosDrinkMainModel.getInstance().setModus(modus);
+                        }
+                        else{
+                            int modus = (int)(Math.pow(2.0d, rnds.get(0))) + (int)(Math.pow(2.0d, rnds.get(1))) + (int)(Math.pow(2.0d, rnds.get(2)));
+                            KongosDrinkMainModel.getInstance().setModus(modus);
+                        }
                     }
 
                 }
