@@ -1,0 +1,7 @@
+Jeder von euch vergibt einen Schluck an den Gegner eurer Wahl.;0;1;0
+Ihr wählt 2 Spieler aus dem gegnerischen Team welche 3 Schlucke trinken müssen.;0;3;0
+Jeder Spieler, egal aus welchem Team, trinkt 2 Schlücke!;0;2;0
+
+
+
+ 

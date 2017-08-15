@@ -1,0 +1,5 @@
+Ihr gegen -oTeam- spielen gegeneinander Schere, Stein, Papier. Jedes Team stellt einen Spieler und es geht bis 3. Die Verlierer trinken 3 Schlücke!;1;3;0
+Challenge! Ihr spielt gegen -oTeam-! Do or Die! Der Gewinner geht weiter und die Verlierer trinken 2 Mal. Daumenringen!;1;2;0
+Ihr gegen -oTeam-! Jedes Team bekommt eine Flasche Wasser. Welches Team sie als erstes ausgetrunken hat gewinnt wichtige Punkte!;1;0;0
+
+
