@@ -1,3 +1,0 @@
-(SpielerA) = Asterix und Obelix, Salto rückwärts, Dirndl, Orange, Sado Maso, Tornado, Wurm, Superman, Schildkröte, Blitz, Nagellack, Rauchmelder, Wind, Streichholz
-(SpielerB) = Bagger, Drillinge, Dreitagebart, Rapper, Oralsex, Michael Jackson, Eine mitspielende Person, Sonnenbrand, Schwert, Turmspringen, Plakat, Schwimmflügel
-(SpielerC) = Scheinwerfer, Gehörschaden, Geldsack, Adler, Analsex, Elvis Presley, Türsteher, Pokemon, Dwayne "The Rock" Johnson, Spiegel, Klebeband, Medaille, Rettungsring, 
