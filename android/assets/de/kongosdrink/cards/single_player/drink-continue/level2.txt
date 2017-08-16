@@ -14,4 +14,12 @@ Lass dir von -oPlayer- die Haare machen oder trinkt zusammen 2 Schlücke.
 Du trinkst einen Bodyshot von -oPlayer- oder bleibe auf deinem Feld stehen und trinke 4 Schlücke.;2;4;0
 Tausche dein Oberteil mit -oPlayer-. Selbstverständlich schmecken 3 Schlücke auch wunderbar.;2;3;0
 Wenn du nicht 2 mal trinken willst, dann musst du dein T-shirt ausziehen.;2;2;0
-
+Du bist Schwanger!! Rufe den 10 Kontakt in deinem Handy an und beichte es ihm/ihr, sonst musst du wohl oder übel 4 Schlücke trinken.;2;4;0
+Sprich mit deinem Handy, dass du schwanger bist und es rastet total aus. Kriegst du es nich hin trinkst du 2 Mal.;2;2;0
+Mach eine Raupe nach oder trinke 3 Mal.;2;3;0
+Der Links von dir darf sich einen Spitznamen für dich ausdenken und muss dich dann so nennen Nicht kreativ? Dann trinke 5 Mal. 2;5;0
+Lass dich von -oPlayer- in den Nippel kneifen oder rette dich mit 4 Schlücken.;2;4;0
+Du hast 45 Sekunden um 6 Wörter zu finden, welche sich auf Land reimen. Schaffst du es nicht trinkst du 3 mal.;2;3;45
+Diese Runde geht auf die brillianten Erfinder dieser App, du musst nichts trinken und darfst weiter gehen.;2;0;0
+Lass alle Hemmungen fallen und sei ein Affe für 60 Sekunden oder trinke 5 Schlücke aus deinem affigen Cocktail!;2;5;6
+Spürst du das Bier schon? Ja? Dann tu mal so als würdest du auf Klo gehen oder geh halt wirklich auf Klo und trinke 4 Mal.;2;4;0

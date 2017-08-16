@@ -17,3 +17,13 @@ Tu so, als würst du der absolute Kussexperte und zeige deinen Mitspielern wie ei
 Setz dich auf den Schoß deines linken Nachbarns oder trinke 3 Schlücke.;3;3;0
 Zieh deinen rechten Nachbarn das Oberteil aus für mindestens 3 Runden oder trinkt 5 Schlücke zusammen, Prost!;3;5;0
 Du ziehst -+Player- die Hose aus und das ohne Hände. Trinke andernfalls 3 mal.;3;3;0
+Tu dir Eiswürfel in die Unterhose oder trinke 4 Mal. Habt ihr keine? Glück gehabt und geh weiter.;3;4;0
+Singstar! Du singst ,,Alle meine Entchen’’ mit Wasser im Mund oder trinkst 3 Mal.;3;3;0
+Bist du stark? Du hast 20 Schlücke vor dir und machst Liegestütze, für jeden erfolgreich absolvierten Liegestütz ziehst du 1 Schluck ab, die restliche Anzahl an nicht absolvierten Liegestützen trinkst du.;3;0;0
+Du merkst schon, dass deine Frisur nicht überzeugt!? Lass dich stylen oder besteche sie indem du 3 Mal trinkst.;3;3;0
+Jetzt geht’s los!! Jeder Teilnehmer in der Runde nennt dir ein beliebiges Wort, du rufst die 28 Person in deiner Kontaktliste an und schilderst ihnen das Szenario mit den genannten Wörtern, oder du kneifst und trinkst 5 mal.;3;5;0
+Sach ma, wo geht’s denn hier zur Goa? Imitiere einen DJ auf Droge für 15 Sekunden oder trink halt 10 Mal.;3;10;15
+Du musst emotionslos dieses Gedicht vollenden aber gebe dir Mühe sonst trinkst du 3 Mal: Rosen sind rot, Veilchen sind blau…;3;3;0
+Lass mal all die Tiere aus dem Zoo! Imitiere innerhalb von 30 Sekunden so viele Tiere wie möglich und das Publikum darf mal raten was du da für Laute von dir gibst, ansonsten trinkst du 5 mal.;3;5;30
+Guck die Katze tanzt für sich allein, Tanzt auf einem…? Ja genau, auf einem Bein. Also tanz auf einem Bein und zeig uns was du drauf hast für 10 Sekunden oder sei ein Spielverderber und trink 10 Schlücke.;3;10;10
+Ach ein wenig Klassischer Tanz hat noch keinem geschadet! Tanz mal einen schönen Wiener Walzer mit -oPlayer- für 25 Sekunden oder bleib halt unbeweglich und trink 4 Schlücke.;3;4;25
