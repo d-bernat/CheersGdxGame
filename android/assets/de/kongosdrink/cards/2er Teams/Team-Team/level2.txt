@@ -1,12 +1,4 @@
-2 Schlücke für den Verlierer. Nennt ein Wort
-mit dem Anfangsbuchstaben eurer Wahl. Der 
-nächste muss ein Wort finden welches sich darauf
-reimt. Der Verlierer trinkt 2 Schlücke! -oPlayer-
-beginnt und es geht im Uhrzeigersinn.;2;2;0
 
-Jedes Team sucht sich einen Prominenten aus, der muss 
-erraten werden. Es wird nur mit Ja oder Nein geantwortet
-und für jedes Nein trinkt ihr einen Schluck.;2;3;0
 
  
 

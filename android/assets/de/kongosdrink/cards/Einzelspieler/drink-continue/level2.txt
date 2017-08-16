@@ -1,9 +1,8 @@
 Du muss -oPlayer- einen Kuss auf die Wange geben, ist ja widerlich trink einfach 3 mal.;2;3;0
-#Füttere -Player- mit einem Snack seiner Wahl oder trink 3 Mal.;2;3;0
+Füttere -Player- mit einem Snack seiner Wahl oder trink 3 Mal.;2;3;0
 Mach 5 Liegestütze, schaffst du es nicht, dann 2 Schlücke.;2;2;0
--oPlayer- liest deine letzten 5 Whatsapp Narichten vor oder jeweils 3 mal trinken.;2;3;0
-Du bist schon einmal geblitzt worden? Dann hat es Nachwirkungen - trink mal 2 Schlücken!;2;2;0
-Augenkontakt vermeiden! Jedes mal, wenn ihr alle  euch in die Augen schaut für die nächsten 5 Runden, trinkt ihr zusammen 2 Schlücke!;2;2;0
+-oPlayer- liest deine letzten 5 Whatsapp Narichten vor oder ihr müsst jeweils 3 mal trinken.;2;3;0
+Du bist schon einmal geblitzt worden? Dann hat es Nachwirkungen - trink mal 2 Schlücke!;2;2;0
 Plank für 30 Sekunden, jede nicht geschaffte Sekunde ergibt ein Strafschluck!;2;1;30
 Du schmeißt dir einen Eiswürfel unters T-shirt und tanzt einen Breakdance bis der Eiswürfel schmilzt. Schaffst du es nicht und der Eiswürfel fällt runter muss du 3 Mal trinken.;2;3;0
 Alle Mitspieler dürfen sich aussuchen, an welcher Stelle du sie küssen musst. Kannst auch 3 Mal trinken.;2;3;0
@@ -12,7 +11,7 @@ Erkläre den anderen wie ein Frosch aussieht ohne die Wörter grün, eklig, klein, 
 Füttere -oPlayer- mit etwas leckerem, ihr könnt selbstverständlich auch beide 3 mal trinken.;2;3;0
 Geh ins Badezimmer und zieh dich um. Deine Klamotten trägst du nun umgekehrt. Unterwäsche außen oder du trinkst für jeden Spieler einen Schluck.;2;1;0
 Lass dir von -oPlayer- die Haare machen oder trinkt zusammen 2 Schlücke.
-Du trinkst einen Bodyshot von -oPlayer- oder trinke 4 Schlücke.;2;4;0
+Du trinkst einen Bodyshot von -oPlayer- oder bleibe auf deinem Feld stehen und trinke 4 Schlücke.;2;4;0
 Tausche dein Oberteil mit -oPlayer-. Selbstverständlich schmecken 3 Schlücke auch wunderbar.;2;3;0
 Wenn du nicht 2 mal trinken willst, dann musst du dein T-shirt ausziehen.;2;2;0
-Du redest abjetzt mit französischen Akzent, falls nicht dann trinkst du 3 mal.;2;3;0
+

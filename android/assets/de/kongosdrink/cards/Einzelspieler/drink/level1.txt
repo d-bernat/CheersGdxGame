@@ -1,0 +1,5 @@
+-oPlayer-, trinkt 2 mal mit dir!;0;2;0
+2 Schlücke für den Verlierer. Nennt ein Wort mit dem Anfangsbuchstaben eurer Wahl. Der nächste muss ein Wort finden welches sich darauf reimt. Der Verlierer trinkt 2 Schlücke! -oPlayer- beginnt.;0;2;0
+Ich packe meinen Koffer und nehme mit... spielt es solange weiter bis es einer nicht mehr weiß. Der Verlierer trinkt 3 Schlücke. Du fängst an!;0;3;0
+Wer weniger als 20Euro in Bar dabei hat muss 2 Schlücke trinken.;0;2;0
+Alle Spieler mit einem ungeraden Alter müssen 2 Schlücke trinken.;0;2;0
