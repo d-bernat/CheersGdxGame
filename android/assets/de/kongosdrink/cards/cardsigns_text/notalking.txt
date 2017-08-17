@@ -1,5 +1,5 @@
-Sprechverbot
-Solange du dieses Zeichen siehst sind folgende W�rter nicht erlaubt zusagen:
+﻿Sprechverbot
+Solange du dieses Zeichen siehst sind folgende Wörter nicht erlaubt zusagen:
 Ich
 Du
 Wir

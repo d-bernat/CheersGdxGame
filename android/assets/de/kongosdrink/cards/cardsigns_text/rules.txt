@@ -1,2 +1,2 @@
-Regeln
-Solange dieses Zeichen zusehen ist darf -oPlayer- sich eine Regel ausdenken und die wird au�erkraft gesetzt, wenn das Symbol verschwindet.
+﻿Regeln
+Solange dieses Zeichen zusehen ist darf -oPlayer- sich eine Regel ausdenken und die wird außerkraft gesetzt, wenn das Symbol verschwindet.
