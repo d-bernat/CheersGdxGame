@@ -3,7 +3,11 @@ package com.gamefactoryx.cheers.controller.kongosdrink;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
+import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
+import com.gamefactoryx.cheers.tool.kongosdrink.CoorTransformator;
+import com.gamefactoryx.cheers.view.kongosdrink.KongosDrinkMainScreen;
+import com.gamefactoryx.cheers.view.kongosdrink.ModusSprite;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +26,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
     private boolean suspend = false;
     private int delay = 1;
 
-    public KongosDrinkMainController(final Screen screen) {
+    public KongosDrinkMainController(final KongosDrinkMainScreen screen) {
         super(screen);
         setScreenLock(0);
 
@@ -30,27 +34,26 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             @Override
             public void run() {
                 long interval = 2_000L;
-                long accInterval  = 0L;
+                long accInterval = 0L;
                 List<Integer> rnds = new ArrayList<>();
-                for(int i = 0; i < 11; i++)
+                for (int i = 0; i < 11; i++)
                     rnds.add(i);
-                while(!KongosDrinkMainModel.getInstance().isFinished()){
+                while (!KongosDrinkMainModel.getInstance().isFinished()) {
                     long time = System.currentTimeMillis();
 
                     while (System.currentTimeMillis() < time + interval &&
                             !KongosDrinkMainModel.getInstance().isFinished()) {
                     }
                     accInterval += interval;
-                    if(!KongosDrinkMainModel.getInstance().isFinished()) {
+                    if (!KongosDrinkMainModel.getInstance().isFinished()) {
                         Collections.shuffle(rnds);
-                        if(accInterval/interval < 4)
-                            KongosDrinkMainModel.getInstance().setModus((int)(Math.pow(2.0d,rnds.get(0))));
-                        else if(accInterval/interval < 8){
-                            int modus = (int)(Math.pow(2.0d, rnds.get(0))) + (int)(Math.pow(2.0d, rnds.get(1)));
+                        if (accInterval / interval < 4)
+                            KongosDrinkMainModel.getInstance().setModus((int) (Math.pow(2.0d, rnds.get(0))));
+                        else if (accInterval / interval < 8) {
+                            int modus = (int) (Math.pow(2.0d, rnds.get(0))) + (int) (Math.pow(2.0d, rnds.get(1)));
                             KongosDrinkMainModel.getInstance().setModus(modus);
-                        }
-                        else{
-                            int modus = (int)(Math.pow(2.0d, rnds.get(0))) + (int)(Math.pow(2.0d, rnds.get(1))) + (int)(Math.pow(2.0d, rnds.get(2)));
+                        } else {
+                            int modus = (int) (Math.pow(2.0d, rnds.get(0))) + (int) (Math.pow(2.0d, rnds.get(1))) + (int) (Math.pow(2.0d, rnds.get(2)));
                             KongosDrinkMainModel.getInstance().setModus(modus);
                         }
                     }
@@ -64,13 +67,29 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        for (ModusSprite ms : getScreen().getModusSprite()) {
+            if (ms.isActive()) {
+                int x = CoorTransformator.getX(960, screenX);
+                int y = CoorTransformator.getY(540, screenY);
+                if (x >= ms.getX() &&
+                        x <= ms.getX() + ms.getWidth() &&
+                        y >= ms.getY() &&
+                        y <= ms.getY() + ms.getHeight()) {
+                    ms.setClicked(true);
+                }
+            }
+        }
+
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        for (ModusSprite ms : getScreen().getModusSprite()) {
+            ms.setClicked(false);
+        }
 
-        if(!super.touchUp(screenX, screenY, pointer, button)) {
+        if (!super.touchUp(screenX, screenY, pointer, button)) {
             KongosDrinkMainModel.getInstance().setXxcoor(0);
             KongosDrinkMainModel.getInstance().setXcoor(0);
             KongosDrinkMainModel.getInstance().setPlayerIndex(0);
@@ -80,7 +99,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             return false;
         }
 
-        switch(KongosDrinkMainModel.getInstance().getPosition()) {
+        switch (KongosDrinkMainModel.getInstance().getPosition()) {
             case 1:
                 gotoPlayer(0);
                 break;
@@ -110,20 +129,19 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
         return false;
     }
 
-    private void gotoPlayer(int playerIndex){
+    private void gotoPlayer(int playerIndex) {
         movePlayground(KongosDrinkMainModel.getInstance().getPlayers()[playerIndex].getPosition());
     }
 
-    private void movePlayer(int playerIndex, int position){
+    private void movePlayer(int playerIndex, int position) {
         KongosDrinkMainModel.getInstance().getPlayers()[playerIndex].setActive(true);
         movePlayground(position);
         //setActive(false) and position will be called in movePlayground additional thread!
     }
 
 
-
-    private void movePlayground(final int  position){
-        if( KongosDrinkMainModel.getInstance().getPosition() == position) {
+    private void movePlayground(final int position) {
+        if (KongosDrinkMainModel.getInstance().getPosition() == position) {
             return;
         }
 
@@ -138,9 +156,9 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 public void run() {
                     while (!suspend) {
                         for (int i = 1; i < 9; i++) {
-                            for(int j = 0; j < KongosDrinkMainModel.getInstance().getPlayers().length; j++)
-                                if(KongosDrinkMainModel.getInstance().getPlayers()[j].isActive())
-                                    if(forward)
+                            for (int j = 0; j < KongosDrinkMainModel.getInstance().getPlayers().length; j++)
+                                if (KongosDrinkMainModel.getInstance().getPlayers()[j].isActive())
+                                    if (forward)
                                         KongosDrinkMainModel.getInstance().getPlayers()[j].setRotate(-10.0f);
                                     else
                                         KongosDrinkMainModel.getInstance().getPlayers()[j].setRotate(10.0f);
@@ -191,8 +209,8 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                     }
                     KongosDrinkMainModel.getInstance().setPosition(position);
                     forward = false;
-                    for(int i = 0; i < KongosDrinkMainModel.getInstance().getPlayers().length; i++)
-                        if(KongosDrinkMainModel.getInstance().getPlayers()[i].isActive()) {
+                    for (int i = 0; i < KongosDrinkMainModel.getInstance().getPlayers().length; i++)
+                        if (KongosDrinkMainModel.getInstance().getPlayers()[i].isActive()) {
                             KongosDrinkMainModel.getInstance().getPlayers()[i].setRotate(0.0f);
                             KongosDrinkMainModel.getInstance().getPlayers()[i].setActive(false);
                             KongosDrinkMainModel.getInstance().getPlayers()[i].setPosition(position);
