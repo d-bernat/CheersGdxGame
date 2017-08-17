@@ -33,7 +33,7 @@ public class KongosDrinkMainScreen extends AbstractScreen {
     private Sprite[] sprite;
     private Sprite[] foregroundSprite;
     private Sprite[] playerSprite;
-    private Sprite[] modusSprite;
+    private ModusSprite[] modusSprite;
 
 
 
@@ -120,18 +120,53 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                 foregroundSprite[i].setPosition(-foregroundSprite[i].getWidth() / 4, -foregroundSprite[i].getHeight() / 2);
             }
         }
-        modusSprite = new Sprite[10];
+        modusSprite = new ModusSprite[10];
         for(int i = 0; i < 10; i++){
-            modusSprite[i] = new Sprite(modusTexture[i]);
+            modusSprite[i] = new ModusSprite(modusTexture[i]);
             modusSprite[i].setSize(modusSprite[i].getWidth() * 0.25f, modusSprite[i].getHeight() * 0.25f);
+            switch(i){
+                case 0:
+                    modusSprite[i].setType(KongosDrinkMainModel.CAP);
+                    break;
+                case 1:
+                    modusSprite[i].setType(KongosDrinkMainModel.CHANGES);
+                    break;
+                case 2:
+                    modusSprite[i].setType(KongosDrinkMainModel.DRINK_TOGETHER);
+                    break;
+                case 3:
+                    modusSprite[i].setType(KongosDrinkMainModel.MIRROR);
+                    break;
+                case 4:
+                    modusSprite[i].setType(KongosDrinkMainModel.NO_TALKING);
+                    break;
+                case 5:
+                    modusSprite[i].setType(KongosDrinkMainModel.PIG);
+                    break;
+                case 6:
+                    modusSprite[i].setType(KongosDrinkMainModel.RULES);
+                    break;
+                case 7:
+                    modusSprite[i].setType(KongosDrinkMainModel.STAR);
+                    break;
+                case 8:
+                    modusSprite[i].setType(KongosDrinkMainModel.WC);
+                    break;
+                case 9:
+                    modusSprite[i].setType(KongosDrinkMainModel.YODA);
+                    break;
+            }
         }
+    }
 
-
+    public ModusSprite[] getModusSprite() {
+        return modusSprite;
     }
 
     @Override
     public void resize(int width, int height) {
         camera = new OrthographicCamera(960, 540);
+        //camera = new OrthographicCamera(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
     }
 
     @Override
@@ -159,34 +194,28 @@ public class KongosDrinkMainScreen extends AbstractScreen {
             foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].draw(batch);
         }
 
-        List<Integer> indexes = new ArrayList<>();
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.CAP) == KongosDrinkMainModel.CAP)
-            indexes.add(0);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.CHANGES) == KongosDrinkMainModel.CHANGES)
-            indexes.add(1);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.DRINK_TOGETHER) == KongosDrinkMainModel.DRINK_TOGETHER)
-            indexes.add(2);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.MIRROR) == KongosDrinkMainModel.MIRROR)
-            indexes.add(3);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.NO_TALKING) == KongosDrinkMainModel.NO_TALKING)
-            indexes.add(4);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.PIG) == KongosDrinkMainModel.PIG)
-            indexes.add(5);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.RULES) == KongosDrinkMainModel.RULES)
-            indexes.add(6);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.STAR) == KongosDrinkMainModel.STAR)
-            indexes.add(7);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.WC) == KongosDrinkMainModel.WC)
-            indexes.add(8);
-        if((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.YODA) == KongosDrinkMainModel.YODA)
-            indexes.add(9);
+
+        modusSprite[0].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.CAP) == KongosDrinkMainModel.CAP);
+        modusSprite[1].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.CHANGES) == KongosDrinkMainModel.CHANGES);
+        modusSprite[2].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.DRINK_TOGETHER) == KongosDrinkMainModel.DRINK_TOGETHER);
+        modusSprite[3].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.MIRROR) == KongosDrinkMainModel.MIRROR);
+        modusSprite[4].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.NO_TALKING) == KongosDrinkMainModel.NO_TALKING);
+        modusSprite[5].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.PIG) == KongosDrinkMainModel.PIG);
+        modusSprite[6].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.RULES) == KongosDrinkMainModel.RULES);
+        modusSprite[7].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.STAR) == KongosDrinkMainModel.STAR);
+        modusSprite[8].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.WC) == KongosDrinkMainModel.WC);
+        modusSprite[9].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.YODA) == KongosDrinkMainModel.YODA);
 
         int i = 0;
-        for(int index: indexes) {
-            modusSprite[index].setPosition(300 - 120 * i++, 120);
-            modusSprite[index].draw(batch);
+        for(ModusSprite ms: modusSprite){
+            if(ms.isActive()){
+                ms.setPosition(300 - 120 * i++, 120);
+                ms.draw(batch);
+                if(ms.isClicked()){
+                    Gdx.app.log("type",  KongosDrinkMainModel.getInstance().getModusTypeTextMap().get(ms.getType()));
+                }
+            }
         }
-
         batch.end();
     }
 
