@@ -1,5 +1,8 @@
 package com.gamefactoryx.cheers.tool.kongosdrink;
 
+import com.gamefactoryx.cheers.model.kongosdrink.AvatarType;
+import com.gamefactoryx.cheers.model.kongosdrink.Player;
+
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -38,9 +41,14 @@ public class Configuration {
     private static GameSizeEnum gameSize = GameSizeEnum.FIFTY;
     private static boolean penalty;
     private static int sound;
-    private static int playersInGame = 4;
-    private static String[] playerNames = {"Samko", "Kajka", "Baska", "Dusan"};
+    private static Player[] players = { new Player("Samko", Player.SEX.MALE, AvatarType.BULGARIA),
+                                            new Player("Kajka", Player.SEX.FEMALE, AvatarType.SLOVAKIA),
+                                            new Player("Baska", Player.SEX.FEMALE, AvatarType.GERMANY),
+                                            new Player("Majo", Player.SEX.MALE, AvatarType.CZECH) };
+
     private static GameType gameType = GameType.TEAM_VS_TEAM;
+    private static long modusTypeInterval = 10_000;
+
 
     public static GameSizeEnum getGameSize(){
         return gameSize;
@@ -70,12 +78,8 @@ public class Configuration {
         sound = _sound;
     }
 
-    public static int getPlayersInGame() {
-        return playersInGame;
-    }
-
-    public static void setPlayersInGame(int _playersInGame) {
-        playersInGame = _playersInGame;
+    public static Player[] getPlayers() {
+        return players;
     }
 
     public static GameType getGameType() {
@@ -87,15 +91,29 @@ public class Configuration {
     }
 
     public static String getPlayerName(int index){
-        return playerNames[index];
+        return players[index].getName();
     }
 
-    public static String getRandomPlayerName(int excluded){
+    public static Player getRandomPlayer(int excluded){
+        return getRandomPlayer(excluded, Player.SEX.DONT_CARE);
+    }
+
+    public static Player getRandomPlayer(int excluded, Player.SEX sex){
         int randomNum;
+        int acc = 0;
         do {
-            randomNum = (new Random()).nextInt(playersInGame);
-        }while(randomNum == excluded);
-        return playerNames[randomNum];
+            randomNum = (new Random()).nextInt(players.length);
+            ++acc;
+        }while((!(randomNum != excluded && (sex == Player.SEX.DONT_CARE || players[randomNum].getSex() == sex))) && acc < players.length);
+        return players[randomNum];
     }
 
+
+    public static long getModusTypeInterval() {
+        return modusTypeInterval;
+    }
+
+    public static void setModusTypeInterval(long modusTypeInterval) {
+        Configuration.modusTypeInterval = modusTypeInterval;
+    }
 }

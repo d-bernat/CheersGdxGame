@@ -168,7 +168,7 @@ public abstract class AbstractScreen implements Screen {
         initSprites();
         initButtons();
         initCards();
-        initTextBox();
+        //initTextBox();
     }
 
 
