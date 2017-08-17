@@ -8,6 +8,7 @@ import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.view.AbstractScreen;
+import com.gamefactoryx.cheers.view.kongosdrink.KongosDrinkMainScreen;
 
 /**
  * Created by bernat on 05.05.2017.
@@ -15,10 +16,10 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 @SuppressWarnings("DefaultFileTemplate")
 abstract public class KongosDrinkAbstractController extends InputAdapter {
 
-    private final Screen screen;
+    private final KongosDrinkMainScreen screen;
     private int downXCoor;
 
-    protected KongosDrinkAbstractController(final Screen screen){
+    protected KongosDrinkAbstractController(final KongosDrinkMainScreen screen){
         this.screen = screen;
         Gdx.input.setInputProcessor(this);
         Gdx.input.setCatchBackKey(true);
@@ -68,7 +69,7 @@ abstract public class KongosDrinkAbstractController extends InputAdapter {
         }*/
         return true;
     }
-    protected Screen getScreen(){ return screen; }
+    protected KongosDrinkMainScreen getScreen(){ return screen; }
 
     protected void setScreenLock(int lockType) {
         if (CheersGdxGame.getScreenLock() != null)

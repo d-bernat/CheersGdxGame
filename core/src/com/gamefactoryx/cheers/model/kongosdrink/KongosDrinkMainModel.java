@@ -1,7 +1,11 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.gamefactoryx.cheers.tool.FunnyNameGenerator;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
+
+import java.util.HashMap;
 
 /**
  * Created by Bernat on 10.07.2017.
@@ -18,6 +22,8 @@ public class KongosDrinkMainModel {
     public static final int STAR = 256;
     public static final int WC = 512;
     public static final int YODA = 1024;
+
+    private final HashMap<Integer, String> modusTypeTextMap;
 
 
     private static KongosDrinkMainModel instance;
@@ -61,22 +67,38 @@ public class KongosDrinkMainModel {
                 case 0:
                     player[i].setAvatar(AvatarType.BULGARIA);
                     player[i].setPosition(11);
+                    player[i].setName("Samko");
                     break;
                 case 1:
                     player[i].setAvatar(AvatarType.SLOVAKIA);
                     player[i].setPosition(14);
+                    player[i].setName("Kajka");
                     break;
                 case 2:
                     player[i].setAvatar(AvatarType.GERMANY);
                     player[i].setPosition(3);
+                    player[i].setName("Baska");
                     break;
                 case 3:
                     player[i].setAvatar(AvatarType.CZECH);
                     player[i].setPosition(5);
+                    player[i].setName("Majo");
                     break;
             }
             player[i].setName(FunnyNameGenerator.getFunnyName(i));
         }
+
+        modusTypeTextMap = new HashMap<>();
+        modusTypeTextMap.put(CAP, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/cap_de.txt").readString());
+        modusTypeTextMap.put(CHANGES, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/changes_de.txt").readString());
+        modusTypeTextMap.put(DRINK_TOGETHER, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/drink_together_de.txt").readString());
+        modusTypeTextMap.put(MIRROR, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/mirror_de.txt").readString());
+        modusTypeTextMap.put(NO_TALKING, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/notalking_de.txt").readString());
+        modusTypeTextMap.put(PIG, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/pig_de.txt").readString());
+        modusTypeTextMap.put(RULES, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/rules_de.txt").readString());
+        modusTypeTextMap.put(STAR, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/star_de.txt").readString());
+        modusTypeTextMap.put(WC, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/WC_de.txt").readString());
+        modusTypeTextMap.put(YODA, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/Yoda_de.txt").readString());
 
         setPlayers(player);
         setPosition(1);
@@ -148,5 +170,9 @@ public class KongosDrinkMainModel {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public HashMap<Integer, String> getModusTypeTextMap() {
+        return modusTypeTextMap;
     }
 }
