@@ -49,24 +49,6 @@ abstract public class KongosDrinkAbstractController extends InputAdapter {
             return false;
         }
 
-       /* for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            if (getScreen().getClicked()[i])
-                switch (i) {
-                    case 0:
-                        Configuration.setLanguage(Configuration.LanguageEnum.DE);
-                        StageManager.getInstance().showStage();
-                        break;
-                    case 1:
-                        Configuration.setLanguage(Configuration.LanguageEnum.EN);
-                        StageManager.getInstance().showStage();
-                        break;
-                    case 2:
-                        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-                        break;
-                }
-
-            getScreen().getClicked()[i] = false;
-        }*/
         return true;
     }
     protected KongosDrinkMainScreen getScreen(){ return screen; }
