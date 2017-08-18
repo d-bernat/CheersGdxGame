@@ -272,8 +272,8 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                             }
 
                             KongosDrinkMainModel.getInstance().setFinished(finished);
+                            Configuration.getPlayers()[i].setPosition(position);
                             if (!finished) {
-                                Configuration.getPlayers()[i].setPosition(position);
                                 do{
                                     if (KongosDrinkMainModel.getInstance().getPlayerIndex() == Configuration.getPlayers().length - 1)
                                         KongosDrinkMainModel.getInstance().setPlayerIndex(0);
