@@ -201,4 +201,13 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     }
 
+    @Override
+    public void dispose(){
+        if(font !=null)
+            font.dispose();
+        if(fontLabel !=null)
+            fontLabel.dispose();
+        super.dispose();
+    }
+
 }

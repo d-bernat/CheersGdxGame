@@ -173,4 +173,12 @@ public class INeverDoScreen extends AbstractScreen {
     protected void drawCards() {
 
     }
+
+    @Override
+    public void dispose(){
+        if(font !=null)
+            font.dispose();
+        super.dispose();
+    }
 }
+

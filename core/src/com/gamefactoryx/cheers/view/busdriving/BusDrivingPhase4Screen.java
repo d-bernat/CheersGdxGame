@@ -110,13 +110,13 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
         setButtons(new Sprite[2][2]);
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
-        getButtons()[0][0].setSize(getButtons()[0][0].getWidth() * 0.7f, getButtons()[0][0].getHeight() * 0.7f);
+        getButtons()[0][0].setSize(Resolution.getGameWorldWidthLandscape() * 0.18f, Resolution.getGameWorldHeightLandscape() * 0.14f);
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
-        getButtons()[0][1].setSize(getButtons()[0][1].getWidth() * 0.7f, getButtons()[0][1].getHeight() * 0.7f);
+        getButtons()[0][1].setSize(Resolution.getGameWorldWidthLandscape() * 0.18f, Resolution.getGameWorldHeightLandscape() * 0.14f);
         getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
-        getButtons()[1][0].setSize(getButtons()[1][0].getWidth() * 0.7f, getButtons()[1][0].getHeight() * 0.7f);
+        getButtons()[1][0].setSize(Resolution.getGameWorldWidthLandscape() * 0.18f, Resolution.getGameWorldHeightLandscape() * 0.14f);
         getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
-        getButtons()[1][1].setSize(getButtons()[1][1].getWidth() * 0.7f, getButtons()[1][1].getHeight() * 0.7f);
+        getButtons()[1][1].setSize(Resolution.getGameWorldWidthLandscape() * 0.18f, Resolution.getGameWorldHeightLandscape() * 0.14f);
         setClicked(new boolean[getCountOfButtons()]);
 
     }
@@ -128,7 +128,7 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
             int y_offset = 0;
             for (int i = 0; i < getCountOfButtons(); i++) {
                 int click_index = getClicked()[i] ? CLICKED : FREE;
-                getButtons()[i][click_index].setPosition(X * 0.11f + BusDrivingPhase4Model.getInstance().getActiveCardIndex() * cardWidth * 1.1f,
+                getButtons()[i][click_index].setPosition(X * 0.07f + BusDrivingPhase4Model.getInstance().getActiveCardIndex() * cardWidth * 1.1f,
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM + y_offset++ * Y * 0.52f);
                 getButtons()[i][click_index].draw(getSpriteBatch(), 50.0f);
             }
@@ -149,8 +149,8 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
     protected void initCards() {
         VCard vCard = Croupier.getInstance().getVCards().last();
         Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
-        cardHight = scard.getHeight() * 0.35f;
-        cardWidth = scard.getWidth() * 0.35f;
+        cardWidth = Resolution.getGameWorldWidthLandscape() * 0.12f;
+        cardHight = Resolution.getGameWorldHeightLandscape() * 0.34f;
     }
 
     @Override
@@ -158,7 +158,7 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
         int x_offset = 0;
         for(VCard vCard : BusDrivingPhase4Model.getInstance().getBoard().getVCards()) {
             Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
-            scard.setPosition(X * 0.08f + x_offset++ * cardWidth * 1.1f, Y * 0.19f);
+            scard.setPosition(X * 0.04f + x_offset++ * cardWidth * 1.1f, Y * 0.18f);
             scard.setSize(cardWidth, cardHight);
             scard.draw(getSpriteBatch(), 1.0f);
         }
@@ -167,6 +167,8 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        if(font !=null)
+            font.dispose();
         super.dispose();
     }
 
