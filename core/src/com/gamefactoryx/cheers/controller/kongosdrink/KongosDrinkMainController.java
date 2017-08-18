@@ -28,6 +28,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
     public KongosDrinkMainController(final KongosDrinkMainScreen screen) {
         super(screen);
         setScreenLock(0);
+        KongosDrinkMainModel.getNewInstance();
 
         new Thread(new Runnable() {
             @Override
@@ -116,6 +117,9 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             KongosDrinkMainModel.getInstance().setFinished(true);
             return false;
         }
+
+        if(KongosDrinkMainModel.getInstance().isFinished())
+            return false;
 
         switch (KongosDrinkMainModel.getInstance().getStep()) {
 
