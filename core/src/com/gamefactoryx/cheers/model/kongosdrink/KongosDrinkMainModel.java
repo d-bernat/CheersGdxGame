@@ -69,6 +69,8 @@ public class KongosDrinkMainModel {
         Player[] players = Configuration.getPlayers();
         for (int i = 0; i < players.length; i++) {
             players[i].setPosition(1);
+            players[i].setFinished(false);
+            players[i].setActive(false);
         }
         //player[i].setName(FunnyNameGenerator.getFunnyName(i));
 
