@@ -8,17 +8,26 @@ import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
  * Created by Bernat on 18.07.2017.
  */
 public class Player {
+    public enum SEX {MALE, FEMALE, DONT_CARE}
+
     private int position;
     private boolean active;
     private float rotate;
     private AvatarType avatar;
     private String name;
+    private SEX sex;
+
+    public Player( String name, SEX sex, AvatarType avatar) {
+        this.avatar = avatar;
+        this.name = name;
+        this.sex = sex;
+    }
 
     public int getPosition() {
         return position;
     }
 
-    public float getNormPosition(){
+    public float getNormPosition() {
         return (position - 1) * Configuration.KongosDrink.DISTANCE_BETWEEN_TWO_FIELDS;
     }
 
@@ -56,5 +65,13 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public SEX getSex() {
+        return sex;
+    }
+
+    public void setSex(SEX sex) {
+        this.sex = sex;
     }
 }
