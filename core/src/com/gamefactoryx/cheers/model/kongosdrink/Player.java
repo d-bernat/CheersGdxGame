@@ -16,6 +16,7 @@ public class Player {
     private AvatarType avatar;
     private String name;
     private SEX sex;
+    private boolean finished;
 
     public Player( String name, SEX sex, AvatarType avatar) {
         this.avatar = avatar;
@@ -73,5 +74,13 @@ public class Player {
 
     public void setSex(SEX sex) {
         this.sex = sex;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }

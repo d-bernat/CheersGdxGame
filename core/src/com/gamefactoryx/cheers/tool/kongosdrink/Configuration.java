@@ -41,10 +41,10 @@ public class Configuration {
     private static GameSizeEnum gameSize = GameSizeEnum.FIFTY;
     private static boolean penalty;
     private static int sound;
-    private static Player[] players = { new Player("Samko", Player.SEX.MALE, AvatarType.BULGARIA),
-                                            new Player("Kajka", Player.SEX.FEMALE, AvatarType.SLOVAKIA),
-                                            new Player("Baska", Player.SEX.FEMALE, AvatarType.GERMANY),
-                                            new Player("Majo", Player.SEX.MALE, AvatarType.CZECH) };
+    private static Player[] players = { new Player("Spieler 1", Player.SEX.MALE, AvatarType.BULGARIA),
+                                            new Player("Spieler 2", Player.SEX.FEMALE, AvatarType.SLOVAKIA),
+                                            new Player("Spieler 3", Player.SEX.FEMALE, AvatarType.GERMANY),
+                                            new Player("Spieler 4", Player.SEX.MALE, AvatarType.CZECH) };
 
     private static GameType gameType = GameType.TEAM_VS_TEAM;
     private static long modusTypeInterval = 10_000;
@@ -56,6 +56,7 @@ public class Configuration {
     public static void setGameSize(GameSizeEnum _gameSize){
         gameSize = _gameSize;
     }
+
 
     private Configuration(){}
     public static class KongosDrink{

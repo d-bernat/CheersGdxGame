@@ -200,12 +200,19 @@ public class KongosDrinkMainScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
+        /*Gdx.app.log("Status", String.format("PlayerIndex:%s, PlayerPosition:%s, Active:%s",
+                KongosDrinkMainModel.getInstance().getPlayerIndex(),
+                Configuration.getPlayers()[KongosDrinkMainModel.getInstance().getPlayerIndex()].getPosition(),
+                Configuration.getPlayers()[KongosDrinkMainModel.getInstance().getPlayerIndex()].isActive()
+                ));
+*/
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         sprite[KongosDrinkMainModel.getInstance().getIndex()].setPosition(-sprite[KongosDrinkMainModel.getInstance().getIndex()].getWidth() / 4 - KongosDrinkMainModel.getInstance().getXcoor(), -sprite[KongosDrinkMainModel.getInstance().getIndex()].getHeight() / 2);
         sprite[KongosDrinkMainModel.getInstance().getIndex()].draw(batch);
-        for (int i = 0; i < playerSprite.length; ++i) {
+        for (int i =  playerSprite.length - 1; i >= 0; --i) {
             if (Configuration.getPlayers()[i].isActive())
                 playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4,
                         -playerSprite[i].getHeight() / 2 * 2.9f);
@@ -214,10 +221,13 @@ public class KongosDrinkMainScreen extends AbstractScreen {
                         -playerSprite[i].getHeight() / 2 * 2.9f);
             if (Configuration.getPlayers()[i].getRotate() != 0)
                 playerSprite[i].rotate(Configuration.getPlayers()[i].getRotate());
-            else
-                playerSprite[i].rotate(0.0f - playerSprite[i].getRotation());
+            /*else
+                playerSprite[i].rotate(0.0f - playerSprite[i].getRotation());*/
             playerSprite[i].draw(batch);
         }
+        if (Configuration.getPlayers()[KongosDrinkMainModel.getInstance().getPlayerIndex()].getRotate() == 0)
+            playerSprite[KongosDrinkMainModel.getInstance().getPlayerIndex()].draw(batch);
+
         if (foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()] != null) {
             foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].setPosition(-foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].getWidth() / 4 - KongosDrinkMainModel.getInstance().getXcoor(), -foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].getHeight() / 2);
             foregroundSprite[KongosDrinkMainModel.getInstance().getIndex()].draw(batch);
