@@ -49,7 +49,8 @@ final class NewGameStageController extends AbstractController {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 0:
-                        KongosDrinkStageManager.getInstance().showStage(KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
+                        //KongosDrinkStageManager.getInstance().showStage(KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
+                        StageManager.getInstance().showStage(StageEnum.KONGOS_DRINK_PHASE0_STAGE);
                         break;
                     case 1:
                         StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_ZERO_PHASE);

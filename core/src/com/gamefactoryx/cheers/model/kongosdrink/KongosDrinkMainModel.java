@@ -1,11 +1,10 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.gamefactoryx.cheers.tool.FunnyNameGenerator;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Bernat on 10.07.2017.
@@ -66,11 +65,11 @@ public class KongosDrinkMainModel {
     }
 
     private KongosDrinkMainModel() {
-        Player[] players = Configuration.getPlayers();
-        for (int i = 0; i < players.length; i++) {
-            players[i].setPosition(1);
-            players[i].setFinished(false);
-            players[i].setActive(false);
+        List<Player> players = Configuration.getPlayers();
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).setPosition(1);
+            players.get(i).setFinished(false);
+            players.get(i).setActive(false);
         }
         //player[i].setName(FunnyNameGenerator.getFunnyName(i));
 

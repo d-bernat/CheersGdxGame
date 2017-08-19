@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model.busdriving;
 
 import com.badlogic.gdx.utils.Queue;
+import com.gamefactoryx.cheers.model.Subject;
 
 
 /**
@@ -8,20 +9,20 @@ import com.badlogic.gdx.utils.Queue;
  */
 public class Player implements Comparable<Player>{
 
-    private String name;
     private final Queue<VCard> cards;
     private boolean alive;
-    private boolean active;
+    private boolean enable;
     private int position;
+    private final Subject subject;
 
-    public Player(String name, int position, boolean active){
+    public Player(Subject subject, int position, boolean enable){
         cards = new Queue<>();
-        this.name = name;
+        this.subject = subject;
         this.position = position;
-        this.active = active;
+        this.enable = enable;
     }
     public String getName() {
-        return name;
+        return subject.getName();
     }
 
     public int getPosition() {
@@ -37,19 +38,19 @@ public class Player implements Comparable<Player>{
     }
 
     public void setName(String name) {
-        this.name = name;
+        subject.setName(name);
     }
 
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
     public void addVCard(VCard vCard){

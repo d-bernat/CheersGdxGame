@@ -3,8 +3,10 @@ package com.gamefactoryx.cheers.model.busdriving;
 import com.badlogic.gdx.utils.Queue;
 //import com.gamefactoryx.cheers.model.BusDrivingModel;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
+import com.gamefactoryx.cheers.model.kongosdrink.AvatarType;
 import com.gamefactoryx.cheers.tool.CardOrientation;
-import com.gamefactoryx.cheers.tool.FunnyNameGenerator;
+import com.gamefactoryx.cheers.tool.Configuration;
+import com.gamefactoryx.cheers.tool.FunnySubjectGenerator;
 
 
 import java.util.ArrayList;
@@ -37,15 +39,16 @@ public class Croupier {
     private final List<Player> players = new ArrayList<>();
     private final Board board = new Board();
 
-
     private Croupier(){
 
         for (int i = 2; i < 53; i++)
             vCards.addLast(new VCard(i, CardOrientation.BACK));
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < Configuration.getMaxPlayers(); i++) {
             PlayerNameCache.clear();
-            players.add(new Player(FunnyNameGenerator.getFunnyName(i), i, i < 2));
+            players.add(new Player(
+                        FunnySubjectGenerator.getFunnySubject(i),
+                        i, i < 2));
         }
         shuffle();
     }

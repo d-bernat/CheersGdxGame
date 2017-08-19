@@ -2,6 +2,7 @@ package com.gamefactoryx.cheers.controller.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.tool.kongosdrink.CardTextParser;
@@ -29,10 +30,13 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
         super(screen);
         setScreenLock(0);
         KongosDrinkMainModel.getNewInstance();
-
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Music mp3Music = Gdx.audio.newMusic(Gdx.files.internal("common/horn.mp3"));
+                Map<Integer,String> backup = new HashMap<>();
+                backup.putAll(KongosDrinkMainModel.getInstance().getModusTypeTextMap());
+
                 long accInterval = 0L;
                 List<Integer> rnds = new ArrayList<>();
                 for (int i = 0; i < 11; i++)
@@ -56,10 +60,12 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                             KongosDrinkMainModel.getInstance().setModus(modus);
                         }
                     }
-                    for (Integer i : KongosDrinkMainModel.getInstance().getModusTypeTextMap().keySet()) {
+                    for (Integer i : backup.keySet()) {
                         KongosDrinkMainModel.getInstance().getModusTypeTextMap().put(i,
-                                CardTextParser.replacePlayerNames(KongosDrinkMainModel.getInstance().getModusTypeTextMap().get(i)));
+                                CardTextParser.replacePlayerNames(backup.get(i)));
                     }
+                    if(KongosDrinkMainModel.getInstance().getModus() != 0)
+                    mp3Music.play();
 
                 }
                 KongosDrinkMainModel.getInstance().setModus(0);
@@ -140,7 +146,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 //set position of active player
                 //gotoPlayer(KongosDrinkMainModel.getInstance().getPlayerIndex());
                 movePlayer(KongosDrinkMainModel.getInstance().getPlayerIndex(),
-                        Configuration.getPlayers()[KongosDrinkMainModel.getInstance().getPlayerIndex()].getPosition() +
+                        Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getPosition() +
                                 KongosDrinkMainModel.getInstance().getLevel());
                 //KongosDrinkMainModel.getInstance().setStep(KongosDrinkMainModel.Step.MOVE);
                 break;
@@ -178,13 +184,13 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
     }
 
     private void gotoPlayer(int playerIndex) {
-        movePlayground(Configuration.getPlayers()[playerIndex].getPosition());
+        movePlayground(Configuration.getPlayers().get(playerIndex).getPosition());
     }
 
     private void movePlayer(int playerIndex, int position) {
-        Configuration.getPlayers()[playerIndex].setActive(true);
+        Configuration.getPlayers().get(playerIndex).setActive(true);
         movePlayground(position);
-        //setActive(false) and position will be called in movePlayground additional thread!
+        //setEnable(false) and position will be called in movePlayground additional thread!
     }
 
 
@@ -204,12 +210,12 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 public void run() {
                     while (!suspend) {
                         for (int i = 1; i < 9; i++) {
-                            for (int j = 0; j < Configuration.getPlayers().length; j++)
-                                if (Configuration.getPlayers()[j].isActive())
+                            for (int j = 0; j < Configuration.getPlayers().size(); j++)
+                                if (Configuration.getPlayers().get(j).isActive())
                                     if (forward)
-                                        Configuration.getPlayers()[j].setRotate(-10.0f);
+                                        Configuration.getPlayers().get(j).setRotate(-10.0f);
                                     else
-                                        Configuration.getPlayers()[j].setRotate(10.0f);
+                                        Configuration.getPlayers().get(j).setRotate(10.0f);
 
                             if (KongosDrinkMainModel.getInstance().getXxcoor() == 960 * i && forward) {
                                 KongosDrinkMainModel.getInstance().setIndex(i);
@@ -257,33 +263,34 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                     }
                     KongosDrinkMainModel.getInstance().setPosition(position);
                     forward = false;
-                    for (int i = 0; i < Configuration.getPlayers().length; i++) {
-                        if (Configuration.getPlayers()[i].isActive()) {
-                            Configuration.getPlayers()[i].setRotate(0.0f);
-                            Configuration.getPlayers()[i].setActive(false);
+                    for (int i = 0; i < Configuration.getPlayers().size(); i++) {
+                        if (Configuration.getPlayers().get(i).isActive()) {
+                            Configuration.getPlayers().get(i).setRotate(0.0f);
+                            Configuration.getPlayers().get(i).setActive(false);
                             switch (Configuration.getGameSize()) {
                                 case FIFTY:
                                     if (position >= 50)
-                                        Configuration.getPlayers()[i].setFinished(true);
+                                        Configuration.getPlayers().get(i).setFinished(true);
                                     break;
                             }
                             boolean finished = true;
-                            for (int j = 0; j < Configuration.getPlayers().length; j++) {
-                                if (!Configuration.getPlayers()[j].isFinished()) {
+                            for (int j = 0; j < Configuration.getPlayers().size(); j++) {
+                                if (!Configuration.getPlayers().get(j).isFinished()) {
                                     finished = false;
                                     break;
                                 }
                             }
 
                             KongosDrinkMainModel.getInstance().setFinished(finished);
-                            Configuration.getPlayers()[i].setPosition(position);
+                            Configuration.getPlayers().get(i).setPosition(position);
                             if (!finished) {
                                 do{
-                                    if (KongosDrinkMainModel.getInstance().getPlayerIndex() == Configuration.getPlayers().length - 1)
+                                    if (KongosDrinkMainModel.getInstance().getPlayerIndex() == Configuration.getPlayers().size() - 1)
                                         KongosDrinkMainModel.getInstance().setPlayerIndex(0);
                                     else
                                         KongosDrinkMainModel.getInstance().setPlayerIndex(KongosDrinkMainModel.getInstance().getPlayerIndex() + 1);
-                                }while(Configuration.getPlayers()[KongosDrinkMainModel.getInstance().getPlayerIndex()].isFinished());
+                                }while(Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).isFinished() ||
+                                        !Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).isEnable());
                                 KongosDrinkMainModel.getInstance().setStep(KongosDrinkMainModel.Step.LEVEL);
                             }
                         }

@@ -1,9 +1,11 @@
 package com.gamefactoryx.cheers.tool.kongosdrink;
 
+import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.model.kongosdrink.AvatarType;
 import com.gamefactoryx.cheers.model.kongosdrink.Player;
+import com.gamefactoryx.cheers.tool.FunnySubjectGenerator;
 
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -11,13 +13,15 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Configuration {
 
-    public enum GameSizeEnum{
+    public enum GameSizeEnum {
         THRITY(30), FORTY(40), FIFTY(50);
         private final int value;
-        GameSizeEnum(int value){
+
+        GameSizeEnum(int value) {
             this.value = value;
         }
-        public String toString(){
+
+        public String toString() {
             return Integer.toString(value);
         }
     }
@@ -37,29 +41,32 @@ public class Configuration {
     }
 
 
-
     private static GameSizeEnum gameSize = GameSizeEnum.FIFTY;
     private static boolean penalty;
     private static int sound;
-    private static Player[] players = { new Player("Spieler 1", Player.SEX.MALE, AvatarType.BULGARIA),
-                                            new Player("Spieler 2", Player.SEX.FEMALE, AvatarType.SLOVAKIA),
-                                            new Player("Spieler 3", Player.SEX.FEMALE, AvatarType.GERMANY),
-                                            new Player("Spieler 4", Player.SEX.MALE, AvatarType.CZECH) };
+    private static final List<Player> players = new ArrayList<>();
 
     private static GameType gameType = GameType.TEAM_VS_TEAM;
     private static long modusTypeInterval = 10_000;
 
 
-    public static GameSizeEnum getGameSize(){
+    public static GameSizeEnum getGameSize() {
         return gameSize;
     }
-    public static void setGameSize(GameSizeEnum _gameSize){
+
+    public static void setGameSize(GameSizeEnum _gameSize) {
         gameSize = _gameSize;
     }
 
+    static {
+        for(int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++)
+            players.add(new Player(FunnySubjectGenerator.getFunnySubject(i)));
+    }
 
-    private Configuration(){}
-    public static class KongosDrink{
+    private Configuration() {
+    }
+
+    public static class KongosDrink {
         public static final int DISTANCE_BETWEEN_TWO_FIELDS = 187;
     }
 
@@ -79,7 +86,7 @@ public class Configuration {
         sound = _sound;
     }
 
-    public static Player[] getPlayers() {
+    public static List<Player> getPlayers() {
         return players;
     }
 
@@ -91,22 +98,25 @@ public class Configuration {
         gameType = _gameType;
     }
 
-    public static String getPlayerName(int index){
-        return players[index].getName();
+    public static String getPlayerName(int index) {
+        return players.get(index).getName();
     }
 
-    public static Player getRandomPlayer(int excluded){
-        return getRandomPlayer(excluded, Player.SEX.DONT_CARE);
+    public static Player getRandomPlayer(int excluded) {
+        return getRandomPlayer(excluded, Subject.Sex.DONT_CARE);
     }
 
-    public static Player getRandomPlayer(int excluded, Player.SEX sex){
+    public static Player getRandomPlayer(int excluded, Subject.Sex sex) {
         int randomNum;
         int acc = 0;
         do {
-            randomNum = (new Random()).nextInt(players.length);
+            randomNum = (new Random()).nextInt(getEnablePlayersAmount());
             ++acc;
-        }while((!(randomNum != excluded && (sex == Player.SEX.DONT_CARE || players[randomNum].getSex() == sex))) && acc < players.length);
-        return players[randomNum];
+        }
+        while ((!(randomNum != excluded &&
+                (sex == Subject.Sex.DONT_CARE || players.get(randomNum).getSex() == sex)))
+                && acc < players.size());
+        return players.get(randomNum);
     }
 
 
@@ -116,5 +126,14 @@ public class Configuration {
 
     public static void setModusTypeInterval(long modusTypeInterval) {
         Configuration.modusTypeInterval = modusTypeInterval;
+    }
+
+    private static int getEnablePlayersAmount() {
+        int ret = 0;
+        for(Player player: Configuration.getPlayers()){
+            if(player.isEnable()) ++ret;
+        }
+
+        return ret;
     }
 }
