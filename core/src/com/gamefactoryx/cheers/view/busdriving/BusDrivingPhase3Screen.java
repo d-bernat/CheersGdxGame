@@ -85,12 +85,12 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
         String task = BusDrivingPhase3Model.getInstance().getTask();
         FontHelper.getGlyphLayout().setText(font, name);
         font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.48f - FontHelper.getGlyphLayout().width / 2.4f, Y * DISTANCE_FROM_TEXTBOX_BOTTOM);
-        if(BusDrivingPhase3Model.getInstance().isPhaseFinished()){
+        if (BusDrivingPhase3Model.getInstance().isPhaseFinished()) {
             FontHelper.getGlyphLayout().setText(font, BusDrivingPhase3Model.getInstance().getFinalMessage());
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
 
-        }else {
+        } else {
             FontHelper.getGlyphLayout().setText(font, task);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - FontHelper.getGlyphLayout().height * 2.5f);
@@ -109,18 +109,22 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
+        getButtons()[0][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.4f, Resolution.getGameWorldHeightPortrait() * 0.1f);
+        getButtons()[0][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.4f, Resolution.getGameWorldHeightPortrait() * 0.1f);
         getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
         getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
+        getButtons()[1][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.4f, Resolution.getGameWorldHeightPortrait() * 0.1f);
+        getButtons()[1][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.4f, Resolution.getGameWorldHeightPortrait() * 0.1f);
         getButtons()[2][0] = new Sprite(new Texture("common/continue.png"));
         getButtons()[2][1] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[2][0].setSize(getButtons()[2][0].getWidth()*2.0f, getButtons()[2][0].getHeight()*2.0f);
-        getButtons()[2][1].setSize(getButtons()[2][1].getWidth()*2.0f, getButtons()[2][1].getHeight()*2.0f);
+        getButtons()[2][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        getButtons()[2][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
         setClicked(new boolean[getCountOfButtons()]);
     }
 
     @Override
     protected void drawButtons() {
-        if(!BusDrivingPhase3Model.getInstance().isPhaseFinished()) {
+        if (!BusDrivingPhase3Model.getInstance().isPhaseFinished()) {
             float PORTRAIT_DISTANCE_FROM_BOTTOM = 0.05f;
             int x_offset = 0;
             for (int i = 0; i < getCountOfButtons(); i++) {
@@ -129,7 +133,7 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM);
                 getButtons()[i][click_index].draw(getSpriteBatch(), 50.0f);
             }
-        }else{
+        } else {
             getButtons()[2][0].setPosition(X * 0.75f, Y * 0.02f);
             getButtons()[2][0].draw(getSpriteBatch(), 1.0f);
         }
@@ -155,13 +159,16 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
     protected void drawCards() {
         VCard vCard = BusDrivingPhase3Model.getInstance().getBoard().getVCards().last();
         Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
-        scard.setPosition(X * 0.22f, Y * 0.23f);
+        scard.setSize(Resolution.getGameWorldWidthPortrait() * 0.6f, Resolution.getGameWorldHeightPortrait() * 0.52f);
+        scard.setPosition(X * 0.20f, Y * 0.23f);
         scard.draw(getSpriteBatch(), 1.0f);
 
     }
 
     @Override
     public void dispose() {
+        if (font != null)
+            font.dispose();
         super.dispose();
 
     }

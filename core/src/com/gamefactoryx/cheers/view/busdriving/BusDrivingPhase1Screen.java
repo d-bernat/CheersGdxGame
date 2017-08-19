@@ -103,8 +103,8 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
         setButtons(new Sprite[1][2]);
         getButtons()[0][0] = new Sprite(new Texture("common/continue.png"));
         getButtons()[0][1] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[0][0].setSize(getButtons()[0][0].getWidth()*2.0f, getButtons()[0][0].getHeight()*2.0f);
-        getButtons()[0][1].setSize(getButtons()[0][1].getWidth()*2.0f, getButtons()[0][1].getHeight()*2.0f);
+        getButtons()[0][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        getButtons()[0][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
 
     }
 
@@ -135,20 +135,22 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     @Override
     protected void drawCards() {
         int x_offset = 0;
-        getFaceDownBigCard().setPosition(X * 0.22f, Y * 0.23f);
+        getFaceDownBigCard().setPosition(X * 0.18f, Y * 0.22f);
         if (BusDrivingPhase1Model.getInstance().getBoard().getVCards().size == 0) {
+            getFaceDownBigCard().setSize(Resolution.getGameWorldWidthPortrait() * 0.6f, Resolution.getGameWorldHeightPortrait() * 0.52f);
             getFaceDownBigCard().draw(getSpriteBatch(), 1.0f);
         } else {
             for (VCard vCard : BusDrivingPhase1Model.getInstance().getBoard().getVCards()) {
                 Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
-                scard.setPosition(X * 0.22f, Y * 0.23f);
+                scard.setPosition(X * 0.18f, Y * 0.22f);
+                scard.setSize(Resolution.getGameWorldWidthPortrait() * 0.6f, Resolution.getGameWorldHeightPortrait() * 0.52f);
                 scard.draw(getSpriteBatch(), 1.0f);
             }
         }
 
         for (VCard vCard : BusDrivingPhase1Model.getInstance().getPlayers().get(BusDrivingPhase1Model.getInstance().getActivePlayer()).getVCards()) {
             Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
-            scard.setSize(X * 0.2f, Y * 0.2f);
+            scard.setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * 0.18f);
             scard.setPosition(X * 0.1f + scard.getWidth() * x_offset++, Y * 0.02f);
             if(BusDrivingPhase1Model.getInstance().isPhaseFinished())
                 scard.draw(getSpriteBatch(), 100.0f);
@@ -161,6 +163,8 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     public void dispose() {
         getFaceDownBigCard().getTexture().dispose();
         getFaceDownSmallCard().getTexture().dispose();
+        if(font !=null)
+            font.dispose();
         super.dispose();
     }
 

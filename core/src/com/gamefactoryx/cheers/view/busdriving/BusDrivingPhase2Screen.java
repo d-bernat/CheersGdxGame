@@ -128,8 +128,9 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
         setButtons(new Sprite[1][2]);
         getButtons()[0][0] = new Sprite(new Texture("common/continue.png"));
         getButtons()[0][1] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[0][0].setSize(getButtons()[0][0].getWidth()*2.0f, getButtons()[0][0].getHeight()*2.0f);
-        getButtons()[0][1].setSize(getButtons()[0][1].getWidth()*2.0f, getButtons()[0][1].getHeight()*2.0f);
+        getButtons()[0][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        getButtons()[0][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+
     }
 
     @Override
@@ -216,7 +217,10 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        if(font !=null)
+            font.dispose();
         super.dispose();
+
     }
     private String getMessage(int credit) {
         switch (Configuration.getLanguage()) {

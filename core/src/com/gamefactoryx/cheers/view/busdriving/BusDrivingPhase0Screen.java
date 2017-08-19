@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.view.busdriving;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -93,23 +94,28 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     @Override
     protected void initButtons() {
         setButtons(new Sprite[8][2]);
-
+        Texture txt = new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
         for (int i = 0; i < getCountOfButtons() - 2; i++)
             for (int j = 0; j < 2; j++) {
-                getButtons()[i][j] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png"));
-                if (i == 0 && j == 0)
+                getButtons()[i][j] = new Sprite(txt);
+                //getButtons()[i][j].setSize(getButtons()[i][j].getWidth() * Re, getButtons()[i][j].getHeight() * 1.15f);
+                getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.65f, Resolution.getGameWorldHeightPortrait() * 0.077f);
+                /*if (i == 0 && j == 0)
                     getButtons()[i][j].setSize(getButtons()[0][0].getWidth() * 1.15f, getButtons()[0][0].getHeight() * 1.15f);
                 else
-                    getButtons()[i][j].setSize(getButtons()[0][0].getWidth(), getButtons()[0][0].getHeight());
+                    getButtons()[i][j].setSize(getButtons()[0][0].getWidth(), getButtons()[0][0].getHeight());*/
             }
 
         getButtons()[6][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
         getButtons()[6][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
+        getButtons()[6][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
+        getButtons()[6][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
         getButtons()[7][0] = new Sprite(new Texture("common/continue.png"));
         getButtons()[7][1] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[7][0].setSize(getButtons()[7][0].getWidth()*2.0f, getButtons()[7][0].getHeight()*2.0f);
-        getButtons()[7][1].setSize(getButtons()[7][1].getWidth()*2.0f, getButtons()[7][1].getHeight()*2.0f);
-
+        //getButtons()[7][0].setSize(getButtons()[7][0].getWidth() * 2.0f, getButtons()[7][0].getHeight() * 2.0f);
+        //getButtons()[7][1].setSize(getButtons()[7][1].getWidth() * 2.0f, getButtons()[7][1].getHeight() * 2.0f);
+        getButtons()[7][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        getButtons()[7][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
 
         setClicked(new boolean[getCountOfButtons()]);
     }
@@ -124,7 +130,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
             getButtons()[i][click_index].setPosition(X * 0.18f,
                     Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][click_index].getHeight() * 1.475f);
             getButtons()[i][click_index].draw(getSpriteBatch(), Croupier.getInstance().getPlayers().get(i).isActive() ? 1.0f : 100.0f);
-            if(i > 1) {
+            if (i > 1) {
                 getButtons()[6][Croupier.getInstance().getPlayers().get(i).isActive() ? 0 : 1].setPosition(X * 0.75f,
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
                 getButtons()[6][Croupier.getInstance().getPlayers().get(i).isActive() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
@@ -178,6 +184,8 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     public void dispose() {
         // getFaceDownBigCard().getTexture().dispose();
         // getFaceDownSmallCard().getTexture().dispose();
+        if (font != null)
+            font.dispose();
         super.dispose();
     }
 

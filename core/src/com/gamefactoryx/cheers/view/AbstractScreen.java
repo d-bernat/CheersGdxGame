@@ -4,13 +4,11 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.*;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -160,7 +158,7 @@ public abstract class AbstractScreen implements Screen {
                     Resolution.getGameWorldHeightPortrait(), camera);
             landscapeViewport = new StretchViewport(Resolution.getGameWorldWidthLandscape(),
                     Resolution.getGameWorldHeightLandscape(), camera);
-            getViewport().apply(true);
+            getViewport().apply(false);
         }
         spriteBatch = new SpriteBatch();
 

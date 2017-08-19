@@ -69,7 +69,7 @@ public class HallOfFameScreen extends AbstractScreen {
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
         }
-        if(Orientation.getOrientation() == Input.Orientation.Portrait)
+        if (Orientation.getOrientation() == Input.Orientation.Portrait)
             getTextBox().setSize(X * 0.85f, Y * 0.065f);
         else
             getTextBox().setSize(X * 0.75f, Y * 0.105f);
@@ -79,8 +79,8 @@ public class HallOfFameScreen extends AbstractScreen {
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
                         Resolution.getGameWorldHeightPortrait() * 0.17f * Resolution.getAspectRatio());
             }
-        for(Sprite medal: medals)
-            if(Orientation.getOrientation() == Input.Orientation.Portrait)
+        for (Sprite medal : medals)
+            if (Orientation.getOrientation() == Input.Orientation.Portrait)
                 medal.setSize(X * 0.2f, X * 0.2f);
             else
                 medal.setSize(Y * 0.2f, Y * 0.2f);
@@ -109,10 +109,10 @@ public class HallOfFameScreen extends AbstractScreen {
             String val = String.format("%3s:    %s", s[0], s[1]);
             float xx = X * DISTANCE_FROM_LEFT;
             float yy = Y * DISTANCE_FROM_UP - font.getCapHeight() * 2.3f * y_offset++;
-            getTextBox().setPosition(xx * 0.5f, yy - getTextBox().getHeight()/1.5f);
+            getTextBox().setPosition(xx * 0.5f, yy - getTextBox().getHeight() / 1.5f);
             getTextBox().draw(getSpriteBatch());
-            if(index < 3) {
-                medals[index].setPosition(xx * DISTANCE_FROM_LEFT_FOR_MEDALS, yy - getTextBox().getHeight()/1.5f);
+            if (index < 3) {
+                medals[index].setPosition(xx * DISTANCE_FROM_LEFT_FOR_MEDALS, yy - getTextBox().getHeight() / 1.5f);
                 medals[index].draw(getSpriteBatch());
             }
             ++index;
@@ -156,9 +156,10 @@ public class HallOfFameScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
-        for(Sprite medal: medals)
+        for (Sprite medal : medals)
             medal.getTexture().dispose();
-
+        if (font != null)
+            font.dispose();
         super.dispose();
     }
 }
