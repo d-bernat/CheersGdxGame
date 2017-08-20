@@ -307,11 +307,10 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
 
             }
 
-            i = 0;
-            for(CtrlSprite ctrl: mainButtonsSprite){
-                 if(ctrl.isActive()){
-                     ctrl.setPosition(60 + 120 * i++, -80);
-                     ctrl.draw(batch);
+            for(int ii = 1; ii < mainButtonsSprite.length; ii++){
+                 if(mainButtonsSprite[ii].isActive()){
+                     mainButtonsSprite[ii].setPosition(60 + 120 * i++, -80);
+                     mainButtonsSprite[ii].draw(batch);
                  }
             }
         }
@@ -429,8 +428,8 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
     private void setMainButtonsTexture(){
         mainButtonsTexture = new Texture[] {
                 new Texture(Gdx.files.internal("common/kongos_drink/other_team.png")),
-                new Texture(Gdx.files.internal("common/kongos_drink/continue.png")),
-                new Texture(Gdx.files.internal("common/kongos_drink/drink.png"))
+                new Texture(Gdx.files.internal("common/kongos_drink/drink.png")),
+                new Texture(Gdx.files.internal("common/kongos_drink/continue.png"))
         };
     }
 

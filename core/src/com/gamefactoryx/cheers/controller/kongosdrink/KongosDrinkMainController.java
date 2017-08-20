@@ -136,38 +136,52 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
         int y = CoorTransformator.getY(540, screenY);
 
         if (getScreen().getMainButtonsSprite()[0].isActive()) {
-            if (x >= getScreen().getMainButtonsSprite()[0].getX() &&
-                    x <= getScreen().getMainButtonsSprite()[0].getX() + getScreen().getMainButtonsSprite()[0].getWidth() &&
+            /*if (x >= getScreen().getMainButtonsSprite()[0].getX() &&
+                    x <= getScreen().getMainButtonsSprite()[0].getX() + getScreen().getMainButtonsSprite()[0].getWidth() * 3.0f &&
                     y >= getScreen().getMainButtonsSprite()[0].getY() &&
-                    y <= getScreen().getMainButtonsSprite()[0].getY() + getScreen().getMainButtonsSprite()[0].getHeight()) {
-                getScreen().getMainButtonsSprite()[0].setActive(false);
-                getScreen().getMainButtonsSprite()[1].setActive(true);
-                getScreen().getMainButtonsSprite()[2].setActive(true);
-
-                gotoPlayer(KongosDrinkMainModel.getInstance().getPlayerIndex());
-                //if click on some level
-                //if no move
-                //determinate level
-                List<Integer> level = Arrays.asList(1, 2, 3, 5);
-                Collections.shuffle(level);
-                KongosDrinkMainModel.getInstance().setLevel(level.get(0));
-                //select active card
-                int cardsSize = KongosDrinkMainModel.getInstance().getCards().get(KongosDrinkMainModel.getInstance().getLevel()).size();
-                int lastSelectedCardIndex = lastSelectedCard.get(KongosDrinkMainModel.getInstance().getLevel());
-                if (lastSelectedCardIndex < cardsSize - 1)
-                    ++lastSelectedCardIndex;
-                else
-                    lastSelectedCardIndex = 0;
-                Card c = KongosDrinkMainModel.getInstance().getCards().get(KongosDrinkMainModel.getInstance().getLevel()).get(lastSelectedCardIndex);
-                c.setText(CardTextParser.replacePlayerNames(c.getOriginText()));
-                KongosDrinkMainModel.getInstance().setActiveCard(c);
-                lastSelectedCard.put(KongosDrinkMainModel.getInstance().getLevel(), lastSelectedCardIndex);
-                //card selected
-            }
+                    y <= getScreen().getMainButtonsSprite()[0].getY() + getScreen().getMainButtonsSprite()[0].getHeight() * 3.0f) {*/
+            gotoPlayer(KongosDrinkMainModel.getInstance().getPlayerIndex());
+            //if click on some level
+            //if no move
+            //determinate level
+            List<Integer> level = Arrays.asList(1, 2, 3, 5);
+            Collections.shuffle(level);
+            KongosDrinkMainModel.getInstance().setLevel(level.get(0));
+            //select active card
+            int cardsSize = KongosDrinkMainModel.getInstance().getCards().get(KongosDrinkMainModel.getInstance().getLevel()).size();
+            int lastSelectedCardIndex = lastSelectedCard.get(KongosDrinkMainModel.getInstance().getLevel());
+            if (lastSelectedCardIndex < cardsSize - 1)
+                ++lastSelectedCardIndex;
+            else
+                lastSelectedCardIndex = 0;
+            Card c = KongosDrinkMainModel.getInstance().getCards().get(KongosDrinkMainModel.getInstance().getLevel()).get(lastSelectedCardIndex);
+            c.setText(CardTextParser.replacePlayerNames(c.getOriginText()));
+            KongosDrinkMainModel.getInstance().setActiveCard(c);
+            lastSelectedCard.put(KongosDrinkMainModel.getInstance().getLevel(), lastSelectedCardIndex);
+            //card selected
+            getScreen().getMainButtonsSprite()[0].setActive(false);
+            getScreen().getMainButtonsSprite()[1].setActive(true);
+            getScreen().getMainButtonsSprite()[2].setActive(c.getPoint() > 0);
+            //}
         } else if (x >= getScreen().getMainButtonsSprite()[1].getX() &&
                 x <= getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth() &&
                 y >= getScreen().getMainButtonsSprite()[1].getY() &&
                 y <= getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight()) {
+
+            getScreen().getMainButtonsSprite()[0].setActive(true);
+            getScreen().getMainButtonsSprite()[1].setActive(false);
+            getScreen().getMainButtonsSprite()[2].setActive(false);
+
+            KongosDrinkMainModel.getInstance().getActiveCard().setText(KongosDrinkMainModel.getInstance().getActiveCard().getOriginText());
+            KongosDrinkMainModel.getInstance().setActiveCard(null);
+            setNextPlayerActive();
+
+
+        } else if (x >= getScreen().getMainButtonsSprite()[2].getX() &&
+                x <= getScreen().getMainButtonsSprite()[2].getX() + getScreen().getMainButtonsSprite()[2].getWidth() &&
+                y >= getScreen().getMainButtonsSprite()[2].getY() &&
+                y <= getScreen().getMainButtonsSprite()[2].getY() + getScreen().getMainButtonsSprite()[2].getHeight()) {
+
             getScreen().getMainButtonsSprite()[0].setActive(true);
             getScreen().getMainButtonsSprite()[1].setActive(false);
             getScreen().getMainButtonsSprite()[2].setActive(false);
@@ -183,19 +197,8 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 setNextPlayerActive();
             }
 
-        } else if (x >= getScreen().getMainButtonsSprite()[2].getX() &&
-                x <= getScreen().getMainButtonsSprite()[2].getX() + getScreen().getMainButtonsSprite()[2].getWidth() &&
-                y >= getScreen().getMainButtonsSprite()[2].getY() &&
-                y <= getScreen().getMainButtonsSprite()[2].getY() + getScreen().getMainButtonsSprite()[2].getHeight()) {
-
-            getScreen().getMainButtonsSprite()[0].setActive(true);
-            getScreen().getMainButtonsSprite()[1].setActive(false);
-            getScreen().getMainButtonsSprite()[2].setActive(false);
-
-            KongosDrinkMainModel.getInstance().getActiveCard().setText(KongosDrinkMainModel.getInstance().getActiveCard().getOriginText());
-            KongosDrinkMainModel.getInstance().setActiveCard(null);
-            setNextPlayerActive();
         }
+
 
         return true;
 
@@ -305,8 +308,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
                             if (!finished) {
                                 setNextPlayerActive();
-                            }
-                            else{
+                            } else {
                                 getScreen().getMainButtonsSprite()[0].setActive(false);
                                 getScreen().getMainButtonsSprite()[1].setActive(false);
                                 getScreen().getMainButtonsSprite()[2].setActive(false);
