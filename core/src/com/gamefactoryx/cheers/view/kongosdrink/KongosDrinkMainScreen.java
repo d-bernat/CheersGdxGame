@@ -309,7 +309,7 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
 
             for(int ii = 1; ii < mainButtonsSprite.length; ii++){
                  if(mainButtonsSprite[ii].isActive()){
-                     mainButtonsSprite[ii].setPosition(60 + 120 * i++, -80);
+                     mainButtonsSprite[ii].setPosition(60 + 120 * ii-1, -80);
                      mainButtonsSprite[ii].draw(batch);
                  }
             }
