@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.controller.busdriving;
+package com.gamefactoryx.cheers.controller.kongosdrink;
 
 
 import com.badlogic.gdx.Gdx;
@@ -7,30 +7,31 @@ import com.gamefactoryx.cheers.controller.AbstractController;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
-import com.gamefactoryx.cheers.model.busdriving.BusDrivingPhase0Model;
-import com.gamefactoryx.cheers.model.busdriving.Croupier;
-import com.gamefactoryx.cheers.tool.Configuration;
+//import com.gamefactoryx.cheers.model.busdriving.Croupier;
+import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkPhase0Model;
+//import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Resolution;
+import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
 /**
  * Created by bernat on 16.05.2017.
  */
-public class BusDrivingStagePhase0Controller extends AbstractController {
+public class KongosDrinkPhase0Controller extends AbstractController {
 
     private StringBuilder typedName = new StringBuilder();
     private boolean shift;
     private boolean keyboardOn;
     private String tempName;
-    private BusDrivingPhase0Model model;
+    private KongosDrinkPhase0Model model;
     private int activeBoxIndex;
 
 
-    public BusDrivingStagePhase0Controller(final AbstractScreen screen) {
+    public KongosDrinkPhase0Controller(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
         enableKeyboard(false);
-        model = BusDrivingPhase0Model.getNewInstance();
+        model = KongosDrinkPhase0Model.getNewInstance();
     }
 
 
@@ -63,8 +64,8 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
                 activeBoxIndex = i;
 
-                if (Croupier.getInstance().getPlayers().get(activeBoxIndex).isEnable()) {
-                    for (int j = activeBoxIndex; j < Configuration.getMaxPlayers(); j++)
+                if (Configuration.getPlayers().get(activeBoxIndex).isEnable()) {
+                    for (int j = activeBoxIndex; j < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); j++)
                         model.getPlayers().get(j).setEnable(false);
                 }
                 else {
@@ -92,7 +93,9 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                 screenX <= getScreen().getButtons()[7][0].getX() + getScreen().getButtons()[7][0].getWidth()&&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[7][0].getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[7][0].getY() + getScreen().getButtons()[7][0].getHeight())
-            StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+            //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+            KongosDrinkStageManager.getInstance().showStage(KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
+
 
         return true;
     }

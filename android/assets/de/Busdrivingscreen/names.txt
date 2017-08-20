@@ -1,41 +1,39 @@
-﻿Knut Schfleck 
-Peer Verser 
-Klaus Uhr 
-Rainer Verlust 
-Eric fik van Hinten 
-Ann Geber 
-Eva N.Gelium 
-Dick Erchen 
-Ed Ding 
-Dr.Acula 
-Kasimir Fickdusiemir 
-Dick Tator 
-Bill Ich 
-Elli Fant 
-Dick S.Ding 
-Bill Yard 
-Harry Bo
-Hella Wahnsinn 
-Hans Maul 
-Jim Panse 
-Jäger Schnitzel 
-Kid Zler 
-Klaus Trophobie 
-Miss Ratten
-Ken Tucky 
-Karl Ender 
-Lee Kör 
-K. Melle 
-Klara Fall 
-Al K. Ohol
-Ali Mente
-Anna Bolika
-Lars Vegas
-Marie Huana
-Perry Ode
-Sham Paine
-Rose Ette
-Anna L.
-Wilma Ficken
-Vater Morgana
-M. N. Taler
+﻿M;Knut Schfleck;ARGENTINA;P
+M;Peer Verser;AUSTRALIA;P
+M;Klaus Uhr;AUSTRIA;P
+M;Rainer Verlust;BRASIL;P
+M;Eric fik van Hinten;BULGARIA;P
+F;Ann Geber;CANADA;P
+F;Eva N.Gelium;CHILE;P
+F;Dick Erchen;CHINA;P
+M;Ed Ding;COLOUR1;P
+F;Dr.Acula;COLOUR2;P
+M;Kasimir Fickdusiemir;COLOUR3;P
+M;Dick Tator;COLOUR4;P
+M;Bill Ich;CROATIA;P
+F;Elli Fant;CZECH;P
+M;Dick S.Ding;DENMARK;P
+M;Bill Yard;EGYPT;P
+M;Harry Bo;FINLAND;P
+F;Hella Wahnsinn;FRANCE;P
+M;Hans Maul;GB;P
+M;Jim Panse;GERMANY;P
+M;Jäger Schnitzel;GREECE;P
+M;Kid Zler;INDIA;P
+M;Klaus Trophobie;ITALY;P
+F;Miss Ratten;JAMAIKA;P
+M;Ken Tucky;KOLUMBIA;P
+M;Karl Ender;MEXICO;P
+M;Lee Kör;NETHERLANDS;P
+M;K. Melle;POLAND;P
+F;Klara Fall;PORTUGAL;P
+M;Al K. Ohol;RUSSIA;P
+M;Ali Mente;SERBIA;P
+F;Anna Bolika;SLOVAKIA;P
+M;Lars Vegas;SPAIN;P
+F;Marie Huana;SWEDEN;P
+M;Perry Ode;SWITZERLAND;P
+M;Sham Paine;TUNIS;P
+F;Rose Ette;TURKEY;P
+F;Anna L.;UKRAINE;P
+F;Wilma Ficken;USA;P

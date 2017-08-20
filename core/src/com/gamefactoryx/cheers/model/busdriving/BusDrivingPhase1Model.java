@@ -79,7 +79,7 @@ public final class BusDrivingPhase1Model {
 
     public boolean isPhaseFinished() {
         for (Player player : getPlayers()) {
-            if (player.isActive() && player.getVCards().size < 4)
+            if (player.isEnable() && player.getVCards().size < 4)
                 return false;
         }
         setFinalMessage();
@@ -91,7 +91,7 @@ public final class BusDrivingPhase1Model {
     }
 
     public void setActivePlayer(int activePlayer) {
-        if (activePlayer < getPlayers().size() && getPlayers().get(activePlayer).isActive())
+        if (activePlayer < getPlayers().size() && getPlayers().get(activePlayer).isEnable())
             this.activePlayer = activePlayer;
         else {
             this.activePlayer = 0;

@@ -65,7 +65,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
                     vCard.setOrientation(CardOrientation.FACE);
                     activeCard = vCard;
                     for (Player player : model.getPlayers()) {
-                        if (player.isActive())
+                        if (player.isEnable())
                             for (VCard vCardPlayer : player.getVCards()) {
                                 if (vCard.equals(vCardPlayer)) {
                                     if (vCard_index < 5)
@@ -92,7 +92,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
             if (!model.isPhaseFinished()) {
                 outer:
                 for (Player player : model.getPlayers()) {
-                    if (player.isActive())
+                    if (player.isEnable())
                         for (VCard playerVCard : player.getVCards()) {
                             if (activeCard.equals(playerVCard)) {
                                 Gdx.input.vibrate(10);
@@ -122,7 +122,7 @@ public class BusDrivingStagePhase2Controller extends AbstractController {
     private boolean isThereMoreThenOneLooser() {
         int counter = 0;
         for (Player player : model.getPlayers()) {
-            if (player.isAlive() && player.isActive()) ++counter;
+            if (player.isAlive() && player.isEnable()) ++counter;
             if (counter > 1) break;
 
         }

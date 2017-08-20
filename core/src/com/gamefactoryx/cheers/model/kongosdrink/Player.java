@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 
@@ -8,20 +9,15 @@ import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
  * Created by Bernat on 18.07.2017.
  */
 public class Player {
-    public enum SEX {MALE, FEMALE, DONT_CARE}
-
     private int position;
+    private boolean enable;
     private boolean active;
     private float rotate;
-    private AvatarType avatar;
-    private String name;
-    private SEX sex;
     private boolean finished;
+    private Subject subject;
 
-    public Player( String name, SEX sex, AvatarType avatar) {
-        this.avatar = avatar;
-        this.name = name;
-        this.sex = sex;
+    public Player( Subject subject) {
+        this.subject = subject;
     }
 
     public int getPosition() {
@@ -53,34 +49,34 @@ public class Player {
     }
 
     public AvatarType getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(AvatarType avatar) {
-        this.avatar = avatar;
+        return subject.getAvatar();
     }
 
     public String getName() {
-        return name;
+        return subject.getName();
+    }
+    public void setName(String name){
+        subject.setName(name);
+    }
+    public Subject.Sex getSex() {
+        return subject.getSex();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Subject.Type getSubjectType(){
+        return subject.getType();
     }
-
-    public SEX getSex() {
-        return sex;
-    }
-
-    public void setSex(SEX sex) {
-        this.sex = sex;
-    }
-
     public boolean isFinished() {
         return finished;
     }
-
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

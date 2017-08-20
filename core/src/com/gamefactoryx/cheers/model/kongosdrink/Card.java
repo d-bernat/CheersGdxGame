@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.gamefactoryx.cheers.tool.kongosdrink.CardTextParser;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 /**
@@ -7,42 +8,30 @@ import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
  */
 
 public class Card {
-
-    public enum SubTypeEnum{A, B, C, D, E, F, G;}
-    public enum DepictLabelEnum {CHANGES,
-        DRINK_TOGETHER, MIRROR, NOTALKING, PIG,
-        PRESENT, RULES, STAR, WC, YODA;}
-    private final DepictLabelEnum depictLabel;
-    private final String text;
-    private final Configuration.GameType gameType;
-    private final SubTypeEnum subType;
+    private final String originText;
+    private String  text;
+    private final int ttl;
     private final int point;
     private final int sip;
 
 
-    public Card(DepictLabelEnum depictLabel, String text, Configuration.GameType gameType, SubTypeEnum subType, int point, int sip) {
-        this.depictLabel = depictLabel;
-        this.text = text;
-        this.gameType = gameType;
-        this.subType  = subType;
+    public Card(String originText, int point, int sip, int ttl) {
+        this.originText = originText;
+        this.ttl = ttl;
         this.point = point;
         this.sip = sip;
-    }
-
-    public DepictLabelEnum getDepictLabel() {
-        return depictLabel;
     }
 
     public String getText() {
         return text;
     }
 
-    public Configuration.GameType getGameType() {
-        return gameType;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public SubTypeEnum getSubType() {
-        return subType;
+    public int getTtl() {
+        return ttl;
     }
 
     public int getPoint() {
@@ -51,5 +40,9 @@ public class Card {
 
     public int getSip() {
         return sip;
+    }
+
+    public String getOriginText() {
+        return originText;
     }
 }

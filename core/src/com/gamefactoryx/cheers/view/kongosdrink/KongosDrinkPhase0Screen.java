@@ -1,4 +1,4 @@
-package com.gamefactoryx.cheers.view.busdriving;
+package com.gamefactoryx.cheers.view.kongosdrink;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -6,16 +6,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.gamefactoryx.cheers.model.busdriving.BusDrivingPhase0Model;
-import com.gamefactoryx.cheers.model.busdriving.Croupier;
-import com.gamefactoryx.cheers.tool.*;
+import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkPhase0Model;
+import com.gamefactoryx.cheers.tool.FontHelper;
+import com.gamefactoryx.cheers.tool.Orientation;
+import com.gamefactoryx.cheers.tool.Resolution;
+import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
 
 /**
  * Created by bernat on 16.05.2017.
  */
-public class BusDrivingPhase0Screen extends AbstractScreen {
+public class KongosDrinkPhase0Screen extends AbstractScreen {
 
 
     private float X, Y;
@@ -25,7 +27,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     private int FONT_SIZE;
 
 
-    public BusDrivingPhase0Screen() {
+    public KongosDrinkPhase0Screen() {
         super();
     }
 
@@ -38,8 +40,8 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdrivingscreen-landscape.png")));
-        setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdrivingscreen.png")));
+        setLandscapeSprite(new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/kongosridescreen.png")));
+        setPortraitSprite(new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/kongosridescreen.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
@@ -48,7 +50,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     public void resize(int width, int height) {
         super.resize(width, height);
         float FONT_SIZE_ON_SCREEN = 0.03f;
-        if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
+        if (com.gamefactoryx.cheers.tool.Configuration.getLanguage() == com.gamefactoryx.cheers.tool.Configuration.LanguageEnum.SK)
             generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
         else
             generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
@@ -77,7 +79,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.81f;
         int y_offset = 0;
         for (int i = 0; i < getCountOfButtons() - 2; i++) {
-            String name = BusDrivingPhase0Model.getInstance().getPlayers().get(i).getName();
+            String name = KongosDrinkPhase0Model.getInstance().getPlayers().get(i).getName();
             FontHelper.getGlyphLayout().setText(font, name);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
                     (Y * DISTANCE_FROM_TEXTBOX_BOTTOM) - y_offset++ * FontHelper.getGlyphLayout().height * 5.72f);
@@ -87,21 +89,21 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_phase_1/text_box_horizontal.png")));
+        setTextBox(new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_phase_1/text_box_horizontal.png")));
     }
 
     @Override
     protected void initButtons() {
         setButtons(new Sprite[8][2]);
-        Texture txt = new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
+        Texture txt = new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
         for (int i = 0; i < getCountOfButtons() - 2; i++)
             for (int j = 0; j < 2; j++) {
                 getButtons()[i][j] = new Sprite(txt);
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.65f, Resolution.getGameWorldHeightPortrait() * 0.077f);
             }
 
-        getButtons()[6][0] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
-        getButtons()[6][1] = new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
+        getButtons()[6][0] = new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
+        getButtons()[6][1] = new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
         getButtons()[6][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
         getButtons()[6][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
         getButtons()[7][0] = new Sprite(new Texture("common/continue.png"));
@@ -117,15 +119,15 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         float PORTRAIT_DISTANCE_FROM_BOTTOM = 0.76f;
         int y_offset = 0;
 
-        for (int i = 0; i < Configuration.getMaxPlayers(); i++) {
+        for (int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;
             getButtons()[i][click_index].setPosition(X * 0.18f,
                     Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][click_index].getHeight() * 1.475f);
-            getButtons()[i][click_index].draw(getSpriteBatch(), Croupier.getInstance().getPlayers().get(i).isEnable() ? 1.0f : 100.0f);
+            getButtons()[i][click_index].draw(getSpriteBatch(),  Configuration.getPlayers().get(i).isEnable() ? 1.0f : 100.0f);
             if (i > 1) {
-                getButtons()[6][Croupier.getInstance().getPlayers().get(i).isEnable() ? 0 : 1].setPosition(X * 0.75f,
+                getButtons()[6][Configuration.getPlayers().get(i).isEnable() ? 0 : 1].setPosition(X * 0.75f,
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
-                getButtons()[6][Croupier.getInstance().getPlayers().get(i).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+                getButtons()[6][Configuration.getPlayers().get(i).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             }
             ++y_offset;
         }
