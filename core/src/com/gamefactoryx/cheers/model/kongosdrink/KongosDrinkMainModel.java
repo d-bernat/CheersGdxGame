@@ -5,6 +5,7 @@ import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Bernat on 10.07.2017.
@@ -50,6 +51,13 @@ public class KongosDrinkMainModel {
 
     private Step step;
 
+    private Card activeCard;
+
+    private Map<Integer,List<Card>> cards;
+
+    private boolean animationRunning;
+
+    private int enablePlayersSize;
 
     public static KongosDrinkMainModel getInstance() {
         if (instance == null) {
@@ -65,14 +73,25 @@ public class KongosDrinkMainModel {
     }
 
     private KongosDrinkMainModel() {
-        List<Player> players = Configuration.getPlayers();
-        for (int i = 0; i < players.size(); i++) {
-            players.get(i).setPosition(1);
-            players.get(i).setFinished(false);
-            players.get(i).setActive(false);
-        }
-        //player[i].setName(FunnyNameGenerator.getFunnyName(i));
 
+        cards = CardFactory.getNewInstance().getCards();
+
+        List<Player> players = Configuration.getPlayers();
+        for (Player player: players) {
+            if(player.isEnable()) {
+                player.setPosition(1);
+                player.setFinished(false);
+                player.setActive(false);
+                ++enablePlayersSize;
+            }
+            else{
+                player.setPosition(0);
+                player.setFinished(false);
+                player.setActive(false);
+
+            }
+
+        }
 
         modusTypeTextMap = new HashMap<>();
         modusTypeTextMap.put(CAP, Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/cards/cardsigns_text/cap.txt").
@@ -194,5 +213,29 @@ public class KongosDrinkMainModel {
 
     public void setStep(Step step) {
         this.step = step;
+    }
+
+    public Card getActiveCard() {
+        return activeCard;
+    }
+
+    public void setActiveCard(Card activeCard) {
+        this.activeCard = activeCard;
+    }
+
+    public Map<Integer, List<Card>> getCards() {
+        return cards;
+    }
+
+    public boolean isAnimationRunning() {
+        return animationRunning;
+    }
+
+    public void setAnimationRunning(boolean animationRunning) {
+        this.animationRunning = animationRunning;
+    }
+
+    public int getEnablePlayersSize() {
+        return enablePlayersSize;
     }
 }

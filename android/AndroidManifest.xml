@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gamefactoryx.cheers"
-    android:versionCode="4"
-    android:versionName="1.0.2.Alpha" >
+    android:versionCode="5"
+    android:versionName="1.0.3.Alpha" >
 
     <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="25" />
 
