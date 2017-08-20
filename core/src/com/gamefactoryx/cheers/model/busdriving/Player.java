@@ -60,7 +60,12 @@ public class Player implements Comparable<Player>{
         cards.removeIndex(cards.indexOf(vCard, true));
     }
 
-
+    public Subject.Sex getSex() {
+        return subject.getSex();
+    }
+    public void setSex(Subject.Sex sex){
+        subject.setSex(sex);
+    }
     @Override
     public int compareTo(Player o) {
         return o.getVCards().size - this.getVCards().size ;

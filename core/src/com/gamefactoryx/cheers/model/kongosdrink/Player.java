@@ -61,6 +61,9 @@ public class Player {
     public Subject.Sex getSex() {
         return subject.getSex();
     }
+    public void setSex(Subject.Sex sex){
+        subject.setSex(sex);
+    }
 
     public Subject.Type getSubjectType(){
         return subject.getType();

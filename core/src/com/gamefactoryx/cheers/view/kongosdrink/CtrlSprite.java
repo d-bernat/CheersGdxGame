@@ -3,13 +3,13 @@ package com.gamefactoryx.cheers.view.kongosdrink;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class ModusSprite extends Sprite {
+public class CtrlSprite extends Sprite {
     private int type;
     private  boolean active;
     private boolean clicked;
 
 
-    public ModusSprite(Texture texture){
+    public CtrlSprite(Texture texture){
         super(texture);
     }
 

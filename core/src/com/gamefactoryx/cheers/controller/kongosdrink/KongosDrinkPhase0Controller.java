@@ -8,6 +8,7 @@ import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
 //import com.gamefactoryx.cheers.model.busdriving.Croupier;
+import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkPhase0Model;
 //import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -55,7 +56,7 @@ public class KongosDrinkPhase0Controller extends AbstractController {
         }
 
 
-        for (int i = 0; i < getScreen().getCountOfButtons() - 2; i++) {
+        for (int i = 0; i < getScreen().getCountOfButtons() - 3; i++) {
 
             if (screenX >= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.9f &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
@@ -72,11 +73,15 @@ public class KongosDrinkPhase0Controller extends AbstractController {
                     for (int j = 0; j <= activeBoxIndex; j++)
                         model.getPlayers().get(j).setEnable(true);
                 }
-
-
-
-            } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
-                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.85f &&
+            }else if (screenX >= getScreen().getButtons()[i][0].getX() &&
+                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                Configuration.getPlayers().get(i).setSex(
+                        Configuration.getPlayers().get(i).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
+            }
+            else if (screenX >= getScreen().getButtons()[i][0].getX() &&
+                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
 
@@ -89,12 +94,15 @@ public class KongosDrinkPhase0Controller extends AbstractController {
             }
         }
 
-        if(screenX >= getScreen().getButtons()[7][0].getX() &&
-                screenX <= getScreen().getButtons()[7][0].getX() + getScreen().getButtons()[7][0].getWidth()&&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[7][0].getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[7][0].getY() + getScreen().getButtons()[7][0].getHeight())
-            //StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+
+        if(screenX >= getScreen().getButtons()[8][0].getX() &&
+                screenX <= getScreen().getButtons()[8][0].getX() + getScreen().getButtons()[8][0].getWidth()&&
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[8][0].getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[8][0].getY() + getScreen().getButtons()[8][0].getHeight()) {
+            Gdx.input.vibrate(10);
             KongosDrinkStageManager.getInstance().showStage(KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
+
+        }
 
 
         return true;
@@ -134,7 +142,7 @@ public class KongosDrinkPhase0Controller extends AbstractController {
                 }
                 break;
         }
-        return false;
+        return true;
     }
 
 

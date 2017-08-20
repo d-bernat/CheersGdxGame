@@ -7,6 +7,7 @@ import com.gamefactoryx.cheers.controller.AbstractController;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
+import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.model.busdriving.BusDrivingPhase0Model;
 import com.gamefactoryx.cheers.model.busdriving.Croupier;
 import com.gamefactoryx.cheers.tool.Configuration;
@@ -44,17 +45,17 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        if(!super.touchUp(screenX, screenY, pointer, button))
+        if (!super.touchUp(screenX, screenY, pointer, button))
             return true;
 
-        if(keyboardOn){
+        if (keyboardOn) {
             enableKeyboard(false);
             setPlayerName();
             return true;
         }
 
 
-        for (int i = 0; i < getScreen().getCountOfButtons() - 2; i++) {
+        for (int i = 0; i < getScreen().getCountOfButtons() - 3; i++) {
 
             if (screenX >= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.9f &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
@@ -66,20 +67,24 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                 if (Croupier.getInstance().getPlayers().get(activeBoxIndex).isEnable()) {
                     for (int j = activeBoxIndex; j < Configuration.getMaxPlayers(); j++)
                         model.getPlayers().get(j).setEnable(false);
-                }
-                else {
+                } else {
                     for (int j = 0; j <= activeBoxIndex; j++)
                         model.getPlayers().get(j).setEnable(true);
                 }
 
 
-
+            } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
+                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                model.getPlayers().get(i).setSex(
+                        model.getPlayers().get(i).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.85f &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
 
-                if(model.getPlayers().get(i).isEnable()) {
+                if (model.getPlayers().get(i).isEnable()) {
                     activeBoxIndex = i;
                     tempName = model.getPlayers().get(activeBoxIndex).getName();
                     model.getPlayers().get(activeBoxIndex).setName("");
@@ -88,11 +93,13 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
             }
         }
 
-        if(screenX >= getScreen().getButtons()[7][0].getX() &&
-                screenX <= getScreen().getButtons()[7][0].getX() + getScreen().getButtons()[7][0].getWidth()&&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[7][0].getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[7][0].getY() + getScreen().getButtons()[7][0].getHeight())
+        if (screenX >= getScreen().getButtons()[8][0].getX() &&
+                screenX <= getScreen().getButtons()[8][0].getX() + getScreen().getButtons()[8][0].getWidth() &&
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[8][0].getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[8][0].getY() + getScreen().getButtons()[8][0].getHeight()) {
+            Gdx.input.vibrate(10);
             StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+        }
 
         return true;
     }
