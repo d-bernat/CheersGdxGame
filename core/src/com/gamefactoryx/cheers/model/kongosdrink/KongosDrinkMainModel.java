@@ -59,6 +59,8 @@ public class KongosDrinkMainModel {
 
     private int enablePlayersSize;
 
+    private boolean textBoxDisplayed;
+
     public static KongosDrinkMainModel getInstance() {
         if (instance == null) {
             instance = new KongosDrinkMainModel();
@@ -237,5 +239,13 @@ public class KongosDrinkMainModel {
 
     public int getEnablePlayersSize() {
         return enablePlayersSize;
+    }
+
+    public boolean isTextBoxDisplayed() {
+        return textBoxDisplayed;
+    }
+
+    public void setTextBoxDisplayed(boolean textBoxDisplayed) {
+        this.textBoxDisplayed = textBoxDisplayed;
     }
 }

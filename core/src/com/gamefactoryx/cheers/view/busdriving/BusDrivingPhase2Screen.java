@@ -120,7 +120,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/busdriving_phase_2/text_box_horizontal.png")));
+        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/Busdrivingscreen/text_box_horizontal.png")));
     }
 
     @Override
