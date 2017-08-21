@@ -46,6 +46,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
     private BitmapFont font;
+    private BitmapFont nameFont;
     private Sprite textBox;
 
     public Sprite getTextBox() {
@@ -193,10 +194,13 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
         parameter.size = FONT_SIZE;
         parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
-        BitmapFont temp = font;
+       // BitmapFont temp = font;
         font = generator.generateFont(parameter);
-        if (temp != null)
-            temp.dispose();
+        parameter.color = new Color(0.0f, 0.0f, 0.0f, 1f);
+        nameFont = generator.generateFont(parameter);
+
+        /*if (temp != null)
+            temp.dispose();*/
         generator.dispose();
     }
 
@@ -321,12 +325,17 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
         if (!KongosDrinkMainModel.getInstance().isTextBoxDisplayed() && !KongosDrinkMainModel.getInstance().isAnimationRunning()) {
             for (int ii = 1; ii < mainButtonsSprite.length; ii++) {
                 if (mainButtonsSprite[ii].isActive()) {
-                    if (ii == 1)
-                        mainButtonsSprite[ii].setPosition(-mainButtonsSprite[ii].getWidth(), -mainButtonsSprite[ii].getHeight()/4);
-                    else
+                    if (ii == 1) {
+                        mainButtonsSprite[ii].setPosition(-mainButtonsSprite[ii].getWidth(), -mainButtonsSprite[ii].getHeight() / 4);
+                        mainButtonsSprite[ii].draw(batch);
+                        nameFont.draw(batch, Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName(),
+                                mainButtonsSprite[ii].getX() * 0.9f,
+                                mainButtonsSprite[ii].getY() + mainButtonsSprite[ii].getHeight() * 0.9f);
+                    }
+                    else {
                         mainButtonsSprite[ii].setPosition(60 + 120 * (ii - 2), -80);
-
-                    mainButtonsSprite[ii].draw(batch);
+                        mainButtonsSprite[ii].draw(batch);
+                    }
 
                 }
             }
@@ -358,6 +367,9 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
         if (font != null)
             font.dispose();
+
+        if (nameFont != null)
+            nameFont.dispose();
 
         if (getTextBox() != null)
             getTextBox().getTexture().dispose();
