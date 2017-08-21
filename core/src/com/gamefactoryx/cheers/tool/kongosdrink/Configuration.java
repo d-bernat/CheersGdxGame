@@ -112,14 +112,22 @@ public class Configuration {
 
     public static Player getRandomPlayer(int excluded, Subject.Sex sex) {
         int randomNum = 0;
+        List<Integer> rndIndexList = new ArrayList<>();
+        for(int i = 0; i < getEnablePlayersAmount(); i++){
+            if(i != excluded)
+                rndIndexList.add(i);
+        }
+
+        Collections.shuffle(rndIndexList);
+
         int acc = 0;
         do {
-           do{ randomNum = (new Random()).nextInt(getEnablePlayersAmount());} while(randomNum == excluded);
+            if(rndIndexList.size() <= acc) break;
+            randomNum = rndIndexList.get(acc);
             ++acc;
         }
-        while ((!(randomNum != excluded &&
-                (sex == Subject.Sex.DONT_CARE || players.get(randomNum).getSex() == sex)))
-                && acc < players.size());
+        while (sex != Subject.Sex.DONT_CARE && players.get(randomNum).getSex() != sex);
+
         return players.get(randomNum);
     }
 
