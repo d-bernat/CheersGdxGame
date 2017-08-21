@@ -23,9 +23,9 @@ public class KongosDrinkMainModel {
     public static final int WC = 512;
     public static final int YODA = 1024;
 
+
     public enum Step {LEVEL, TASK, MOVE}
 
-    ;
 
     private final HashMap<Integer, String> modusTypeTextMap;
 

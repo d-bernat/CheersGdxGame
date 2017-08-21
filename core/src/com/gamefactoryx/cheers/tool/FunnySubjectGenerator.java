@@ -26,7 +26,7 @@ public class FunnySubjectGenerator {
                 String[] subject = line.split(";");
                 if (subject.length == 4) {
                     Subject.Sex sex;
-                    switch (subject[0]) {
+                    switch (subject[0].trim()) {
                         case "M":
                             sex = Subject.Sex.MALE;
                             break;
@@ -38,7 +38,7 @@ public class FunnySubjectGenerator {
                     }
 
                     Subject.Type type;
-                    switch (subject[3]) {
+                    switch (subject[3].trim()) {
                         case "P":
                             type = Subject.Type.PERSON;
                             break;
@@ -51,7 +51,7 @@ public class FunnySubjectGenerator {
                     }
 
                     AvatarType avatar;
-                    switch (subject[2]) {
+                    switch (subject[2].trim()) {
                         case "ARGENTINA":
                             avatar = AvatarType.ARGENTINA;
                             break;
@@ -174,7 +174,7 @@ public class FunnySubjectGenerator {
                             break;
 
                     }
-                    subjects.add(new Subject(subject[1], sex, type, avatar));
+                    subjects.add(new Subject(subject[1].trim(), sex, type, avatar));
 
                 }
             }

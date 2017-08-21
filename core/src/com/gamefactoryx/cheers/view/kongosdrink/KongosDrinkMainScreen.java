@@ -13,10 +13,7 @@ import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.model.kongosdrink.Player;
 import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
-import com.gamefactoryx.cheers.tool.Resolution;
-import com.gamefactoryx.cheers.tool.kongosdrink.CardTextParser;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
-import com.gamefactoryx.cheers.view.AbstractScreen;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,10 +35,12 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
     private Texture[] backgroundTexture;
     private Texture[] foregroundTexture;
     private Texture[] modusTexture;
+    private Texture[] mainButtonsTexture;
     private Sprite[] sprite;
     private Sprite[] foregroundSprite;
     private Sprite[] playerSprite;
-    private ModusSprite[] modusSprite;
+    private CtrlSprite[] modusSprite;
+    private CtrlSprite[] mainButtonsSprite;
     private Sprite finishFlag;
     private final static FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     private FreeTypeFontGenerator generator;
@@ -54,6 +53,10 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
     }
     public void setTextBox(Sprite textBox) {
         this.textBox = textBox;
+    }
+
+    public CtrlSprite[] getMainButtonsSprite() {
+        return mainButtonsSprite;
     }
 
     private void initTextBox() {
@@ -72,6 +75,7 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
         setBackgroudTexture();
         setForegroundTexture();
         setModusTexture();
+        setMainButtonsTexture();
         sprite = new Sprite[backgroundTexture.length];
         for (int i = 0; i < sprite.length; i++) {
             sprite[i] = new Sprite(backgroundTexture[i]);
@@ -98,9 +102,9 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
                 foregroundSprite[i].setPosition(-foregroundSprite[i].getWidth() / 4, -foregroundSprite[i].getHeight() / 2);
             }
         }
-        modusSprite = new ModusSprite[10];
+        modusSprite = new CtrlSprite[10];
         for (int i = 0; i < 10; i++) {
-            modusSprite[i] = new ModusSprite(modusTexture[i]);
+            modusSprite[i] = new CtrlSprite(modusTexture[i]);
             modusSprite[i].setSize(modusSprite[i].getWidth() * 0.25f, modusSprite[i].getHeight() * 0.25f);
             switch (i) {
                 case 0:
@@ -135,6 +139,16 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
                     break;
             }
         }
+        mainButtonsSprite = new CtrlSprite[3];
+        for(int i = 0; i < 3; i++){
+            mainButtonsSprite[i] = new CtrlSprite(mainButtonsTexture[i]);
+            mainButtonsSprite[i].setSize(mainButtonsTexture[i].getWidth() * 0.25f, mainButtonsTexture[i].getHeight() * 0.25f);
+
+        }
+        mainButtonsSprite[0].setActive(true);
+        mainButtonsSprite[1].setActive(false);
+        mainButtonsSprite[2].setActive(false);
+
         initTextBox();
         initFinishFlag();
     }
@@ -148,7 +162,7 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
         return ret;
     }
 
-    public ModusSprite[] getModusSprite() {
+    public CtrlSprite[] getModusSprite() {
         return modusSprite;
     }
 
@@ -244,9 +258,11 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
         modusSprite[8].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.WC) == KongosDrinkMainModel.WC);
         modusSprite[9].setActive((KongosDrinkMainModel.getInstance().getModus() & KongosDrinkMainModel.YODA) == KongosDrinkMainModel.YODA);
 
+
+
         int i = 0;
         boolean textBoxDisplayed = false;
-        for (ModusSprite ms : modusSprite) {
+        for (CtrlSprite ms : modusSprite) {
             if (ms.isActive()) {
                 ms.setPosition(300 - 120 * i++, 120);
                 ms.draw(batch);
@@ -290,6 +306,13 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
                 }
 
             }
+
+            for(int ii = 1; ii < mainButtonsSprite.length; ii++){
+                 if(mainButtonsSprite[ii].isActive()){
+                     mainButtonsSprite[ii].setPosition(60 + 120 * (ii-1), -80);
+                     mainButtonsSprite[ii].draw(batch);
+                 }
+            }
         }
 
         batch.end();
@@ -311,6 +334,11 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
         for (Texture txt : modusTexture)
             if (txt != null)
                 txt.dispose();
+
+        for (Texture txt : mainButtonsTexture)
+            if (txt != null)
+                txt.dispose();
+
         if (font != null)
             font.dispose();
 
@@ -394,6 +422,14 @@ public class KongosDrinkMainScreen  implements Screen/*extends AbstractScreen*/ 
                 new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/star.png")),
                 new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/WC.png")),
                 new Texture(Gdx.files.internal("common/kongos_drink/cardsigns/yoda.png"))
+        };
+    }
+
+    private void setMainButtonsTexture(){
+        mainButtonsTexture = new Texture[] {
+                new Texture(Gdx.files.internal("common/kongos_drink/other_team.png")),
+                new Texture(Gdx.files.internal("common/kongos_drink/drink.png")),
+                new Texture(Gdx.files.internal("common/kongos_drink/continue.png"))
         };
     }
 

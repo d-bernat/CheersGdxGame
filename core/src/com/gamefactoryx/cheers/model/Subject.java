@@ -22,6 +22,10 @@ public class Subject {
         return sex;
     }
 
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
     public String getName() {
         return name;
     }

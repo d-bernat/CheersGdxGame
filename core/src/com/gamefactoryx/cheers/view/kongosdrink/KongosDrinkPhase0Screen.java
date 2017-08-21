@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkPhase0Model;
 import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
@@ -78,7 +79,7 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
     protected void drawText() {
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.81f;
         int y_offset = 0;
-        for (int i = 0; i < getCountOfButtons() - 2; i++) {
+        for (int i = 0; i < getCountOfButtons() - 3; i++) {
             String name = KongosDrinkPhase0Model.getInstance().getPlayers().get(i).getName();
             FontHelper.getGlyphLayout().setText(font, name);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
@@ -94,9 +95,9 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[8][2]);
+        setButtons(new Sprite[9][2]);
         Texture txt = new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
-        for (int i = 0; i < getCountOfButtons() - 2; i++)
+        for (int i = 0; i < getCountOfButtons() - 3; i++)
             for (int j = 0; j < 2; j++) {
                 getButtons()[i][j] = new Sprite(txt);
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.65f, Resolution.getGameWorldHeightPortrait() * 0.077f);
@@ -106,10 +107,16 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
         getButtons()[6][1] = new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
         getButtons()[6][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
         getButtons()[6][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
-        getButtons()[7][0] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[7][1] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[7][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
-        getButtons()[7][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+
+        getButtons()[7][0] = new Sprite(new Texture("common/kongos_drink/1st_side/boys.png"));
+        getButtons()[7][1] = new Sprite(new Texture("common/kongos_drink/1st_side/girls.png"));
+        getButtons()[7][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
+        getButtons()[7][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
+
+        getButtons()[8][0] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[8][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[8][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        getButtons()[8][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
 
         setClicked(new boolean[getCountOfButtons()]);
     }
@@ -129,11 +136,14 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
                 getButtons()[6][Configuration.getPlayers().get(i).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             }
+            getButtons()[7][Configuration.getPlayers().get(i).getSex() == Subject.Sex.MALE ? 0 : 1].setPosition(X * 0.16f,
+                        Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
+            getButtons()[7][Configuration.getPlayers().get(i).getSex() == Subject.Sex.MALE ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             ++y_offset;
         }
 
-        getButtons()[7][0].setPosition(X * 0.75f, Y * 0.02f);
-        getButtons()[7][0].draw(getSpriteBatch(), 1.0f);
+        getButtons()[8][0].setPosition(X * 0.75f, Y * 0.02f);
+        getButtons()[8][0].draw(getSpriteBatch(), 1.0f);
     }
 
     @Override

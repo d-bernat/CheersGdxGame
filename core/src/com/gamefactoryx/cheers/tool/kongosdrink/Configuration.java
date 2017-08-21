@@ -45,7 +45,7 @@ public class Configuration {
     }
 
 
-    private static GameSizeEnum gameSize = GameSizeEnum.TWENTY;
+    private static GameSizeEnum gameSize = GameSizeEnum.FORTY;
     private static boolean penalty;
     private static int sound;
     private static final List<Player> players = new ArrayList<>();
@@ -111,10 +111,10 @@ public class Configuration {
     }
 
     public static Player getRandomPlayer(int excluded, Subject.Sex sex) {
-        int randomNum;
+        int randomNum = 0;
         int acc = 0;
         do {
-            randomNum = (new Random()).nextInt(getEnablePlayersAmount());
+           do{ randomNum = (new Random()).nextInt(getEnablePlayersAmount());} while(randomNum == excluded);
             ++acc;
         }
         while ((!(randomNum != excluded &&
