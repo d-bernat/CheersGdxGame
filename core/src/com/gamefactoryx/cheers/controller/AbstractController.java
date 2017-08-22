@@ -16,7 +16,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 abstract public class AbstractController extends InputAdapter {
 
     private final AbstractScreen screen;
-    private int downXCoor;
+
 
     protected AbstractController(final AbstractScreen screen){
         this.screen = screen;
@@ -36,8 +36,7 @@ abstract public class AbstractController extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        downXCoor = screenX;
-        return true;
+        return false;
     }
 
     @Override
