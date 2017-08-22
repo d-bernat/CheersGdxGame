@@ -23,6 +23,11 @@ public class NewGameScreen extends AbstractScreen {
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
 
+    @Override
+    public void show(){
+        super.show();
+        initBackButton();
+    }
 
     @Override
     protected void drawText() {

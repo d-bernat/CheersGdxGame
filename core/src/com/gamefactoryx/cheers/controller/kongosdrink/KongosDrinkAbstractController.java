@@ -7,6 +7,8 @@ import com.badlogic.gdx.Screen;
 import com.gamefactoryx.cheers.CheersGdxGame;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
+import com.gamefactoryx.cheers.tool.Orientation;
+import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 import com.gamefactoryx.cheers.view.kongosdrink.KongosDrinkMainScreen;
 
@@ -43,9 +45,19 @@ abstract public class KongosDrinkAbstractController extends InputAdapter {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if(downXCoor - screenX > 400 ){
+        if(screen.getBackButtonSprite() == null)
+            return true;
+
+        if(     screenX <= 200 &&
+                Resolution.getGameWorldHeightLandscape() - screenY <= 200 &&
+                Orientation.getOrientation() == Input.Orientation.Landscape ||
+
+                screenX <= 200 &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= 200 &&
+                        Orientation.getOrientation() == Input.Orientation.Portrait)
+        {
             Gdx.input.vibrate(10);
-            StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
+            StageManager.getInstance().showLastStage();
             return false;
         }
 

@@ -1,10 +1,7 @@
 package com.gamefactoryx.cheers.view;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -37,6 +34,8 @@ public abstract class AbstractScreen implements Screen {
     private Sprite[][] buttons;
     private Map<String, Sprite> cardSprites = new HashMap<>();
     private Sprite textBox;
+    private Sprite backButtonSprite;
+
 
 
     private int yScrollPos;
@@ -213,6 +212,8 @@ public abstract class AbstractScreen implements Screen {
             landscapeSprite.getTexture().dispose();
         if(spriteBatch != null)
             spriteBatch.dispose();
+        if(backButtonSprite != null)
+            backButtonSprite.getTexture().dispose();
     }
 
     public void setLandscapeSprite(Sprite landscapeSprite) {
@@ -225,6 +226,9 @@ public abstract class AbstractScreen implements Screen {
         portraitSprite.setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
 
+    public Sprite getBackButtonSprite() {
+        return backButtonSprite;
+    }
 
     private void drawSprite() {
         spriteBatch.begin();
@@ -234,6 +238,8 @@ public abstract class AbstractScreen implements Screen {
         drawCards();
         drawButtons();
         drawText();
+        if(backButtonSprite != null)
+            backButtonSprite.draw(spriteBatch);
         spriteBatch.end();
     }
 
@@ -259,6 +265,12 @@ public abstract class AbstractScreen implements Screen {
             return portraitViewport;
         else
             return landscapeViewport;
+    }
+
+    protected void initBackButton(){
+        backButtonSprite = new Sprite(new Texture("common/return.png"));
+        backButtonSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.05f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.05f);
+
     }
 
 }

@@ -31,7 +31,7 @@ public enum StageEnum {
             return new NewGameStageController(new NewGameScreen());
         }
     },
-    KONGOS_DRINK_PHASE0_STAGE {
+    KONGOS_DRINK_ZERO_STAGE {
         public AbstractController getController() {
             return new KongosDrinkPhase0Controller(new KongosDrinkPhase0Screen());
         }

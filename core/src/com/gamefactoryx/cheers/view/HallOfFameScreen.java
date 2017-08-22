@@ -37,6 +37,7 @@ public class HallOfFameScreen extends AbstractScreen {
     public void show() {
         super.show();
         dataModel = HallOfFameModel.getInstance();
+        initBackButton();
     }
 
 

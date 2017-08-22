@@ -36,6 +36,7 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
+        initBackButton();
     }
 
 

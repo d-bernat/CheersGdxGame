@@ -22,6 +22,7 @@ public final class StageManager {
     private StageEnum currentStage;
     private Queue<StageEnum> stageHistory = new Queue<>();
 
+
     // Singleton: private constructor
     private StageManager() {
         super();
@@ -79,8 +80,8 @@ public final class StageManager {
             case NEW_GAME_STAGE:
                 controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
-            case KONGOS_DRINK_PHASE0_STAGE:
-                controller = StageEnum.KONGOS_DRINK_PHASE0_STAGE.getController();
+            case KONGOS_DRINK_ZERO_STAGE:
+                controller = StageEnum.KONGOS_DRINK_ZERO_STAGE.getController();
                 break;
             case I_NEVER_DO_STAGE:
                 controller = StageEnum.I_NEVER_DO_STAGE.getController();
@@ -121,11 +122,11 @@ public final class StageManager {
         if (isLogicalLeafStage(currentStage))
             return;
 
-        if (stageHistory.size > 0) {
-            if (stageHistory.last() != currentStage)
-                stageHistory.addLast(currentStage);
-        } else
-            stageHistory.addLast(currentStage);
+        for(int i = 0; i < stageHistory.size; i++){
+            if(stageHistory.get(i) == currentStage)
+                return;
+        }
+        stageHistory.addLast(currentStage);
     }
 
     private boolean isLogicalLeafStage(StageEnum screenEnum) {
@@ -135,6 +136,7 @@ public final class StageManager {
         switch (screenEnum) {
             case SPLASH_STAGE:
             case BUS_DRIVING_STAGE_ZERO_PHASE:
+            case KONGOS_DRINK_ZERO_STAGE:
             case BUS_DRIVING_STAGE_FIRST_PHASE:
             case BUS_DRIVING_STAGE_SECOND_PHASE:
             case BUS_DRIVING_STAGE_THIRD_PHASE:

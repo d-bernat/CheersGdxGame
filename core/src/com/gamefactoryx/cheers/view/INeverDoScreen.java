@@ -37,6 +37,7 @@ public class INeverDoScreen extends AbstractScreen {
         super.show();
         dataModel = INeverDoModel.getInstance();
         line = dataModel.getLine();
+        initBackButton();
     }
 
     private List<String> splitLine() {

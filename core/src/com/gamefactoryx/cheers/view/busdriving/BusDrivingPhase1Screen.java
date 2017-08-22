@@ -32,6 +32,7 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
+        initBackButton();
     }
 
 

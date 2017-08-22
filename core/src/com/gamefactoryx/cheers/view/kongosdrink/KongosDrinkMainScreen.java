@@ -13,6 +13,7 @@ import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.model.kongosdrink.Player;
 import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
+import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
     private BitmapFont font;
     private BitmapFont nameFont;
     private Sprite textBox;
+    private Sprite backButtonSprite;
 
     public Sprite getTextBox() {
         return textBox;
@@ -59,6 +61,10 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
     public CtrlSprite[] getMainButtonsSprite() {
         return mainButtonsSprite;
+    }
+
+    public Sprite getBackButtonSprite() {
+        return backButtonSprite;
     }
 
     private void initTextBox() {
@@ -161,6 +167,8 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
         initMainButtonSprite();
         initTextBox();
         initFinishFlag();
+        initMainButtonSprite();
+        initBackButton();
     }
 
     private int getEnablePlayersAmount() {
@@ -175,6 +183,9 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
     public CtrlSprite[] getModusSprite() {
         return modusSprite;
     }
+
+
+
 
     @Override
     public void resize(int width, int height) {
@@ -340,7 +351,9 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                 }
             }
         }
-
+        if(backButtonSprite != null) {
+            backButtonSprite.draw(batch);
+        }
         batch.end();
     }
 
@@ -376,7 +389,8 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
         if (finishFlag != null)
             finishFlag.getTexture().dispose();
 
-        //super.dispose();
+        if(backButtonSprite != null)
+            backButtonSprite.getTexture().dispose();
     }
 
     private void setBackgroudTexture() {
@@ -496,5 +510,11 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
         return text;
     }
 
+    private void initBackButton(){
+        backButtonSprite = new Sprite(new Texture("common/return.png"));
+        backButtonSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
+        backButtonSprite.setPosition(-960/2, -540/2);
+
+    }
 
 }
