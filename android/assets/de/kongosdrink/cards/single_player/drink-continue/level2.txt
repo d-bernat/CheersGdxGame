@@ -35,4 +35,10 @@ Bis zum Ende des Spiels musst du, bevor du redest immer deinen Namen sagen und a
 Hast du seit Beginn des Spiels schon einen dummen Kommentar von dir gegeben? Wenn du es nicht getan hast dann hast du diese Aufgabe bestanden. Wir leben in einer Demokratie, also lass alle Spieler abwählen. Wenn sie sich jedoch dagegen entscheiden, musst du 3 Schlücke trinken.;2;3;0
 Gebe -+Player- eine 1 minütige Massage. Manchmal ist bisschen Fürsorge doch nett. Trinke lieber nicht 3 Mal.;2;3;0
 Schreibe der 7 Person, welche du auf Whatsapp hast, und frage sie ob sie dazu kommen will. Trinke anderenfalls 3 Mal,;2;2;0
+Ist es aber heiß hier! Du musst ein Kleidungsstück ausziehen oder kühl dich doch mit 2 Schlücken ab.;2;2;0
+Wirf der Person links neben dir einen verführerischen Blick zu. Kannst du sie so überzeugen mit dir einmal zu trinken? Wenn nicht trinkst du 3 Mal allein.;2;3;0
+Anstatt 2 Schlücke zu trinken kannst du auch einen Radschlag machen.;2;2;0
+Imitiere jemanden aus dieser Runde und wenn es die Mitspieler innerhalb 30 Sekunden erraten, dann musst du nich 2 Mal trinken.;2;2;0
+Du darfst 2 Mitspieler auswählen, welche sich küssen müssen oder ihr drei trinkt 2 Mal.;2;2;0
+-oPlayer- summt dir jetzt ein Lied vor, wenn du es nicht innerhalb von 15 Sekunden errätst musst du 3 Schlücke trinken.;2;3;15
 
