@@ -248,4 +248,5 @@ public class KongosDrinkMainModel {
     public void setTextBoxDisplayed(boolean textBoxDisplayed) {
         this.textBoxDisplayed = textBoxDisplayed;
     }
+
 }

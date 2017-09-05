@@ -1,8 +1,5 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
-//import com.gamefactoryx.cheers.model.busdriving.Croupier;
-//import com.gamefactoryx.cheers.model.busdriving.Player;
-
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.List;
@@ -15,6 +12,8 @@ public final class KongosDrinkPhase0Model {
 
 
     private int activePlayer;
+    private int page = 1;
+    private int maxPages;
 //    private Croupier croupier;
     private static KongosDrinkPhase0Model instance;
 
@@ -35,6 +34,9 @@ public final class KongosDrinkPhase0Model {
     private KongosDrinkPhase0Model() {
         for(int i = 0; i < Configuration.getPlayers().size(); i++)
             Configuration.getPlayers().get(i).setEnable(i < 2);
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+        maxPages = Configuration.getMaxPlayers() % maxPlayersProPage == 0 ?
+                Configuration.getMaxPlayers() / maxPlayersProPage : Configuration.getMaxPlayers() / maxPlayersProPage + 1;
 
     }
 
@@ -42,7 +44,19 @@ public final class KongosDrinkPhase0Model {
         return Configuration.getPlayers();
     }
 
-   /* public int getActivePlayer() {
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getMaxPages() {
+        return maxPages;
+    }
+
+    /* public int getActivePlayer() {
         return activePlayer;
     }
 

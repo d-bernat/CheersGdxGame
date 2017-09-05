@@ -1,7 +1,9 @@
 package com.gamefactoryx.cheers.view.kongosdrink;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -80,7 +82,9 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
     protected void drawText() {
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.81f;
         int y_offset = 0;
-        for (int i = 0; i < getCountOfButtons() - 3; i++) {
+        int page = KongosDrinkPhase0Model.getInstance().getPage();
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+        for (int i = maxPlayersProPage * (page - 1) ; i < maxPlayersProPage * (page - 1) + getMaxPlayers(); i++) {
             String name = KongosDrinkPhase0Model.getInstance().getPlayers().get(i).getName();
             FontHelper.getGlyphLayout().setText(font, name);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
@@ -96,7 +100,7 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[9][2]);
+        setButtons(new Sprite[7][2]);
         Texture txt = new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
         for (int i = 0; i < getCountOfButtons() - 3; i++)
             for (int j = 0; j < 2; j++) {
@@ -104,20 +108,20 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.65f, Resolution.getGameWorldHeightPortrait() * 0.077f);
             }
 
-        getButtons()[6][0] = new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
-        getButtons()[6][1] = new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
-        getButtons()[6][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
-        getButtons()[6][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
+        getButtons()[4][0] = new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
+        getButtons()[4][1] = new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
+        getButtons()[4][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
+        getButtons()[4][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
 
-        getButtons()[7][0] = new Sprite(new Texture("common/kongos_drink/1st_side/boys.png"));
-        getButtons()[7][1] = new Sprite(new Texture("common/kongos_drink/1st_side/girls.png"));
-        getButtons()[7][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
-        getButtons()[7][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
+        getButtons()[5][0] = new Sprite(new Texture("common/kongos_drink/1st_side/boys.png"));
+        getButtons()[5][1] = new Sprite(new Texture("common/kongos_drink/1st_side/girls.png"));
+        getButtons()[5][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
+        getButtons()[5][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
 
-        getButtons()[8][0] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[8][1] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[8][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
-        getButtons()[8][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        getButtons()[6][0] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[6][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[6][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        getButtons()[6][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
 
         setClicked(new boolean[getCountOfButtons()]);
     }
@@ -126,25 +130,29 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
     protected void drawButtons() {
         float PORTRAIT_DISTANCE_FROM_BOTTOM = 0.76f;
         int y_offset = 0;
+        int page = KongosDrinkPhase0Model.getInstance().getPage();
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
 
-        for (int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++) {
+        Gdx.app.log("*********", getMaxPlayers() + "");
+
+        for (int i = 0; i < getMaxPlayers(); i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;
             getButtons()[i][click_index].setPosition(X * 0.18f,
                     Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][click_index].getHeight() * 1.475f);
-            getButtons()[i][click_index].draw(getSpriteBatch(),  Configuration.getPlayers().get(i).isEnable() ? 1.0f : 100.0f);
-            if (i > 1) {
-                getButtons()[6][Configuration.getPlayers().get(i).isEnable() ? 0 : 1].setPosition(X * 0.75f,
+            getButtons()[i][click_index].draw(getSpriteBatch(),  Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 1.0f : 100.0f);
+            if (i > 1 || KongosDrinkPhase0Model.getInstance().getPage() > 1) {
+                getButtons()[4][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].setPosition(X * 0.75f,
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
-                getButtons()[6][Configuration.getPlayers().get(i).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+                getButtons()[4][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             }
-            getButtons()[7][Configuration.getPlayers().get(i).getSex() == Subject.Sex.MALE ? 0 : 1].setPosition(X * 0.16f,
+            getButtons()[5][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].setPosition(X * 0.16f,
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
-            getButtons()[7][Configuration.getPlayers().get(i).getSex() == Subject.Sex.MALE ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+            getButtons()[5][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             ++y_offset;
         }
 
-        getButtons()[8][0].setPosition(X * 0.75f, Y * 0.02f);
-        getButtons()[8][0].draw(getSpriteBatch(), 1.0f);
+        getButtons()[6][0].setPosition(X * 0.75f, Y * 0.02f);
+        getButtons()[6][0].draw(getSpriteBatch(), 1.0f);
     }
 
     @Override
@@ -172,5 +180,11 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
         super.dispose();
     }
 
+    private int getMaxPlayers(){
+        int page = KongosDrinkPhase0Model.getInstance().getPage();
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+        return  Configuration.getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage:
+                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getMaxPlayers());
+    }
 
 }

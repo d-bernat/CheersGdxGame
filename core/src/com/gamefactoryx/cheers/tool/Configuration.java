@@ -22,7 +22,8 @@ public class Configuration {
 
     private static LanguageEnum language;
     private static int MAX_PLAYERS = 6;
-    private static int MAX_TOP_SCORERS = 6;
+    private static int MAX_TOP_SCORERS = 4;
+    private static int MAX_PLAYERS_PRO_CONFIG_PAGE = 4;
 
     public static LanguageEnum getLanguage(){
         if(language == null)
@@ -38,6 +39,8 @@ public class Configuration {
     public static int getMaxTopScorers(){
         return MAX_TOP_SCORERS;
     }
-
+    public static int getMaxPlayersProConfigPage(){
+        return MAX_PLAYERS_PRO_CONFIG_PAGE;
+    }
     private Configuration(){}
 }

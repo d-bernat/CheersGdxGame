@@ -252,7 +252,7 @@ public abstract class AbstractScreen implements Screen {
 
     }
 
-    private void drawMainSprite() {
+     void drawMainSprite() {
         if (Orientation.getOrientation() == Input.Orientation.Landscape) {
             landscapeSprite.draw(spriteBatch, 1);
         } else {
@@ -273,4 +273,7 @@ public abstract class AbstractScreen implements Screen {
 
     }
 
+    public static Camera getCamera() {
+        return camera;
+    }
 }

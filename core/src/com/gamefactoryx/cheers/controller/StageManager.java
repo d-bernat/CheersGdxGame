@@ -141,6 +141,7 @@ public final class StageManager {
             case BUS_DRIVING_STAGE_SECOND_PHASE:
             case BUS_DRIVING_STAGE_THIRD_PHASE:
             case BUS_DRIVING_STAGE_FOURTH_PHASE:
+            case I_NEVER_DO_STAGE:
                 return true;
             default:
                 return false;

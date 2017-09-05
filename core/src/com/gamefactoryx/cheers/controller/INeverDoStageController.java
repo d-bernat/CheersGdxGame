@@ -48,7 +48,7 @@ final class INeverDoStageController extends AbstractController {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 0:
-                        StageManager.getInstance().showStage();
+                        StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
                         break;
                 }
             }

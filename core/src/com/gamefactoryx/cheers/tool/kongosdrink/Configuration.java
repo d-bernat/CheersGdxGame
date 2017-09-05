@@ -51,7 +51,9 @@ public class Configuration {
     private static final List<Player> players = new ArrayList<>();
 
     private static GameType gameType = GameType.TEAM_VS_TEAM;
-    private static long modusTypeInterval = 120_000;
+    private static long modusTypeInterval = 600_000;
+    private static int MAX_PLAYERS = 13;
+
 
 
     public static GameSizeEnum getGameSize() {
@@ -63,7 +65,7 @@ public class Configuration {
     }
 
     static {
-        for(int i = 0; i < com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers(); i++)
+        for(int i = 0; i < Configuration.getMaxPlayers(); i++)
             players.add(new Player(FunnySubjectGenerator.getFunnySubject(i)));
     }
 
@@ -72,6 +74,10 @@ public class Configuration {
 
     public static class KongosDrink {
         public static final int DISTANCE_BETWEEN_TWO_FIELDS = 187;
+    }
+
+    public static int getHowManyConfigurationScreens(){
+        return com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers() / 6 + 1;
     }
 
     public static boolean isPenalty() {
@@ -148,4 +154,10 @@ public class Configuration {
 
         return ret;
     }
+
+
+    public static int getMaxPlayers(){
+        return MAX_PLAYERS;
+    }
+
 }

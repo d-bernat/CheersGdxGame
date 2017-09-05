@@ -93,10 +93,10 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
             }
         }
 
-        if (screenX >= getScreen().getButtons()[8][0].getX() &&
-                screenX <= getScreen().getButtons()[8][0].getX() + getScreen().getButtons()[8][0].getWidth() &&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[8][0].getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[8][0].getY() + getScreen().getButtons()[8][0].getHeight()) {
+        if (screenX >= getScreen().getButtons()[6][0].getX() &&
+                screenX <= getScreen().getButtons()[6][0].getX() + getScreen().getButtons()[6][0].getWidth() &&
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
             Gdx.input.vibrate(10);
             StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
         }

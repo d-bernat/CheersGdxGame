@@ -167,7 +167,7 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
                 Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.SMALL, vCard.getOrientation()));
                 scard.setSize(X * 0.15f, Y * 0.12f);
                 scard.setPosition(X * 0.05f +
-                        (Configuration.getMaxPlayers() - BusDrivingPhase2Model.getInstance().getCountOfPlayers())/2.0f * scard.getWidth() +
+                        (/*Configuration.getMaxPlayers()*/ 6 - BusDrivingPhase2Model.getInstance().getCountOfPlayers())/2.0f * scard.getWidth() +
                         scard.getWidth() * x_offset,
                         Y * 0.78f - scard.getHeight() * 0.15f * y_offset++);
                 scard.draw(getSpriteBatch(), 1.0f);
