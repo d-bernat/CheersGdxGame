@@ -41,7 +41,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
         if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
                 screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 200) {
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 100) {
             touchPos = screenX;
             return true;
         }
