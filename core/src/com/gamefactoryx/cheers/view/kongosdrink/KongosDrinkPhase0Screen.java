@@ -133,7 +133,6 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
         int page = KongosDrinkPhase0Model.getInstance().getPage();
         int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
 
-        Gdx.app.log("*********", getMaxPlayers() + "");
 
         for (int i = 0; i < getMaxPlayers(); i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;

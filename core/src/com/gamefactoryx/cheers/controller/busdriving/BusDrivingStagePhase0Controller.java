@@ -25,6 +25,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
     private String tempName;
     private BusDrivingPhase0Model model;
     private int activeBoxIndex;
+    private int touchPos;
 
 
     public BusDrivingStagePhase0Controller(final AbstractScreen screen) {
@@ -38,12 +39,19 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-
+        if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
+                screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 200) {
+            touchPos = screenX;
+            return true;
+        }
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        int distance = screenX - touchPos;
+        touchPos = 0;
 
         if (!super.touchUp(screenX, screenY, pointer, button))
             return true;
@@ -54,8 +62,20 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
             return true;
         }
 
+        if (screenX >= getScreen().getButtons()[6][0].getX() &&
+                screenX <= getScreen().getButtons()[6][0].getX() + getScreen().getButtons()[6][0].getWidth() &&
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
+            Gdx.input.vibrate(10);
+            StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+            return true;
+        }
 
-        for (int i = 0; i < getScreen().getCountOfButtons() - 3; i++) {
+        int maxPlayersProPage = Configuration.getMaxPlayersProConfigPage();
+        int page = model.getPage();
+
+
+        for (int i = 0; i < /*getScreen().getCountOfButtons() - 3*/ getMaxPlayers(); i++) {
 
             if (screenX >= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.9f &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
@@ -64,11 +84,11 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
                 activeBoxIndex = i;
 
-                if (Croupier.getInstance().getPlayers().get(activeBoxIndex).isEnable()) {
-                    for (int j = activeBoxIndex; j < Configuration.getMaxPlayers(); j++)
+                if (Croupier.getInstance().getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).isEnable()) {
+                    for (int j = activeBoxIndex + Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j < Configuration.getMaxPlayers(); j++)
                         model.getPlayers().get(j).setEnable(false);
                 } else {
-                    for (int j = 0; j <= activeBoxIndex; j++)
+                    for (int j = 0; j <= activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j++)
                         model.getPlayers().get(j).setEnable(true);
                 }
 
@@ -77,28 +97,34 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
-                model.getPlayers().get(i).setSex(
-                        model.getPlayers().get(i).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
+                model.getPlayers().get(i + maxPlayersProPage * (page - 1)).setSex(
+                        model.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.85f &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
 
-                if (model.getPlayers().get(i).isEnable()) {
+                if (model.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable()) {
                     activeBoxIndex = i;
-                    tempName = model.getPlayers().get(activeBoxIndex).getName();
-                    model.getPlayers().get(activeBoxIndex).setName("");
+                    tempName = model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).getName();
+                    model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).setName("");
                     enableKeyboard(true);
                 }
             }
         }
+        if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
+                screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 200) {
+            if (distance >= 100) {
+                if (!model.isLastPage())
+                    model.setPage(model.getPage() + 1);
 
-        if (screenX >= getScreen().getButtons()[6][0].getX() &&
-                screenX <= getScreen().getButtons()[6][0].getX() + getScreen().getButtons()[6][0].getWidth() &&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
-            Gdx.input.vibrate(10);
-            StageManager.getInstance().showStage(StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
+            } else if (distance <= -100) {
+                if (!model.isFirstPage()) {
+                    model.setPage(model.getPage() - 1);
+
+                }
+            }
         }
 
         return true;
@@ -131,10 +157,12 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                 return false;
             default:
                 if (keycode >= Input.Keys.A && keycode <= Input.Keys.Z && typedName.length() < 8) {
+                    int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+                    int page =model.getPage();
 
                     typedName.append(shift ? Input.Keys.toString(keycode).toUpperCase() : Input.Keys.toString(keycode).toLowerCase());
-                    model.getPlayers().get(activeBoxIndex).setName(typedName.toString());
-                    PlayerNameCache.addName(typedName.toString(), model.getPlayers().get(activeBoxIndex).getPosition());
+                    model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).setName(typedName.toString());
+                    PlayerNameCache.addName(typedName.toString(), model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).getPosition());
                 }
                 break;
         }
@@ -148,12 +176,31 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
     }
 
 
-    private void setPlayerName() {
+    /*private void setPlayerName() {
         if (typedName.toString().trim().length() > 0)
             model.getPlayers().get(activeBoxIndex).setName(typedName.toString());
         else
             model.getPlayers().get(activeBoxIndex).setName(tempName);
         typedName.setLength(0);
+    }*/
+
+    private void setPlayerName() {
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+        int page = model.getPage();
+
+        if (typedName.toString().trim().length() > 0)
+            model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).setName(typedName.toString());
+        else
+            model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).setName(tempName);
+        typedName.setLength(0);
     }
+
+    private int getMaxPlayers() {
+        int page = model.getPage();
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+        return Configuration.getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage :
+                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getMaxPlayers());
+    }
+
 
 }

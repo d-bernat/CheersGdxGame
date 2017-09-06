@@ -78,7 +78,9 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     protected void drawText() {
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.81f;
         int y_offset = 0;
-        for (int i = 0; i < getCountOfButtons() - 3; i++) {
+        int page = BusDrivingPhase0Model.getInstance().getPage();
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+        for (int i = maxPlayersProPage * (page - 1) ; i < maxPlayersProPage * (page - 1) + getMaxPlayers(); i++) {
             String name = BusDrivingPhase0Model.getInstance().getPlayers().get(i).getName();
             FontHelper.getGlyphLayout().setText(font, name);
             font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
@@ -129,7 +131,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         int maxPlayers = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage:
                 page * maxPlayersProPage - com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers();
 
-        for (int i = 0; i < maxPlayers; i++) {
+       /* for (int i = 0; i < maxPlayers; i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;
             getButtons()[i][click_index].setPosition(X * 0.18f,
                     Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][click_index].getHeight() * 1.475f);
@@ -144,6 +146,22 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
             getButtons()[5][Croupier.getInstance().getPlayers().get(i).getSex() == Subject.Sex.MALE ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             ++y_offset;
 
+        }*/
+
+        for (int i = 0; i < getMaxPlayers(); i++) {
+            int click_index = getClicked()[i] ? CLICKED : FREE;
+            getButtons()[i][click_index].setPosition(X * 0.18f,
+                    Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][click_index].getHeight() * 1.475f);
+            getButtons()[i][click_index].draw(getSpriteBatch(),  Croupier.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 1.0f : 100.0f);
+            if (i > 1 || BusDrivingPhase0Model.getInstance().getPage() > 1) {
+                getButtons()[4][Croupier.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].setPosition(X * 0.75f,
+                        Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
+                getButtons()[4][Croupier.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+            }
+            getButtons()[5][Croupier.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].setPosition(X * 0.16f,
+                    Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
+            getButtons()[5][Croupier.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+            ++y_offset;
         }
 
         getButtons()[6][0].setPosition(X * 0.75f, Y * 0.02f);
@@ -175,5 +193,11 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         super.dispose();
     }
 
+    private int getMaxPlayers(){
+        int page = BusDrivingPhase0Model.getInstance().getPage();
+        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
+        return  Configuration.getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage:
+                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getMaxPlayers());
+    }
 
 }

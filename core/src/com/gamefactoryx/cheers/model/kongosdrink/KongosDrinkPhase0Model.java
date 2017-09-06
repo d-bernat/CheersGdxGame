@@ -14,6 +14,7 @@ public final class KongosDrinkPhase0Model {
     private int activePlayer;
     private int page = 1;
     private int maxPages;
+    private boolean last, first;
 //    private Croupier croupier;
     private static KongosDrinkPhase0Model instance;
 
@@ -37,6 +38,8 @@ public final class KongosDrinkPhase0Model {
         int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
         maxPages = Configuration.getMaxPlayers() % maxPlayersProPage == 0 ?
                 Configuration.getMaxPlayers() / maxPlayersProPage : Configuration.getMaxPlayers() / maxPlayersProPage + 1;
+        first = true;
+
 
     }
 
@@ -50,10 +53,20 @@ public final class KongosDrinkPhase0Model {
 
     public void setPage(int page) {
         this.page = page;
+        first = page == 1;
+        last = page == maxPages;
     }
 
     public int getMaxPages() {
         return maxPages;
+    }
+
+    public boolean isFirstPage() {
+        return first;
+    }
+
+    public boolean isLastPage() {
+        return last;
     }
 
     /* public int getActivePlayer() {
