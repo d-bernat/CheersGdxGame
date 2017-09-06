@@ -112,7 +112,7 @@ public class KongosDrinkPhase0Controller extends AbstractController {
 
         if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
                 screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 200) {
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 100) {
             if (distance >= 100) {
                 if (!model.isLastPage())
                     model.setPage(model.getPage() + 1);

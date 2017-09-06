@@ -96,7 +96,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[7][2]);
+        setButtons(new Sprite[8][2]);
         Texture txt = new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
         for (int i = 0; i < getCountOfButtons() - 3; i++)
             for (int j = 0; j < 2; j++) {
@@ -118,6 +118,12 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         getButtons()[6][1] = new Sprite(new Texture("common/continue.png"));
         getButtons()[6][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
         getButtons()[6][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+
+        getButtons()[7][0] = new Sprite(new Texture("common/gold.png"));
+        getButtons()[7][1] = new Sprite(new Texture("common/grey.png"));
+        getButtons()[7][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
+        getButtons()[7][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
+
 
         setClicked(new boolean[getCountOfButtons()]);
     }
@@ -166,16 +172,33 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
         getButtons()[6][0].setPosition(X * 0.75f, Y * 0.02f);
         getButtons()[6][0].draw(getSpriteBatch(), 1.0f);
+
+        float x_offset =  getButtons()[7][1].getWidth() * 2.0f;
+        for(int i = 0; i < BusDrivingPhase0Model.getInstance().getMaxPages(); i++) {
+            if( BusDrivingPhase0Model.getInstance().getPage() - 1 == i) {
+                getButtons()[7][0].setPosition(X/2 - BusDrivingPhase0Model.getInstance().getMaxPages() * getButtons()[7][0].getWidth() + x_offset * i, Y * 0.36f);
+                getButtons()[7][0].draw(getSpriteBatch(), 1.0f);
+            }
+            else{
+                getButtons()[7][1].setPosition(X/2 - BusDrivingPhase0Model.getInstance().getMaxPages() * getButtons()[7][1].getWidth() + x_offset * i, Y * 0.36f);
+                getButtons()[7][1].draw(getSpriteBatch(), 1.0f);
+
+            }
+        }
+
     }
 
     @Override
     protected void initLogo() {
-
+        setLogo(new Sprite(new Texture("common/logo.png")));
+        float logoRatio = getLogo().getHeight() / getLogo().getWidth();
+        getLogo().setSize(Resolution.getGameWorldWidthPortrait() * 0.4f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.4f * logoRatio);
+        getLogo().setPosition(Resolution.getGameWorldWidthPortrait()/3.65f, Resolution.getGameWorldHeightPortrait()/7f);
     }
 
     @Override
     protected void drawLogo() {
-
+        getLogo().draw(getSpriteBatch(), 75.0f);
     }
 
     @Override

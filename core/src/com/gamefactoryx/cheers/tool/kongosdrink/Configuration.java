@@ -52,7 +52,7 @@ public class Configuration {
 
     private static GameType gameType = GameType.TEAM_VS_TEAM;
     private static long modusTypeInterval = 600_000;
-    private static int MAX_PLAYERS = 13;
+    private static int MAX_PLAYERS = 16;
 
 
 
