@@ -38,13 +38,7 @@ public class KongosDrinkPhase0Controller extends AbstractController {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
-                screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 100) {
-            touchPos = screenX;
-            return true;
-        }
-
+        touchPos = screenX;
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
@@ -84,18 +78,20 @@ public class KongosDrinkPhase0Controller extends AbstractController {
                 activeBoxIndex = i;
 
                 if (Configuration.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).isEnable()) {
-                    for (int j = activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * ( model.getPage() - 1); j < Configuration.getMaxPlayers(); j++)
+                    for (int j = activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j < Configuration.getMaxPlayers(); j++)
                         model.getPlayers().get(j/* + maxPlayersProPage * (page - 1)*/).setEnable(false);
                 } else {
-                    for (int j = 0; j <= activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * ( model.getPage() - 1); j++)
+                    for (int j = 0; j <= activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j++)
                         model.getPlayers().get(j/* + maxPlayersProPage * (page - 1)*/).setEnable(true);
                 }
+                return true;
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
                 Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).setSex(
                         Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
+                return true;
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
@@ -107,21 +103,19 @@ public class KongosDrinkPhase0Controller extends AbstractController {
                     model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).setName("");
                     enableKeyboard(true);
                 }
+
+                return true;
             }
         }
 
-        if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
-                screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 100) {
-            if (distance >= 100) {
-                if (!model.isLastPage())
-                    model.setPage(model.getPage() + 1);
+        if (distance <= 100) {
+            if (!model.isLastPage())
+                model.setPage(model.getPage() + 1);
 
-            } else if (distance <= -100) {
-                if (!model.isFirstPage()) {
-                    model.setPage(model.getPage() - 1);
+        } else if (distance >= -100) {
+            if (!model.isFirstPage()) {
+                model.setPage(model.getPage() - 1);
 
-                }
             }
         }
 

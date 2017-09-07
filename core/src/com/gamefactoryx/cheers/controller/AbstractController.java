@@ -31,12 +31,12 @@ abstract public class AbstractController extends InputAdapter {
             case Input.Keys.BACK:
                 StageManager.getInstance().showLastStage();
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return true;
     }
 
     @Override
@@ -55,7 +55,7 @@ abstract public class AbstractController extends InputAdapter {
         {
             Gdx.input.vibrate(10);
             StageManager.getInstance().showLastStage();
-            return false;
+            return true;
         }
 
        /* for (int i = 0; i < getScreen().getCountOfButtons(); i++) {

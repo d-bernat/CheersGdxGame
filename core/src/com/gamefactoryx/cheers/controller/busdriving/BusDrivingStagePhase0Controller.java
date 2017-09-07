@@ -39,12 +39,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
-                screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 100) {
-            touchPos = screenX;
-            return true;
-        }
+        touchPos = screenX;
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
@@ -91,7 +86,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                     for (int j = 0; j <= activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j++)
                         model.getPlayers().get(j).setEnable(true);
                 }
-
+                return true;
 
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
@@ -99,6 +94,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
                 model.getPlayers().get(i + maxPlayersProPage * (page - 1)).setSex(
                         model.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
+                return true;
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.85f &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
@@ -110,20 +106,17 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
                     model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).setName("");
                     enableKeyboard(true);
                 }
+                return true;
             }
         }
-        if (/*screenX >= getScreen().getButtons()[3][0].getX() &&
-                screenX <= getScreen().getButtons()[3][0].getX() + getScreen().getButtons()[3][0].getWidth() &&*/
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[3][0].getY() - 100) {
-            if (distance >= 100) {
-                if (!model.isLastPage())
-                    model.setPage(model.getPage() + 1);
+        if (distance <= 100) {
+            if (!model.isLastPage())
+                model.setPage(model.getPage() + 1);
 
-            } else if (distance <= -100) {
-                if (!model.isFirstPage()) {
-                    model.setPage(model.getPage() - 1);
+        } else if (distance >= -100) {
+            if (!model.isFirstPage()) {
+                model.setPage(model.getPage() - 1);
 
-                }
             }
         }
 
@@ -158,7 +151,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
             default:
                 if (keycode >= Input.Keys.A && keycode <= Input.Keys.Z && typedName.length() < 8) {
                     int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
-                    int page =model.getPage();
+                    int page = model.getPage();
 
                     typedName.append(shift ? Input.Keys.toString(keycode).toUpperCase() : Input.Keys.toString(keycode).toLowerCase());
                     model.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).setName(typedName.toString());

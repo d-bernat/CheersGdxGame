@@ -41,8 +41,7 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        super.touchDown(screenX, screenY, pointer, button);
-        return !model.isPhaseFinished();
+        return super.touchDown(screenX, screenY, pointer, button);
     }
 
     @Override
@@ -118,7 +117,7 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                 break;
             case Input.Keys.BACK:
                 StageManager.getInstance().showLastStage();
-                return false;
+                return true;
             default:
                 if (keycode >= Input.Keys.A && keycode <= Input.Keys.Z && typedName.length() < 8) {
 
@@ -128,7 +127,7 @@ public class BusDrivingStagePhase1Controller extends AbstractController {
                 }
                 break;
         }
-        return false;
+        return true;
     }
 
 

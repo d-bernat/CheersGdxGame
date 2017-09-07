@@ -97,7 +97,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
         }
 
         if (KongosDrinkMainModel.getInstance().isAnimationRunning())
-            return false;
+            return true;
 
 
         return super.touchDown(screenX, screenY, pointer, button);
@@ -113,11 +113,11 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 ms.setClicked(false);
             }
 
-            return false;
+            return true;
         }
 
         if (KongosDrinkMainModel.getInstance().isAnimationRunning())
-            return false;
+            return true;
 
         if (!super.touchUp(screenX, screenY, pointer, button)) {
             KongosDrinkMainModel.getInstance().setXxcoor(0);
@@ -127,11 +127,11 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             KongosDrinkMainModel.getInstance().setStep(KongosDrinkMainModel.Step.LEVEL);
             suspend = true;
             KongosDrinkMainModel.getInstance().setFinished(true);
-            return false;
+            return true;
         }
 
         if (KongosDrinkMainModel.getInstance().isFinished()) {
-            return false;
+            return true;
         }
 
         int x = CoorTransformator.getX(960, screenX);
@@ -257,7 +257,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-        return false;
+        return true;
     }
 
     private void gotoPlayer(int playerIndex) {

@@ -34,7 +34,7 @@ abstract public class KongosDrinkAbstractController extends InputAdapter {
             case Input.Keys.BACK:
                 StageManager.getInstance().showLastStage();
         }
-        return false;
+        return true;
     }
 
     @Override
