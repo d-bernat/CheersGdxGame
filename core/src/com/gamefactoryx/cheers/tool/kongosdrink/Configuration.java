@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Configuration {
 
     public enum GameSizeEnum {
-        TEN(10), TWENTY(20), THRITY(30), FORTY(40), FIFTY(50);
+        TEN(10), FIFTEEN(15), TWENTY(20), THRITY(30), FORTY(40), FIFTY(50);
         private final int value;
 
         GameSizeEnum(int value) {
@@ -45,7 +45,7 @@ public class Configuration {
     }
 
 
-    private static GameSizeEnum gameSize = GameSizeEnum.FORTY;
+    private static GameSizeEnum gameSize = GameSizeEnum.FIFTY;
     private static boolean penalty;
     private static int sound;
     private static final List<Player> players = new ArrayList<>();
