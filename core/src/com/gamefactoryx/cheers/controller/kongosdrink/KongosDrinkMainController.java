@@ -278,6 +278,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
         suspend = false;
 
+
         if (!KongosDrinkMainModel.getInstance().isAnimationRunning()) {
             KongosDrinkMainModel.getInstance().setAnimationRunning(true);
             forward = KongosDrinkMainModel.getInstance().getPosition() < position;
@@ -285,7 +286,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 @Override
                 public void run() {
                     while (!suspend) {
-                        for (int i = 1; i < 9; i++) {
+                        for (int i = 1; i < KongosDrinkMainModel.getInstance().getCountOfTextures(); i++) {
                             for (int j = 0; j < KongosDrinkMainModel.getInstance().getEnablePlayersSize(); j++)
                                 if (Configuration.getPlayers().get(j).isActive())
                                     if (forward)
@@ -305,7 +306,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                             }
                         }
 
-                        if (KongosDrinkMainModel.getInstance().getXxcoor() >= 960 * 9 &&
+                        if (KongosDrinkMainModel.getInstance().getXxcoor() >= 960 * KongosDrinkMainModel.getInstance().getCountOfTextures() &&
                                 forward
                                 && position == -1) {
                         }

@@ -61,6 +61,8 @@ public class KongosDrinkMainModel {
 
     private boolean textBoxDisplayed;
 
+    private int countOfTextures;
+
     public static KongosDrinkMainModel getInstance() {
         if (instance == null) {
             instance = new KongosDrinkMainModel();
@@ -249,4 +251,12 @@ public class KongosDrinkMainModel {
         this.textBoxDisplayed = textBoxDisplayed;
     }
 
+
+    public int getCountOfTextures() {
+        return countOfTextures;
+    }
+
+    public void setCountOfTextures(int countOfTextures) {
+        this.countOfTextures = countOfTextures;
+    }
 }

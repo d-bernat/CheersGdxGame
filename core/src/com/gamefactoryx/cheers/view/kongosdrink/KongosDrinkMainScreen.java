@@ -120,7 +120,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
         if (foregroundTexture != null) {
             foregroundSprite = new Sprite[foregroundTexture.length];
-            for (int i = 0; i < sprite.length; i++) {
+            for (int i = 0; i < foregroundSprite.length; i++) {
                 if (foregroundTexture[i] != null) {
                     foregroundSprite[i] = new Sprite(foregroundTexture[i]);
                     foregroundSprite[i].setOrigin(0, 0);
@@ -397,6 +397,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
     private void setBackgroudTexture() {
         switch (Configuration.getGameSize()) {
             case FIFTY:
+
                 backgroundTexture = new Texture[]{new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.1.jpg")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.2.jpg")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.jpg")),
@@ -443,6 +444,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                 break;
 
         }
+        KongosDrinkMainModel.getInstance().setCountOfTextures(backgroundTexture.length);
 
     }
 
@@ -454,6 +456,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.1.jpg")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.4.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.5.1.png")),
+                        null,
                         null,
                         null,
                         null,
