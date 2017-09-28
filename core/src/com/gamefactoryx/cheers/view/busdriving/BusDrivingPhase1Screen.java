@@ -34,7 +34,7 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     public void show() {
         super.show();
         initBackButton();
-        Card.getNewInstance();
+        Card.getInstance();
 
     }
 

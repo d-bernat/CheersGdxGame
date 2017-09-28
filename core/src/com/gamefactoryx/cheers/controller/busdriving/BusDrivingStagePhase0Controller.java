@@ -32,6 +32,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
         super(screen);
         setScreenLock(1);
         enableKeyboard(false);
+
         model = BusDrivingPhase0Model.getNewInstance();
     }
 

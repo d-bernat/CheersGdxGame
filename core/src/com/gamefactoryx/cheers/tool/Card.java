@@ -22,11 +22,6 @@ public class Card {
             return instance;
     }
 
-    public static Card getNewInstance()
-    {
-        return new Card();
-    }
-
     public Texture getCardTexture(int cardIndex, CardSize cardSize, CardOrientation cardOrientation) {
 
         return cardTextures.get(getFileName(cardIndex, cardSize, cardOrientation));
