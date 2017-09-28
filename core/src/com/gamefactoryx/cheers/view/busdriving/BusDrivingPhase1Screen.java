@@ -10,6 +10,7 @@ import com.gamefactoryx.cheers.model.busdriving.BusDrivingPhase1Model;
 import com.gamefactoryx.cheers.tool.*;
 import com.gamefactoryx.cheers.model.busdriving.VCard;
 import com.gamefactoryx.cheers.view.AbstractScreen;
+import sun.awt.image.GifImageDecoder;
 
 
 /**
@@ -33,6 +34,8 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     public void show() {
         super.show();
         initBackButton();
+        Card.getNewInstance();
+
     }
 
 
@@ -131,6 +134,16 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
     protected void initCards() {
         setFaceDownBigCard(new Sprite(new Texture("common/busdriving_cards/facedown_big_card.png")));
         setFaceDownSmallCard(new Sprite(new Texture("common/busdriving_cards/facedown_small_card.png")));
+    }
+
+    @Override
+    protected void initLoadingSprite() {
+
+    }
+
+    @Override
+    protected void drawLoadingSprite() {
+
     }
 
     @Override

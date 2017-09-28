@@ -35,7 +35,7 @@ public abstract class AbstractScreen implements Screen {
     private Map<String, Sprite> cardSprites = new HashMap<>();
     private Sprite textBox;
     private Sprite backButtonSprite;
-
+    private Sprite loadingSprite;
 
 
     private int yScrollPos;
@@ -60,7 +60,6 @@ public abstract class AbstractScreen implements Screen {
     public Sprite getTextBox() {
         return textBox;
     }
-
 
 
     public Sprite getLandscapeSprite() {
@@ -99,6 +98,14 @@ public abstract class AbstractScreen implements Screen {
         this.logo = logo;
     }
 
+    public Sprite getLoadingSprite() {
+        return loadingSprite;
+    }
+
+    public void setLoadingSprite(Sprite loadingSprite) {
+        this.loadingSprite = loadingSprite;
+    }
+
     protected abstract void initSprites();
 
     protected abstract void drawText();
@@ -114,6 +121,9 @@ public abstract class AbstractScreen implements Screen {
     protected abstract void drawLogo();
 
     protected abstract void initCards();
+
+    protected abstract void initLoadingSprite();
+    protected abstract void drawLoadingSprite();
 
     protected abstract void drawCards();
 
@@ -151,9 +161,9 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void show() {
-        if(camera == null) {
+        if (camera == null) {
             camera = new OrthographicCamera();
-            portraitViewport = new StretchViewport(Resolution.getGameWorldWidthPortrait() ,
+            portraitViewport = new StretchViewport(Resolution.getGameWorldWidthPortrait(),
                     Resolution.getGameWorldHeightPortrait(), camera);
             landscapeViewport = new StretchViewport(Resolution.getGameWorldWidthLandscape(),
                     Resolution.getGameWorldHeightLandscape(), camera);
@@ -161,11 +171,13 @@ public abstract class AbstractScreen implements Screen {
         }
         spriteBatch = new SpriteBatch();
 
-        initLogo();
+
         initSprites();
+        initLogo();
         initButtons();
         initCards();
         initTextBox();
+        initLoadingSprite();
     }
 
 
@@ -206,14 +218,16 @@ public abstract class AbstractScreen implements Screen {
             getTextBox().getTexture().dispose();
         if (logo != null)
             logo.getTexture().dispose();
-        if(portraitSprite != null)
+        if (portraitSprite != null)
             portraitSprite.getTexture().dispose();
-        if(landscapeSprite != null)
+        if (landscapeSprite != null)
             landscapeSprite.getTexture().dispose();
-        if(spriteBatch != null)
+        if (spriteBatch != null)
             spriteBatch.dispose();
-        if(backButtonSprite != null)
+        if (backButtonSprite != null)
             backButtonSprite.getTexture().dispose();
+        if(loadingSprite != null)
+            loadingSprite.getTexture().dispose();
     }
 
     public void setLandscapeSprite(Sprite landscapeSprite) {
@@ -238,9 +252,11 @@ public abstract class AbstractScreen implements Screen {
         drawCards();
         drawButtons();
         drawText();
-        if(backButtonSprite != null)
+        if (backButtonSprite != null)
             backButtonSprite.draw(spriteBatch);
+        drawLoadingSprite();
         spriteBatch.end();
+
     }
 
     private void setCameraPosition() {
@@ -252,22 +268,24 @@ public abstract class AbstractScreen implements Screen {
 
     }
 
-     void drawMainSprite() {
-        if (Orientation.getOrientation() == Input.Orientation.Landscape) {
-            landscapeSprite.draw(spriteBatch, 1);
-        } else {
-            portraitSprite.draw(spriteBatch, 1);
+    void drawMainSprite() {
+        if (landscapeSprite != null && portraitSprite != null) {
+            if (Orientation.getOrientation() == Input.Orientation.Landscape) {
+                landscapeSprite.draw(spriteBatch, 1);
+            } else {
+                portraitSprite.draw(spriteBatch, 1);
+            }
         }
     }
 
-    private Viewport getViewport(){
+    private Viewport getViewport() {
         if (Orientation.getOrientation() == Input.Orientation.Portrait)
             return portraitViewport;
         else
             return landscapeViewport;
     }
 
-    protected void initBackButton(){
+    protected void initBackButton() {
         backButtonSprite = new Sprite(new Texture("common/return.png"));
         backButtonSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.05f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.05f);
 

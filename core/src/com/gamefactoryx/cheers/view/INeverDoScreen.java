@@ -77,7 +77,7 @@ public class INeverDoScreen extends AbstractScreen {
     public void resize(int width, int height) {
         super.resize(width, height);
         float FONT_SIZE_ON_SCREEN = 0.04f;
-        if(Configuration.getLanguage() == Configuration.LanguageEnum.SK)
+        if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
             generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
         else
             generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
@@ -93,8 +93,13 @@ public class INeverDoScreen extends AbstractScreen {
         getTextBox().setSize(X * 0.8f, Y * 0.45f);
         for (int i = 0; i < getCountOfButtons(); i++)
             for (int j = 0; j < 2; j++) {
-                getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
-                        Resolution.getGameWorldHeightPortrait() * 0.17f * Resolution.getAspectRatio());
+                if (i == 0)
+                    getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
+                            Resolution.getGameWorldHeightPortrait() * 0.17f * Resolution.getAspectRatio());
+                else{
+                    getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
+                            Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
+                }
             }
 
         parameter.size = FONT_SIZE;
@@ -112,12 +117,24 @@ public class INeverDoScreen extends AbstractScreen {
     protected void drawText() {
         float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.6f;
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.4f;
-        getTextBox().setPosition(X * 0.1f, Y * 0.35f);
-        getTextBox().draw(getSpriteBatch());
-        for (int i = 0; i < text.size(); i++)
-            font.draw(getSpriteBatch(), text.get(i),
-                    (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                    Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
+        if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+            getTextBox().setPosition(X * 0.1f, Y * 0.35f);
+            getTextBox().draw(getSpriteBatch());
+            for (int i = 0; i < text.size(); i++)
+                font.draw(getSpriteBatch(), text.get(i),
+                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                        Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
+            font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
+        } else {
+            getTextBox().setPosition(X * 0.02f, Y * 0.35f);
+            getTextBox().draw(getSpriteBatch());
+            for (int i = 0; i < text.size(); i++)
+                font.draw(getSpriteBatch(), text.get(i),
+                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.3f,
+                        Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
+
+            font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
+        }
     }
 
 
@@ -130,10 +147,16 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[1][2]);
+        setButtons(new Sprite[4][2]);
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon_white.png"));
+        getButtons()[1][0] = new Sprite(new Texture("common/ineverhave/18+.png"));
+        getButtons()[1][1] = new Sprite(new Texture("common/ineverhave/18+.png"));
+        getButtons()[2][0] = new Sprite(new Texture("common/ineverhave/mix.png"));
+        getButtons()[2][1] = new Sprite(new Texture("common/ineverhave/mix.png"));
+        getButtons()[3][0] = new Sprite(new Texture("common/ineverhave/standart.png"));
+        getButtons()[3][1] = new Sprite(new Texture("common/ineverhave/standart.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }
@@ -142,16 +165,46 @@ public class INeverDoScreen extends AbstractScreen {
     protected void drawButtons() {
         float PORTRAIT_DISTANCE_FROM_TEXT_BOX = 0.22f;
         float LANDSCAPE_DISTANCE_FROM_TEXT_BOX = 0.15f;
+        float x_offset = 0f;
+        float y_offset = 0f;
         for (int i = 0; i < getCountOfButtons(); i++) {
             int click_index = getClicked()[i] ? CLICKED : FREE;
             if (Orientation.getOrientation() == Input.Orientation.Portrait)
-                getButtons()[i][click_index].setPosition(X * 0.115f,
-                        Y * PORTRAIT_DISTANCE_FROM_TEXT_BOX);
-            else
-                getButtons()[i][click_index].setPosition(0.5f * (X - getButtons()[i][click_index].getWidth()),
-                        Y * LANDSCAPE_DISTANCE_FROM_TEXT_BOX);
+                if (i == 0)
+                    getButtons()[i][click_index].setPosition(X * 0.115f,
+                            Y * PORTRAIT_DISTANCE_FROM_TEXT_BOX);
+                else {
+                    getButtons()[i][click_index].setPosition(X * 0.18f + x_offset,
+                            Y * 0.05f - y_offset);
+                    // y_offset = getButtons()[i][click_index].getHeight() * 1.05f * i;
+                    x_offset = getButtons()[i][click_index].getWidth() * 1.15f * i;
+                }
+            else {
+                if (i == 0)
+                    getButtons()[i][click_index].setPosition(0.36f * (X - getButtons()[i][click_index].getWidth()),
+                            Y * LANDSCAPE_DISTANCE_FROM_TEXT_BOX);
+                else {
+                    getButtons()[i][click_index].setPosition(X * 0.87f + x_offset,
+                            Y * 0.65f - y_offset);
+                    y_offset = getButtons()[i][click_index].getHeight() * 1.15f * i;
+                    //x_offset = getButtons()[i][click_index].getWidth() * 1.05f * i;
+                }
+            }
 
-            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
+            switch (i) {
+                case 0:
+                    getButtons()[i][click_index].draw(getSpriteBatch(),1);
+                    break;
+                case 1:
+                    getButtons()[i][click_index].draw(getSpriteBatch(), Configuration.getINeverDoGameType() == Configuration.INeverDoGameTypeEnum.GAME_18PLUS ? 1 : 0.5f);
+                    break;
+                case 2:
+                    getButtons()[i][click_index].draw(getSpriteBatch(), Configuration.getINeverDoGameType() == Configuration.INeverDoGameTypeEnum.GAME_MIXED ? 1 : 0.5f);
+                    break;
+                case 3:
+                    getButtons()[i][click_index].draw(getSpriteBatch(), Configuration.getINeverDoGameType() == Configuration.INeverDoGameTypeEnum.GAME_STANDARD ? 1 : 0.5f);
+                    break;
+            }
         }
     }
 
@@ -171,13 +224,23 @@ public class INeverDoScreen extends AbstractScreen {
     }
 
     @Override
+    protected void initLoadingSprite() {
+
+    }
+
+    @Override
+    protected void drawLoadingSprite() {
+
+    }
+
+    @Override
     protected void drawCards() {
 
     }
 
     @Override
-    public void dispose(){
-        if(font !=null)
+    public void dispose() {
+        if (font != null)
             font.dispose();
         super.dispose();
     }

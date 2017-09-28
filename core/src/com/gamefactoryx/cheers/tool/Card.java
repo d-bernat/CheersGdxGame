@@ -16,10 +16,15 @@ public class Card {
 
     public static Card getInstance()
     {
-            if(instance == null)
+           if(instance == null)
                 instance = new Card();
 
             return instance;
+    }
+
+    public static Card getNewInstance()
+    {
+        return new Card();
     }
 
     public Texture getCardTexture(int cardIndex, CardSize cardSize, CardOrientation cardOrientation) {

@@ -2,6 +2,8 @@ package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheers.model.INeverDoModel;
+import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
@@ -12,6 +14,7 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
  */
 @SuppressWarnings("DefaultFileTemplate")
 final class INeverDoStageController extends AbstractController {
+
 
     INeverDoStageController(final AbstractScreen screen) {
         super(screen);
@@ -49,6 +52,15 @@ final class INeverDoStageController extends AbstractController {
                 switch (i) {
                     case 0:
                         StageManager.getInstance().showStage(StageEnum.I_NEVER_DO_STAGE);
+                        break;
+                    case 1:
+                        Configuration.setINeverDoGameType(Configuration.INeverDoGameTypeEnum.GAME_18PLUS);
+                        break;
+                    case 2:
+                        Configuration.setINeverDoGameType(Configuration.INeverDoGameTypeEnum.GAME_MIXED);
+                        break;
+                    case 3:
+                        Configuration.setINeverDoGameType(Configuration.INeverDoGameTypeEnum.GAME_STANDARD);
                         break;
                 }
             }

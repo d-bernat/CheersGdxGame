@@ -95,6 +95,16 @@ public class NewGameScreen extends AbstractScreen {
     }
 
     @Override
+    protected void initLoadingSprite() {
+
+    }
+
+    @Override
+    protected void drawLoadingSprite() {
+
+    }
+
+    @Override
     protected void drawCards() {
 
     }

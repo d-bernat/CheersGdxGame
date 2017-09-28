@@ -15,6 +15,7 @@ public final class KongosDrinkPhase0Model {
     private int page = 1;
     private int maxPages;
     private boolean last, first;
+
 //    private Croupier croupier;
     private static KongosDrinkPhase0Model instance;
 
@@ -77,4 +78,6 @@ public final class KongosDrinkPhase0Model {
         if (activePlayer < getPlayers().size())
             this.activePlayer = activePlayer;
     }*/
+
+
 }

@@ -417,7 +417,8 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.5.jpg")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.6.jpg")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.7.jpg")),
-                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.8.jpg"))};
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.8.jpg")),
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.9.jpg"))};
                 break;
             case THRITY:
                 backgroundTexture = new Texture[]{new Texture(Gdx.files.internal("common/kongos_drink/game_design/30/30.1.jpg")),

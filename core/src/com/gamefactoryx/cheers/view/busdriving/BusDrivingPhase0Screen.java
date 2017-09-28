@@ -25,7 +25,6 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
 
-
     public BusDrivingPhase0Screen() {
         super();
     }
@@ -72,6 +71,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         if (temp != null)
             temp.dispose();
         generator.dispose();
+        getLoadingSprite().setPosition(X * 0.5f - getLoadingSprite().getWidth() * 0.5f, Y * 0.5f - getLoadingSprite().getHeight() * 0.5f);
     }
 
     @Override
@@ -196,13 +196,27 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         getLogo().setPosition(Resolution.getGameWorldWidthPortrait()/3.65f, Resolution.getGameWorldHeightPortrait()/7f);
     }
 
+
     @Override
     protected void drawLogo() {
         getLogo().draw(getSpriteBatch(), 75.0f);
+
     }
 
     @Override
     protected void initCards() {
+    }
+
+    @Override
+    protected void initLoadingSprite() {
+        setLoadingSprite(new Sprite(new Texture("common/loading.png")));
+    }
+
+    @Override
+    protected void drawLoadingSprite() {
+        if(BusDrivingPhase0Model.getInstance().isLoadingNextStage())
+            getLoadingSprite().draw(getSpriteBatch(), 1);
+
     }
 
     @Override
@@ -213,6 +227,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     public void dispose() {
         if (font != null)
             font.dispose();
+
         super.dispose();
     }
 

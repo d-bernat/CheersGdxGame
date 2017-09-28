@@ -157,6 +157,16 @@ public class BusDrivingPhase3Screen extends AbstractScreen {
     }
 
     @Override
+    protected void initLoadingSprite() {
+
+    }
+
+    @Override
+    protected void drawLoadingSprite() {
+
+    }
+
+    @Override
     protected void drawCards() {
         VCard vCard = BusDrivingPhase3Model.getInstance().getBoard().getVCards().last();
         Sprite scard = new Sprite(Card.getInstance().getCardTexture(vCard.getCardIndex(), CardSize.BIG, vCard.getOrientation()));
