@@ -17,17 +17,17 @@ public final class BusDrivingPhase0Model {
     private int page = 1;
     private int maxPages;
     private boolean last, first;
+    private boolean loadingNextStage;
 
-
-    public static BusDrivingPhase0Model getInstance(){
-        if(instance == null) {
+    public static BusDrivingPhase0Model getInstance() {
+        if (instance == null) {
             instance = new BusDrivingPhase0Model();
         }
 
         return instance;
     }
 
-    public static BusDrivingPhase0Model getNewInstance(){
+    public static BusDrivingPhase0Model getNewInstance() {
         instance = new BusDrivingPhase0Model();
         return instance;
     }
@@ -70,7 +70,13 @@ public final class BusDrivingPhase0Model {
     }
 
 
+    public boolean isLoadingNextStage() {
+        return loadingNextStage;
+    }
 
+    public void setLoadingNextStage(boolean loadingNextStage) {
+        this.loadingNextStage = loadingNextStage;
+    }
 
     /* public int getActivePlayer() {
         return activePlayer;

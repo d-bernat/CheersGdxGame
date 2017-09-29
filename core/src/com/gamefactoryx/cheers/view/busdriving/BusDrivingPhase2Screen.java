@@ -159,6 +159,16 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
     }
 
     @Override
+    protected void initLoadingSprite() {
+
+    }
+
+    @Override
+    protected void drawLoadingSprite() {
+
+    }
+
+    @Override
     protected void drawCards() {
         int x_offset = 0;
         int y_offset = 0;

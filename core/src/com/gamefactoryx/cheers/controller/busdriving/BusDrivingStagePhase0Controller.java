@@ -32,6 +32,7 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
         super(screen);
         setScreenLock(1);
         enableKeyboard(false);
+
         model = BusDrivingPhase0Model.getNewInstance();
     }
 
@@ -39,7 +40,15 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        touchPos = screenX;
+        if (screenX >= getScreen().getButtons()[6][0].getX() &&
+                screenX <= getScreen().getButtons()[6][0].getX() + getScreen().getButtons()[6][0].getWidth() &&
+                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight())
+            model.setLoadingNextStage(true);
+
+
+
+            touchPos = screenX;
         return super.touchDown(screenX, screenY, pointer, button);
     }
 

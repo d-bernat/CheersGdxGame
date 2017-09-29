@@ -16,7 +16,7 @@ public class Card {
 
     public static Card getInstance()
     {
-            if(instance == null)
+           if(instance == null)
                 instance = new Card();
 
             return instance;

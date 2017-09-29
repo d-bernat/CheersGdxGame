@@ -3,8 +3,8 @@ package com.gamefactoryx.cheers.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.gamefactoryx.cheers.model.SplashScreenModel;
 import com.gamefactoryx.cheers.tool.Card;
-import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -14,11 +14,12 @@ import com.gamefactoryx.cheers.tool.Resolution;
 @SuppressWarnings("DefaultFileTemplate")
 public class SplashScreen extends AbstractScreen {
 
+    private float X, Y;
 
     @Override
     public void show() {
         super.show();
-        Card.getInstance();
+        SplashScreenModel.getInstance().setLaterLogoDown(3000);
     }
 
     @Override
@@ -29,7 +30,18 @@ public class SplashScreen extends AbstractScreen {
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
 
-
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+            X = Resolution.getGameWorldWidthPortrait();
+            Y = Resolution.getGameWorldHeightPortrait();
+        } else {
+            X = Resolution.getGameWorldWidthLandscape();
+            Y = Resolution.getGameWorldHeightLandscape();
+        }
+        getLogo().setPosition(X * 0.5f - getLogo().getWidth() * 0.5f, Y * 0.5f - getLogo().getHeight() * 0.5f);
+    }
     @Override
     protected void drawText() {
 
@@ -50,15 +62,29 @@ public class SplashScreen extends AbstractScreen {
 
     @Override
     protected void initLogo() {
+        setLogo(new Sprite(new Texture("common/screen1_landscape_loading.jpg")));
 
     }
 
     @Override
     protected void drawLogo() {
+        if(SplashScreenModel.getInstance().isLogoUp())
+            getLogo().draw(getSpriteBatch(),1);
+
     }
 
     @Override
     protected void initCards() {
+
+    }
+
+    @Override
+    protected void initLoadingSprite() {
+
+    }
+
+    @Override
+    protected void drawLoadingSprite() {
 
     }
 
