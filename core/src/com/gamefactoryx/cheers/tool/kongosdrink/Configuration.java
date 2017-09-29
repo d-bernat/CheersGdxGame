@@ -45,7 +45,7 @@ public class Configuration {
     }
 
 
-    private static GameSizeEnum gameSize = GameSizeEnum.THRITY;
+    private static GameSizeEnum gameSize = GameSizeEnum.FORTY;
     private static boolean penalty;
     private static int sound;
     private static final List<Player> players = new ArrayList<>();

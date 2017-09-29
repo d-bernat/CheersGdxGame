@@ -454,7 +454,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
             case FIFTY:
                 foregroundTexture = new Texture[]{null,
                         null,
-                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.1.jpg")),
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.4.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.5.1.png")),
                         null,
@@ -463,6 +463,15 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         null,
                         null};
             case FORTY:
+                foregroundTexture = new Texture[]{null,
+                        null,
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.3.1.png")),
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.4.1.png")),
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.5.1.png")),
+                        null,
+                        null,
+                        null,
+                        null};
             case THRITY:
             case TWENTY:
             case TEN:
