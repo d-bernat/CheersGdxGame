@@ -1,8 +1,8 @@
 ﻿Du muss -oPlayer- einen Kuss auf die Wange geben, ist ja widerlich trink einfach 3 mal.;2;3;0
-Füttere -Player- mit einem Snack seiner Wahl oder trink 3 Mal.;2;3;0
+Füttere -oPlayer- mit einem Snack seiner Wahl oder trink 3 Mal.;2;3;0
 Mach 5 Liegestütze, schaffst du es nicht, dann 2 Schlücke.;2;2;0
 -oPlayer- liest deine letzten 5 Whatsapp Narichten vor oder ihr müsst jeweils 3 mal trinken.;2;3;0
-Du bist schon einmal geblitzt worden? Dann hat es Nachwirkungen - trink mal 2 Schlücke!;2;2;0
+Du bist schon einmal geblitzt worden? Dann hat es Nachwirkungen, trink mal 2 Schlücke!;2;2;0
 Plank für 30 Sekunden, jede nicht geschaffte Sekunde ergibt ein Strafschluck!;2;1;30
 Du schmeißt dir einen Eiswürfel unters T-shirt und tanzt einen Breakdance bis der Eiswürfel schmilzt. Schaffst du es nicht und der Eiswürfel fällt runter muss du 3 Mal trinken.;2;3;0
 Alle Mitspieler dürfen sich aussuchen, an welcher Stelle du sie küssen musst. Kannst auch 3 Mal trinken.;2;3;0
@@ -41,13 +41,13 @@ Anstatt 2 Schlücke zu trinken kannst du auch einen Radschlag machen.;2;2;0
 Imitiere jemanden aus dieser Runde und wenn es die Mitspieler innerhalb 30 Sekunden erraten, dann musst du nich 2 Mal trinken.;2;2;0
 Du darfst 2 Mitspieler auswählen, welche sich küssen müssen oder ihr drei trinkt 2 Mal.;2;2;0
 -oPlayer- summt dir jetzt ein Lied vor, wenn du es nicht innerhalb von 15 Sekunden errätst musst du 3 Schlücke trinken.;2;3;15
-Trinke 4 Mal und geh weiter!
-Trinke 4 Mal und geh weiter!
-Trinke 4 Mal und geh weiter!
-Trinke 4 Mal und geh weiter!
-Trinke 4 Mal und geh weiter!
-Trinke 5 Mal und geh weiter!
-Trinke 5 Mal und geh weiter!
-Trinke 5 Mal und geh weiter!
-Trinke 5 Mal und geh weiter!
-Trinke 5 Mal und geh weiter!
+Trinke 4 Mal und geh weiter!;2;4;0
+Trinke 4 Mal und geh weiter!;2;4;0
+Trinke 4 Mal und geh weiter!;2;4;0
+Trinke 4 Mal und geh weiter!;2;4;0
+Trinke 4 Mal und geh weiter!;2;4;0
+Trinke 5 Mal und geh weiter!;2;5;0
+Trinke 5 Mal und geh weiter!;2;5;0
+Trinke 5 Mal und geh weiter!;2;5;0
+Trinke 5 Mal und geh weiter!;2;5;0
+Trinke 5 Mal und geh weiter!;2;5;0

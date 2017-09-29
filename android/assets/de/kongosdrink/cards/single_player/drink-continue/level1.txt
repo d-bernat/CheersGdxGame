@@ -39,13 +39,13 @@ Verteile 2 Schlücke oder trinke 2 Schlücke und geh ein Feld weiter.;1;2;0
 Bist du kleiner als -oPlayer-? Dann musst du 2 mal trinken, wenn nicht geh weiter.;1;2;0
 Pass mal auf wie du mit anderen Leuten redest! Du darfst keine Schimpfwörter mehr benutzen! Du trinkst immer 2 Mal dafür. Wenn du weiter ein dreckiges Mundwerk haben willst kannst du auch 3 mal trinken.;1;3;0
 Heute schon nach Gold gegraben? Nein? Dann grab mal schön in der nase rum für 10 Sekunden, sonst musst du wohl oder übel 2 Schlücke trinken.;1;2;10
-Trinke 2 Mal und geh weiter!
-Trinke 2 Mal und geh weiter!
-Trinke 2 Mal und geh weiter!
-Trinke 2 Mal und geh weiter!
-Trinke 2 Mal und geh weiter!
-Trinke 3 Mal und geh weiter!
-Trinke 3 Mal und geh weiter!
-Trinke 3 Mal und geh weiter!
-Trinke 3 Mal und geh weiter!
-Trinke 3 Mal und geh weiter!
+Trinke 2 Mal und geh weiter!;1;2;0
+Trinke 2 Mal und geh weiter!;1;2;0
+Trinke 2 Mal und geh weiter!;1;2;0
+Trinke 2 Mal und geh weiter!;1;2;0
+Trinke 2 Mal und geh weiter!;1;2;0
+Trinke 3 Mal und geh weiter!;1;3;0
+Trinke 3 Mal und geh weiter!;1;3;0
+Trinke 3 Mal und geh weiter!;1;3;0
+Trinke 3 Mal und geh weiter!;1;3;0
+Trinke 3 Mal und geh weiter!;1;3;0
