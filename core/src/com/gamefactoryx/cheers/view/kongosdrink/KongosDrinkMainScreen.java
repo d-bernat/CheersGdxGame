@@ -453,7 +453,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
         switch (Configuration.getGameSize()) {
             case FIFTY:
                 foregroundTexture = new Texture[]{null,
-                        null,
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.2.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.3.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.4.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.5.1.png")),
@@ -464,7 +464,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         null};
             case FORTY:
                 foregroundTexture = new Texture[]{null,
-                        null,
+                        new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.2.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.3.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.4.1.png")),
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.5.1.png")),
@@ -474,6 +474,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         null};
             case THRITY:
             case TWENTY:
+            case FIFTEEN:
             case TEN:
                 break;
         }
