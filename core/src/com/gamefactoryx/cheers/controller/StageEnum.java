@@ -6,9 +6,11 @@ import com.gamefactoryx.cheers.controller.busdriving.BusDrivingStagePhase3Contro
 import com.gamefactoryx.cheers.controller.busdriving.BusDrivingStagePhase4Controller;
 import com.gamefactoryx.cheers.controller.kongosdrink.KongosDrinkMainController;
 import com.gamefactoryx.cheers.controller.kongosdrink.KongosDrinkPhase0Controller;
+import com.gamefactoryx.cheers.controller.kongosdrink.KongosDrinkSetupController;
 import com.gamefactoryx.cheers.view.*;
 import com.gamefactoryx.cheers.view.kongosdrink.KongosDrinkMainScreen;
 import com.gamefactoryx.cheers.view.kongosdrink.KongosDrinkPhase0Screen;
+import com.gamefactoryx.cheers.view.kongosdrink.KongosDrinkSetupScreen;
 
 
 /**
@@ -29,6 +31,11 @@ public enum StageEnum {
     NEW_GAME_STAGE {
         public AbstractController getController() {
             return new NewGameStageController(new NewGameScreen());
+        }
+    },
+    KONGOS_DRINK_SETUP_STAGE {
+        public AbstractController getController() {
+            return new KongosDrinkSetupController(new KongosDrinkSetupScreen());
         }
     },
     KONGOS_DRINK_ZERO_STAGE {
