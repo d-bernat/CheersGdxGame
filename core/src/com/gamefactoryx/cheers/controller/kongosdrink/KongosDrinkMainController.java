@@ -242,7 +242,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             if (point != 0) {
                 int nextPoint = Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getPosition() +
                         point;
-                if(nextPoint >= Configuration.getGameSize().getValue()) nextPoint = Configuration.getGameSize().getValue() + 3;
+                if(nextPoint >= Configuration.getGameSize().getValue()) nextPoint = Configuration.getGameSize().getValue() + 1;
                 movePlayer(KongosDrinkMainModel.getInstance().getPlayerIndex(), nextPoint);
             }
             else {
