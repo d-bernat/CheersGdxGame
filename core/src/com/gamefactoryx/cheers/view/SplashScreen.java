@@ -36,9 +36,15 @@ public class SplashScreen extends AbstractScreen {
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
+            getLogo().setSize(X * 1.5f, X * 1.5f
+                    * getLogo().getHeight()/getLogo().getWidth());
+
         } else {
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
+            getLogo().setSize(X, X
+                    * getLogo().getWidth()/getLogo().getHeight());
+
         }
         getLogo().setPosition(X * 0.5f - getLogo().getWidth() * 0.5f, Y * 0.5f - getLogo().getHeight() * 0.5f);
     }

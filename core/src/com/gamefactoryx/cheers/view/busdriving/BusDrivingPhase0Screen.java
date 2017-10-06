@@ -71,6 +71,8 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         if (temp != null)
             temp.dispose();
         generator.dispose();
+        getLoadingSprite().setSize(X * 0.4f, X * 0.4f
+                * getLoadingSprite().getHeight()/getLoadingSprite().getWidth());
         getLoadingSprite().setPosition(X * 0.5f - getLoadingSprite().getWidth() * 0.5f, Y * 0.5f - getLoadingSprite().getHeight() * 0.5f);
     }
 

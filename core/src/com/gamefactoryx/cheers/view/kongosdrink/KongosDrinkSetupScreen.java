@@ -53,6 +53,15 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
         }
+
+        final float FACTOR = 0.15f;
+        for(int  i = 0; i < getButtons().length - 1; i++){
+            getButtons()[i][0].setSize(X * FACTOR, X * FACTOR
+                    * getButtons()[i][0].getHeight()/getButtons()[i][0].getWidth());
+            getButtons()[i][1].setSize(X * FACTOR, X * FACTOR
+                    * getButtons()[i][1].getHeight()/getButtons()[i][1].getWidth());
+
+        }
     }
 
     @Override

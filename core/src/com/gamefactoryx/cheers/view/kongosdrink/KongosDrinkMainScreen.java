@@ -462,6 +462,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         null,
                         null,
                         null};
+                break;
             case FORTY:
                 foregroundTexture = new Texture[]{null,
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/40/40.2.1.png")),
@@ -472,6 +473,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         null,
                         null,
                         null};
+                break;
             case THRITY:
             case TWENTY:
             case FIFTEEN:
