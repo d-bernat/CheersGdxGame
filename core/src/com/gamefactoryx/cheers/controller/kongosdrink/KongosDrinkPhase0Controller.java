@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.gamefactoryx.cheers.controller.AbstractController;
+import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.model.PlayerNameCache;
 import com.gamefactoryx.cheers.model.Subject;
@@ -61,7 +62,7 @@ public class KongosDrinkPhase0Controller extends AbstractController {
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
             Gdx.input.vibrate(10);
-            KongosDrinkStageManager.getInstance().showStage(KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
+            StageManager.getInstance().showStage(StageEnum.KONGOS_DRINK_SETUP_STAGE);
             return true;
         }
 
@@ -77,8 +78,8 @@ public class KongosDrinkPhase0Controller extends AbstractController {
 
                 activeBoxIndex = i;
 
-                if (Configuration.getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).isEnable()) {
-                    for (int j = activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j < Configuration.getMaxPlayers(); j++)
+                if (Configuration.getInstance().getPlayers().get(activeBoxIndex + maxPlayersProPage * (page - 1)).isEnable()) {
+                    for (int j = activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j < Configuration.getInstance().getMaxPlayers(); j++)
                         model.getPlayers().get(j/* + maxPlayersProPage * (page - 1)*/).setEnable(false);
                 } else {
                     for (int j = 0; j <= activeBoxIndex + com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage() * (model.getPage() - 1); j++)
@@ -89,8 +90,8 @@ public class KongosDrinkPhase0Controller extends AbstractController {
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
-                Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).setSex(
-                        Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
+                Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).setSex(
+                        Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
                 return true;
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
@@ -183,8 +184,8 @@ public class KongosDrinkPhase0Controller extends AbstractController {
     private int getMaxPlayers() {
         int page = model.getPage();
         int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
-        return Configuration.getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage :
-                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getMaxPlayers());
+        return Configuration.getInstance().getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage :
+                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getInstance().getMaxPlayers());
     }
 
 

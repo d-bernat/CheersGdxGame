@@ -143,15 +143,15 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
             int click_index = getClicked()[i] ? CLICKED : FREE;
             getButtons()[i][click_index].setPosition(X * 0.18f,
                     Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][click_index].getHeight() * 1.475f);
-            getButtons()[i][click_index].draw(getSpriteBatch(),  Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 1.0f : 100.0f);
+            getButtons()[i][click_index].draw(getSpriteBatch(),  Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 1.0f : 100.0f);
             if (i > 1 || KongosDrinkPhase0Model.getInstance().getPage() > 1) {
-                getButtons()[4][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].setPosition(X * 0.75f,
+                getButtons()[4][Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].setPosition(X * 0.75f,
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
-                getButtons()[4][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+                getButtons()[4][Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable() ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             }
-            getButtons()[5][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].setPosition(X * 0.16f,
+            getButtons()[5][Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].setPosition(X * 0.16f,
                         Y * PORTRAIT_DISTANCE_FROM_BOTTOM - y_offset * getButtons()[i][0].getHeight() * 1.475f);
-            getButtons()[5][Configuration.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].draw(getSpriteBatch(), 1.0f);
+            getButtons()[5][Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? 0 : 1].draw(getSpriteBatch(), 1.0f);
             ++y_offset;
         }
 
@@ -215,8 +215,8 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
     private int getMaxPlayers(){
         int page = KongosDrinkPhase0Model.getInstance().getPage();
         int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
-        return  Configuration.getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage:
-                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getMaxPlayers());
+        return  Configuration.getInstance().getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage:
+                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getInstance().getMaxPlayers());
     }
 
 }

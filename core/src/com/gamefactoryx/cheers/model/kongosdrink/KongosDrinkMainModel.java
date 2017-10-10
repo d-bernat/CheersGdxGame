@@ -63,6 +63,8 @@ public class KongosDrinkMainModel {
 
     private int countOfTextures;
 
+    private boolean loadingNextStage;
+
     public static KongosDrinkMainModel getInstance() {
         if (instance == null) {
             instance = new KongosDrinkMainModel();
@@ -80,7 +82,7 @@ public class KongosDrinkMainModel {
 
         cards = CardFactory.getNewInstance().getCards();
 
-        List<Player> players = Configuration.getPlayers();
+        List<Player> players = Configuration.getInstance().getPlayers();
         for (Player player: players) {
             if(player.isEnable()) {
                 player.setPosition(1);
@@ -259,4 +261,13 @@ public class KongosDrinkMainModel {
     public void setCountOfTextures(int countOfTextures) {
         this.countOfTextures = countOfTextures;
     }
+
+    public boolean isLoadingNextStage() {
+        return loadingNextStage;
+    }
+
+    public void setLoadingNextStage(boolean loadingNextStage) {
+        this.loadingNextStage = loadingNextStage;
+    }
+
 }

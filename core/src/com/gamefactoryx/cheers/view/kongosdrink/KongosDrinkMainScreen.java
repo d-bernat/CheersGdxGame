@@ -109,7 +109,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
         playerSprite = new Sprite[getEnablePlayersAmount()];
         for (int i = 0; i < playerSprite.length; i++) {
-            String avatar = Configuration.getPlayers().get(i).getAvatar().toString();
+            String avatar = Configuration.getInstance().getPlayers().get(i).getAvatar().toString();
             playerSprite[i] = new Sprite(
                     new Texture(Gdx.files.internal("common/kongos_drink/player/" + avatar + "/" + avatar + "_1.png")));
 
@@ -175,7 +175,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
     private int getEnablePlayersAmount() {
         int ret = 0;
-        for (Player player : Configuration.getPlayers()) {
+        for (Player player : Configuration.getInstance().getPlayers()) {
             if (player.isEnable()) ++ret;
         }
 
@@ -245,19 +245,19 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
         sprite[KongosDrinkMainModel.getInstance().getIndex()].setPosition(-sprite[KongosDrinkMainModel.getInstance().getIndex()].getWidth() / 4 - KongosDrinkMainModel.getInstance().getXcoor(), -sprite[KongosDrinkMainModel.getInstance().getIndex()].getHeight() / 2);
         sprite[KongosDrinkMainModel.getInstance().getIndex()].draw(batch);
         for (int i = playerSprite.length - 1; i >= 0; --i) {
-            if (Configuration.getPlayers().get(i).isActive())
+            if (Configuration.getInstance().getPlayers().get(i).isActive())
                 playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4,
                         -playerSprite[i].getHeight() / 2 * 2.9f);
             else
-                playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4 + Configuration.getPlayers().get(i).getNormPosition() - KongosDrinkMainModel.getInstance().getXxcoor(),
+                playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4 + Configuration.getInstance().getPlayers().get(i).getNormPosition() - KongosDrinkMainModel.getInstance().getXxcoor(),
                         -playerSprite[i].getHeight() / 2 * 2.9f);
-            if (Configuration.getPlayers().get(i).getRotate() != 0)
-                playerSprite[i].rotate(Configuration.getPlayers().get(i).getRotate());
+            if (Configuration.getInstance().getPlayers().get(i).getRotate() != 0)
+                playerSprite[i].rotate(Configuration.getInstance().getPlayers().get(i).getRotate());
             /*else
                 playerSprite[i].rotate(0.0f - playerSprite[i].getRotation());*/
             playerSprite[i].draw(batch);
         }
-        if (Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getRotate() == 0) {
+        if (Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getRotate() == 0) {
             playerSprite[KongosDrinkMainModel.getInstance().getPlayerIndex()].draw(batch);
         }
 
@@ -315,7 +315,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                 getTextBox().setPosition(-440, -200);
                 getTextBox().draw(batch);
                 font.draw(batch, String.format("%s (%s)",
-                        Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName(),
+                        Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName(),
                         card.getPoint()), -410, 150);
 
                 float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
@@ -339,7 +339,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                     if (ii == 1) {
                         mainButtonsSprite[ii].setPosition(-mainButtonsSprite[ii].getWidth(), -mainButtonsSprite[ii].getHeight() / 4);
                         mainButtonsSprite[ii].draw(batch);
-                        nameFont.draw(batch, Configuration.getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName(),
+                        nameFont.draw(batch, Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName(),
                                 mainButtonsSprite[ii].getX() * 0.9f,
                                 mainButtonsSprite[ii].getY() + mainButtonsSprite[ii].getHeight() * 0.9f);
                     } else {
@@ -395,7 +395,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
     }
 
     private void setBackgroudTexture() {
-        switch (Configuration.getGameSize()) {
+        switch (Configuration.getInstance().getGameSize()) {
             case FIFTY:
 
                 backgroundTexture = new Texture[]{new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.1.jpg")),
@@ -450,7 +450,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
     }
 
     private void setForegroundTexture() {
-        switch (Configuration.getGameSize()) {
+        switch (Configuration.getInstance().getGameSize()) {
             case FIFTY:
                 foregroundTexture = new Texture[]{null,
                         new Texture(Gdx.files.internal("common/kongos_drink/game_design/50/50.2.1.png")),

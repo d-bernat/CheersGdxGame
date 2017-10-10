@@ -28,13 +28,15 @@ public class Configuration {
         public int getValue() {
             return value;
         }
+
+
     }
 
-    public enum GameType {
+    public enum GameTypeEnum {
         DOGFIGHT("dogfight"), TEAMOFTWO_VS_TEAMOFTWO("2team vs 2team"), TEAM_VS_TEAM("team vs team");
         private String value;
 
-        GameType(String value) {
+        GameTypeEnum(String value) {
             this.value = value;
 
         }
@@ -45,78 +47,90 @@ public class Configuration {
     }
 
 
-    private static GameSizeEnum gameSize = GameSizeEnum.FORTY;
-    private static boolean penalty;
-    private static int sound;
-    private static final List<Player> players = new ArrayList<>();
 
-    private static GameType gameType = GameType.TEAM_VS_TEAM;
-    private static long modusTypeInterval = 600_000;
-    private static int MAX_PLAYERS = 16;
+    private static Configuration instance;
+    private  GameSizeEnum gameSize = GameSizeEnum.FORTY;
+    private  boolean penalty;
+    private  int sound;
+    private  List<Player> players = new ArrayList<>();
 
+    private  GameTypeEnum gameType = GameTypeEnum.DOGFIGHT;
+    private  long modusTypeInterval = 600_000;
+    private  int MAX_PLAYERS = 16;
 
+    public static  Configuration getInstance(){
+        if(instance == null) {
+            instance = new Configuration();
+            return instance;
+        }
+        else
+            return instance;
+    }
 
-    public static GameSizeEnum getGameSize() {
+    public  GameTypeEnum getGameType() {
+        return gameType;
+    }
+
+    public  GameSizeEnum getGameSize() {
         return gameSize;
     }
 
-    public static void setGameSize(GameSizeEnum _gameSize) {
+    public  void setGameType(GameTypeEnum gameType) {
+        this.gameType = gameType;
+    }
+
+    public  void setGameSize(GameSizeEnum _gameSize) {
         gameSize = _gameSize;
     }
 
-    static {
-        for(int i = 0; i < Configuration.getMaxPlayers(); i++)
-            players.add(new Player(FunnySubjectGenerator.getFunnySubject(i)));
-    }
 
     private Configuration() {
+        for(int i = 0; i < getMaxPlayers(); i++)
+            players.add(new Player(FunnySubjectGenerator.getFunnySubject(i)));
+
     }
 
     public static class KongosDrink {
         public static final int DISTANCE_BETWEEN_TWO_FIELDS = 187;
     }
 
-    public static int getHowManyConfigurationScreens(){
+    public  int getHowManyConfigurationScreens(){
         return com.gamefactoryx.cheers.tool.Configuration.getMaxPlayers() / 6 + 1;
     }
 
-    public static boolean isPenalty() {
+    public  boolean isPenalty() {
         return penalty;
     }
 
-    public static void setPenalty(boolean _penalty) {
+    public  void setPenalty(boolean _penalty) {
         penalty = _penalty;
     }
 
-    public static int getSound() {
+    public  int getSound() {
         return sound;
     }
 
-    public static void setSound(int _sound) {
+    public  void setSound(int _sound) {
         sound = _sound;
     }
 
-    public static List<Player> getPlayers() {
+    public  List<Player> getPlayers() {
         return players;
     }
 
-    public static GameType getGameType() {
-        return gameType;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
-    public static void setGameType(GameType _gameType) {
-        gameType = _gameType;
-    }
+    /*public  String getPlayerName(int index) {
+        return players.get(index).getPlayerName();
+    }*/
 
-    public static String getPlayerName(int index) {
-        return players.get(index).getName();
-    }
-
-    public static Player getRandomPlayer(int excluded) {
+    public  Player getRandomPlayer(int excluded) {
         return getRandomPlayer(excluded, Subject.Sex.DONT_CARE);
     }
 
-    public static Player getRandomPlayer(int excluded, Subject.Sex sex) {
+    public  Player getRandomPlayer(int excluded, Subject.Sex sex) {
         int randomNum = 0;
         List<Integer> rndIndexList = new ArrayList<>();
         for(int i = 0; i < getEnablePlayersAmount(); i++){
@@ -132,23 +146,24 @@ public class Configuration {
             randomNum = rndIndexList.get(acc);
             ++acc;
         }
+        /////!!!!!!!!!!!!!!!!!!it wont work properly for more then one subject in player
         while (sex != Subject.Sex.DONT_CARE && players.get(randomNum).getSex() != sex);
 
         return players.get(randomNum);
     }
 
 
-    public static long getModusTypeInterval() {
+    public  long getModusTypeInterval() {
         return modusTypeInterval;
     }
 
-    public static void setModusTypeInterval(long modusTypeInterval) {
-        Configuration.modusTypeInterval = modusTypeInterval;
+    public  void setModusTypeInterval(long modusTypeInterval) {
+        this.modusTypeInterval = modusTypeInterval;
     }
 
-    private static int getEnablePlayersAmount() {
+    private  int getEnablePlayersAmount() {
         int ret = 0;
-        for(Player player: Configuration.getPlayers()){
+        for(Player player: getPlayers()){
             if(player.isEnable()) ++ret;
         }
 
@@ -156,7 +171,7 @@ public class Configuration {
     }
 
 
-    public static int getMaxPlayers(){
+    public  int getMaxPlayers(){
         return MAX_PLAYERS;
     }
 

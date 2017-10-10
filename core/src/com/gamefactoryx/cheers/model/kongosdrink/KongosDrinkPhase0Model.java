@@ -16,6 +16,7 @@ public final class KongosDrinkPhase0Model {
     private int maxPages;
     private boolean last, first;
 
+
 //    private Croupier croupier;
     private static KongosDrinkPhase0Model instance;
 
@@ -34,18 +35,18 @@ public final class KongosDrinkPhase0Model {
     }
 
     private KongosDrinkPhase0Model() {
-        for(int i = 0; i < Configuration.getPlayers().size(); i++)
-            Configuration.getPlayers().get(i).setEnable(i < 2);
+        for(int i = 0; i < Configuration.getInstance().getPlayers().size(); i++)
+            Configuration.getInstance().getPlayers().get(i).setEnable(i < 2);
         int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
-        maxPages = Configuration.getMaxPlayers() % maxPlayersProPage == 0 ?
-                Configuration.getMaxPlayers() / maxPlayersProPage : Configuration.getMaxPlayers() / maxPlayersProPage + 1;
+        maxPages = Configuration.getInstance().getMaxPlayers() % maxPlayersProPage == 0 ?
+                Configuration.getInstance().getMaxPlayers() / maxPlayersProPage : Configuration.getInstance().getMaxPlayers() / maxPlayersProPage + 1;
         first = true;
 
 
     }
 
     public List<Player> getPlayers() {
-        return Configuration.getPlayers();
+        return Configuration.getInstance().getPlayers();
     }
 
     public int getPage() {
@@ -78,6 +79,5 @@ public final class KongosDrinkPhase0Model {
         if (activePlayer < getPlayers().size())
             this.activePlayer = activePlayer;
     }*/
-
 
 }
