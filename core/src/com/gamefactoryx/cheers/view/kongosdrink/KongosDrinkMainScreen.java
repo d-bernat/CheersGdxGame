@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.model.kongosdrink.Card;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.model.kongosdrink.Player;
@@ -314,9 +315,12 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
             if (card != null) {
                 getTextBox().setPosition(-440, -200);
                 getTextBox().draw(batch);
-                font.draw(batch, String.format("%s (%s)",
-                        Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName(),
-                        card.getPoint()), -410, 150);
+                //String team = Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName();
+                String subj = "";
+                for(Subject subject:  Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getSubjects())
+                    subj += subject.getName() + " ";
+
+                font.draw(batch, String.format("%s (%s)", subj, card.getPoint()), -410, 150);
 
                 float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
                 float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 3.5f;
@@ -339,7 +343,11 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                     if (ii == 1) {
                         mainButtonsSprite[ii].setPosition(-mainButtonsSprite[ii].getWidth(), -mainButtonsSprite[ii].getHeight() / 4);
                         mainButtonsSprite[ii].draw(batch);
-                        nameFont.draw(batch, Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName(),
+                        String subj = "";
+                        for(Subject subject:  Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getSubjects())
+                           subj = subj + " " + subject.getName();
+
+                        nameFont.draw(batch, subj,
                                 mainButtonsSprite[ii].getX() * 0.9f,
                                 mainButtonsSprite[ii].getY() + mainButtonsSprite[ii].getHeight() * 0.9f);
                     } else {

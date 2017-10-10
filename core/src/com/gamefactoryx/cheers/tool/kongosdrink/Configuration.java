@@ -67,6 +67,11 @@ public class Configuration {
             return instance;
     }
 
+    public static  Configuration getNewInstance(){
+        instance = new Configuration();
+        return instance;
+    }
+
     public  GameTypeEnum getGameType() {
         return gameType;
     }
@@ -85,8 +90,12 @@ public class Configuration {
 
 
     private Configuration() {
-        for(int i = 0; i < getMaxPlayers(); i++)
-            players.add(new Player(FunnySubjectGenerator.getFunnySubject(i)));
+        for(int i = 0; i < getMaxPlayers(); i++) {
+            Player p = new Player(FunnySubjectGenerator.getFunnySubject(i));
+            if(i < 2)
+                p.setEnable(true);
+            players.add(p);
+        }
 
     }
 

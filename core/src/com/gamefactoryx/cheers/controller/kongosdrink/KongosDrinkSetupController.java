@@ -12,6 +12,7 @@ import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkPhase0Model;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
+import com.gamefactoryx.cheers.tool.kongosdrink.PlayerToTeamsTransformator;
 import com.gamefactoryx.cheers.view.AbstractScreen;
 
 /**
@@ -34,6 +35,7 @@ public class KongosDrinkSetupController extends AbstractController {
                 screenX <= getScreen().getButtons()[lastButtonIndex][0].getX() + getScreen().getButtons()[lastButtonIndex][0].getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[lastButtonIndex][0].getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[lastButtonIndex][0].getY() + getScreen().getButtons()[lastButtonIndex][0].getHeight()) {
+            Configuration.getInstance().setPlayers(PlayerToTeamsTransformator.toTeams(Configuration.getInstance().getPlayers()));
             KongosDrinkMainModel.getInstance().setLoadingNextStage(true);
         }
         return super.touchDown(screenX, screenY, pointer, button);

@@ -33,6 +33,7 @@ public class KongosDrinkPhase0Controller extends AbstractController {
         setScreenLock(1);
         enableKeyboard(false);
         model = KongosDrinkPhase0Model.getNewInstance();
+        Configuration.getNewInstance();
     }
 
 

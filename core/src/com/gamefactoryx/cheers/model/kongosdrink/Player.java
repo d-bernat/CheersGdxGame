@@ -4,6 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * Created by Bernat on 18.07.2017.
@@ -14,12 +18,20 @@ public class Player {
     private boolean active;
     private float rotate;
     private boolean finished;
-    private Subject subject;
+    private List<Subject> subjects = new ArrayList<>();
 
     public Player( Subject subject) {
-        this.subject = subject;
+
+        this.subjects.add(subject);
     }
 
+    public void addSubject(Subject subject){
+        subjects.add(subject);
+    }
+
+    public List<Subject> getSubjects(){
+        return subjects;
+    }
     public int getPosition() {
         return position;
     }
@@ -49,24 +61,24 @@ public class Player {
     }
 
     public AvatarType getAvatar() {
-        return subject.getAvatar();
+        return subjects.get(0).getAvatar();
     }
 
     public String getName() {
-        return subject.getName();
+        return subjects.get(0).getName();
     }
     public void setName(String name){
-        subject.setName(name);
+        subjects.get(0).setName(name);
     }
     public Subject.Sex getSex() {
-        return subject.getSex();
+        return subjects.get(0).getSex();
     }
     public void setSex(Subject.Sex sex){
-        subject.setSex(sex);
+        subjects.get(0).setSex(sex);
     }
 
     public Subject.Type getSubjectType(){
-        return subject.getType();
+        return subjects.get(0).getType();
     }
     public boolean isFinished() {
         return finished;
