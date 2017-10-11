@@ -127,6 +127,12 @@ public class Configuration {
         return players;
     }
 
+    public int enabledPlayers(){
+        int rs = 0;
+        for(Player player: players) if(player.isEnable()) ++rs;
+
+        return rs;
+    }
     public void setPlayers(List<Player> players) {
         this.players = players;
     }

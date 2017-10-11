@@ -81,11 +81,24 @@ public class KongosDrinkSetupController extends AbstractController {
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
                 switch(i){
-                    case 6: Configuration.getInstance().setGameType(Configuration.GameTypeEnum.DOGFIGHT);break;
-                    case 7: Configuration.getInstance().setGameType(Configuration.GameTypeEnum.TEAMOFTWO_VS_TEAMOFTWO);break;
-                    case 8: Configuration.getInstance().setGameType(Configuration.GameTypeEnum.TEAM_VS_TEAM);break;
+                    case 6:
+                        Configuration.getInstance().setGameType(Configuration.GameTypeEnum.DOGFIGHT);
+                        Gdx.input.vibrate(10);
+                        break;
+                    case 7:
+                        if(Configuration.getInstance().enabledPlayers() > 2) {
+                            Configuration.getInstance().setGameType(Configuration.GameTypeEnum.TEAMOFTWO_VS_TEAMOFTWO);
+                            Gdx.input.vibrate(10);
+                        }
+                        break;
+                    case 8:
+                        if(Configuration.getInstance().enabledPlayers() > 2) {
+                            Configuration.getInstance().setGameType(Configuration.GameTypeEnum.TEAM_VS_TEAM);
+                            Gdx.input.vibrate(10);
+                        }
+                        break;
                 }
-                Gdx.input.vibrate(10);
+
                 break;
             }
         }

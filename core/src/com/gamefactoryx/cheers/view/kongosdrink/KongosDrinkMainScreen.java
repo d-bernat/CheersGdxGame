@@ -310,17 +310,34 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
             }
         }
 
-        if (!KongosDrinkMainModel.getInstance().isTextBoxDisplayed() && !KongosDrinkMainModel.getInstance().isAnimationRunning()) {
+        if(KongosDrinkMainModel.getInstance().isWhoIsWho()){
+            getTextBox().setPosition(-440, -200);
+            getTextBox().draw(batch);
+            List<String> text = new ArrayList<>();
+            for(Subject subject:  Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getSubjects())
+                text.add(subject.getName());
+            float y_offset = 0f;
+            float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
+            float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 3.5f;
+            for (String line : text) {
+                font.draw(batch, line, -410, 150 - y_offset);
+                if (y_offset == 0)
+                    y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITH_ENTER;
+                else
+                    y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
+            }
+        }
+
+
+        if (!KongosDrinkMainModel.getInstance().isTextBoxDisplayed() && !KongosDrinkMainModel.getInstance().isAnimationRunning()
+                && !KongosDrinkMainModel.getInstance().isWhoIsWho()) {
             Card card = KongosDrinkMainModel.getInstance().getActiveCard();
             if (card != null) {
                 getTextBox().setPosition(-440, -200);
                 getTextBox().draw(batch);
-                //String team = Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName();
-                String subj = "";
-                for(Subject subject:  Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getSubjects())
-                    subj += subject.getName() + " ";
+                String team = Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName();
 
-                font.draw(batch, String.format("%s (%s)", subj, card.getPoint()), -410, 150);
+                font.draw(batch, String.format("%s (%s)", team, card.getPoint()), -410, 150);
 
                 float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
                 float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 3.5f;
@@ -337,17 +354,21 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
             }
         }
 
-        if (!KongosDrinkMainModel.getInstance().isTextBoxDisplayed() && !KongosDrinkMainModel.getInstance().isAnimationRunning()) {
+        if (!KongosDrinkMainModel.getInstance().isTextBoxDisplayed() && !KongosDrinkMainModel.getInstance().isAnimationRunning()
+                && !KongosDrinkMainModel.getInstance().isWhoIsWho()) {
             for (int ii = 1; ii < mainButtonsSprite.length; ii++) {
                 if (mainButtonsSprite[ii].isActive()) {
+
                     if (ii == 1) {
+                        if(Configuration.getInstance().getGameType() != Configuration.GameTypeEnum.DOGFIGHT) {
+                            mainButtonsSprite[0].setPosition(60 + 120 * (mainButtonsSprite.length - 2), -80);
+                            mainButtonsSprite[0].draw(batch);
+                        }
+
                         mainButtonsSprite[ii].setPosition(-mainButtonsSprite[ii].getWidth(), -mainButtonsSprite[ii].getHeight() / 4);
                         mainButtonsSprite[ii].draw(batch);
-                        String subj = "";
-                        for(Subject subject:  Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getSubjects())
-                           subj = subj + " " + subject.getName();
-
-                        nameFont.draw(batch, subj,
+                        String team = Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getName();
+                        nameFont.draw(batch, team,
                                 mainButtonsSprite[ii].getX() * 0.9f,
                                 mainButtonsSprite[ii].getY() + mainButtonsSprite[ii].getHeight() * 0.9f);
                     } else {

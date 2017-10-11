@@ -24,6 +24,8 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
 
     private float X, Y;
     private Sprite fieldLengthFrame, gameModusFrame;
+    private Sprite disabledSprite;
+
 
     public KongosDrinkSetupScreen() {
         super();
@@ -46,6 +48,7 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
 
         fieldLengthFrame = new Sprite( new Texture (com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/field_length.png"));
         gameModusFrame = new Sprite( new Texture (com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/mode.png"));
+        disabledSprite = new Sprite( new Texture ("common/kongos_drink/disabled.png"));
     }
 
     @Override
@@ -74,7 +77,7 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
         }
         fieldLengthFrame.setSize(X * 0.7f, Y * 0.25f);
         gameModusFrame.setSize(X * 0.7f, Y * 0.31f);
-
+        disabledSprite.setSize(X * 0.1f, X * 0.1f);
         getLoadingSprite().setSize(X * 0.4f, X * 0.4f
                 * getLoadingSprite().getHeight()/getLoadingSprite().getWidth());
         getLoadingSprite().setPosition(X * 0.5f - getLoadingSprite().getWidth() * 0.5f, Y * 0.5f - getLoadingSprite().getHeight() * 0.5f);
@@ -160,6 +163,10 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
 
             getButtons()[i][0].setPosition( X * 0.5f  - getButtons()[i][0].getWidth() * 0.5f , Y * 0.4f - getButtons()[i][0].getHeight() * 1.25f * (i - 6));
             getButtons()[i][0].draw(getSpriteBatch(), alpha);
+            if(i > 6 && Configuration.getInstance().enabledPlayers() <= 2){
+                disabledSprite.setPosition(X * 0.5f  - getButtons()[i][0].getWidth() * 0.5f , Y * 0.4f - getButtons()[i][0].getHeight() * 1.25f * (i - 6));
+                disabledSprite.draw(getSpriteBatch(), 1);
+            }
         }
 
 
@@ -206,6 +213,7 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
     public void dispose() {
         fieldLengthFrame.getTexture().dispose();
         gameModusFrame.getTexture().dispose();
+        disabledSprite.getTexture().dispose();
         super.dispose();
     }
 

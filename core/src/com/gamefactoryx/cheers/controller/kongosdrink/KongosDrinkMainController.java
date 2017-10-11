@@ -81,6 +81,10 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        if (KongosDrinkMainModel.getInstance().isAnimationRunning())
+            return true;
+
         for (CtrlSprite ms : getScreen().getModusSprite()) {
             if (ms.isActive()) {
                 int x = CoorTransformator.getX(960, screenX);
@@ -96,8 +100,17 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             }
         }
 
-        if (KongosDrinkMainModel.getInstance().isAnimationRunning())
-            return true;
+        if (getScreen().getMainButtonsSprite()[1].isActive()) {
+            int x = CoorTransformator.getX(960, screenX);
+            int y = CoorTransformator.getY(540, screenY);
+            if (x >= getScreen().getMainButtonsSprite()[0].getX() &&
+                    x <= getScreen().getMainButtonsSprite()[0].getX() + getScreen().getMainButtonsSprite()[0].getWidth() &&
+                    y >= getScreen().getMainButtonsSprite()[0].getY() &&
+                    y <= getScreen().getMainButtonsSprite()[0].getY() + getScreen().getMainButtonsSprite()[0].getHeight()) {
+                KongosDrinkMainModel.getInstance().setWhoIsWho(true);
+            }
+        }
+
 
 
         return super.touchDown(screenX, screenY, pointer, button);
@@ -138,11 +151,6 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
         int y = CoorTransformator.getY(540, screenY);
 
         if (getScreen().getMainButtonsSprite()[0].isActive()) {
-            /*if (x >= getScreen().getMainButtonsSprite()[0].getX() &&
-                    x <= getScreen().getMainButtonsSprite()[0].getX() + getScreen().getMainButtonsSprite()[0].getWidth() * 3.0f &&
-                    y >= getScreen().getMainButtonsSprite()[0].getY() &&
-                    y <= getScreen().getMainButtonsSprite()[0].getY() + getScreen().getMainButtonsSprite()[0].getHeight() * 3.0f) {*/
-
             gotoPlayer(KongosDrinkMainModel.getInstance().getPlayerIndex());
             getScreen().getMainButtonsSprite()[0].setActive(false);
             getScreen().getMainButtonsSprite()[1].setActive(true);
@@ -151,36 +159,43 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
         } else if (getScreen().getMainButtonsSprite()[1].isActive()) {
 
+            if (x >= getScreen().getMainButtonsSprite()[0].getX() &&
+                    x <= getScreen().getMainButtonsSprite()[0].getX() + getScreen().getMainButtonsSprite()[0].getWidth() &&
+                    y >= getScreen().getMainButtonsSprite()[0].getY() &&
+                    y <= getScreen().getMainButtonsSprite()[0].getY() + getScreen().getMainButtonsSprite()[0].getHeight()) {
+                KongosDrinkMainModel.getInstance().setWhoIsWho(false);
+            }
+
             //if click on some level
             //if no move
             //determinate level
             int level = 0;
 
-            float xa =  getScreen().getMainButtonsSprite()[1].getX();
-            float ya =  getScreen().getMainButtonsSprite()[1].getY();
-            float xb =  getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth();
-            float yb =  getScreen().getMainButtonsSprite()[1].getY();
-            float xc =  getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth()/2;
-            float yc =  getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight()/2;
-            if(pointInTriangle( (float)x, (float)y, xa, ya, xb, yb, xc, yc)) level = 5;
+            float xa = getScreen().getMainButtonsSprite()[1].getX();
+            float ya = getScreen().getMainButtonsSprite()[1].getY();
+            float xb = getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth();
+            float yb = getScreen().getMainButtonsSprite()[1].getY();
+            float xc = getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth() / 2;
+            float yc = getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight() / 2;
+            if (pointInTriangle((float) x, (float) y, xa, ya, xb, yb, xc, yc)) level = 5;
 
-            if(level == 0) {
+            if (level == 0) {
                 xb = getScreen().getMainButtonsSprite()[1].getX();
                 yb = getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight();
                 if (pointInTriangle((float) x, (float) y, xa, ya, xb, yb, xc, yc)) level = 2;
             }
 
-            if(level == 0) {
-                xa =  getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth();
-                ya =  getScreen().getMainButtonsSprite()[1].getY();
+            if (level == 0) {
+                xa = getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth();
+                ya = getScreen().getMainButtonsSprite()[1].getY();
                 xb = getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth();
                 yb = getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight();
                 if (pointInTriangle((float) x, (float) y, xa, ya, xb, yb, xc, yc)) level = 3;
             }
 
-            if(level == 0) {
-                xa =  getScreen().getMainButtonsSprite()[1].getX();
-                ya =  getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight();
+            if (level == 0) {
+                xa = getScreen().getMainButtonsSprite()[1].getX();
+                ya = getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight();
                 xb = getScreen().getMainButtonsSprite()[1].getX() + getScreen().getMainButtonsSprite()[1].getWidth();
                 yb = getScreen().getMainButtonsSprite()[1].getY() + getScreen().getMainButtonsSprite()[1].getHeight();
                 if (pointInTriangle((float) x, (float) y, xa, ya, xb, yb, xc, yc)) level = 1;
@@ -191,7 +206,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 //            Collections.shuffle(level);
 //            KongosDrinkMainModel.getInstance().setLevel(level.get(0));
 
-            if(level > 0) {
+            if (level > 0) {
                 KongosDrinkMainModel.getInstance().setLevel(level);
                 //select active card
                 int cardsSize = KongosDrinkMainModel.getInstance().getCards().get(KongosDrinkMainModel.getInstance().getLevel()).size();
@@ -242,10 +257,10 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             if (point != 0) {
                 int nextPoint = Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).getPosition() +
                         point;
-                if(nextPoint >= Configuration.getInstance().getGameSize().getValue()) nextPoint = Configuration.getInstance().getGameSize().getValue() + 1;
+                if (nextPoint >= Configuration.getInstance().getGameSize().getValue())
+                    nextPoint = Configuration.getInstance().getGameSize().getValue() + 1;
                 movePlayer(KongosDrinkMainModel.getInstance().getPlayerIndex(), nextPoint);
-            }
-            else {
+            } else {
                 setNextPlayerActive();
             }
 
@@ -384,12 +399,12 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 KongosDrinkMainModel.getInstance().setPlayerIndex(0);
             else
                 KongosDrinkMainModel.getInstance().setPlayerIndex(KongosDrinkMainModel.getInstance().getPlayerIndex() + 1);
-        } while (Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).isFinished());
+        }
+        while (Configuration.getInstance().getPlayers().get(KongosDrinkMainModel.getInstance().getPlayerIndex()).isFinished());
 
     }
 
-    private boolean pointInTriangle(float xp, float yp, float xa, float ya, float xb, float yb, float xc, float yc)
-    {
+    private boolean pointInTriangle(float xp, float yp, float xa, float ya, float xb, float yb, float xc, float yc) {
         float s = ya * xc - xa * yc + (yc - ya) * xp + (xa - xc) * yp;
         float t = xa * yb - ya * xb + (ya - yb) * xp + (xb - xa) * yp;
 
@@ -397,8 +412,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
             return false;
 
         float A = -yb * xc + ya * (xc - xb) + xa * (yb - yc) + xb * yc;
-        if (A < 0.0)
-        {
+        if (A < 0.0) {
             s = -s;
             t = -t;
             A = -A;

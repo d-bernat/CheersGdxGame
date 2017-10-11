@@ -65,6 +65,17 @@ public class KongosDrinkMainModel {
 
     private boolean loadingNextStage;
 
+    private boolean whoIsWho;
+
+
+    public boolean isWhoIsWho() {
+        return whoIsWho;
+    }
+
+    public void setWhoIsWho(boolean whoIsWho) {
+        this.whoIsWho = whoIsWho;
+    }
+
     public static KongosDrinkMainModel getInstance() {
         if (instance == null) {
             instance = new KongosDrinkMainModel();

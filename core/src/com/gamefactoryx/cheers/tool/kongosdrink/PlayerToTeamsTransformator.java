@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class PlayerToTeamsTransformator {
+    public class PlayerToTeamsTransformator {
 
     public static List<Player> toTeams(List<Player> players) {
         switch (Configuration.getInstance().getGameType()) {
@@ -60,7 +60,7 @@ public class PlayerToTeamsTransformator {
 
         if (splitted[0].size() == splitted[1].size()) {
             for (int i = 0; i < splitted[0].size(); i++) {
-                Player newPlayer = new Player(new Subject("Team" + (i + 1), Subject.Sex.DONT_CARE,
+                Player newPlayer = new Player(new Subject("Team " + (i + 1), Subject.Sex.DONT_CARE,
                         Subject.Type.TEAM, splitted[0].get(i).getAvatar()));
                 newPlayer.addSubject(splitted[0].get(i).getSubjects().get(0));
                 newPlayer.addSubject(splitted[1].get(i).getSubjects().get(0));
