@@ -1,3 +1,0 @@
-Ihr spielt gegen das andere Team Schere, Stein, Papier. Jedes Team stellt einen Spieler und es geht bis 3. Die Verlierer trinken 3 Schlücke, die Gewinner gehen ein Feld nach vorne!;1;3;0
-Challenge! Ihr gegen Die! Do or Die! Jedes Team stellt einen Spieler. Der Verlierer trinkt 2-mal, die Gewinner gehen ein Feld weiter. Daumenringen!;1;2;0
-Team gegen Team! Jedes Team bekommt eine Flasche Wasser.Welches Team sie als erstes ausgetrunken hat gewinnt wichtige Punkte!;1;0;0
