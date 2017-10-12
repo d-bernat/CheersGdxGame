@@ -78,9 +78,6 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
         fieldLengthFrame.setSize(X * 0.7f, Y * 0.25f);
         gameModusFrame.setSize(X * 0.7f, Y * 0.31f);
         disabledSprite.setSize(X * 0.1f, X * 0.1f);
-        getLoadingSprite().setSize(X * 0.4f, X * 0.4f
-                * getLoadingSprite().getHeight()/getLoadingSprite().getWidth());
-        getLoadingSprite().setPosition(X * 0.5f - getLoadingSprite().getWidth() * 0.5f, Y * 0.5f - getLoadingSprite().getHeight() * 0.5f);
 
     }
 
@@ -195,14 +192,11 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
 
     @Override
     protected void initLoadingSprite() {
-        setLoadingSprite(new Sprite(new Texture("common/loading.png")));
+
     }
 
     @Override
     protected void drawLoadingSprite() {
-        if(KongosDrinkMainModel.getInstance().isLoadingNextStage())
-            getLoadingSprite().draw(getSpriteBatch(), 1);
-
     }
 
     @Override

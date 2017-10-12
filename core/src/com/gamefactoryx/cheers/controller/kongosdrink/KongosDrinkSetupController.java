@@ -30,14 +30,7 @@ public class KongosDrinkSetupController extends AbstractController {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        int lastButtonIndex = getScreen().getButtons().length - 1;
-        if (screenX >= getScreen().getButtons()[lastButtonIndex][0].getX() &&
-                screenX <= getScreen().getButtons()[lastButtonIndex][0].getX() + getScreen().getButtons()[lastButtonIndex][0].getWidth() &&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[lastButtonIndex][0].getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[lastButtonIndex][0].getY() + getScreen().getButtons()[lastButtonIndex][0].getHeight()) {
-            Configuration.getInstance().setPlayers(PlayerToTeamsTransformator.toTeams(Configuration.getInstance().getPlayers()));
-            KongosDrinkMainModel.getInstance().setLoadingNextStage(true);
-        }
+
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
@@ -53,7 +46,8 @@ public class KongosDrinkSetupController extends AbstractController {
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[lastButtonIndex][0].getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[lastButtonIndex][0].getY() + getScreen().getButtons()[lastButtonIndex][0].getHeight()) {
             Gdx.input.vibrate(10);
-            KongosDrinkStageManager.getInstance().showStage(KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
+            Configuration.getInstance().setPlayers(PlayerToTeamsTransformator.toTeams(Configuration.getInstance().getPlayers()));
+            StageManager.getInstance().showStage(StageEnum.KONGOS_DRINK_ZERO_ONE_STAGE);
             return true;
         }
 

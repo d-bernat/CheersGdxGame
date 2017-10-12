@@ -64,6 +64,10 @@ public class Player {
         return subjects.get(0).getAvatar();
     }
 
+    public void setAvatar(AvatarType avatar) {
+        subjects.get(0).setAvatar( avatar );
+    }
+
     public String getName() {
         return subjects.get(0).getName();
     }

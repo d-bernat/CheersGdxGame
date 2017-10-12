@@ -86,6 +86,9 @@ public final class StageManager {
             case KONGOS_DRINK_ZERO_STAGE:
                 controller = StageEnum.KONGOS_DRINK_ZERO_STAGE.getController();
                 break;
+            case KONGOS_DRINK_ZERO_ONE_STAGE:
+                controller = StageEnum.KONGOS_DRINK_ZERO_ONE_STAGE.getController();
+                break;
             case I_NEVER_DO_STAGE:
                 controller = StageEnum.I_NEVER_DO_STAGE.getController();
                 break;
@@ -141,6 +144,7 @@ public final class StageManager {
             case BUS_DRIVING_STAGE_ZERO_PHASE:
             case KONGOS_DRINK_SETUP_STAGE:
             case KONGOS_DRINK_ZERO_STAGE:
+            case KONGOS_DRINK_ZERO_ONE_STAGE:
             case BUS_DRIVING_STAGE_FIRST_PHASE:
             case BUS_DRIVING_STAGE_SECOND_PHASE:
             case BUS_DRIVING_STAGE_THIRD_PHASE:
