@@ -2,6 +2,7 @@ package com.gamefactoryx.cheers.tool.kongosdrink;
 
 import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.model.kongosdrink.Player;
+import com.gamefactoryx.cheers.tool.FunnyNameGenerator;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration.GameTypeEnum;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-    public class PlayerToTeamsTransformator {
+public class PlayerToTeamsTransformator {
 
     public static List<Player> toTeams(List<Player> players) {
         switch (Configuration.getInstance().getGameType()) {
@@ -18,8 +19,18 @@ import java.util.List;
             case TEAM_VS_TEAM:
                 return getTeamVsTeam(players);
             default:
-                return players;
+                return getSinglePlayers(players);
         }
+    }
+
+    private static List<Player> getSinglePlayers(List<Player> players) {
+
+        List<Player> tp = new ArrayList<>();
+        for(Player player: players){
+            if(player.isEnable()) tp.add(player);
+        }
+        return tp;
+
     }
 
     private static List<Player> getTeamVsTeam(List<Player> players) {
@@ -29,9 +40,9 @@ import java.util.List;
 
         List<Player>[] splitted = splitPlayerList(players);
 
-        Player[] newPlayers = {new Player(new Subject("Team 1", Subject.Sex.DONT_CARE, Subject.Type.TEAM,
+        Player[] newPlayers = {new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(0), Subject.Sex.DONT_CARE, Subject.Type.TEAM,
                 splitted[0].get(0).getAvatar())),
-                new Player(new Subject("Team 2", Subject.Sex.DONT_CARE, Subject.Type.TEAM,
+                new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(1), Subject.Sex.DONT_CARE, Subject.Type.TEAM,
                         splitted[1].get(0).getAvatar()))};
 
         for (Player player : splitted[0]) {
@@ -60,7 +71,7 @@ import java.util.List;
 
         if (splitted[0].size() == splitted[1].size()) {
             for (int i = 0; i < splitted[0].size(); i++) {
-                Player newPlayer = new Player(new Subject("Team " + (i + 1), Subject.Sex.DONT_CARE,
+                Player newPlayer = new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(i), Subject.Sex.DONT_CARE,
                         Subject.Type.TEAM, splitted[0].get(i).getAvatar()));
                 newPlayer.addSubject(splitted[0].get(i).getSubjects().get(0));
                 newPlayer.addSubject(splitted[1].get(i).getSubjects().get(0));
@@ -70,7 +81,7 @@ import java.util.List;
 
         } else if (splitted[0].size() < splitted[1].size()) {
             for (int i = 0; i < splitted[0].size(); i++) {
-                Player newPlayer = new Player(new Subject("Team " + (i + 1), Subject.Sex.DONT_CARE,
+                Player newPlayer = new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(i), Subject.Sex.DONT_CARE,
                         Subject.Type.TEAM, splitted[0].get(0).getAvatar()));
                 newPlayer.addSubject(splitted[0].get(i).getSubjects().get(0));
                 newPlayer.addSubject(splitted[1].get(i).getSubjects().get(0));

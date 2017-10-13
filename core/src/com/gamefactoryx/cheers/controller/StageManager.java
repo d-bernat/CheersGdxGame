@@ -74,6 +74,12 @@ public final class StageManager {
             case MAIN_STAGE:
                 controller = StageEnum.MAIN_STAGE.getController();
                 break;
+            case SETUP_STAGE:
+                controller = StageEnum.SETUP_STAGE.getController();
+                break;
+            case CREDIT_STAGE:
+                controller = StageEnum.CREDIT_STAGE.getController();
+                break;
             case HALL_OF_FAME_STAGE:
                 controller = StageEnum.HALL_OF_FAME_STAGE.getController();
                 break;
@@ -141,6 +147,8 @@ public final class StageManager {
 
         switch (screenEnum) {
             case SPLASH_STAGE:
+            case SETUP_STAGE:
+            case CREDIT_STAGE:
             case BUS_DRIVING_STAGE_ZERO_PHASE:
             case KONGOS_DRINK_SETUP_STAGE:
             case KONGOS_DRINK_ZERO_STAGE:

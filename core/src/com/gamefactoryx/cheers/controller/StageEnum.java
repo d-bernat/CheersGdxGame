@@ -30,6 +30,16 @@ public enum StageEnum {
             return new MainStageController(new MainScreen());
         }
     },
+    SETUP_STAGE {
+        public AbstractController getController() {
+            return new SetupController(new SetupScreen());
+        }
+    },
+    CREDIT_STAGE {
+        public AbstractController getController() {
+            return new CreditController(new CreditScreen());
+        }
+    },
     NEW_GAME_STAGE {
         public AbstractController getController() {
             return new NewGameStageController(new NewGameScreen());

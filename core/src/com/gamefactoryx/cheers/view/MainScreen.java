@@ -106,9 +106,11 @@ public class MainScreen extends AbstractScreen {
                 getButtons()[i][click_index].setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY + getButtons()[i][0].getWidth() * SPACE_BETWEEN_BUTTONS,
                         Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY - getButtons()[i][0].getHeight() * 0.5f - y_offset);
             else
+                if(i == 5)
                 getButtons()[i][click_index].setPosition(X * (1.0f - DISTANCE_FROM_RIGHT_SCREEN_BOUNDARY) - getButtons()[i][0].getWidth(),
                         Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY / 2.5f - y_offset);
-            getButtons()[i][click_index].draw(getSpriteBatch(), 1);
+            if(i != 4 && i != 6)
+                getButtons()[i][click_index].draw(getSpriteBatch(), 1);
         }
     }
 

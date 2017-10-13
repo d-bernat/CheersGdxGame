@@ -13,7 +13,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock{
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-		View gameView = initializeForView(new CheersGdxGame(this), config);
+		View gameView = initializeForView(new CheersGdxGame(this, new AndroidFacebookLinkHandler(this)), config);
 		setContentView(gameView);
 	}
 

@@ -95,7 +95,7 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png")));
+        //setTextBox(new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png")));
     }
 
     @Override

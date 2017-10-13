@@ -1,4 +1,4 @@
-﻿GameFactory X 
+﻿GameFactoryX
 a Bernat Cooperation Company
 
 Producers:
@@ -9,13 +9,13 @@ Samuel Bernat
 Game Design:
 Samuel Bernat
 
-Programming: 
+Programming:
 Dusan Bernat
 
 Text:
 Nicolas Pimentel
 Samuel Bernat
 
-Musik:
+Music:
 Alan Walker - Fade (NCS Release)
 

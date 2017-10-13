@@ -32,4 +32,24 @@ public class FunnyNameGenerator {
             return null;
         return nameList.get(index);
     }
+
+    private static void createTeamFunnyNames() {
+        if(nameList.size() == 0) {
+            FileHandle nameFile = Gdx.files.internal(Configuration.getLanguage() + "/kongosdrink/teamnames.txt");
+            String fileContent = nameFile.readString();
+            String[] names = fileContent.split("\n");
+            nameList = Arrays.asList(names);
+            Collections.shuffle(nameList);
+        }
+    }
+
+    public static String getTeamFunnyName(int index){
+ //       if(nameList.size() == 0)
+        createTeamFunnyNames();
+        if(index >= nameList.size())
+            return null;
+        return nameList.get(index);
+    }
+
+
 }

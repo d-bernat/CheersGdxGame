@@ -26,7 +26,6 @@ public class KongosDrinkPhase01Controller extends AbstractController {
     private boolean shift;
     private boolean keyboardOn;
     private String tempName;
-    private KongosDrinkPhase0Model model;
     // private int activeBoxIndex;
     // private int touchPos;
 
@@ -34,6 +33,7 @@ public class KongosDrinkPhase01Controller extends AbstractController {
     public KongosDrinkPhase01Controller(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
+        KongosDrinkPhase01Model.getInstance().setPlayerToConfigureIndex(0);
         //enableKeyboard(false);
         //model = KongosDrinkPhase0Model.getInstance();
         //Configuration.getInstance();
@@ -75,23 +75,25 @@ public class KongosDrinkPhase01Controller extends AbstractController {
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
 
-                if(i < getScreen().getButtons().length - 2) {
-                    Gdx.input.vibrate(10);
+                if (i < getScreen().getButtons().length - 2) {
+                    if (!isDisabled(i)) {
+                        Gdx.input.vibrate(10);
 
-                    for (AvatarType at : AvatarType.values()) {
-                        if (at.value() == i - 1) {
-                            Configuration.getInstance().getPlayers()
-                                    .get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).setAvatar(at);
-                            break;
+                        for (AvatarType at : AvatarType.values()) {
+                            if (at.value() == i - 1) {
+                                Configuration.getInstance().getPlayers()
+                                        .get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).setAvatar(at);
+                                break;
+                            }
                         }
                     }
-                }else{
-                    if(i == getScreen().getButtons().length - 2 && KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() > 0){
+                } else {
+                    if (i == getScreen().getButtons().length - 2 && KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() > 0) {
                         Gdx.input.vibrate(10);
-                        KongosDrinkPhase01Model.getInstance().setPlayerToConfigureIndex(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() - 1 );
-                    }else if(i == getScreen().getButtons().length - 1 && KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() <  Configuration.getInstance().enabledPlayers() - 1){
+                        KongosDrinkPhase01Model.getInstance().setPlayerToConfigureIndex(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() - 1);
+                    } else if (i == getScreen().getButtons().length - 1 && KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() < Configuration.getInstance().enabledPlayers() - 1) {
                         Gdx.input.vibrate(10);
-                        KongosDrinkPhase01Model.getInstance().setPlayerToConfigureIndex(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() + 1 );
+                        KongosDrinkPhase01Model.getInstance().setPlayerToConfigureIndex(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex() + 1);
                     }
                 }
             }
@@ -225,5 +227,18 @@ public class KongosDrinkPhase01Controller extends AbstractController {
         else
             Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).setName(tempName);
         typedName.setLength(0);
+    }
+
+    private boolean isDisabled(int index){
+
+        boolean rs = false;
+        for(int i = 0; i < Configuration.getInstance().getPlayers().size(); i++) {
+            int av_index = Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).getAvatar().value() + 1;
+            if( index == Configuration.getInstance().getPlayers().get(i).getAvatar().value() + 1 && av_index != index) {
+                rs = true;
+            }else{
+            }
+        }
+        return rs;
     }
 }

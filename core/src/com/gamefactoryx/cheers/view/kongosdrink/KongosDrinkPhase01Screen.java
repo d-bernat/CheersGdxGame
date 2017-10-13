@@ -29,6 +29,8 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
     private FreeTypeFontGenerator generator;
     private int FONT_SIZE;
     private Sprite teamTextBox;
+    private Sprite avatarBox;
+    private Sprite disabledSprite;
 
 
     public KongosDrinkPhase01Screen() {
@@ -51,6 +53,8 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
 
         teamTextBox = new Sprite(new Texture("common/kongos_drink/text_box_horizontal.png"));
+        avatarBox = new Sprite(new Texture("common/kongos_drink/box.png"));
+        disabledSprite = new Sprite( new Texture ("common/kongos_drink/disabled.png"));
 
     }
 
@@ -103,18 +107,21 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
             teamTextBox.setSize(X * 0.65f, Y * 0.07f);
         else
             teamTextBox.setSize(X * 0.65f, Y * 0.2f);
+
+        avatarBox.setSize(X * 0.65f, getButtons()[1][0].getHeight() * Math.round(AvatarType.values().length * 0.2f * 1.1f ));
+        disabledSprite.setSize(X * 0.1f, X * 0.1f);
     }
 
     @Override
     protected void drawText() {
-        getTextBox().setPosition(X * 0.5f - getTextBox().getWidth() * 0.5f, Y * 0.76f);
+        getTextBox().setPosition(X * 0.5f - getTextBox().getWidth() * 0.5f, Y * 0.8f);
         getTextBox().draw(getSpriteBatch(), 1.0f);
         if (Configuration.getInstance().getGameType() != Configuration.GameTypeEnum.DOGFIGHT) {
             teamTextBox.setPosition(getTextBox().getX(), getTextBox().getY() - teamTextBox.getHeight());
             teamTextBox.draw(getSpriteBatch(), 1.0f);
         }
 
-        float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.81f;
+        float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.85f;
         String name = Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).getName();
         FontHelper.getGlyphLayout().setText(font, name);
         font.draw(getSpriteBatch(), FontHelper.getGlyphLayout(), X * 0.46f - FontHelper.getGlyphLayout().width / 2.4f,
@@ -133,7 +140,7 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
         }
 
         int av_index = Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).getAvatar().value() + 1;
-        getButtons()[av_index][0].setPosition(X * 0.5f - getTextBox().getWidth() * 0.5f, Y * 0.76f + getTextBox().getHeight() * 0.5f - getButtons()[av_index][0].getHeight() * 0.5f);
+        getButtons()[av_index][0].setPosition(X * 0.5f - getTextBox().getWidth() * 0.5f, Y * 0.8f + getTextBox().getHeight() * 0.7f);
         getButtons()[av_index][0].draw(getSpriteBatch(), 1.0f);
     }
 
@@ -151,11 +158,10 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
         getButtons()[0][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
         getButtons()[0][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
 
-        int temp = -1;
+
         for(int i = 0; i < AvatarType.values().length; i++ ){
             getButtons()[i+1][0] = new Sprite(new Texture("common/kongos_drink/player/" + AvatarType.values()[i].toString() + "/" + AvatarType.values()[i].toString() + "_1.png"));
             getButtons()[i+1][1] = new Sprite(new Texture("common/kongos_drink/player/" + AvatarType.values()[i].toString() + "/" + AvatarType.values()[i].toString() + "_1.png"));
-            ++temp;
         }
 
         getButtons()[getButtons().length - 2][0] = new Sprite(new Texture("common/review.png"));
@@ -169,6 +175,10 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
     @Override
     protected void drawButtons() {
 
+
+        avatarBox.setPosition(getTextBox().getX(),
+                Y * 0.54f - getButtons()[getButtons().length - 3][0].getHeight() * 1.12f * (Math.round(AvatarType.values().length * 0.2f) - 1));
+        avatarBox.draw(getSpriteBatch(), 1.0f);
         int y_offset = 0;
         int x_offset = 0;
         for (int i = 1; i < getButtons().length - 2; i++) {
@@ -177,9 +187,14 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
                 x_offset = 0;
             }
             getButtons()[i][0].setPosition(X * 0.5f - getButtons()[i][0].getWidth() * 5 * 1.1f * 0.5f + getButtons()[i][0].getWidth() * x_offset * 1.1f,
-                    Y * 0.5f - getButtons()[i][0].getHeight() * y_offset * 1.1f);
+                    Y * 0.54f - getButtons()[i][0].getHeight() * y_offset * 1.1f);
             int av_index = Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).getAvatar().value() + 1;
             getButtons()[i][0].draw(getSpriteBatch(), av_index == i ? 1.0f : 0.5f);
+            if(isDisabled(i)) {
+                disabledSprite.setPosition(X * 0.5f - getButtons()[i][0].getWidth() * 5 * 1.1f * 0.5f + getButtons()[i][0].getWidth() * x_offset * 1.1f,
+                        Y * 0.54f - getButtons()[i][0].getHeight() * y_offset * 1.1f);
+                disabledSprite.draw(getSpriteBatch(), 1.0f);
+            }
             ++x_offset;
         }
 
@@ -235,13 +250,22 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
         super.dispose();
 
         teamTextBox.getTexture().dispose();
+        avatarBox.getTexture().dispose();
+        disabledSprite.getTexture().dispose();
     }
 
-    /*private int getMaxPlayers(){
-        int page = KongosDrinkPhase0Model.getInstance().getPage();
-        int maxPlayersProPage = com.gamefactoryx.cheers.tool.Configuration.getMaxPlayersProConfigPage();
-        return  Configuration.getInstance().getMaxPlayers() >= (page * maxPlayersProPage) ? maxPlayersProPage:
-                maxPlayersProPage - (page * maxPlayersProPage - Configuration.getInstance().getMaxPlayers());
-    }*/
+
+    private boolean isDisabled(int index){
+
+        boolean rs = false;
+        for(int i = 0; i < Configuration.getInstance().getPlayers().size(); i++) {
+            int av_index = Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).getAvatar().value() + 1;
+            if( index == Configuration.getInstance().getPlayers().get(i).getAvatar().value() + 1 && av_index != index) {
+                rs = true;
+            }else{
+            }
+        }
+        return rs;
+    }
 
 }

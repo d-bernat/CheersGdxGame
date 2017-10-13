@@ -14,9 +14,11 @@ import java.util.Timer;
 public class CheersGdxGame extends Game {
 
 	private static ScreenLock screenLock;
+	private static FacebookLinkHandler facebookLinkHandler;
 
-	public CheersGdxGame(ScreenLock screenLock){
+	public CheersGdxGame(ScreenLock screenLock, FacebookLinkHandler facebookLinkHandler){
 		this.screenLock = screenLock;
+		this.facebookLinkHandler = facebookLinkHandler;
 	}
 	@Override
 	public void create () {
@@ -30,6 +32,9 @@ public class CheersGdxGame extends Game {
 
 	public static ScreenLock getScreenLock(){
 		return screenLock;
+	}
+	public static FacebookLinkHandler getFacebookLinkHandler(){
+		return facebookLinkHandler;
 	}
 
 }
