@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheers.model.CreditModel;
 import com.gamefactoryx.cheers.model.KingsCupSpecialModel;
 import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.FontHelper;
@@ -32,6 +33,7 @@ public class CreditScreen extends AbstractScreen {
     private BitmapFont font, fontLabel;
     private String plainText;
     private List<String> text;
+
 
 
     private List<String> splitLine() {
@@ -73,13 +75,15 @@ public class CreditScreen extends AbstractScreen {
         FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/credits/credits.txt");
         plainText = taskFile.readString("UTF-8");
         initBackButton();
+        CreditModel.getInstance().setyOffset(Resolution.getGameWorldHeightPortrait() * 0.7f);
+        CreditModel.getInstance().startAnimation();
     }
 
 
     @Override
     protected void initSprites() {
-        setLandscapeSprite(new Sprite(new Texture("common/Landscapescreen.png")));
-        setPortraitSprite(new Sprite(new Texture("common/Portraitscreen.png")));
+        setLandscapeSprite(new Sprite(new Texture("common/credits.png")));
+        setPortraitSprite(new Sprite(new Texture("common/credits.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
@@ -98,14 +102,15 @@ public class CreditScreen extends AbstractScreen {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
-            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.92f, Resolution.getGameWorldHeightPortrait() * 0.82f);
+
         } else {
             FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
-            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.92f, Resolution.getGameWorldHeightLandscape() * 0.82f);
 
         }
+
+        getTextBox().setSize(X, Y);
 
         parameter.size = FONT_SIZE;
         parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
@@ -126,48 +131,46 @@ public class CreditScreen extends AbstractScreen {
         generator.dispose();
         text = splitLine();
 
+        CreditModel.getInstance().setMaxYOffset(-font.getCapHeight() * text.size() * 2.0f);
+
     }
 
     @Override
     protected void drawText() {
 
-        float MAX_LINES_VISIBLE = 0.85f;
         float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
         float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 2.5f;
         float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
-        if (Orientation.getOrientation() == Input.Orientation.Portrait)
-            getTextBox().setPosition(X * 0.05f, Y * 0.07f);
-        else
-            getTextBox().setPosition(X * 0.05f, Y * 0.07f);
 
-        getTextBox().draw(getSpriteBatch());
-        float y_offset = 0f;
-        if (getYScrollPos() < 0) setYScrollPos(0);
-        else if (getYScrollPos() > text.size() - 10) setYScrollPos(text.size() - 10);
-        for (int i = getYScrollPos(); i < text.size(); i++) {
+        float y_offset = CreditModel.getInstance().getyOffset();
+
+        for (int i = 0; i < text.size(); i++) {
 
             if (text.get(i).contains(":"))
                 fontLabel.draw(getSpriteBatch(), text.get(i),
                         (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                        getTextBox().getHeight() - font.getCapHeight() * 1.3f - y_offset);
+                         Y * 0.8f - font.getCapHeight() * 1.3f - y_offset);
             else
                 font.draw(getSpriteBatch(), text.get(i),
                         (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.53f,
-                        getTextBox().getHeight() - font.getCapHeight() * 1.3f - y_offset);
+                        Y * 0.8f - font.getCapHeight() * 1.3f - y_offset);
 
             if (text.get(i).indexOf('\n') > -1)
                 y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITH_ENTER;
             else
                 y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
 
-            if (y_offset > getTextBox().getHeight() * MAX_LINES_VISIBLE) break;
         }
+
+        getTextBox().setPosition(0, 0);
+        getTextBox().draw(getSpriteBatch());
+
     }
 
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecial-TextBox.png")));
+        setTextBox(new Sprite(new Texture("common/credits2.png")));
 
     }
 
@@ -212,12 +215,13 @@ public class CreditScreen extends AbstractScreen {
     }
 
     @Override
-    public void dispose(){
-        if(font !=null)
+    public void dispose() {
+        if (font != null)
             font.dispose();
-        if(fontLabel !=null)
+        if (fontLabel != null)
             fontLabel.dispose();
         super.dispose();
     }
+
 
 }

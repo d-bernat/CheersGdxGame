@@ -82,7 +82,7 @@ public class PlayerToTeamsTransformator {
         } else if (splitted[0].size() < splitted[1].size()) {
             for (int i = 0; i < splitted[0].size(); i++) {
                 Player newPlayer = new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(i), Subject.Sex.DONT_CARE,
-                        Subject.Type.TEAM, splitted[0].get(0).getAvatar()));
+                        Subject.Type.TEAM, splitted[0].get(i).getAvatar()));
                 newPlayer.addSubject(splitted[0].get(i).getSubjects().get(0));
                 newPlayer.addSubject(splitted[1].get(i).getSubjects().get(0));
                 newPlayer.setEnable(true);
@@ -90,7 +90,7 @@ public class PlayerToTeamsTransformator {
             }
 
             Player newPlayer = new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(splitted[1].size()), Subject.Sex.DONT_CARE,
-                    Subject.Type.TEAM, splitted[0].get(0).getAvatar()));
+                    Subject.Type.TEAM, splitted[1].get(splitted[1].size() - 1).getAvatar()));
             newPlayer.addSubject(splitted[1].get(splitted[1].size() - 1).getSubjects().get(0));
             newPlayer.setEnable(true);
             rs.add(newPlayer);
@@ -99,14 +99,14 @@ public class PlayerToTeamsTransformator {
             for (int i = 0; i < splitted[1].size(); i++) {
                 Subject s = splitted[0].get(i).getSubjects().get(0);
                 Player newPlayer = new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(i + 1), Subject.Sex.DONT_CARE,
-                        Subject.Type.TEAM, splitted[0].get(0).getAvatar()));
+                        Subject.Type.TEAM, splitted[0].get(i).getAvatar()));
                 newPlayer.addSubject(splitted[0].get(i).getSubjects().get(0));
                 newPlayer.addSubject(splitted[1].get(i).getSubjects().get(0));
                 newPlayer.setEnable(true);
                 rs.add(newPlayer);
             }
             Player newPlayer = new Player(new Subject(FunnyNameGenerator.getTeamFunnyName(splitted[0].size()), Subject.Sex.DONT_CARE,
-                    Subject.Type.TEAM, splitted[1].get(0).getAvatar()));
+                    Subject.Type.TEAM, splitted[0].get(splitted[0].size() - 1).getAvatar()));
             newPlayer.addSubject(splitted[0].get(splitted[0].size() - 1).getSubjects().get(0));
             newPlayer.setEnable(true);
             rs.add(newPlayer);

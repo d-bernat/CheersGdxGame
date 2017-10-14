@@ -2,6 +2,7 @@ package com.gamefactoryx.cheers.controller;
 
 import com.badlogic.gdx.Input;
 import com.gamefactoryx.cheers.controller.AbstractController;
+import com.gamefactoryx.cheers.model.CreditModel;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
@@ -17,24 +18,7 @@ final class CreditController extends AbstractController {
 
     CreditController(final AbstractScreen screen) {
         super(screen);
-        setScreenLock(10);
-
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int acc = 0;
-                while (acc < 5) {
-                    long time = System.currentTimeMillis();
-                    while (System.currentTimeMillis() < time + 1000L) {
-                    }
-                    ++acc;
-                    getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
-
-                }
-            }
-
-        }).start();*/
-
+        setScreenLock(1);
     }
 
     @Override
@@ -46,6 +30,7 @@ final class CreditController extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+
         super.touchUp(screenX, screenY, pointer, button);
         return true;
     }
@@ -53,7 +38,7 @@ final class CreditController extends AbstractController {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-        int SCROLLING_SLOW_DOWN = 30;
+       /* int SCROLLING_SLOW_DOWN = 30;
         if (screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
@@ -74,10 +59,9 @@ final class CreditController extends AbstractController {
                 lastYPointerPos = screenY;
             }
 
-        }
+        }*/
 
         return true;
     }
-
 
 }
