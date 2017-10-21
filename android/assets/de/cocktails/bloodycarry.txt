@@ -1,4 +1,4 @@
-Bloody Carry
+﻿Bloody Carry
 
 Typ
 Classic, leicht
@@ -13,5 +13,5 @@ Zutaten
 
 Zubereitung
 1. Alle Zutaten vermischen
-2. Mit Eis ins Glas f�llen.
+2. Mit Eis ins Glas füllen.
 3. Cheers!

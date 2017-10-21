@@ -1,4 +1,4 @@
-43 Peaches
+ï»¿43 Peaches
 
 Typ
 Longdrink, Mittelstark
@@ -7,15 +7,15 @@ Glas
 Longdrinkglas
 
 Zutaten
-2cl Likör 43
+2cl LikÃ¶r 43
 2cl Vodka
-2cl Pfirsichlikör
+2cl PfirsichlikÃ¶r
 2cl Limettensaft
 2cl Vanillesirup
 4cl Maracujasaft
 4cl Orangensaft
 
 Zubereitung
-1. Crushed Ice zu 3/4 ins Glas füllen.
-2. Alle Zutaten mixen lassen und ins Glas füllen.
+1. Crushed Ice zu 3/4 ins Glas fÃ¼llen.
+2. Alle Zutaten mixen lassen und ins Glas fÃ¼llen.
 3. Cheers!

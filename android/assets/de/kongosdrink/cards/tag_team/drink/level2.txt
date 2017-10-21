@@ -2,7 +2,7 @@
 Ihr wählt 2 Spieler aus dem gegnerischen Team welche 3 Schlucke trinken müssen.;0;3;0
 Jeder Spieler, egal aus welchem Team, trinkt 2 Schlücke!;0;2;0
 2 Schlücke für den Verlierer. Nennt ein Wortmit dem Anfangsbuchstaben eurer Wahl. Der nächste muss ein Wort finden welches sich daraufreimt. Der Verlierer trinkt 2 Schlücke! -oPlayer-beginnt und es geht im Uhrzeigersinn.;0;2;0
-Ihr gegen -OTeam-. Ihr sucht sich einen Prominenten aus, der muss erraten werde,die anderen ebenfalls. Es wird nur mit Ja oder Nein geantwortetund für jedes Nein trinkt ihr einen Schluck.;0;3;0
+Ihr gegen -oPlayer.-. Ihr sucht sich einen Prominenten aus, der muss erraten werde,die anderen ebenfalls. Es wird nur mit Ja oder Nein geantwortetund für jedes Nein trinkt ihr einen Schluck.;0;3;0
 
 
 
