@@ -1,11 +1,8 @@
 ﻿Gorbatschow Summer
-
 Typ
 Longdrink, leicht
-
 Glas
 Collinsglas
-
 Zutaten
 1cl Erdbeersirup
 2cl Cranberrysaft
@@ -13,7 +10,6 @@ Zutaten
 6cl Soda Wasser
 1cl Erdbeersirup
 3cl Vodka Gorbatschow
-
 Zubereitung
 1. Glas bis zur Hälfte
  mit Eiswürfeln füllen.
