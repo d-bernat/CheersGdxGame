@@ -99,6 +99,11 @@ public enum StageEnum {
         public AbstractController getController() {
             return new HallOfFameController(new HallOfFameScreen());
         }
+    },
+    COCKTAILS_STAGE {
+        public AbstractController getController() {
+            return new CocktailsController(new CocktailsScreen());
+        }
     };
 
     @SuppressWarnings("unused")

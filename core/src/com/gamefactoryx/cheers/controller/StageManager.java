@@ -83,6 +83,10 @@ public final class StageManager {
             case HALL_OF_FAME_STAGE:
                 controller = StageEnum.HALL_OF_FAME_STAGE.getController();
                 break;
+            case COCKTAILS_STAGE:
+                controller = StageEnum.COCKTAILS_STAGE.getController();
+                break;
+
             case NEW_GAME_STAGE:
                 controller = StageEnum.NEW_GAME_STAGE.getController();
                 break;
@@ -149,6 +153,7 @@ public final class StageManager {
             case SPLASH_STAGE:
             case SETUP_STAGE:
             case CREDIT_STAGE:
+            case COCKTAILS_STAGE:
             case BUS_DRIVING_STAGE_ZERO_PHASE:
             case KONGOS_DRINK_SETUP_STAGE:
             case KONGOS_DRINK_ZERO_STAGE:
