@@ -1,0 +1,3 @@
+﻿2: Kategorie
+Der Spieler sucht sich eine Kategorie aus wie Automarken, Fußballer, Modelabels oder ähnliches.
+Er nennt einen Begriff und es geht im Uhrzeigersinn, der erste dem nichts einfällt muss trinken.
