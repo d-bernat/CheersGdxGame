@@ -1,4 +1,4 @@
-Lila Caipirinha
+﻿Lila Caipirinha
 
 Typ
 Classic, Mittelstark
@@ -15,8 +15,8 @@ Zutaten
 Zubereitung
 1. Glas mit Crushed Ice füllen.
 2. Limette achteln und ins Glas
-hinzufügen.
+   hinzufügen.
 3. Rohrzucker, Lime Juice
-und Livo-Liva hinzugeben.
-4. Vermischen
+   und Livo-Liva hinzugeben.
+4. Vermischen.
 5. Cheers! 

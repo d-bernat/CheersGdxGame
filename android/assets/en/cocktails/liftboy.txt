@@ -1,0 +1,19 @@
+﻿Liftboy
+
+Type
+Longdrink, Middle
+
+Glass
+Longdrinkglas
+
+Ingredients
+1TL Honey
+4cl Vodka
+8cl Pine apple juice
+1cl Grenadine syrup
+
+Preparation
+1. Mix all ingredients together.
+2. Fill the wohle glass with ice.
+3. Fill now the content into your glass.
+4. Cheers!

@@ -1,0 +1,10 @@
+﻿Is there a back button?
+If you have an android mobile you can use there button. Otherwise 
+you need to wipe from your right screen side to your left.
+
+Can I turn off some functions?
+Of course you can. In your settings you can turn off the music and
+the wipe function.
+
+Which meaning have the flag at the mainside?
+With thoses flags you can change the language.
