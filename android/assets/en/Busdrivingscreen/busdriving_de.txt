@@ -1,29 +1,30 @@
 1.       Black or white?
 2.       Higher card or lower card?
 3.       Between or outside?
-4.       Which template? 
+4.       Which suit? 
 
-overtime. It's overtime! -Player-,-Player- [etc.] alternately you'll estimate if the card is higher or lower. The first player which is wrong will lose. 
+overtime. It's overtime! -Player-,-Player- [etc.] alternately you'll guess if the card is higher or lower. The first player who is wrong loses. 
 
 x1.     -Player- you can lay a card. Do you want to do it?
 
-x2.     -Player- you distribute 1 sip.
-x2a.   - Player- you can also distribute 1 sips.
-x2b.    -Player- you of course also.
+x2.     -Player- you pass on 1 sip.
+x2a.    -Player- you can also pass on 1 sip.
+x2b.    -Player- you can pass on 1 sip aswell.
 
-x3.     -Player- you distribute 2 sips.
-x3a.    -Player- you can also distribute 2 sips.
-x3b.    -Player- you also
+x3.     -Player- you pass on 2 sips.
+x3a.    -Player- you can also pass on 2 sips.
+x3b.    -Player- you too.
 
-x4.     -Player- you distribute 3 sips.
-x4a.    -Player- you can also distribute 3 sips.
-x4b.    -Player- distribute also 3.
+x4.     -Player- you pass on 3 sips.
+x4a.    -Player- you can also pass on 3 sips.
+x4b.    -Player- pass on 3 sips.
 
-x5.     -Player- you distribute 4 sips.
-x5a.    -Player you can also distribute 4 sips.
-x5b.    -Player- you can also.
+x5.     -Player- you can pass on 4 sips.
+x5a.    -Player you can also pass on 4 sips.
+x5b.    -Player- you can do so too.
 
-x6.     -Player- Congratulations you are allowed to Bus Driving! I wish you success and good luck!
+x6.     -Player- Congratulations you are allowed to drive the bus! I wish you success and good luck!mid
+
 
 x7.     Take 1 sip.
 x7/2.   Take 1 sip and go on!

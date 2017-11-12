@@ -1,0 +1,5 @@
+8: Chinman
+You can touch your chin everytime you want, 
+if you touch it, then every player needs to 
+touch their chin too. The player which will 
+be last needs to drink.
