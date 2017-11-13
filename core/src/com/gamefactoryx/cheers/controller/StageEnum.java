@@ -35,6 +35,11 @@ public enum StageEnum {
             return new SetupController(new SetupScreen());
         }
     },
+    HELP_STAGE {
+        public AbstractController getController() {
+            return new HelpController(new HelpScreen());
+        }
+    },
     CREDIT_STAGE {
         public AbstractController getController() {
             return new CreditController(new CreditScreen());

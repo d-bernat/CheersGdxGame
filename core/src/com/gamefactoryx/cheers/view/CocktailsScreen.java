@@ -54,7 +54,7 @@ public class CocktailsScreen extends AbstractScreen {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-        float FONT_SIZE_ON_SCREEN = 0.03f;
+        float FONT_SIZE_ON_SCREEN = 0.028f;
         super.resize(width, height);
         if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
             generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
@@ -66,12 +66,12 @@ public class CocktailsScreen extends AbstractScreen {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
-            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.92f, Resolution.getGameWorldHeightPortrait() * 0.85f);
+            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.90f, Resolution.getGameWorldHeightPortrait() * 0.85f);
         } else {
             FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
-            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.92f, Resolution.getGameWorldHeightLandscape() * 0.85f);
+            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.90f, Resolution.getGameWorldHeightLandscape() * 0.85f);
 
         }
 
@@ -98,7 +98,8 @@ public class CocktailsScreen extends AbstractScreen {
     protected void drawText() {
         float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
         float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 2.5f;
-        float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
+        float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.6f;
+        float EMPTYCHAR_CHAR_WIDTH_RATIO_FOR_LABEL = 1.9f;
         if (CocktailsModel.getInstance().getCocktailToDisplay() > -1) {
 
             if (Orientation.getOrientation() == Input.Orientation.Portrait)
@@ -115,7 +116,7 @@ public class CocktailsScreen extends AbstractScreen {
 
                 if (i == 0)
                     fontLabel.draw(getSpriteBatch(), text.get(i),
-                            (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                            (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO_FOR_LABEL) * 0.5f,
                             getTextBox().getHeight() - font.getCapHeight() * 1.3f - y_offset);
                 else
                     font.draw(getSpriteBatch(), text.get(i),

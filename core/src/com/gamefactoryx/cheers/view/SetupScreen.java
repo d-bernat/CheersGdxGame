@@ -21,6 +21,10 @@ import java.util.List;
 public class SetupScreen extends AbstractScreen {
 
     private float X, Y;
+    private Sprite settingGroups[] = {
+            new Sprite(new Texture(Configuration.getLanguage() + "/settings/musikbox.png")),
+            new Sprite(new Texture(Configuration.getLanguage() + "/settings/backbutton.png"))
+    } ;
 
     @Override
     public void show() {
@@ -49,7 +53,8 @@ public class SetupScreen extends AbstractScreen {
             Y = Resolution.getGameWorldHeightLandscape();
         }
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
-            getTextBox().setSize(X * 0.7f, Y * 0.1f);
+            for(Sprite s: settingGroups)
+                s.setSize(X * 0.7f, Y * 0.1f);
             for (int i = 0; i < getCountOfButtons(); i++)
                 for (int j = 0; j < 2; j++) {
                     getButtons()[i][j].setSize(X * 0.3f,
@@ -58,7 +63,9 @@ public class SetupScreen extends AbstractScreen {
 
         }
         else {
-            getTextBox().setSize(X * 0.5f, Y * 0.22f);
+            for(Sprite s: settingGroups)
+                s.setSize(X * 0.5f, Y * 0.22f);
+
             for (int i = 0; i < getCountOfButtons(); i++)
                 for (int j = 0; j < 2; j++) {
                     getButtons()[i][j].setSize(X * 0.2f,
@@ -73,24 +80,28 @@ public class SetupScreen extends AbstractScreen {
 
     @Override
     protected void drawText() {
-        getTextBox().setPosition( X * 0.5f - getTextBox().getWidth() * 0.5f, Y * 0.6f);
-        getTextBox().draw(getSpriteBatch(), 1.0f);
+    /*    getTextBox().setPosition( X * 0.5f - getTextBox().getWidth() * 0.5f, Y * 0.6f);
+        getTextBox().draw(getSpriteBatch(), 1.0f);*/
     }
 
 
     @Override
     protected void initTextBox() {
-        setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/settings/musikbox.png")));
+        //setTextBox(new Sprite(new Texture(Configuration.getLanguage() + "/settings/musikbox.png")));
     }
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[2][2]);
+        setButtons(new Sprite[4][2]);
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/off.png"));
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/off.png"));
         getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/on.png"));
         getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/on.png"));
+        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/off.png"));
+        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/off.png"));
+        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/on.png"));
+        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/settings/on.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
 
@@ -98,14 +109,38 @@ public class SetupScreen extends AbstractScreen {
 
     @Override
     protected void drawButtons() {
-        for (int i = 0; i < getCountOfButtons(); i++){
-            getButtons()[i][0].setPosition(X * 0.5f - getButtons()[0][0].getWidth() * 1.1f * 2 * 0.5f + i * getButtons()[i][0].getWidth() * 1.2f,
-                    Y * 0.6f + getTextBox().getHeight() * 0.45f - getButtons()[0][0].getHeight() * 0.5f );
-            if( i  == 1 )
-                getButtons()[i][0].draw(getSpriteBatch(), Configuration.isPlayMusic() ? 1.0f: 0.5f);
-            else
-                getButtons()[i][0].draw(getSpriteBatch(), Configuration.isPlayMusic() ? 0.5f: 1.0f);
+
+        int offset = 0;
+        for(Sprite s: settingGroups) {
+            s.setPosition(X * 0.5f - s.getWidth() * 0.5f, Y * 0.6f - s.getHeight() * 1.2f * offset++);
+            s.draw(getSpriteBatch(), 1.0f);
         }
+
+        int x_offset = 0, y_offset = 0;
+
+        for (int i = 0; i < getCountOfButtons(); i++){
+            getButtons()[i][0].setPosition(X * 0.5f - getButtons()[0][0].getWidth() * 1.1f * 2 * 0.5f + x_offset * getButtons()[i][0].getWidth() * 1.2f,
+                    Y * 0.6f + settingGroups[0].getHeight() * 0.45f - getButtons()[0][0].getHeight() * 0.5f - settingGroups[0].getHeight() * 1.2f * y_offset);
+            if( i  == 1 ) {
+                getButtons()[i][0].draw(getSpriteBatch(), Configuration.isPlayMusic() ? 1.0f : 0.5f);
+                ++y_offset;
+                x_offset = 0;
+            }
+            else if(i == 0) {
+                getButtons()[i][0].draw(getSpriteBatch(), Configuration.isPlayMusic() ? 0.5f : 1.0f);
+                ++x_offset;
+            }
+            else if(i == 3)
+                getButtons()[i][0].draw(getSpriteBatch(), Configuration.isShowBackButton() ? 1.0f: 0.5f);
+            else if(i == 2) {
+                getButtons()[i][0].draw(getSpriteBatch(), Configuration.isShowBackButton() ? 0.5f : 1.0f);
+                ++x_offset;
+            }
+        }
+
+
+
+
     }
 
     @Override
@@ -140,6 +175,8 @@ public class SetupScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        for(Sprite s: settingGroups)
+            s.getTexture().dispose();
         super.dispose();
     }
 }

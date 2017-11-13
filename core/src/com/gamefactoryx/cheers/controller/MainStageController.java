@@ -67,6 +67,9 @@ final class MainStageController extends AbstractController {
                         StageManager.getInstance().showStage(StageEnum.COCKTAILS_STAGE);
                         break;
                     case 5:
+                        StageManager.getInstance().showStage(StageEnum.HELP_STAGE);
+                        break;
+                    case 6:
                         switch (Configuration.getLanguage()) {
                             case DE:
                                 //Configuration.setLanguage(Configuration.LanguageEnum.EN);
@@ -80,8 +83,11 @@ final class MainStageController extends AbstractController {
                         }
                         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
                         break;
-                    case 6:
+                    case 7:
                         CheersGdxGame.getFacebookLinkHandler().openFacebookPage("fb://page/312135055904603", "https://www.facebook.com/BernatCooperation");
+                        break;
+                    case 8:
+                        //CheersGdxGame.getInstagramLinkHandler().openInstagramPage("fb://page/312135055904603", "https://www.facebook.com/BernatCooperation");
                         break;
 
                     default:

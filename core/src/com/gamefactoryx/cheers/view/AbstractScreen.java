@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.*;
+import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
@@ -252,8 +253,8 @@ public abstract class AbstractScreen implements Screen {
         drawCards();
         drawButtons();
         drawText();
-        if (backButtonSprite != null)
-            backButtonSprite.draw(spriteBatch);
+        /*if (backButtonSprite != null && Configuration.isShowBackButton())
+            backButtonSprite.draw(spriteBatch);*/
         drawLoadingSprite();
         spriteBatch.end();
 

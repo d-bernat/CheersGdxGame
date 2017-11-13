@@ -16,18 +16,19 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 abstract public class AbstractController extends InputAdapter {
 
     private final AbstractScreen screen;
+    private boolean readyGoBack = false;
 
-
-    protected AbstractController(final AbstractScreen screen){
+    protected AbstractController(final AbstractScreen screen) {
         this.screen = screen;
         Gdx.input.setInputProcessor(this);
         Gdx.input.setCatchBackKey(true);
 
     }
+
     @Override
     public boolean keyDown(int keycode) {
 
-        switch (keycode){
+        switch (keycode) {
             case Input.Keys.BACK:
                 StageManager.getInstance().showLastStage();
         }
@@ -36,49 +37,52 @@ abstract public class AbstractController extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (Configuration.isShowBackButton()) {
+            if (Orientation.getOrientation() == Input.Orientation.Landscape) {
+                readyGoBack = screenX >= Resolution.getGameWorldWidthLandscape() * 0.55f &&
+                        Resolution.getGameWorldHeightLandscape() - screenY <= 350;
+            } else {
+
+                readyGoBack = screenX >= Resolution.getGameWorldWidthPortrait() * 0.55f &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= 350;
+            }
+        }
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         //if(downXCoor - screenX > 400 ){
-        if(screen.getBackButtonSprite() == null)
+        if (screen.getBackButtonSprite() == null || !Configuration.isShowBackButton())
             return true;
 
-        if(     screenX <= 200 &&
-                Resolution.getGameWorldHeightLandscape() - screenY <= 200 &&
-                Orientation.getOrientation() == Input.Orientation.Landscape ||
 
-                screenX <= 200 &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= 200 &&
-                Orientation.getOrientation() == Input.Orientation.Portrait)
-        {
+
+        boolean flag = false;
+        if (Configuration.isShowBackButton() && readyGoBack) {
+            if (Orientation.getOrientation() == Input.Orientation.Landscape) {
+                flag = screenX <= Resolution.getGameWorldWidthLandscape() * 0.45f &&
+                        Resolution.getGameWorldHeightLandscape() - screenY <= 350;
+            } else {
+
+                flag = screenX <= Resolution.getGameWorldWidthPortrait() * 0.45f &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= 350;
+            }
+        }
+
+        if (flag) {
+            readyGoBack = false;
             Gdx.input.vibrate(10);
             StageManager.getInstance().showLastStage();
             return true;
         }
 
-       /* for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            if (getScreen().getClicked()[i])
-                switch (i) {
-                    case 0:
-                        Configuration.setLanguage(Configuration.LanguageEnum.DE);
-                        StageManager.getInstance().showStage();
-                        break;
-                    case 1:
-                        Configuration.setLanguage(Configuration.LanguageEnum.EN);
-                        StageManager.getInstance().showStage();
-                        break;
-                    case 2:
-                        StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
-                        break;
-                }
-
-            getScreen().getClicked()[i] = false;
-        }*/
         return true;
     }
-    protected AbstractScreen getScreen(){ return screen; }
+
+    protected AbstractScreen getScreen() {
+        return screen;
+    }
 
     protected void setScreenLock(int lockType) {
         if (CheersGdxGame.getScreenLock() != null)

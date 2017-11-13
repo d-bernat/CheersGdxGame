@@ -77,6 +77,10 @@ public final class StageManager {
             case SETUP_STAGE:
                 controller = StageEnum.SETUP_STAGE.getController();
                 break;
+            case HELP_STAGE:
+                controller = StageEnum.HELP_STAGE.getController();
+                break;
+
             case CREDIT_STAGE:
                 controller = StageEnum.CREDIT_STAGE.getController();
                 break;
@@ -152,6 +156,7 @@ public final class StageManager {
         switch (screenEnum) {
             case SPLASH_STAGE:
             case SETUP_STAGE:
+            case HELP_STAGE:
             case CREDIT_STAGE:
             case COCKTAILS_STAGE:
             case BUS_DRIVING_STAGE_ZERO_PHASE:

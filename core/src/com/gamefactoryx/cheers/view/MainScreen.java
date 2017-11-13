@@ -37,7 +37,7 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[8][2]);
+        setButtons(new Sprite[9][2]);
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory.png"));
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory_white.png"));
@@ -49,29 +49,31 @@ public class MainScreen extends AbstractScreen {
         getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game_white.png"));
         getButtons()[4][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails.png"));
         getButtons()[4][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails_white.png"));
+        getButtons()[5][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help.png"));
+        getButtons()[5][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help_white.png"));
         switch (Configuration.getLanguage()) {
             case EN:
-                getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
-                getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                getButtons()[6][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                getButtons()[6][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
                 break;
             case DE:
-                getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
-                getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
+                getButtons()[6][0] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
+                getButtons()[6][1] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
                 break;
           //  case SK:
           //      getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
           //      getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
           //      break;
         }
-        getButtons()[6][0] = new Sprite(new Texture("common/Facebook_icon.png"));
-        getButtons()[6][1] = new Sprite(new Texture("common/Facebook_icon.png"));
-        getButtons()[7][0] = new Sprite(new Texture("common/Twitter_icon.png"));
-        getButtons()[7][1] = new Sprite(new Texture("common/Twitter_icon.png"));
+        getButtons()[7][0] = new Sprite(new Texture("common/Facebook_icon.png"));
+        getButtons()[7][1] = new Sprite(new Texture("common/Facebook_icon.png"));
+        getButtons()[8][0] = new Sprite(new Texture("common/Twitter_icon.png"));
+        getButtons()[8][1] = new Sprite(new Texture("common/Twitter_icon.png"));
 
 
         for (int i = 0; i < getCountOfButtons(); i++)
             for (int j = 0; j < 2; j++) {
-                if(i < 5)
+                if(i < 6)
                     getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
                         Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
                 else
@@ -88,13 +90,13 @@ public class MainScreen extends AbstractScreen {
 
         float X = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
         float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
-        float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.45f : 0.3f;
+        float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.40f : 0.23f;
         float DISTANCE_FROM_RIGHT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.03f : 0.06f;
         float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.03f : 0.06f;
         for (int i = 0; i < getCountOfButtons(); i++) {
             if (i == 3)
                 offset_index = 0;
-            else if (i == 5)
+            else if (i == 6)
                 offset_index = 0;
 
             float y_offset = offset_index++ * getButtons()[i][CLICKED].getHeight() * SPACE_BETWEEN_BUTTONS;
@@ -102,14 +104,14 @@ public class MainScreen extends AbstractScreen {
             if (i < 3)
                 getButtons()[i][click_index].setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY,
                         Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY - y_offset);
-            else if (i >= 3 && i < 5)
+            else if (i >= 3 && i < 6)
                 getButtons()[i][click_index].setPosition(X * DISTANCE_FROM_LEFT_SCREEN_BOUNDARY + getButtons()[i][0].getWidth() * SPACE_BETWEEN_BUTTONS,
                         Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY - getButtons()[i][0].getHeight() * 0.5f - y_offset);
             else
-                if(i == 6)
+                if(i >= 7 && i <= 8)
                 getButtons()[i][click_index].setPosition(X * (1.0f - DISTANCE_FROM_RIGHT_SCREEN_BOUNDARY) - getButtons()[i][0].getWidth(),
                         Y - Y * DISTANCE_FROM_UPPER_SCREEN_BOUNDARY / 2.5f - y_offset);
-            if(i != 5 && i != 7)
+            if(i != 6 /* && i != 8*/)
                 getButtons()[i][click_index].draw(getSpriteBatch(), 1);
         }
     }

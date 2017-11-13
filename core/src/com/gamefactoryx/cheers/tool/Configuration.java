@@ -43,6 +43,7 @@ public class Configuration {
     private static int MAX_PLAYERS = 6;
     private static int MAX_TOP_SCORERS = 4;
     private static int MAX_PLAYERS_PRO_CONFIG_PAGE = 4;
+    private static boolean showBackButton = true;
 
     public static LanguageEnum getLanguage() {
         if (language == null)
@@ -96,4 +97,11 @@ public class Configuration {
         }
     }
 
+    public static boolean isShowBackButton() {
+        return showBackButton;
+    }
+
+    public static void setShowBackButton(boolean showBackButton) {
+        Configuration.showBackButton = showBackButton;
+    }
 }

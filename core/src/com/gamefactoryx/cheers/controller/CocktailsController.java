@@ -36,6 +36,11 @@ public class CocktailsController extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if(Resolution.getGameWorldHeightPortrait() - screenY <= 350) {
+            return super.touchUp(screenX, screenY, pointer, button);
+        }
+
+
         int distance = screenX - touchPos;
         touchPos = 0;
 
