@@ -34,6 +34,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
     public void show() {
         super.show();
         initBackButton();
+        initRulesButton(BusDrivingPhase0Model.getInstance());
     }
 
 

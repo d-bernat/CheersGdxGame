@@ -31,13 +31,19 @@ public class CocktailsController extends AbstractController {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         touchPos = screenX;
-        return super.touchDown(screenX, screenY, pointer, button);
+        return super.touchDown(screenX, screenY, pointer, button) ;
+
+
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+
+        if(!super.touchUp(screenX, screenY, pointer, button))
+            return true;
+
         if(Resolution.getGameWorldHeightPortrait() - screenY <= 350) {
-            return super.touchUp(screenX, screenY, pointer, button);
+            return true;
         }
 
 

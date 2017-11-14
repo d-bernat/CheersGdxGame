@@ -38,7 +38,7 @@ public class KingsCupSpecialModel extends Model {
     }
 
     @Override
-    public String getRulesText() {
-        return null;
+    protected void initRulesText() {
+        rulesText = null;
     }
 }

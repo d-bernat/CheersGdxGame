@@ -1,0 +1,2 @@
+4.Phase
+Ihr m�sst tippen ob die gedeckte Karte h�her oder tiefer als die Karte im Bus ist. Es geht von links nach rechts.Liegt ihr falsch trinkt ihr und geht an den Anfang zur�ck. Unter eurem Namen wird angezeigt wie viele ihr trinken m�sst und wie viele ihr schon getrunken habt.

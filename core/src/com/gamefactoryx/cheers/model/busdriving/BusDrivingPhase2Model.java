@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.busdriving;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Queue;
 import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.CardOrientation;
@@ -51,6 +52,7 @@ public final class BusDrivingPhase2Model extends Model {
                 ++countOfPlayers;
 
     }
+
 
     public Queue<VCard> getvCards() {
         return croupier.getInstance().getVCards();
@@ -144,7 +146,7 @@ public final class BusDrivingPhase2Model extends Model {
 
 
     @Override
-    public String getRulesText() {
-        return null;
+    protected void initRulesText() {
+        rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/rules02.txt").readString();
     }
 }

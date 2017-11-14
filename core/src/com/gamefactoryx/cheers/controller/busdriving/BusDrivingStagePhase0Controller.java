@@ -54,11 +54,13 @@ public class BusDrivingStagePhase0Controller extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (!super.touchUp(screenX, screenY, pointer, button))
+            return true;
+
         int distance = screenX - touchPos;
         touchPos = 0;
 
-        if (!super.touchUp(screenX, screenY, pointer, button))
-            return true;
+
 
         if (keyboardOn) {
             enableKeyboard(false);

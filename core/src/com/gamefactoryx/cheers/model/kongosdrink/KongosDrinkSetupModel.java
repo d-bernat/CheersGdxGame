@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.badlogic.gdx.Gdx;
 import com.gamefactoryx.cheers.model.Model;
 
 
@@ -10,7 +11,6 @@ public final class KongosDrinkSetupModel extends Model {
 
 
     private static KongosDrinkSetupModel instance;
-
 
     public static KongosDrinkSetupModel getInstance(){
         if(instance == null) {
@@ -26,11 +26,12 @@ public final class KongosDrinkSetupModel extends Model {
     }
 
     private KongosDrinkSetupModel() {
+
     }
 
 
     @Override
-    public String getRulesText() {
-        return null;
+    protected void initRulesText() {
+        rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/rules.txt").readString();
     }
 }

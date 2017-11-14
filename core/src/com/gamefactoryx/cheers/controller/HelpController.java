@@ -30,7 +30,8 @@ final class HelpController extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return super.touchUp(screenX, screenY, pointer, button);
+        super.touchUp(screenX, screenY, pointer, button);
+        return true;
     }
 
     @Override

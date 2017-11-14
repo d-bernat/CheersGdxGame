@@ -1,0 +1,2 @@
+1. Phase
+Ihr bekommt nacheinander 4 Karten und m�sst vor jeder Karte die dazugeh�rige Frage beantworten, diese erscheint auf dem Screen.Beantwortet erstmal die Frage und dreht danach die Karte um. Liegst du falsch musst du einmal trinken, liegst du richtig ist der n�chste dran.

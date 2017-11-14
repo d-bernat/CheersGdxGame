@@ -1,5 +1,7 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.badlogic.gdx.Gdx;
+import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * Created by bernat on 16.05.2017.
  */
-public final class KongosDrinkPhase0Model {
+public final class KongosDrinkPhase0Model extends Model {
 
 
     private int activePlayer;
@@ -45,6 +47,11 @@ public final class KongosDrinkPhase0Model {
 
     }
 
+    @Override
+    protected void initRulesText() {
+        rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/rules.txt").readString();
+    }
+
     public List<Player> getPlayers() {
         return Configuration.getInstance().getPlayers();
     }
@@ -70,14 +77,5 @@ public final class KongosDrinkPhase0Model {
     public boolean isLastPage() {
         return last;
     }
-
-    /* public int getActivePlayer() {
-        return activePlayer;
-    }
-
-    public void setActivePlayer(int activePlayer) {
-        if (activePlayer < getPlayers().size())
-            this.activePlayer = activePlayer;
-    }*/
 
 }

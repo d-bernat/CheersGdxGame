@@ -69,8 +69,12 @@ abstract public class AbstractController extends InputAdapter {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         //if(downXCoor - screenX > 400 ){
-        if( getScreen().getRulesModel() != null)
+        if( getScreen().getRulesModel() != null && getScreen().getRulesModel().isShowRulesText() ) {
             getScreen().getRulesModel().setShowRulesText(false);
+
+            return false;
+        }
+
 
         if (screen.getBackButtonSprite() == null || !Configuration.isShowBackButton())
             return true;

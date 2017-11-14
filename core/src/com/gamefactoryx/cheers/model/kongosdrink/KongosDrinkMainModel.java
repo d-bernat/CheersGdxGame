@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
+import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Bernat on 10.07.2017.
  */
-public class KongosDrinkMainModel {
+public class KongosDrinkMainModel extends Model {
 
     public static final int CAP = 2;
     public static final int CHANGES = 4;
@@ -154,6 +155,11 @@ public class KongosDrinkMainModel {
 
         setStep(Step.LEVEL);
 
+    }
+
+    @Override
+    protected void initRulesText() {
+        rulesText = null;
     }
 
     public int getIndex() {

@@ -3,16 +3,18 @@ package com.gamefactoryx.cheers.view;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.viewport.*;
 import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.Configuration;
+import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -39,6 +41,12 @@ public abstract class AbstractScreen implements Screen {
     private Sprite backButtonSprite;
     private Sprite rulesButtonSprite;
     private Sprite loadingSprite;
+
+    private final static FreeTypeFontGenerator.FreeTypeFontParameter _parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+    private FreeTypeFontGenerator _generator;
+    private int _FONT_SIZE;
+    private BitmapFont _font;
+    private float _X, _Y;
 
 
     private int yScrollPos;
@@ -129,6 +137,7 @@ public abstract class AbstractScreen implements Screen {
     protected abstract void initCards();
 
     protected abstract void initLoadingSprite();
+
     protected abstract void drawLoadingSprite();
 
     protected abstract void drawCards();
@@ -187,7 +196,7 @@ public abstract class AbstractScreen implements Screen {
         initRulesTextBoxes();
     }
 
-    private void initRulesTextBoxes(){
+    private void initRulesTextBoxes() {
         rulesTextBoxLandscape = new Sprite(new Texture("common/rules_pop_up_landscape.png"));
         rulesTextBoxPortrait = new Sprite(new Texture("common/rules_Pop_up_Portrait.png"));
     }
@@ -201,19 +210,47 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        if(rulesButtonSprite != null) {
+        if (rulesButtonSprite != null) {
             if (Orientation.getOrientation() == Input.Orientation.Portrait) {
-                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthPortrait() - rulesButtonSprite.getWidth(),
-                        Resolution.getGameWorldHeightPortrait() - rulesButtonSprite.getHeight());
+                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthPortrait() - rulesButtonSprite.getWidth() * 1.2f,
+                        Resolution.getGameWorldHeightPortrait() - rulesButtonSprite.getHeight() * 2.0f);
             } else {
-                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthLandscape() - rulesButtonSprite.getWidth(),
-                        Resolution.getGameWorldHeightLandscape() - rulesButtonSprite.getHeight());
+                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthLandscape() - rulesButtonSprite.getWidth() * 1.2f,
+                        Resolution.getGameWorldHeightLandscape() - rulesButtonSprite.getHeight() * 2.0f);
             }
         }
-        if(rulesTextBoxLandscape != null && rulesTextBoxPortrait != null){
-            rulesTextBoxLandscape.setSize( Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.8f);
-            rulesTextBoxPortrait.setSize( Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.8f);
+        if (rulesTextBoxLandscape != null && rulesTextBoxPortrait != null) {
+            rulesTextBoxLandscape.setSize(Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.8f);
+            rulesTextBoxPortrait.setSize(Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.8f);
         }
+
+        if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+            _X = Resolution.getGameWorldWidthPortrait();
+            _Y = Resolution.getGameWorldHeightPortrait();
+        } else {
+            _X = Resolution.getGameWorldWidthLandscape();
+            _Y = Resolution.getGameWorldHeightLandscape();
+        }
+
+        float FONT_SIZE_ON_SCREEN = 0.04f;
+        if (com.gamefactoryx.cheers.tool.Configuration.getLanguage() == com.gamefactoryx.cheers.tool.Configuration.LanguageEnum.SK)
+            _generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
+        else
+            _generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
+        if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+            _FONT_SIZE = (int) (_X * FONT_SIZE_ON_SCREEN);
+        } else {
+            _FONT_SIZE = (int) (_Y * FONT_SIZE_ON_SCREEN);
+        }
+        _parameter.size = _FONT_SIZE;
+        _parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
+        // BitmapFont temp = font;
+        _font = _generator.generateFont(_parameter);
+        _parameter.color = new Color(0.0f, 0.0f, 0.0f, 1f);
+
+        /*if (temp != null)
+            temp.dispose();*/
+        _generator.dispose();
 
 
         getViewport().update(width, height);
@@ -255,12 +292,13 @@ public abstract class AbstractScreen implements Screen {
             backButtonSprite.getTexture().dispose();
         if (rulesButtonSprite != null)
             rulesButtonSprite.getTexture().dispose();
-        if(rulesTextBoxLandscape != null)
+        if (rulesTextBoxLandscape != null)
             rulesTextBoxLandscape.getTexture().dispose();
-        if(rulesTextBoxPortrait != null)
+        if (rulesTextBoxPortrait != null)
             rulesTextBoxPortrait.getTexture().dispose();
-
-        if(loadingSprite != null)
+        if(_font != null)
+            _font.dispose();
+        if (loadingSprite != null)
             loadingSprite.getTexture().dispose();
     }
 
@@ -292,20 +330,35 @@ public abstract class AbstractScreen implements Screen {
         drawText();
         /*if (backButtonSprite != null && Configuration.isShowBackButton())
             backButtonSprite.draw(spriteBatch);*/
-        if (rulesButtonSprite != null && Configuration.isShowRules()) {
-            rulesButtonSprite.draw(spriteBatch);
-            if(rulesModel != null && rulesModel.isShowRulesText()){
-                if(Orientation.getOrientation() == Input.Orientation.Portrait){
+        if (rulesButtonSprite != null && rulesModel.isShowRules()) {
+
+
+            if (rulesModel != null && rulesModel.isShowRulesText()) {
+                if (Orientation.getOrientation() == Input.Orientation.Portrait) {
                     rulesTextBoxPortrait.setPosition(Resolution.getGameWorldWidthPortrait() / 2 - rulesTextBoxPortrait.getWidth() / 2,
-                             Resolution.getGameWorldHeightPortrait() /2  - rulesTextBoxPortrait.getHeight() / 2);
+                            Resolution.getGameWorldHeightPortrait() / 2 - rulesTextBoxPortrait.getHeight() / 2);
                     rulesTextBoxPortrait.draw(getSpriteBatch());
-                }else{
+                } else {
                     rulesTextBoxLandscape.setPosition(Resolution.getGameWorldWidthLandscape() / 2 - rulesTextBoxLandscape.getWidth() / 2,
                             Resolution.getGameWorldHeightLandscape() / 2 - rulesTextBoxLandscape.getHeight() / 2);
                     rulesTextBoxLandscape.draw(getSpriteBatch());
                 }
             }
+            if(rulesModel.isShowRulesText()) {
+                float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
+                float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
+                float y_offset = 0f;
+                for (int i = 0; i < splitLine().size(); i++) {
 
+
+                    _font.draw(getSpriteBatch(), splitLine().get(i),
+                            (_X - splitLine().get(i).length() * _font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                            (_Y + getYScrollPos()) * 0.85f - _font.getCapHeight() * 1.3f - y_offset);
+
+                    y_offset += _font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
+                }
+            }
+            rulesButtonSprite.draw(spriteBatch, rulesModel.isShowRulesText() ? 1.0f : 0.5f);
         }
 
         drawLoadingSprite();
@@ -347,7 +400,7 @@ public abstract class AbstractScreen implements Screen {
 
     protected void initRulesButton(Model model) {
         rulesButtonSprite = new Sprite(new Texture(Configuration.getLanguage() + "/rules_icon.png"));
-        rulesButtonSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        rulesButtonSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.15f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.15f);
         rulesModel = model;
     }
 
@@ -355,7 +408,41 @@ public abstract class AbstractScreen implements Screen {
         return camera;
     }
 
-    public Model getRulesModel(){
+    public Model getRulesModel() {
         return rulesModel;
+    }
+
+    private List<String> splitLine() {
+        List<String> text = new ArrayList<>();
+        if (rulesModel.getRulesText() != null) {
+            int num_of_chars = (int) (_X * 0.78f / _font.getSpaceWidth() * 0.5f);
+            StringBuilder sb = new StringBuilder();
+            if (rulesModel.getRulesText().length() > num_of_chars) {
+
+                for (String line : rulesModel.getRulesText().split("\\n")) {
+                    for (String word : line.split(" ")) {
+                        if (sb.length() == 0) {
+                            sb.append(word);
+                        } else if (sb.length() + word.length() + 1 < num_of_chars) {
+                            sb.append(" ");
+                            sb.append(word);
+                        } else {
+                            text.add(sb.toString());
+                            sb.setLength(0);
+                            sb.append(word);
+                        }
+                    }
+                    sb.append('\n');
+                    text.add(sb.toString());
+                    sb.setLength(0);
+                }
+            } else {
+                sb.append(rulesModel.getRulesText());
+                sb.append('\n');
+                text = Collections.singletonList(sb.toString());
+            }
+
+        }
+        return text;
     }
 }

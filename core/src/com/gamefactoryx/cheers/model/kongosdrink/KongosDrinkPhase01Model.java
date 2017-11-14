@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.badlogic.gdx.Gdx;
 import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
@@ -42,8 +43,9 @@ public final class KongosDrinkPhase01Model extends Model {
         this.playerToConfigureIndex = playerToConfigureIndex;
     }
 
+
     @Override
-    public String getRulesText() {
-        return null;
+    protected void initRulesText() {
+        rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kongosdrink/rules.txt").readString();
     }
 }

@@ -85,6 +85,11 @@ public class INeverDoModel extends Model{
         return rulesText;
     }
 
+    @Override
+    protected void initRulesText() {
+        rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/iNeverDoScreen/rules.txt").readString();
+    }
+
 
     private INeverDoModel(){
         if(lastLanguage == null || lastLanguage != com.gamefactoryx.cheers.tool.Configuration.getLanguage()) {
@@ -94,7 +99,6 @@ public class INeverDoModel extends Model{
             setTasks18plus(taskFile.readString().split("\\n"));
             taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/iNeverDoScreen/tasks_standart.txt");
             setTasksStandard(taskFile.readString().split("\\n"));
-            rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/iNeverDoScreen/rules.txt").readString();
         }
 
     }

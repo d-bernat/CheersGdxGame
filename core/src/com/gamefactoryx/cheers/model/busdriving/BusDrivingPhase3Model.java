@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.busdriving;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Queue;
 import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.CardOrientation;
@@ -144,7 +145,7 @@ public final class BusDrivingPhase3Model extends Model {
     }
 
     @Override
-    public String getRulesText() {
-        return null;
+    public void initRulesText() {
+        rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/Busdrivingscreen/rules03.txt").readString();
     }
 }
