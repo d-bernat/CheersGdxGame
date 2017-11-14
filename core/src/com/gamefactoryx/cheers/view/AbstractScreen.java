@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.*;
+import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -36,6 +37,7 @@ public abstract class AbstractScreen implements Screen {
     private Map<String, Sprite> cardSprites = new HashMap<>();
     private Sprite textBox;
     private Sprite backButtonSprite;
+    private Sprite rulesButtonSprite;
     private Sprite loadingSprite;
 
 
@@ -45,6 +47,9 @@ public abstract class AbstractScreen implements Screen {
     private Sprite faceDownBigCard;
     private Sprite faceDownSmallCard;
 
+    private Model rulesModel;
+    private Sprite rulesTextBoxLandscape;
+    private Sprite rulesTextBoxPortrait;
 
     public Sprite[][] getButtons() {
         return buttons;
@@ -179,6 +184,12 @@ public abstract class AbstractScreen implements Screen {
         initCards();
         initTextBox();
         initLoadingSprite();
+        initRulesTextBoxes();
+    }
+
+    private void initRulesTextBoxes(){
+        rulesTextBoxLandscape = new Sprite(new Texture("common/rules_pop_up_landscape.png"));
+        rulesTextBoxPortrait = new Sprite(new Texture("common/rules_Pop_up_Portrait.png"));
     }
 
 
@@ -190,6 +201,21 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+        if(rulesButtonSprite != null) {
+            if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthPortrait() - rulesButtonSprite.getWidth(),
+                        Resolution.getGameWorldHeightPortrait() - rulesButtonSprite.getHeight());
+            } else {
+                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthLandscape() - rulesButtonSprite.getWidth(),
+                        Resolution.getGameWorldHeightLandscape() - rulesButtonSprite.getHeight());
+            }
+        }
+        if(rulesTextBoxLandscape != null && rulesTextBoxPortrait != null){
+            rulesTextBoxLandscape.setSize( Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.8f);
+            rulesTextBoxPortrait.setSize( Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.8f);
+        }
+
+
         getViewport().update(width, height);
         setCameraPosition();
     }
@@ -227,6 +253,13 @@ public abstract class AbstractScreen implements Screen {
             spriteBatch.dispose();
         if (backButtonSprite != null)
             backButtonSprite.getTexture().dispose();
+        if (rulesButtonSprite != null)
+            rulesButtonSprite.getTexture().dispose();
+        if(rulesTextBoxLandscape != null)
+            rulesTextBoxLandscape.getTexture().dispose();
+        if(rulesTextBoxPortrait != null)
+            rulesTextBoxPortrait.getTexture().dispose();
+
         if(loadingSprite != null)
             loadingSprite.getTexture().dispose();
     }
@@ -245,6 +278,10 @@ public abstract class AbstractScreen implements Screen {
         return backButtonSprite;
     }
 
+    public Sprite getRulesButtonSprite() {
+        return rulesButtonSprite;
+    }
+
     private void drawSprite() {
         spriteBatch.begin();
         spriteBatch.setProjectionMatrix(camera.combined);
@@ -255,6 +292,22 @@ public abstract class AbstractScreen implements Screen {
         drawText();
         /*if (backButtonSprite != null && Configuration.isShowBackButton())
             backButtonSprite.draw(spriteBatch);*/
+        if (rulesButtonSprite != null && Configuration.isShowRules()) {
+            rulesButtonSprite.draw(spriteBatch);
+            if(rulesModel != null && rulesModel.isShowRulesText()){
+                if(Orientation.getOrientation() == Input.Orientation.Portrait){
+                    rulesTextBoxPortrait.setPosition(Resolution.getGameWorldWidthPortrait() / 2 - rulesTextBoxPortrait.getWidth() / 2,
+                             Resolution.getGameWorldHeightPortrait() /2  - rulesTextBoxPortrait.getHeight() / 2);
+                    rulesTextBoxPortrait.draw(getSpriteBatch());
+                }else{
+                    rulesTextBoxLandscape.setPosition(Resolution.getGameWorldWidthLandscape() / 2 - rulesTextBoxLandscape.getWidth() / 2,
+                            Resolution.getGameWorldHeightLandscape() / 2 - rulesTextBoxLandscape.getHeight() / 2);
+                    rulesTextBoxLandscape.draw(getSpriteBatch());
+                }
+            }
+
+        }
+
         drawLoadingSprite();
         spriteBatch.end();
 
@@ -292,7 +345,17 @@ public abstract class AbstractScreen implements Screen {
 
     }
 
+    protected void initRulesButton(Model model) {
+        rulesButtonSprite = new Sprite(new Texture(Configuration.getLanguage() + "/rules_icon.png"));
+        rulesButtonSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
+        rulesModel = model;
+    }
+
     public static Camera getCamera() {
         return camera;
+    }
+
+    public Model getRulesModel(){
+        return rulesModel;
     }
 }

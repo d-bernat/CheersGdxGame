@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model.busdriving;
 
 import com.badlogic.gdx.utils.Queue;
+import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.CardOrientation;
 import com.gamefactoryx.cheers.tool.Configuration;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by bernat on 16.05.2017.
  */
-public final class BusDrivingPhase3Model {
+public final class BusDrivingPhase3Model extends Model {
 
 
     private Croupier croupier;
@@ -140,5 +141,10 @@ public final class BusDrivingPhase3Model {
 
         }
 
+    }
+
+    @Override
+    public String getRulesText() {
+        return null;
     }
 }

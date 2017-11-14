@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
  * Created by bernat on 05.05.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public class KingsCupSpecialModel {
+public class KingsCupSpecialModel extends Model {
 
     private String text;
 
@@ -37,4 +37,8 @@ public class KingsCupSpecialModel {
         return instance;
     }
 
+    @Override
+    public String getRulesText() {
+        return null;
+    }
 }

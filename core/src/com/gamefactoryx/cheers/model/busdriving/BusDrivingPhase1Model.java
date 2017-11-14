@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model.busdriving;
 
 import com.badlogic.gdx.utils.Queue;
+import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.Configuration;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by bernat on 16.05.2017.
  */
-public final class BusDrivingPhase1Model {
+public final class BusDrivingPhase1Model extends Model {
 
 
     private List<String> enTasks = new ArrayList<>();
@@ -118,4 +119,8 @@ public final class BusDrivingPhase1Model {
     }
 
 
+    @Override
+    public String getRulesText() {
+        return null;
+    }
 }

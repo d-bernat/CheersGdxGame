@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.kongosdrink;
 
+import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.kongosdrink.Configuration;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by bernat on 16.05.2017.
  */
-public final class KongosDrinkPhase01Model {
+public final class KongosDrinkPhase01Model extends Model {
 
 
     private int playerToConfigureIndex;
@@ -39,5 +40,10 @@ public final class KongosDrinkPhase01Model {
 
     public void setPlayerToConfigureIndex(int playerToConfigureIndex) {
         this.playerToConfigureIndex = playerToConfigureIndex;
+    }
+
+    @Override
+    public String getRulesText() {
+        return null;
     }
 }

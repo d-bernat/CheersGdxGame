@@ -47,12 +47,31 @@ abstract public class AbstractController extends InputAdapter {
                         Resolution.getGameWorldHeightPortrait() - screenY <= 350;
             }
         }
+        if(Configuration.isShowRules() && getScreen().getRulesButtonSprite() != null){
+                if(screenX >= getScreen().getRulesButtonSprite().getX() &&
+                        screenX <= getScreen().getRulesButtonSprite().getX() + getScreen().getRulesButtonSprite().getWidth() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getRulesButtonSprite().getY() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getRulesButtonSprite().getY() + getScreen().getRulesButtonSprite().getHeight() &&
+                        Orientation.getOrientation() == Input.Orientation.Portrait
+                        ||
+                        screenX >= getScreen().getRulesButtonSprite().getX() &&
+                                screenX <= getScreen().getRulesButtonSprite().getX() + getScreen().getRulesButtonSprite().getWidth() &&
+                                Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getRulesButtonSprite().getY() &&
+                                Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getRulesButtonSprite().getY() + getScreen().getRulesButtonSprite().getHeight() &&
+                                Orientation.getOrientation() == Input.Orientation.Landscape){
+                    Gdx.input.vibrate(10);
+                    getScreen().getRulesModel().setShowRulesText(true);
+                }
+            }
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         //if(downXCoor - screenX > 400 ){
+        if( getScreen().getRulesModel() != null)
+            getScreen().getRulesModel().setShowRulesText(false);
+
         if (screen.getBackButtonSprite() == null || !Configuration.isShowBackButton())
             return true;
 

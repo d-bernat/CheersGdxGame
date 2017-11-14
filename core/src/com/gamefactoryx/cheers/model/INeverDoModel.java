@@ -12,13 +12,15 @@ import java.util.List;
  * Created by bernat on 05.05.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public class INeverDoModel {
+public class INeverDoModel extends Model{
 
     private static com.gamefactoryx.cheers.tool.Configuration.LanguageEnum lastLanguage;
 
     private String[] tasks_mixed;
     private String[] tasks_18plus;
     private String[] tasks_standard;
+    private String rulesText;
+
     public String getLine() {
         if(listTasksMixed.size() == 0){
             for(int i = 0; i < instance.tasks_mixed.length; i++){
@@ -70,12 +72,19 @@ public class INeverDoModel {
         if(instance == null ) {
             instance = new INeverDoModel();
             Configuration.setINeverDoGameType(Configuration.INeverDoGameTypeEnum.GAME_STANDARD);
+
         }
 
 
         lastLanguage = com.gamefactoryx.cheers.tool.Configuration.getLanguage();
         return instance;
     }
+
+    @Override
+    public String getRulesText() {
+        return rulesText;
+    }
+
 
     private INeverDoModel(){
         if(lastLanguage == null || lastLanguage != com.gamefactoryx.cheers.tool.Configuration.getLanguage()) {
@@ -85,7 +94,9 @@ public class INeverDoModel {
             setTasks18plus(taskFile.readString().split("\\n"));
             taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/iNeverDoScreen/tasks_standart.txt");
             setTasksStandard(taskFile.readString().split("\\n"));
+            rulesText = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/iNeverDoScreen/rules.txt").readString();
         }
 
     }
+
 }

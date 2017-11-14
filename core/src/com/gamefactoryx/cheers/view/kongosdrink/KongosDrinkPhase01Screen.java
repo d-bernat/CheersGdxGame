@@ -42,6 +42,7 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
     public void show() {
         super.show();
         initBackButton();
+        initRulesButton(KongosDrinkPhase01Model.getInstance());
     }
 
 

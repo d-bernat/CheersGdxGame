@@ -590,9 +590,9 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
     }
 
     private void initBackButton() {
-        backButtonSprite = new Sprite(new Texture("common/return.png"));
+        /*backButtonSprite = new Sprite(new Texture("common/return.png"));
         backButtonSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
-        backButtonSprite.setPosition(-960 / 2, -540 / 2);
+        backButtonSprite.setPosition(-960 / 2, -540 / 2);*/
 
     }
 

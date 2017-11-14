@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheers.model.Subject;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkPhase0Model;
+import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkSetupModel;
 import com.gamefactoryx.cheers.tool.FontHelper;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
@@ -36,6 +37,7 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
     public void show() {
         super.show();
         initBackButton();
+        initRulesButton(KongosDrinkSetupModel.getInstance());
     }
 
 

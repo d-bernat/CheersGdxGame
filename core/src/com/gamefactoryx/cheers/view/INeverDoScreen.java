@@ -29,18 +29,19 @@ public class INeverDoScreen extends AbstractScreen {
     private BitmapFont font;
     private INeverDoModel dataModel;
     private List<String> text;
-    private String line;
+    private String plainText;
 
 
     @Override
     public void show() {
         super.show();
         dataModel = INeverDoModel.getInstance();
-        line = dataModel.getLine();
+        plainText = dataModel.getLine();
         initBackButton();
+        initRulesButton(dataModel);
     }
 
-    private List<String> splitLine() {
+    /*private List<String> splitLine() {
         List<String> text = new ArrayList<>();
         int num_of_chars = (int) (getTextBox().getWidth() / font.getSpaceWidth() * 0.6f);
         if (line.length() > num_of_chars) {
@@ -62,6 +63,38 @@ public class INeverDoScreen extends AbstractScreen {
             text = Collections.singletonList(line);
 
         return text;
+    }*/
+    private List<String> splitLine() {
+        List<String> text = new ArrayList<>();
+        int num_of_chars = (int) (X * 0.8f / font.getSpaceWidth() * 0.5f);
+        StringBuilder sb = new StringBuilder();
+        if (plainText.length() > num_of_chars) {
+
+            for (String line : plainText.split("\\n")) {
+                for (String word : line.split(" ")) {
+                    if (sb.length() == 0) {
+                        sb.append(word);
+                    } else if (sb.length() + word.length() + 1 < num_of_chars) {
+                        sb.append(" ");
+                        sb.append(word);
+                    } else {
+                        text.add(sb.toString());
+                        sb.setLength(0);
+                        sb.append(word);
+                    }
+                }
+                sb.append('\n');
+                text.add(sb.toString());
+                sb.setLength(0);
+            }
+        } else {
+            sb.append(plainText);
+            sb.append('\n');
+            text = Collections.singletonList(sb.toString());
+        }
+
+
+        return text;
     }
 
 
@@ -75,20 +108,25 @@ public class INeverDoScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
         float FONT_SIZE_ON_SCREEN = 0.04f;
+        super.resize(width, height);
         if (Configuration.getLanguage() == Configuration.LanguageEnum.SK)
             generator = new FreeTypeFontGenerator(FontHelper.getSkFontFile());
         else
             generator = new FreeTypeFontGenerator(FontHelper.getFontFile());
+
+
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
+//            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.92f, Resolution.getGameWorldHeightPortrait() * 0.85f);
         } else {
             FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
+//            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.92f, Resolution.getGameWorldHeightLandscape() * 0.85f);
+
         }
         getTextBox().setSize(X * 0.8f, Y * 0.45f);
         for (int i = 0; i < getCountOfButtons(); i++)
@@ -104,10 +142,16 @@ public class INeverDoScreen extends AbstractScreen {
 
         parameter.size = FONT_SIZE;
         parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
+
         BitmapFont temp = font;
         font = generator.generateFont(parameter);
+
+        parameter.size = FONT_SIZE + 10;
+
         if (temp != null)
             temp.dispose();
+
+
         generator.dispose();
         text = splitLine();
 

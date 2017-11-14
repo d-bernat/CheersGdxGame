@@ -74,6 +74,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
         dataModel = KingsCupSpecialModel.getInstance();
         plainText = dataModel.getText();
         initBackButton();
+        initRulesButton(dataModel);
     }
 
 

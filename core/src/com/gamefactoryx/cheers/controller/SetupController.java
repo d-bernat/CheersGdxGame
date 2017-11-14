@@ -58,6 +58,13 @@ final class SetupController extends AbstractController {
                         break;
                     case 3:
                         Configuration.setShowBackButton(true);
+                        break;
+                    case 4:
+                        Configuration.setShowRules(false);
+                        break;
+                    case 5:
+                        Configuration.setShowRules(true);
+                        break;
                 }
                 Configuration.playMusic();
                 getScreen().getClicked()[i] = false;

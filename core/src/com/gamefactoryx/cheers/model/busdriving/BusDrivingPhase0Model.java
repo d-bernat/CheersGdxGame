@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers.model.busdriving;
 
+import com.gamefactoryx.cheers.model.Model;
 import com.gamefactoryx.cheers.tool.Configuration;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by bernat on 16.05.2017.
  */
-public final class BusDrivingPhase0Model {
+public final class BusDrivingPhase0Model extends Model {
 
 
     private int activePlayer;
@@ -76,6 +77,11 @@ public final class BusDrivingPhase0Model {
 
     public void setLoadingNextStage(boolean loadingNextStage) {
         this.loadingNextStage = loadingNextStage;
+    }
+
+    @Override
+    public String getRulesText() {
+        return null;
     }
 
     /* public int getActivePlayer() {
