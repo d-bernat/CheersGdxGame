@@ -328,9 +328,7 @@ public abstract class AbstractScreen implements Screen {
         drawCards();
         drawButtons();
         drawText();
-        /*if (backButtonSprite != null && Configuration.isShowBackButton())
-            backButtonSprite.draw(spriteBatch);*/
-        if (rulesButtonSprite != null && rulesModel.isShowRules()) {
+        if (rulesButtonSprite != null && rulesModel.isShowRules() && Configuration.isShowRules()) {
 
 
             if (rulesModel != null && rulesModel.isShowRulesText()) {

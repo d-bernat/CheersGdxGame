@@ -52,22 +52,22 @@ final class MainStageController extends AbstractController {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 0:
-                        StageManager.getInstance().showStage(StageEnum.CREDIT_STAGE);
-                        break;
-                    case 1:
-                        StageManager.getInstance().showStage(StageEnum.SETUP_STAGE);
-                        break;
-                    case 2:
-                        StageManager.getInstance().showStage(StageEnum.HALL_OF_FAME_STAGE);
-                        break;
-                    case 3:
                         StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
                         break;
-                    case 4:
+                    case 1:
+                        StageManager.getInstance().showStage(StageEnum.HALL_OF_FAME_STAGE);
+                        break;
+                    case 2:
                         StageManager.getInstance().showStage(StageEnum.COCKTAILS_STAGE);
                         break;
-                    case 5:
+                    case 3:
+                        StageManager.getInstance().showStage(StageEnum.SETUP_STAGE);
+                        break;
+                    case 4:
                         StageManager.getInstance().showStage(StageEnum.HELP_STAGE);
+                        break;
+                    case 5:
+                        StageManager.getInstance().showStage(StageEnum.CREDIT_STAGE);
                         break;
                     case 6:
                         switch (Configuration.getLanguage()) {

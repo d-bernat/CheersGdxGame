@@ -5,6 +5,7 @@ public class CreditModel {
     private CreditModel(){}
     private float yOffset;
     private float maxYOffset;
+    private boolean animate = true;
 
     public static CreditModel getInstance() {
         if (instance == null) {
@@ -40,9 +41,14 @@ public class CreditModel {
                     CreditModel.getInstance().setyOffset(CreditModel.getInstance().getyOffset() - 1);
 
                 }
+                animate = false;
             }
 
         }).start();
+    }
+
+    public boolean isAnimate() {
+        return animate;
     }
 }
 

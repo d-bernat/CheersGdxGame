@@ -140,6 +140,7 @@ public class CreditScreen extends AbstractScreen {
 
         float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
         float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 2.5f;
+        float EMPTYCHAR_CHAR_WIDTH_RATIO_LABEL = 1.6f;
         float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
 
         float y_offset = CreditModel.getInstance().getyOffset();
@@ -148,11 +149,11 @@ public class CreditScreen extends AbstractScreen {
 
             if (text.get(i).contains(":"))
                 fontLabel.draw(getSpriteBatch(), text.get(i),
-                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                         Y * 0.8f - font.getCapHeight() * 1.3f - y_offset);
+                        (X - text.get(i).length() * fontLabel.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO_LABEL) * 0.5f,
+                         Y * 0.8f - fontLabel.getCapHeight() * 1.3f - y_offset);
             else
                 font.draw(getSpriteBatch(), text.get(i),
-                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.53f,
+                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
                         Y * 0.8f - font.getCapHeight() * 1.3f - y_offset);
 
             if (text.get(i).indexOf('\n') > -1)

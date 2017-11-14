@@ -32,6 +32,11 @@ final class CreditController extends AbstractController {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
         super.touchUp(screenX, screenY, pointer, button);
+        if(!CreditModel.getInstance().isAnimate()){
+            StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
+            return true;
+        }
+
         return true;
     }
 
