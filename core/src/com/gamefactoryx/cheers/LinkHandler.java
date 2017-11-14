@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheers;
 
-public interface FacebookLinkHandler {
+public interface LinkHandler {
     public void openFacebookPage(String facebookAppURI, String facebookWebURL);
+    public void openInstagramPage(String instagramWebURL);
 }

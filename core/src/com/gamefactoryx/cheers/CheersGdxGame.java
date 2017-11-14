@@ -1,24 +1,19 @@
 package com.gamefactoryx.cheers;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.gamefactoryx.cheers.controller.StageEnum;
 import com.gamefactoryx.cheers.controller.StageManager;
 import com.gamefactoryx.cheers.controller.kongosdrink.KongosDrinkStageManager;
-import com.gamefactoryx.cheers.tool.Card;
 import com.gamefactoryx.cheers.tool.Resolution;
-
-import java.util.Timer;
 
 public class CheersGdxGame extends Game {
 
 	private static ScreenLock screenLock;
-	private static FacebookLinkHandler facebookLinkHandler;
+	private static LinkHandler linkHandler;
 
-	public CheersGdxGame(ScreenLock screenLock, FacebookLinkHandler facebookLinkHandler){
+	public CheersGdxGame(ScreenLock screenLock, LinkHandler linkHandler){
 		this.screenLock = screenLock;
-		this.facebookLinkHandler = facebookLinkHandler;
+		this.linkHandler = linkHandler;
 	}
 	@Override
 	public void create () {
@@ -33,8 +28,8 @@ public class CheersGdxGame extends Game {
 	public static ScreenLock getScreenLock(){
 		return screenLock;
 	}
-	public static FacebookLinkHandler getFacebookLinkHandler(){
-		return facebookLinkHandler;
+	public static LinkHandler getLinkHandler(){
+		return linkHandler;
 	}
 
 }

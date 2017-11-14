@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
-public class AndroidFacebookLinkHandler implements FacebookLinkHandler {
+public class AndroidFacebookLinkHandler implements LinkHandler {
     Activity mActivity;
 
     public AndroidFacebookLinkHandler(Activity activity){
@@ -21,5 +21,11 @@ public class AndroidFacebookLinkHandler implements FacebookLinkHandler {
             intent = new Intent (Intent.ACTION_VIEW, Uri.parse(facebookWebURL));
         }
         mActivity.startActivity(intent);
+    }
+
+    @Override
+    public void openInstagramPage(String instagramWebURL) {
+        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( instagramWebURL ) );
+        mActivity.startActivity( intent );
     }
 }

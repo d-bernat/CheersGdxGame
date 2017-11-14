@@ -84,10 +84,10 @@ final class MainStageController extends AbstractController {
                         StageManager.getInstance().showStage(StageEnum.MAIN_STAGE);
                         break;
                     case 7:
-                        CheersGdxGame.getFacebookLinkHandler().openFacebookPage("fb://page/312135055904603", "https://www.facebook.com/BernatCooperation");
+                        CheersGdxGame.getLinkHandler().openFacebookPage("fb://page/312135055904603", "https://www.facebook.com/BernatCooperation");
                         break;
                     case 8:
-                        //CheersGdxGame.getInstagramLinkHandler().openInstagramPage("fb://page/312135055904603", "https://www.facebook.com/BernatCooperation");
+                        CheersGdxGame.getLinkHandler().openInstagramPage("https://www.instagram.com/cheersapp.official");
                         break;
 
                     default:
