@@ -288,5 +288,19 @@ public class INeverDoScreen extends AbstractScreen {
             font.dispose();
         super.dispose();
     }
+
+    @Override
+    public void setRulesButtonSpritePosition() {
+        if (getRulesButtonSprite() != null) {
+            if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+                getRulesButtonSprite().setPosition(Resolution.getGameWorldWidthPortrait() - getRulesButtonSprite().getWidth() * 1.2f,
+                        Resolution.getGameWorldHeightPortrait() - getRulesButtonSprite().getHeight() * 2.0f);
+            } else {
+                getRulesButtonSprite().setPosition(Resolution.getGameWorldWidthLandscape() - getRulesButtonSprite().getWidth() * 3.0f,
+                        Resolution.getGameWorldHeightLandscape() - getRulesButtonSprite().getHeight() * 1.2f);
+            }
+        }
+
+    }
 }
 

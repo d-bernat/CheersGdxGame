@@ -24,7 +24,7 @@ public class SetupScreen extends AbstractScreen {
     private Sprite settingGroups[] = {
             new Sprite(new Texture(Configuration.getLanguage() + "/settings/musikbox.png")),
             new Sprite(new Texture(Configuration.getLanguage() + "/settings/backbutton.png")),
-            new Sprite(new Texture(Configuration.getLanguage() + "/settings/backbutton.png"))
+            new Sprite(new Texture(Configuration.getLanguage() + "/settings/rules.png"))
     };
 
     @Override
@@ -109,17 +109,26 @@ public class SetupScreen extends AbstractScreen {
     @Override
     protected void drawButtons() {
 
+        boolean isPortrait = Orientation.getOrientation() == Input.Orientation.Portrait;
         int offset = 0;
         for (Sprite s : settingGroups) {
-            s.setPosition(X * 0.5f - s.getWidth() * 0.5f, Y * 0.6f - s.getHeight() * 1.2f * offset++);
+            if(isPortrait)
+                s.setPosition(X * 0.5f - s.getWidth() * 0.5f, Y * 0.7f - s.getHeight() * 1.25f * offset++);
+            else
+                s.setPosition(X * 0.5f - s.getWidth() * 0.5f, Y * 0.6f - s.getHeight() * 1.25f * offset++);
             s.draw(getSpriteBatch(), 1.0f);
         }
 
         int x_offset = 0, y_offset = 0;
 
         for (int i = 0; i < getCountOfButtons(); i++) {
-            getButtons()[i][0].setPosition(X * 0.5f - getButtons()[0][0].getWidth() * 1.1f * 2 * 0.5f + x_offset * getButtons()[i][0].getWidth() * 1.2f,
-                    Y * 0.6f + settingGroups[0].getHeight() * 0.45f - getButtons()[0][0].getHeight() * 0.5f - settingGroups[0].getHeight() * 1.2f * y_offset);
+            if(isPortrait)
+                getButtons()[i][0].setPosition(X * 0.5f - getButtons()[0][0].getWidth() * 1.1f * 2 * 0.5f + x_offset * getButtons()[i][0].getWidth() * 1.2f,
+                        Y * 0.7f + settingGroups[0].getHeight() * 0.45f - getButtons()[0][0].getHeight() * 0.5f - settingGroups[0].getHeight() * 1.25f * y_offset);
+            else
+                getButtons()[i][0].setPosition(X * 0.5f - getButtons()[0][0].getWidth() * 1.1f * 2 * 0.5f + x_offset * getButtons()[i][0].getWidth() * 1.2f,
+                        Y * 0.6f + settingGroups[0].getHeight() * 0.45f - getButtons()[0][0].getHeight() * 0.5f - settingGroups[0].getHeight() * 1.25f * y_offset);
+
             if (i == 1) {
                 getButtons()[i][0].draw(getSpriteBatch(), Configuration.isPlayMusic() ? 1.0f : 0.5f);
                 ++y_offset;

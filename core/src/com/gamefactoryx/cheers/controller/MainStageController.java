@@ -55,16 +55,16 @@ final class MainStageController extends AbstractController {
                         StageManager.getInstance().showStage(StageEnum.NEW_GAME_STAGE);
                         break;
                     case 1:
-                        StageManager.getInstance().showStage(StageEnum.HALL_OF_FAME_STAGE);
-                        break;
-                    case 2:
                         StageManager.getInstance().showStage(StageEnum.COCKTAILS_STAGE);
                         break;
+                    case 2:
+                        StageManager.getInstance().showStage(StageEnum.HELP_STAGE);
+                        break;
                     case 3:
-                        StageManager.getInstance().showStage(StageEnum.SETUP_STAGE);
+                        StageManager.getInstance().showStage(StageEnum.HALL_OF_FAME_STAGE);
                         break;
                     case 4:
-                        StageManager.getInstance().showStage(StageEnum.HELP_STAGE);
+                        StageManager.getInstance().showStage(StageEnum.SETUP_STAGE);
                         break;
                     case 5:
                         StageManager.getInstance().showStage(StageEnum.CREDIT_STAGE);

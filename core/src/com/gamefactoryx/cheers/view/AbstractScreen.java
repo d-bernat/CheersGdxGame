@@ -20,7 +20,7 @@ import java.util.*;
  * Created by bernat on 28.04.2017.
  */
 @SuppressWarnings("DefaultFileTemplate")
-public abstract class AbstractScreen implements Screen {
+public abstract class AbstractScreen implements Screen, Rule {
 
 
     protected final int FREE = 0;
@@ -210,15 +210,7 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        if (rulesButtonSprite != null) {
-            if (Orientation.getOrientation() == Input.Orientation.Portrait) {
-                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthPortrait() - rulesButtonSprite.getWidth() * 1.2f,
-                        Resolution.getGameWorldHeightPortrait() - rulesButtonSprite.getHeight() * 2.0f);
-            } else {
-                rulesButtonSprite.setPosition(Resolution.getGameWorldWidthLandscape() - rulesButtonSprite.getWidth() * 1.2f,
-                        Resolution.getGameWorldHeightLandscape() - rulesButtonSprite.getHeight() * 2.0f);
-            }
-        }
+        setRulesButtonSpritePosition();
         if (rulesTextBoxLandscape != null && rulesTextBoxPortrait != null) {
             rulesTextBoxLandscape.setSize(Resolution.getGameWorldWidthLandscape() * 0.8f, Resolution.getGameWorldHeightLandscape() * 0.8f);
             rulesTextBoxPortrait.setSize(Resolution.getGameWorldWidthPortrait() * 0.8f, Resolution.getGameWorldHeightPortrait() * 0.8f);
@@ -255,6 +247,20 @@ public abstract class AbstractScreen implements Screen {
 
         getViewport().update(width, height);
         setCameraPosition();
+    }
+
+    @Override
+    public void setRulesButtonSpritePosition() {
+        if (rulesButtonSprite != null) {
+            if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+                getRulesButtonSprite().setPosition(Resolution.getGameWorldWidthPortrait() - getRulesButtonSprite().getWidth(),
+                        Resolution.getGameWorldHeightPortrait() - getRulesButtonSprite().getHeight());
+            } else {
+                getRulesButtonSprite().setPosition(Resolution.getGameWorldWidthLandscape() - getRulesButtonSprite().getWidth(),
+                        Resolution.getGameWorldHeightLandscape() - getRulesButtonSprite().getHeight());
+            }
+        }
+
     }
 
     @Override
@@ -443,4 +449,6 @@ public abstract class AbstractScreen implements Screen {
         }
         return text;
     }
+
+
 }

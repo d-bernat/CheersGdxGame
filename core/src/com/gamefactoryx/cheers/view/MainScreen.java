@@ -41,14 +41,14 @@ public class MainScreen extends AbstractScreen {
 
         getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game.png"));
         getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game_white.png"));
-        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
-        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame_white.png"));
-        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails.png"));
-        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails_white.png"));
-        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
-        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings_white.png"));
-        getButtons()[4][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help.png"));
-        getButtons()[4][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help_white.png"));
+        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails.png"));
+        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails_white.png"));
+        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help.png"));
+        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help_white.png"));
+        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
+        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame_white.png"));
+        getButtons()[4][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
+        getButtons()[4][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings_white.png"));
         getButtons()[5][0] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory.png"));
         getButtons()[5][1] = new Sprite(new Texture(Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory_white.png"));
 
