@@ -1,2 +1,14 @@
-3.Phase
-Ihr m�sst tippen ob die gedeckte Karte h�her oder tiefer als die Karte im Bus ist. Es geht von links nach rechts.Liegt ihr falsch trinkt ihr und geht an den Anfang zur�ck. Unter eurem Namen wird angezeigt wie viele ihr trinken m�sst und wie viele ihr schon getrunken habt.
+﻿ñ   »  [ALT]-Taste + 164
+Ñ   »  [ALT]-Taste + 165
+¿   »  [ALT]-Taste + 168
+¡   »  [ALT]-Taste + 173
+á   »  [ALT]-Taste + 160
+Á   »  [ALT]-Taste + 181
+é   »  [ALT]-Taste + 130
+É   »  [ALT]-Taste + 144
+í   »  [ALT]-Taste + 161
+Í   »  [ALT]-Taste + 214
+ó   »  [ALT]-Taste + 162
+Ó   »  [ALT]-Taste + 224
+ú   »  [ALT]-Taste + 163
+Ú   »  [ALT]-Taste + 233
