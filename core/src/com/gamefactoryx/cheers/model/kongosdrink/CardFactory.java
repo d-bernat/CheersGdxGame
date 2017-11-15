@@ -37,19 +37,19 @@ public class CardFactory {
         switch (Configuration.getInstance().getGameType()) {
             case DOGFIGHT:
                 files = new String[]{"/kongosdrink/cards/single_player/drink/",
-                        "/kongosdrink/cards/single_player/drink-continue/"};
+                        "/kongosdrink/cards/single_player/drink_continue/"};
                 break;
             case TEAMOFTWO_VS_TEAMOFTWO:
                 files = new String[]{"/kongosdrink/cards/two_teams/drink/",
-                        "/kongosdrink/cards/two_teams/drink-team/"};
+                        "/kongosdrink/cards/two_teams/drink_team/"};
                 break;
             case TEAM_VS_TEAM:
                 files = new String[]{"/kongosdrink/cards/tag_team/drink/",
-                        "/kongosdrink/cards/tag_team/drink-team/"};
+                        "/kongosdrink/cards/tag_team/drink_team/"};
                 break;
             default:
                 files = new String[]{"/kongosdrink/cards/single_player/drink/",
-                        "/kongosdrink/cards/single_player/drink-continue/"};
+                        "/kongosdrink/cards/single_player/drink_continue/"};
         }
         for (int ll : level) {
 

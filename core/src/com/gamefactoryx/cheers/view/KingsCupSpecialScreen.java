@@ -33,6 +33,8 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     private KingsCupSpecialModel dataModel;
     private String plainText;
     private List<String> text;
+    private Sprite rad;
+    private float rotation;
 
 
     private List<String> splitLine() {
@@ -84,6 +86,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
         setPortraitSprite(new Sprite(new Texture(Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialScreenPortrait.png")));
         getLandscapeSprite().setSize(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
+
     }
 
     @Override
@@ -109,6 +112,13 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
         }
 
+        if (X < Y)
+            rad.setSize(X * 0.8f, X * 0.8f);
+        else
+            rad.setSize(Y * 0.8f, Y * 0.8f);
+        rad.setOrigin(rad.getWidth() / 2, rad.getHeight() / 2);
+
+
         parameter.size = FONT_SIZE;
         parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
 
@@ -133,7 +143,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     @Override
     protected void drawText() {
 
-        float MAX_LINES_VISIBLE = 0.85f;
+       /* float MAX_LINES_VISIBLE = 0.85f;
         float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
         float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 2.5f;
         float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
@@ -163,7 +173,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
                 y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
 
             if (y_offset > getTextBox().getHeight() * MAX_LINES_VISIBLE) break;
-        }
+        }*/
     }
 
 
@@ -195,6 +205,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     @Override
     protected void initCards() {
+        rad = new Sprite(new Texture("common/Rad.png"));
 
     }
 
@@ -210,15 +221,22 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     @Override
     protected void drawCards() {
-
+        rad.setPosition(X / 2 - rad.getWidth() / 2, Y / 2 - rad.getHeight() / 2);
+        rotation = KingsCupSpecialModel.getInstance().getRotation();
+        rad.rotate(rotation);
+        float rot = rad.getRotation();
+        KingsCupSpecialModel.getInstance().setRadPosition(rot);
+        rad.draw(getSpriteBatch());
     }
 
     @Override
-    public void dispose(){
-        if(font !=null)
+    public void dispose() {
+        if (font != null)
             font.dispose();
-        if(fontLabel !=null)
+        if (fontLabel != null)
             fontLabel.dispose();
+        if (rad != null)
+            rad.getTexture().dispose();
         super.dispose();
     }
 

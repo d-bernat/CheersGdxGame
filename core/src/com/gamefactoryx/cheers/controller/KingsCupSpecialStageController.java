@@ -1,9 +1,13 @@
 package com.gamefactoryx.cheers.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheers.model.KingsCupSpecialModel;
 import com.gamefactoryx.cheers.tool.Orientation;
 import com.gamefactoryx.cheers.tool.Resolution;
 import com.gamefactoryx.cheers.view.AbstractScreen;
+
+import java.util.Random;
 
 
 /**
@@ -13,10 +17,21 @@ import com.gamefactoryx.cheers.view.AbstractScreen;
 final class KingsCupSpecialStageController extends AbstractController {
 
     private int lastYPointerPos;
+    private static boolean animationRunning;
+    private float position;
 
     KingsCupSpecialStageController(final AbstractScreen screen) {
         super(screen);
+        animationRunning = false;
         setScreenLock(10);
+        KingsCupSpecialModel.getNewInstance();
+        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
+        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
+        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
+        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
+        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
+        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
+
     }
 
 
@@ -29,7 +44,13 @@ final class KingsCupSpecialStageController extends AbstractController {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        super.touchUp(screenX, screenY, pointer, button);
+        if(!super.touchUp(screenX, screenY, pointer, button)) {
+            return true;
+        }
+        if(!animationRunning) {
+            KingsCupSpecialModel.getNewInstance();
+            animation();
+        }
         return true;
     }
 
@@ -64,7 +85,34 @@ final class KingsCupSpecialStageController extends AbstractController {
     }
 
 
+    public void animation() {
+        animationRunning = true;
+        Random rand = new Random();
+        final int n = rand.nextInt((5-1) + 1) + 1;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+                int cykles = n * 20;
+                while (animationRunning && i < cykles) {
+                    long time = System.currentTimeMillis();
+                    while (System.currentTimeMillis() < time + 50L) {
+                    }
+                    if(i < cykles / 2)
+                        KingsCupSpecialModel.getInstance().setRotation(KingsCupSpecialModel.getInstance().getRotation() - 1.0f);
+                    else
+                        KingsCupSpecialModel.getInstance().setRotation(KingsCupSpecialModel.getInstance().getRotation() + 1.0f);
+
+                    i++;
+                }
+                animationRunning = false;
+                KingsCupSpecialModel.getInstance().setRotation(0.0f);
 
 
+            }
+
+        }).start();
+    }
 
 }
