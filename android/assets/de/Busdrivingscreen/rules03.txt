@@ -1,14 +1,7 @@
-﻿ñ   »  [ALT]-Taste + 164
-Ñ   »  [ALT]-Taste + 165
-¿   »  [ALT]-Taste + 168
-¡   »  [ALT]-Taste + 173
-á   »  [ALT]-Taste + 160
-Á   »  [ALT]-Taste + 181
-é   »  [ALT]-Taste + 130
-É   »  [ALT]-Taste + 144
-í   »  [ALT]-Taste + 161
-Í   »  [ALT]-Taste + 214
-ó   »  [ALT]-Taste + 162
-Ó   »  [ALT]-Taste + 224
-ú   »  [ALT]-Taste + 163
-Ú   »  [ALT]-Taste + 233
+﻿1. negro o rojo?
+2. más alto o más abajo?
+3. en medio o fuera?
+4. Qué patrón?
+
+moda los. Ahora se va a la extensión! Alternativamente si el mapa es más alto o más abajo. El primero que está equivocado ha perdido. 
+x1. 
