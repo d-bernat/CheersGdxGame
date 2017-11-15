@@ -1,7 +1,3 @@
-﻿1. negro o rojo?
-2. más alto o más abajo?
-3. en medio o fuera?
-4. Qué patrón?
-
-moda los. Ahora se va a la extensión! Alternativamente si el mapa es más alto o más abajo. El primero que está equivocado ha perdido. 
-x1. 
+﻿Es geht nun in die Overtime. Abwechselnd müsst ihr erraten, 
+ob die nächste Karte höher oder tiefer ist. Der Verlierer geht 
+in die letzte Phase des Spiels.
