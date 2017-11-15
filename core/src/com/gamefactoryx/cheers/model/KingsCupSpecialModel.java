@@ -98,8 +98,6 @@ public class KingsCupSpecialModel extends Model {
     public void setRadPosition(float rotation) {
         this.radPosition = ((rotation < 0 ? 360 + (rotation % 360) : 360 - rotation % 360));
         itemPosition = Math.round(radPosition / (360 / radSize)) % radSize;
-        Gdx.app.log("*************", radValues[itemPosition]);
-
     }
 
     public boolean isClicked() {
