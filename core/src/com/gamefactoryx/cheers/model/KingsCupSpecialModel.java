@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheers.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 
 import java.io.UnsupportedEncodingException;
@@ -13,36 +14,28 @@ public class KingsCupSpecialModel extends Model {
 
     private String text;
     private float rotation;
-    private static int radSize = 24;
+    private static int radSize = 15;
     private float radPosition;
     private int itemPosition;
-    private String[] radValues = {
-            "Bankrupt",
-            "600",
-            "400",
-            "300",
-            "joker",
-            "800",
-            "350",
-            "450",
-            "700",
-            "300",
-            "600",
-            "5000",
-            "600",
-            "500",
-            "300",
-            "Turn",
-            "800",
-            "550",
-            "400",
-            "300",
-            "900",
-            "500",
-            "300",
-            "900"
-    };
+    private boolean clicked;
 
+    private String[] radValues = {
+            "9",
+            "8",
+            "K",
+            "9",
+            "B",
+            "2",
+            "4",
+            "7",
+            "10",
+            "6",
+            "3",
+            "A",
+            "D",
+            "5",
+            "2"
+    };
 
     private KingsCupSpecialModel() {
     }
@@ -105,12 +98,15 @@ public class KingsCupSpecialModel extends Model {
     public void setRadPosition(float rotation) {
         this.radPosition = ((rotation < 0 ? 360 + (rotation % 360) : 360 - rotation % 360));
         itemPosition = Math.round(radPosition / (360 / radSize)) % radSize;
-        Gdx.app.log("*************", rotation + "");
-        Gdx.app.log("*************", radPosition + "");
-        Gdx.app.log("*************", itemPosition + "");
         Gdx.app.log("*************", radValues[itemPosition]);
 
     }
 
+    public boolean isClicked() {
+        return clicked;
+    }
 
+    public void setClicked(boolean clicked) {
+        this.clicked = clicked;
+    }
 }

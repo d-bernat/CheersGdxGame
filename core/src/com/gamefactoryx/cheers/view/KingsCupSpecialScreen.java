@@ -112,11 +112,16 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
         }
 
-        if (X < Y)
+        if (X < Y) {
             rad.setSize(X * 0.8f, X * 0.8f);
-        else
-            rad.setSize(Y * 0.8f, Y * 0.8f);
+            getButtons()[0][0].setSize(X * 0.8f, Y * 0.08f);
+        }
+        else {
+            rad.setSize(Y * 0.65f, Y * 0.65f);
+            getButtons()[0][0].setSize( Y * 0.65f, Y * 0.12f);
+        }
         rad.setOrigin(rad.getWidth() / 2, rad.getHeight() / 2);
+
 
 
         parameter.size = FONT_SIZE;
@@ -185,12 +190,18 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
+        setButtons(new Sprite[1][2]);
 
+        getButtons()[0][0] = new Sprite(new Texture("common/kingscupbutton.png"));
+        getButtons()[0][1] = new Sprite(new Texture("common/kingscupbutton.png"));
+
+        setClicked(new boolean[getCountOfButtons()]);
     }
 
     @Override
     protected void drawButtons() {
-
+        getButtons()[0][0].setPosition(X / 2 - getButtons()[0][0].getWidth()/2 , rad.getY() - getButtons()[0][0].getHeight() );
+        getButtons()[0][0].draw(getSpriteBatch(), getClicked()[0] ? 0.5f : 1.0f);
     }
 
     @Override
@@ -239,5 +250,18 @@ public class KingsCupSpecialScreen extends AbstractScreen {
             rad.getTexture().dispose();
         super.dispose();
     }
+
+    @Override
+    public void setRulesButtonSpritePosition() {
+        if (getRulesButtonSprite() != null) {
+            if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+                getRulesButtonSprite().setPosition(Resolution.getGameWorldWidthPortrait() - getRulesButtonSprite().getWidth(),
+                        Resolution.getGameWorldHeightPortrait() - getRulesButtonSprite().getHeight() * 2.5f);
+            }
+        }
+
+    }
+
+
 
 }

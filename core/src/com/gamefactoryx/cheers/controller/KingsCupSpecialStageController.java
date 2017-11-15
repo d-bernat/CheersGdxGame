@@ -25,13 +25,6 @@ final class KingsCupSpecialStageController extends AbstractController {
         animationRunning = false;
         setScreenLock(10);
         KingsCupSpecialModel.getNewInstance();
-        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
-        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
-        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
-        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
-        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
-        Gdx.app.log("************", KingsCupSpecialModel.getInstance().getRotation() + "");
-
     }
 
 
@@ -39,26 +32,47 @@ final class KingsCupSpecialStageController extends AbstractController {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         super.touchDown(screenX, screenY, pointer, button);
         lastYPointerPos = screenY;
+        for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+            getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
+                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                    Orientation.getOrientation() == Input.Orientation.Portrait
+                    ||
+                    screenX >= getScreen().getButtons()[i][0].getX() &&
+                            screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                            Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                            Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                            Orientation.getOrientation() == Input.Orientation.Landscape);
+        }
+
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if(!super.touchUp(screenX, screenY, pointer, button)) {
+        if (!super.touchUp(screenX, screenY, pointer, button)) {
             return true;
         }
-        if(!animationRunning) {
-            KingsCupSpecialModel.getNewInstance();
-            animation();
+
+        if (!animationRunning) {
+            for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+                if (getScreen().getClicked()[i]) {
+                    KingsCupSpecialModel.getNewInstance();
+                    animation();
+                    getScreen().getClicked()[i] = false;
+                }
+            }
         }
+
         return true;
     }
 
     @Override
-    public boolean touchDragged (int screenX, int screenY, int pointer) {
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
 
         int SCROLLING_SLOW_DOWN = 30;
-        if(screenX >= getScreen().getTextBox().getX() &&
+        if (screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
                 Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight() &&
@@ -70,11 +84,10 @@ final class KingsCupSpecialStageController extends AbstractController {
                         Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight() &&
                         Orientation.getOrientation() == Input.Orientation.Landscape
                 ) {
-            if(screenY < lastYPointerPos - SCROLLING_SLOW_DOWN) {
+            if (screenY < lastYPointerPos - SCROLLING_SLOW_DOWN) {
                 getScreen().setYScrollPos(getScreen().getYScrollPos() + 1);
                 lastYPointerPos = screenY;
-            }
-            else if(screenY > lastYPointerPos + SCROLLING_SLOW_DOWN) {
+            } else if (screenY > lastYPointerPos + SCROLLING_SLOW_DOWN) {
                 getScreen().setYScrollPos(getScreen().getYScrollPos() - 1);
                 lastYPointerPos = screenY;
             }
@@ -88,7 +101,7 @@ final class KingsCupSpecialStageController extends AbstractController {
     public void animation() {
         animationRunning = true;
         Random rand = new Random();
-        final int n = rand.nextInt((5-1) + 1) + 1;
+        final int n = rand.nextInt((5 - 1) + 1) + 1;
 
         new Thread(new Runnable() {
             @Override
@@ -99,7 +112,7 @@ final class KingsCupSpecialStageController extends AbstractController {
                     long time = System.currentTimeMillis();
                     while (System.currentTimeMillis() < time + 50L) {
                     }
-                    if(i < cykles / 2)
+                    if (i < cykles / 2)
                         KingsCupSpecialModel.getInstance().setRotation(KingsCupSpecialModel.getInstance().getRotation() - 1.0f);
                     else
                         KingsCupSpecialModel.getInstance().setRotation(KingsCupSpecialModel.getInstance().getRotation() + 1.0f);
