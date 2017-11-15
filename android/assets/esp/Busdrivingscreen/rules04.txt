@@ -1,0 +1,2 @@
+﻿3. Phase
+Now you can drive the bus and you need to guess if the next card will be higher or lower than the card on the screen. Are you right you will be moved to the next card. If you're wrong, then you'll be set back to start and drink the amount of cards you've gotten right.

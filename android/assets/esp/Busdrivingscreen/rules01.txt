@@ -1,0 +1,2 @@
+﻿1. Phase
+Every player will receive 4 cards. Everybody needs to answer some simple questions before they flip the card. If the question was answered you can turn your card face up. If your answer is wrong than you need to drink. If your answer right than it's the next persons turn.

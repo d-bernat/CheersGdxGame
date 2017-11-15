@@ -1,0 +1,39 @@
+M;Bud Light;ARGENTINA;P
+M;Casey Macy;AUSTRALIA;P
+M;Dick Long;AUSTRIA;P
+M;Doug Hole;BRASIL;P
+M;Forrest Green;BULGARIA;P
+F;Randy Guy;CANADA;P
+F;Virginia Beach;CHILE;P
+M;Will Power;CHINA;P
+M;Willie Waite;COLOUR1;P
+F;Sue Ridge;COLOUR2;P
+M;Sonny Day;COLOUR3;P
+M;Sal A. Mander;COLOUR4;P
+M;Ryan Coke;CROATIA;P
+M;Rod N. Reel;CZECH;P
+M;Rich Kidd;DENMARK;P
+M;Ray Gunn;EGYPT;P
+M;Phil Bowles;FINLAND;P
+M;Park A. Studebaker;FRANCE;P
+M;Olive Yew;GB;P
+M;Oliver Sutton;GERMANY;P
+M;Mike Sweeney;GREECE;P
+M;Mike Reinhart;INDIA;P
+F;May Furst;ITALY;P
+F;Marsha Dimes;JAMAIKA;P
+F;Lou Zar;KOLUMBIA;P
+F;Laura Norder;MEXICO;P
+M;Joe Kerr;NETHERLANDS;P
+M;Jim Laucher;POLAND;P
+F;Annie Matter;PORTUGAL;P
+F;Anna Fender;RUSSIA;P
+F;Sharon A. Burger;SERBIA;P
+F;Sharon Weed;SLOVAKIA;P
+F;Helen Wiells;SPAIN;P
+M;Chip Stone;SWEDEN;P
+M;Jack Hammer;SWITZERLAND;P
+M;Holly Wood;TUNIS;P
+M;Alf A. Romeo;TURKEY;P
+M;F;Walter Melon;UKRAINE;P
+M;Marshall Law;USA;P

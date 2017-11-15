@@ -1,0 +1,3 @@
+﻿3: Trinkpartner
+Du darfst dir nun einen Trinkpartner für den Rest des Spiels aussuchen. 
+Dieser muss immer dann trinken, wenn du es auch musst.

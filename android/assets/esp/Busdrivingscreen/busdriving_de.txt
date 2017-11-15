@@ -1,0 +1,45 @@
+1.       Black or white?
+2.       Higher card or lower card?
+3.       Between or outside?
+4.       Which suit? 
+
+overtime. It's overtime! -Player-,-Player- [etc.] alternately you'll guess if the card is higher or lower. The first player who is wrong loses. 
+
+x1.     -Player- you can lay a card. Do you want to do it?
+
+x2.     -Player- you pass on 1 sip.
+x2a.    -Player- you can also pass on 1 sip.
+x2b.    -Player- you can pass on 1 sip aswell.
+
+x3.     -Player- you pass on 2 sips.
+x3a.    -Player- you can also pass on 2 sips.
+x3b.    -Player- you too.
+
+x4.     -Player- you pass on 3 sips.
+x4a.    -Player- you can also pass on 3 sips.
+x4b.    -Player- pass on 3 sips.
+
+x5.     -Player- you can pass on 4 sips.
+x5a.    -Player you can also pass on 4 sips.
+x5b.    -Player- you can do so too.
+
+x6.     -Player- Congratulations you are allowed to drive the bus! I wish you success and good luck!mid
+
+
+x7.     Take 1 sip.
+x7/2.   Take 1 sip and go on!
+x7a.    Take 2 sips.
+x7a/2.  Take 2 sips and go on!
+x7b.    Take 3 sips.
+x7b/2.  Take 3 sips and go on!
+x7c.    Take 4 sips.
+x7c/2.  Take 4 sips and go on!
+x7d.    Take 5 sips.
+x7d/2.  Take 5 sips and go on!
+x7e.    Take 6 sips.
+x7e/2.  Take 6 sips and go on!
+x7f.    Take 7 sips.
+x7f/2.  Take 7 sips and go on!
+
+
+x8.     You are probably a little bit drunk but you made it!!! Congratulations!!!

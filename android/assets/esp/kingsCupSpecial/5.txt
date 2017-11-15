@@ -1,0 +1,5 @@
+﻿5: Counter
+Eine beliebige Zahl zwischen 1 – 8 darf ausgesuchen werden.  
+Anschließend wird reihum durchgezählt. Bei der ausgewählten Zahl und 
+allen Zahlen, in denen die ausgewählte Zahl vorkommt oder durch die 
+ausgewählte Zahl teilbar ist, muss ein vorher ausgedachtes Wort genannt werden.                                     

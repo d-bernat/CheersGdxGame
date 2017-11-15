@@ -1,0 +1,8 @@
+﻿KingsCup Special
+Dieses Spiel funktioniert wie das typische KingsCup Spiel. 
+Es wird ein größeres Glas benötigt und auf den Tisch gestellt.
+Nun lässt ihr das Kingsrad drehen und die Karte, auf die der Pfeil 
+zeigt ist an der Reihe. Das bedeutet nun, dass euch die Aufgabe erscheint, 
+die mit der Karte verbunden ist. Ihr könnt aufhören, wenn vier Mal 
+der König angezeigt wird oder ihr denkt euch ein alternatives Ende aus. 
+Cheers!

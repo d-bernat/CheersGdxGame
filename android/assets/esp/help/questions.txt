@@ -1,0 +1,13 @@
+﻿Gibt es eine Zurück Taste?
+Für Android Geräte ist es möglich die eingebaute Zurück Taste
+zu bedienen. Ansonsten ersetzt eine Wischbewegung vom rechten Bildschirmrand zum
+linken Bildschirmrand die klassische Zurück Taste. 
+
+
+Ist es möglich bestimmte Funktionen auszuschalten?
+Selbstverständlich, die Musik und die Zurück-Wischbewegung sind unter den
+Einstellung Ein -und Ausschaltbar.
+
+
+Was bedeutet die Flagge auf der Startseite?
+Mit den Flaggen ist die jeweilige Sprache einstellbar.
