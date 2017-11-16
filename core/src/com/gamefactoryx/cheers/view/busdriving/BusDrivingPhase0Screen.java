@@ -212,7 +212,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initLoadingSprite() {
-        setLoadingSprite(new Sprite(new Texture("common/loading.png")));
+        setLoadingSprite(new Sprite(new Texture(Configuration.getLanguage() + "/loading.png")));
     }
 
     @Override

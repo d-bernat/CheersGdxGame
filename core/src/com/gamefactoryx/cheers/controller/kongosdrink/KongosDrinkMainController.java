@@ -362,19 +362,21 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                             Configuration.getInstance().getPlayers().get(i).setRotate(0.0f);
                             Configuration.getInstance().getPlayers().get(i).setActive(false);
                             Configuration.getInstance().getPlayers().get(i).setPosition(position);
-                            if (Configuration.getInstance().getPlayers().get(i).getPosition() >= Configuration.getInstance().getGameSize().getValue())
+                            if (Configuration.getInstance().getPlayers().get(i).getPosition() >= Configuration.getInstance().getGameSize().getValue()) {
                                 Configuration.getInstance().getPlayers().get(i).setFinished(true);
-                            boolean finished = true;
-                            for (int j = 0; j < KongosDrinkMainModel.getInstance().getEnablePlayersSize(); j++) {
+                                KongosDrinkMainModel.getInstance().setFinished(true);
+                            }
+                            //boolean finished = true;
+                            /*for (int j = 0; j < KongosDrinkMainModel.getInstance().getEnablePlayersSize(); j++) {
                                 if (!Configuration.getInstance().getPlayers().get(j).isFinished()) {
                                     finished = false;
                                     break;
                                 }
-                            }
+                            }*/
 
-                            KongosDrinkMainModel.getInstance().setFinished(finished);
 
-                            if (!finished) {
+
+                            if (!KongosDrinkMainModel.getInstance().isFinished()) {
                                 setNextPlayerActive();
                             } else {
                                 getScreen().getMainButtonsSprite()[0].setActive(false);

@@ -128,6 +128,10 @@ public class CocktailsScreen extends AbstractScreen {
                 else
                     y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
             }
+            getButtons()[getCountOfButtons() - 1][getClicked()[getCountOfButtons() - 1] ? 1 : 0].setPosition(getTextBox().getX() /*+ getTextBox().getWidth() / 2 - getButtons()[i][0].getWidth() / 2*/,
+                    getTextBox().getY() /*- rad.getHeight() + getButtons()[i][0].getHeight() * 1.2f*/);
+            getButtons()[getCountOfButtons() - 1][getClicked()[getCountOfButtons() - 1] ? 1 : 0].draw(getSpriteBatch());
+
         }
     }
 
@@ -139,7 +143,7 @@ public class CocktailsScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[CocktailsModel.cocktailNames.length + 1][2]);
+        setButtons(new Sprite[CocktailsModel.cocktailNames.length + 1 + 1] [2]);
 
         for (int i = 0; i < CocktailsModel.cocktailNames.length; ++i) {
             for (int j = 0; j < 2; j++) {
@@ -153,7 +157,8 @@ public class CocktailsScreen extends AbstractScreen {
         getButtons()[CocktailsModel.cocktailNames.length][1] = new Sprite(new Texture("common/grey.png"));
         getButtons()[CocktailsModel.cocktailNames.length][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
         getButtons()[CocktailsModel.cocktailNames.length][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
-
+        getButtons()[CocktailsModel.cocktailNames.length + 1][0] = new Sprite(new Texture("common/rules_ok.png"));
+        getButtons()[CocktailsModel.cocktailNames.length + 1][1] = new Sprite(new Texture("common/rules_ok_white.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }

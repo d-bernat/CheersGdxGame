@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 /**
  * Created by bernat on 05.05.2017.
@@ -12,12 +13,13 @@ import java.io.UnsupportedEncodingException;
 @SuppressWarnings("DefaultFileTemplate")
 public class KingsCupSpecialModel extends Model {
 
-    private String text;
+   // private String text;
     private float rotation;
     private static int radSize = 15;
     private float radPosition;
     private int itemPosition;
     private boolean clicked;
+    private boolean showTask;
 
     private String[] radValues = {
             "9",
@@ -37,16 +39,18 @@ public class KingsCupSpecialModel extends Model {
             "2"
     };
 
+    private HashMap<String, String> tasks = new HashMap<>();
+
     private KingsCupSpecialModel() {
     }
 
-    public String getText() {
-        return text;
-    }
+   // public String getText() {
+   //     return text;
+   // }
 
-    private void setTasks(String text) {
-        this.text = text;
-    }
+    //private void setTasks(String text) {
+    //    this.text = text;
+    //}
 
 
     private static KingsCupSpecialModel instance;
@@ -56,17 +60,21 @@ public class KingsCupSpecialModel extends Model {
             instance = new KingsCupSpecialModel();
 
         }
-        FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialDescription.txt");
-        instance.setTasks(taskFile.readString("UTF-8"));
-
+        String[] fileNames = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "B", "D", "K", "A"};
+        for(String f: fileNames ){
+            FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kingsCupSpecial/" + f + ".txt");
+            instance.tasks.put(f, taskFile.readString("UTF-8"));
+        }
 
         return instance;
     }
 
     public static KingsCupSpecialModel getNewInstance() {
         instance = new KingsCupSpecialModel();
-        FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialDescription.txt");
-        instance.setTasks(taskFile.readString("UTF-8"));
+        //FileHandle taskFile = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kingsCupSpecial/KingsCupSpecialDescription.txt");
+        //instance.setTasks(taskFile.readString("UTF-8"));
+
+
         instance.rotation = 0;
 
 
@@ -75,7 +83,8 @@ public class KingsCupSpecialModel extends Model {
 
     @Override
     protected void initRulesText() {
-        rulesText = null;
+        FileHandle file = Gdx.files.internal(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/kingsCupSpecial/rules.txt");
+        rulesText = file.readString("UTF-8");
     }
 
     public float getRotation() {
@@ -91,7 +100,7 @@ public class KingsCupSpecialModel extends Model {
     }
 
 
-    public float getItemPosition() {
+    public int getItemPosition() {
         return itemPosition;
     }
 
@@ -106,5 +115,21 @@ public class KingsCupSpecialModel extends Model {
 
     public void setClicked(boolean clicked) {
         this.clicked = clicked;
+    }
+
+    public String[] getRadValues() {
+        return radValues;
+    }
+
+    public boolean isShowTask() {
+        return showTask;
+    }
+
+    public void setShowTask(boolean showTask) {
+        this.showTask = showTask;
+    }
+
+    public HashMap<String, String> getTasks() {
+        return tasks;
     }
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheers.model.kongosdrink.KongosDrinkMainModel;
 import com.gamefactoryx.cheers.tool.Configuration;
 import com.gamefactoryx.cheers.model.KingsCupSpecialModel;
 import com.gamefactoryx.cheers.tool.FontHelper;
@@ -34,6 +35,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     private String plainText;
     private List<String> text;
     private Sprite rad;
+    private Sprite radPointer;
     private float rotation;
 
 
@@ -74,7 +76,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     public void show() {
         super.show();
         dataModel = KingsCupSpecialModel.getInstance();
-        plainText = dataModel.getText();
+        //plainText = dataModel.getText();
         initBackButton();
         initRulesButton(dataModel);
     }
@@ -103,25 +105,32 @@ public class KingsCupSpecialScreen extends AbstractScreen {
             FONT_SIZE = (int) (Resolution.getGameWorldHeightPortrait() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthPortrait();
             Y = Resolution.getGameWorldHeightPortrait();
-            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.92f, Resolution.getGameWorldHeightPortrait() * 0.85f);
+            getTextBox().setSize(Resolution.getGameWorldWidthPortrait() * 0.92f, Resolution.getGameWorldHeightPortrait() * 0.65f);
         } else {
             FONT_SIZE = (int) (Resolution.getGameWorldWidthLandscape() * FONT_SIZE_ON_SCREEN);
             X = Resolution.getGameWorldWidthLandscape();
             Y = Resolution.getGameWorldHeightLandscape();
-            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.92f, Resolution.getGameWorldHeightLandscape() * 0.85f);
+            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.72f, Resolution.getGameWorldHeightLandscape() * 0.65f);
 
         }
 
         if (X < Y) {
             rad.setSize(X * 0.8f, X * 0.8f);
-            getButtons()[0][0].setSize(X * 0.8f, Y * 0.08f);
-        }
-        else {
+            radPointer.setSize(X * 0.05f, X * 0.05f);
+            getButtons()[0][0].setSize(Y * 0.08f * getButtons()[0][0].getWidth() / getButtons()[0][0].getHeight(), Y * 0.08f);
+            getButtons()[0][1].setSize(Y * 0.08f * getButtons()[0][0].getWidth() / getButtons()[0][0].getHeight(), Y * 0.08f);
+            getButtons()[1][0].setSize(Y * 0.08f, Y * 0.08f);
+            getButtons()[1][1].setSize(Y * 0.08f, Y * 0.08f);
+
+        } else {
             rad.setSize(Y * 0.65f, Y * 0.65f);
-            getButtons()[0][0].setSize( Y * 0.65f, Y * 0.12f);
+            getButtons()[0][0].setSize(Y * 0.1f * getButtons()[0][0].getWidth() / getButtons()[0][0].getHeight(), Y * 0.1f);
+            getButtons()[0][1].setSize(Y * 0.1f * getButtons()[0][0].getWidth() / getButtons()[0][0].getHeight(), Y * 0.1f);
+            getButtons()[1][0].setSize(Y * 0.1f, Y * 0.1f);
+            getButtons()[1][1].setSize(Y * 0.1f, Y * 0.1f);
+            radPointer.setSize(Y * 0.05f, Y * 0.05f);
         }
         rad.setOrigin(rad.getWidth() / 2, rad.getHeight() / 2);
-
 
 
         parameter.size = FONT_SIZE;
@@ -141,44 +150,45 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
 
         generator.dispose();
-        text = splitLine();
+        //text = splitLine();
 
     }
 
     @Override
     protected void drawText() {
 
-       /* float MAX_LINES_VISIBLE = 0.85f;
-        float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
-        float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 2.5f;
-        float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
-        if (Orientation.getOrientation() == Input.Orientation.Portrait)
-            getTextBox().setPosition(X * 0.05f, Y * 0.02f);
-        else
-            getTextBox().setPosition(X * 0.05f, Y * 0.02f);
+        if (KingsCupSpecialModel.getInstance().isShowTask()) {
+            float SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER = 1.75f;
+            float SPACE_BETWEEN_TWO_LINES_WITH_ENTER = 2.5f;
+            float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.7f;
+            if (KingsCupSpecialModel.getInstance().isShowTask()) {
+                getTextBox().setPosition(X / 2 - getTextBox().getWidth() / 2, Y / 2 - getTextBox().getHeight() / 2);
+                getTextBox().draw(getSpriteBatch());
+            }
+            plainText = KingsCupSpecialModel.getInstance().getTasks().get(KingsCupSpecialModel.getInstance().getRadValues()[KingsCupSpecialModel.getInstance().getItemPosition()]);
+            text = splitLine();
+            float y_offset = 0f;
+            for (int i = 0; i < text.size(); i++) {
 
-        getTextBox().draw(getSpriteBatch());
-        float y_offset = 0f;
-        if (getYScrollPos() < 0) setYScrollPos(0);
-        else if (getYScrollPos() > text.size() - 10) setYScrollPos(text.size() - 10);
-        for (int i = getYScrollPos(); i < text.size(); i++) {
+                if (text.get(i).contains(":"))
+                    fontLabel.draw(getSpriteBatch(), text.get(i),
+                            (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                            getTextBox().getY() + getTextBox().getHeight() - font.getCapHeight() * 3f - y_offset);
+                else
+                    font.draw(getSpriteBatch(), text.get(i),
+                            (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                            getTextBox().getY() + getTextBox().getHeight() - font.getCapHeight() * 3f - y_offset);
 
-            if (text.get(i).contains(":"))
-                fontLabel.draw(getSpriteBatch(), text.get(i),
-                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                        getTextBox().getHeight() - font.getCapHeight() * 1.3f - y_offset);
-            else
-                font.draw(getSpriteBatch(), text.get(i),
-                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                        getTextBox().getHeight() - font.getCapHeight() * 1.3f - y_offset);
+                if (text.get(i).indexOf('\n') > -1)
+                    y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITH_ENTER;
+                else
+                    y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
+            }
+            getButtons()[1][getClicked()[1] ? 1 : 0].setPosition(getTextBox().getX() /*+ getTextBox().getWidth() / 2 - getButtons()[i][0].getWidth() / 2*/,
+                    getTextBox().getY() /*- rad.getHeight() + getButtons()[i][0].getHeight() * 1.2f*/);
+            getButtons()[1][getClicked()[1] ? 1 : 0].draw(getSpriteBatch());
 
-            if (text.get(i).indexOf('\n') > -1)
-                y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITH_ENTER;
-            else
-                y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
-
-            if (y_offset > getTextBox().getHeight() * MAX_LINES_VISIBLE) break;
-        }*/
+        }
     }
 
 
@@ -190,18 +200,21 @@ public class KingsCupSpecialScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[1][2]);
+        setButtons(new Sprite[2][2]);
 
         getButtons()[0][0] = new Sprite(new Texture("common/kingscupbutton.png"));
-        getButtons()[0][1] = new Sprite(new Texture("common/kingscupbutton.png"));
+        getButtons()[0][1] = new Sprite(new Texture("common/kingscupbutton_white.png"));
+        getButtons()[1][0] = new Sprite(new Texture("common/rules_ok.png"));
+        getButtons()[1][1] = new Sprite(new Texture("common/rules_ok_white.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }
 
     @Override
     protected void drawButtons() {
-        getButtons()[0][0].setPosition(X / 2 - getButtons()[0][0].getWidth()/2 , rad.getY() - getButtons()[0][0].getHeight() );
-        getButtons()[0][0].draw(getSpriteBatch(), getClicked()[0] ? 0.5f : 1.0f);
+        getButtons()[0][getClicked()[0] ? 1 : 0].setPosition(X / 2 - getButtons()[0][0].getWidth() / 2, rad.getY() - getButtons()[0][0].getHeight());
+        getButtons()[0][getClicked()[0] ? 1 : 0].draw(getSpriteBatch());
+
     }
 
     @Override
@@ -217,6 +230,7 @@ public class KingsCupSpecialScreen extends AbstractScreen {
     @Override
     protected void initCards() {
         rad = new Sprite(new Texture("common/Rad.png"));
+        radPointer = new Sprite(new Texture("common/arrow.png"));
 
     }
 
@@ -238,6 +252,8 @@ public class KingsCupSpecialScreen extends AbstractScreen {
         float rot = rad.getRotation();
         KingsCupSpecialModel.getInstance().setRadPosition(rot);
         rad.draw(getSpriteBatch());
+        radPointer.setPosition(X / 2 - radPointer.getWidth() / 2, rad.getY() + rad.getHeight() - radPointer.getHeight() / 2);
+        radPointer.draw(getSpriteBatch());
     }
 
     @Override
@@ -248,6 +264,8 @@ public class KingsCupSpecialScreen extends AbstractScreen {
             fontLabel.dispose();
         if (rad != null)
             rad.getTexture().dispose();
+        if (radPointer != null)
+            radPointer.getTexture().dispose();
         super.dispose();
     }
 
@@ -257,11 +275,12 @@ public class KingsCupSpecialScreen extends AbstractScreen {
             if (Orientation.getOrientation() == Input.Orientation.Portrait) {
                 getRulesButtonSprite().setPosition(Resolution.getGameWorldWidthPortrait() - getRulesButtonSprite().getWidth(),
                         Resolution.getGameWorldHeightPortrait() - getRulesButtonSprite().getHeight() * 2.5f);
+            }else{
+                getRulesButtonSprite().setPosition(Resolution.getGameWorldWidthLandscape() - getRulesButtonSprite().getWidth(),
+                        Resolution.getGameWorldHeightLandscape() - getRulesButtonSprite().getHeight());
             }
         }
 
     }
-
-
 
 }

@@ -1,8 +1,2 @@
 5: Counter
-You will pick a number between 1-8, maybe three
-and a word like cheesecake. Then you start to count. 
-PlayerA: 1; PlayerB: 2 and so on. The next player 
-who needs to say 3 or a number which is a multple 
-of a 3 (3, 6, 9, 12) or a number that contains 
-a 3 (like 13, 23, 33) has to say the chosen 
-word instead.
+You will pick a number between 1-8, maybe three and a word like cheesecake. Then you start to count. PlayerA: 1; PlayerB: 2 and so on. The next player who needs to say 3 or a number which is a multple of a 3 (3, 6, 9, 12) or a number that contains a 3 (like 13, 23, 33) has to say the chosen word instead.

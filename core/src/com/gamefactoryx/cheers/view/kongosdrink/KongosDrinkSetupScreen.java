@@ -162,7 +162,12 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
 
             getButtons()[i][0].setPosition( X * 0.5f  - getButtons()[i][0].getWidth() * 0.5f , Y * 0.4f - getButtons()[i][0].getHeight() * 1.25f * (i - 6));
             getButtons()[i][0].draw(getSpriteBatch(), alpha);
-            if(!KongosDrinkMainModel.getInstance().isLoadingNextStage() && i > 6 && Configuration.getInstance().enabledPlayers() <= 2){
+            if(!KongosDrinkMainModel.getInstance().isLoadingNextStage() && i == 7  && (Configuration.getInstance().enabledPlayers() <= 2 || Configuration.getInstance().enabledPlayers() % 2 != 0 )){
+                disabledSprite.setPosition(X * 0.5f  - getButtons()[i][0].getWidth() * 0.5f , Y * 0.4f - getButtons()[i][0].getHeight() * 1.25f * (i - 6));
+                disabledSprite.draw(getSpriteBatch(), 1);
+            }
+
+            if(!KongosDrinkMainModel.getInstance().isLoadingNextStage() && i == 8  && Configuration.getInstance().enabledPlayers() <= 2){
                 disabledSprite.setPosition(X * 0.5f  - getButtons()[i][0].getWidth() * 0.5f , Y * 0.4f - getButtons()[i][0].getHeight() * 1.25f * (i - 6));
                 disabledSprite.draw(getSpriteBatch(), 1);
             }
