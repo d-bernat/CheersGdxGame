@@ -363,6 +363,12 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
             }
         }
+        if (KongosDrinkMainModel.getInstance().isWhoIsWho()) {
+            if(Configuration.getInstance().getGameType() != Configuration.GameTypeEnum.DOGFIGHT) {
+                mainButtonsSprite[0].setPosition(60 + 120 * (mainButtonsSprite.length - 2), -80);
+                mainButtonsSprite[0].draw(batch);
+            }
+        }
 
         if (!KongosDrinkMainModel.getInstance().isTextBoxDisplayed() && !KongosDrinkMainModel.getInstance().isAnimationRunning()
                 && !KongosDrinkMainModel.getInstance().isWhoIsWho()) {

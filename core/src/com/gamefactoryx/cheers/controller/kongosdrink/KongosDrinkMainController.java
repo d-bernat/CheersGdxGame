@@ -159,12 +159,12 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
         } else if (getScreen().getMainButtonsSprite()[1].isActive()) {
 
-            if (x >= getScreen().getMainButtonsSprite()[0].getX() &&
+            /*if (x >= getScreen().getMainButtonsSprite()[0].getX() &&
                     x <= getScreen().getMainButtonsSprite()[0].getX() + getScreen().getMainButtonsSprite()[0].getWidth() &&
                     y >= getScreen().getMainButtonsSprite()[0].getY() &&
-                    y <= getScreen().getMainButtonsSprite()[0].getY() + getScreen().getMainButtonsSprite()[0].getHeight()) {
+                    y <= getScreen().getMainButtonsSprite()[0].getY() + getScreen().getMainButtonsSprite()[0].getHeight()) {*/
                 KongosDrinkMainModel.getInstance().setWhoIsWho(false);
-            }
+            //}
 
             //if click on some level
             //if no move
