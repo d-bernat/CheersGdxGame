@@ -1,4 +1,2 @@
 ﻿4: Dance Off
-Der Spieler, der die Karte zieht tanzt einen Tanzschritt, 
-der Spieler links von ihm muss ihn nachtanzen und einen neuen
-erfinden und so geht es weiter bis einer einen Fehler gemacht hat.
+Der Spieler, der die Karte zieht tanzt einen Tanzschritt, der Spieler links von ihm muss ihn nachtanzen und einen neuen erfinden und so geht es weiter bis einer einen Fehler gemacht hat.

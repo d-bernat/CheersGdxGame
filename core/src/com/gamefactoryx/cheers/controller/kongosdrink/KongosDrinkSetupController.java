@@ -80,7 +80,7 @@ public class KongosDrinkSetupController extends AbstractController {
                         Gdx.input.vibrate(10);
                         break;
                     case 7:
-                        if(Configuration.getInstance().enabledPlayers() > 2) {
+                        if(Configuration.getInstance().enabledPlayers() > 2 && Configuration.getInstance().enabledPlayers() % 2 == 0) {
                             Configuration.getInstance().setGameType(Configuration.GameTypeEnum.TEAMOFTWO_VS_TEAMOFTWO);
                             Gdx.input.vibrate(10);
                         }

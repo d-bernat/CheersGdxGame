@@ -230,7 +230,7 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
 
     @Override
     protected void initLoadingSprite() {
-        setLoadingSprite(new Sprite(new Texture("common/loading.png")));
+        setLoadingSprite(new Sprite(new Texture(com.gamefactoryx.cheers.tool.Configuration.getLanguage() + "/loading.png")));
     }
 
     @Override

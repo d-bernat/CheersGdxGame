@@ -30,7 +30,8 @@ public class Resolution {
     }
 
     public static void setResolution(){
-        if ((Gdx.input.getNativeOrientation() == Input.Orientation.Portrait)) {
+        //if ((Gdx.input.getNativeOrientation() == Input.Orientation.Portrait)) {
+        if(Orientation.getOrientation() == Input.Orientation.Portrait){
             gameWorldWidthPortrait = Gdx.graphics.getWidth();
             gameWorldHeightPortrait = Gdx.graphics.getHeight();
             gameWorldWidthLandscape = Gdx.graphics.getHeight();

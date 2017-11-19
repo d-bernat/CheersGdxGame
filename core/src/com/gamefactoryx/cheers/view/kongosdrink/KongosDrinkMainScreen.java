@@ -196,7 +196,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
     @Override
     public void resize(int width, int height) {
-        camera = new OrthographicCamera(960, 540);
+        camera = new OrthographicCamera(960, 960 * Resolution.getGameWorldHeightLandscape() / Resolution.getGameWorldWidthLandscape());
         //camera = new OrthographicCamera(Resolution.getGameWorldWidthLandscape(), Resolution.getGameWorldHeightLandscape());
 
         float FONT_SIZE_ON_SCREEN = 0.03f;
@@ -258,10 +258,10 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
         for (int i = playerSprite.length - 1; i >= 0; --i) {
             if (Configuration.getInstance().getPlayers().get(i).isActive())
                 playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4,
-                        -playerSprite[i].getHeight() / 2 * 2.9f);
+                        -playerSprite[i].getHeight() / 2 * 2.7f);
             else
                 playerSprite[i].setPosition(-playerSprite[i].getWidth() / 4 + Configuration.getInstance().getPlayers().get(i).getNormPosition() - KongosDrinkMainModel.getInstance().getXxcoor(),
-                        -playerSprite[i].getHeight() / 2 * 2.9f);
+                        -playerSprite[i].getHeight() / 2 * 2.7f);
             if (Configuration.getInstance().getPlayers().get(i).getRotate() != 0)
                 playerSprite[i].rotate(Configuration.getInstance().getPlayers().get(i).getRotate());
             /*else
@@ -361,6 +361,12 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
                         y_offset += font.getCapHeight() * SPACE_BETWEEN_TWO_LINES_WITHOUT_ENTER;
                 }
 
+            }
+        }
+        if (KongosDrinkMainModel.getInstance().isWhoIsWho()) {
+            if(Configuration.getInstance().getGameType() != Configuration.GameTypeEnum.DOGFIGHT) {
+                mainButtonsSprite[0].setPosition(60 + 120 * (mainButtonsSprite.length - 2), -80);
+                mainButtonsSprite[0].draw(batch);
             }
         }
 

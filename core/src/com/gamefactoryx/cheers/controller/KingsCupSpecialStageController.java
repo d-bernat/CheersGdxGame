@@ -33,17 +33,32 @@ final class KingsCupSpecialStageController extends AbstractController {
         super.touchDown(screenX, screenY, pointer, button);
         lastYPointerPos = screenY;
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
-                    screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
-                    Orientation.getOrientation() == Input.Orientation.Portrait
-                    ||
-                    screenX >= getScreen().getButtons()[i][0].getX() &&
-                            screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                            Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
-                            Orientation.getOrientation() == Input.Orientation.Landscape);
+            if (i == 0 && !KingsCupSpecialModel.getInstance().isShowTask()) {
+                getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
+                        screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                        Orientation.getOrientation() == Input.Orientation.Portrait
+                        ||
+                        screenX >= getScreen().getButtons()[i][0].getX() &&
+                                screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                                Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                                Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                                Orientation.getOrientation() == Input.Orientation.Landscape);
+
+            } else if (i == 1 && KingsCupSpecialModel.getInstance().isShowTask()) {
+                getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
+                        screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                        Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                        Orientation.getOrientation() == Input.Orientation.Portrait
+                        ||
+                        screenX >= getScreen().getButtons()[i][0].getX() &&
+                                screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
+                                Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
+                                Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                                Orientation.getOrientation() == Input.Orientation.Landscape);
+            }
         }
 
         return true;
@@ -55,11 +70,19 @@ final class KingsCupSpecialStageController extends AbstractController {
             return true;
         }
 
-        if (!animationRunning) {
+        if (KingsCupSpecialModel.getInstance().isShowTask()) {
+            if (getScreen().getClicked()[1]) {
+                KingsCupSpecialModel.getInstance().setShowTask(false);
+
+            }
+        } else {
+
             for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
                 if (getScreen().getClicked()[i]) {
-                    KingsCupSpecialModel.getNewInstance();
-                    animation();
+                    if (!animationRunning) {
+                        KingsCupSpecialModel.getNewInstance();
+                        animation();
+                    }
                     getScreen().getClicked()[i] = false;
                 }
             }
@@ -71,7 +94,7 @@ final class KingsCupSpecialStageController extends AbstractController {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-        int SCROLLING_SLOW_DOWN = 30;
+       /* int SCROLLING_SLOW_DOWN = 30;
         if (screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
                 Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
@@ -92,7 +115,7 @@ final class KingsCupSpecialStageController extends AbstractController {
                 lastYPointerPos = screenY;
             }
 
-        }
+        }*/
 
         return true;
     }
@@ -119,7 +142,12 @@ final class KingsCupSpecialStageController extends AbstractController {
 
                     i++;
                 }
+                long time = System.currentTimeMillis();
+                while (System.currentTimeMillis() < time + 500L) {
+                }
+
                 animationRunning = false;
+                KingsCupSpecialModel.getInstance().setShowTask(true);
                 KingsCupSpecialModel.getInstance().setRotation(0.0f);
 
 

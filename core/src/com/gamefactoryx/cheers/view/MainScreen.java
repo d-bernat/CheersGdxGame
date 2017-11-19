@@ -13,7 +13,7 @@ import com.gamefactoryx.cheers.tool.Resolution;
 @SuppressWarnings("DefaultFileTemplate")
 public class MainScreen extends AbstractScreen {
 
-
+    private float X, Y;
 
     @Override
     protected void initSprites() {
@@ -23,7 +23,40 @@ public class MainScreen extends AbstractScreen {
         getPortraitSprite().setSize(Resolution.getGameWorldWidthPortrait(), Resolution.getGameWorldHeightPortrait());
     }
 
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
 
+       if (Orientation.getOrientation() == Input.Orientation.Portrait) {
+            X = Resolution.getGameWorldWidthPortrait();
+            Y = Resolution.getGameWorldHeightPortrait();
+        } else {
+            X = Resolution.getGameWorldWidthLandscape();
+            Y = Resolution.getGameWorldHeightLandscape();
+        }
+
+
+        for (int i = 0; i < getCountOfButtons(); i++)
+            for (int j = 0; j < 2; j++) {
+                if (X < Y) {
+                    if (i < 6)
+                        getButtons()[i][j].setSize(X * 0.2f,
+                            /*Y * 0.2f * Resolution.getAspectRatio()*/
+                                X * 0.2f);
+                    else
+                        getButtons()[i][j].setSize(X * 0.13f,
+                            /*Y * 0.13f * Resolution.getAspectRatio()*/ X * 0.13f);
+                }else{
+                    if (i < 6)
+                        getButtons()[i][j].setSize(Y * 0.2f,
+                            /*Y * 0.2f * Resolution.getAspectRatio()*/
+                                Y * 0.2f);
+                    else
+                        getButtons()[i][j].setSize(Y * 0.13f,
+                            /*Y * 0.13f * Resolution.getAspectRatio()*/ Y * 0.13f);
+                }
+            }
+    }
 
     @Override
     protected void drawText() {
@@ -68,19 +101,10 @@ public class MainScreen extends AbstractScreen {
         }
         getButtons()[7][0] = new Sprite(new Texture("common/Facebook_icon.png"));
         getButtons()[7][1] = new Sprite(new Texture("common/Facebook_icon.png"));
-        getButtons()[8][0] = new Sprite(new Texture("common/Twitter_icon.png"));
-        getButtons()[8][1] = new Sprite(new Texture("common/Twitter_icon.png"));
+        getButtons()[8][0] = new Sprite(new Texture("common/Instagram.png"));
+        getButtons()[8][1] = new Sprite(new Texture("common/Instagram.png"));
 
 
-        for (int i = 0; i < getCountOfButtons(); i++)
-            for (int j = 0; j < 2; j++) {
-                if(i < 6)
-                    getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
-                        Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
-                else
-                    getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.13f,
-                            Resolution.getGameWorldHeightPortrait() * 0.13f * Resolution.getAspectRatio());
-            }
         setClicked(new boolean[getCountOfButtons()]);
     }
 
@@ -89,8 +113,6 @@ public class MainScreen extends AbstractScreen {
         float SPACE_BETWEEN_BUTTONS = 1.2f;
         int offset_index = 0;
 
-        float X = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldWidthLandscape() : Resolution.getGameWorldWidthPortrait();
-        float Y = Orientation.getOrientation() == Input.Orientation.Landscape ? Resolution.getGameWorldHeightLandscape() : Resolution.getGameWorldHeightPortrait();
         float DISTANCE_FROM_UPPER_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.40f : 0.23f;
         float DISTANCE_FROM_RIGHT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.03f : 0.06f;
         float DISTANCE_FROM_LEFT_SCREEN_BOUNDARY = Orientation.getOrientation() == Input.Orientation.Landscape ? 0.03f : 0.06f;
