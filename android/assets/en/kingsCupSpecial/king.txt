@@ -1,3 +1,4 @@
 King: Kings Cup
 You need to fill 1/4 of your drink into
-the cup on the table.
+the cup on the table. Do you have the fourth king?
+Congratulations! You need to drink the whole Kings Cup.

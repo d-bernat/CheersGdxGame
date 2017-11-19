@@ -1,29 +1,29 @@
-1.       Schwarz oder Rot?
-2.       Höher oder Tiefer?
-3.       Dazwischen oder außerhalb?
+ï»¿1.       Schwarz oder Rot?
+2.       HÃ¶her oder Tiefer?
+3.       Dazwischen oder auÃŸerhalb?
 4.       Welches Muster?
 
-overtime mode. Jetzt geht es in die Verlängerung! Abwechselnd sagt ihr ob die Karte höher oder tiefer ist. Der erste der falsch liegt hat verloren.
+overtime mode. Jetzt geht es in die VerlÃ¤ngerung! Abwechselnd sagt ihr ob die Karte hÃ¶her oder tiefer ist. Der erste der falsch liegt hat verloren.
 x1.     -Spieler- du kannst eine Karte legen. Willst du es auch tun?
 
 
 x2.     -Spieler- du verteilst 1 Schluck.
 x2a.    -Spieler- du kannst auch einen Schluck verteilen.
-x2b.    -Spieler- du selbstverständlich auch.
+x2b.    -Spieler- du selbstverstÃ¤ndlich auch.
 
-x3.     -Spieler- du verteilst 2 Schlücke.
-x3a.    -Spieler- du kannst auch 2 Schlücke verteilen.
+x3.     -Spieler- du verteilst 2 SchlÃ¼cke.
+x3a.    -Spieler- du kannst auch 2 SchlÃ¼cke verteilen.
 x3b.    -Spieler- du ebenfalls.
 
-x4.     -Spieler- du verteilst 3 Schlücke.
-x4a.    -Spieler- du verteilst auch 3 Schlücke.
+x4.     -Spieler- du verteilst 3 SchlÃ¼cke.
+x4a.    -Spieler- du verteilst auch 3 SchlÃ¼cke.
 x4b.    -Spieler- verteil auch 3.
 
-x5.     -Spieler- du verteilst 4 Schlücke.
-x5a.    -Spieler- du kannst auch 4 Schlücke verteilen.
+x5.     -Spieler- du verteilst 4 SchlÃ¼cke.
+x5a.    -Spieler- du kannst auch 4 SchlÃ¼cke verteilen.
 x5b.    -Spieler- du darfst auch.
 
-x6.     -Spieler- Na Herzlichen Glückwunsch du darfst Busfahren! Viel Erfolg!
+x6.     -Spieler- Na Herzlichen GlÃ¼ckwunsch du darfst Busfahren! Viel Erfolg!
 
 x7.      Trink 1 mal
 x7/2.    Trink 1 mal und mach weiter!

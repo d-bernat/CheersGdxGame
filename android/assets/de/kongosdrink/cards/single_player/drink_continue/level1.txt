@@ -26,9 +26,9 @@ Tue so als würdest du die größte Welle deines Lebens reiten! Oops, du verlier
 Bist du stolz auf deine Figur? Wenn ja, dann bewegst deinen Arsch auf's nächste Feld. Wenn nicht dann trinkst du 4 Mal.;1;4;0
 Ey du freu dich mal lieber! Du darfst dir einen Spieler aussuchen, die eine Aufgabe deiner Wahl machen muss. Aber pass auf mit der Aufgabe, falls sie dem Spieler nicht gefällt musst du 4 Schlücke trinken.;1;4;0
 Er hat orangene Haut und trägt ein blondes Toupet! Na, weißt du wen ich meine? Nein?! Dann trink halt 5 Schlücke.;1;5;0
-Schreibe deiner Mutter, dass du ein Kind erwartest und löse es erst nachdem Spiel auf. Möchtest du deiner Mama nichts böses, dann leide für sie und trinke 2 Mal.;1;2;0
-Schreibe deinen Geschwistern, dass du herausgefunden hast, dass du adoptiert wurdest. Möchtest du deinen Geschwistern nichts böses, dann leide für sie und trinke 2 Mal.;1;2;0
-Beschreibe deinen verrücktesten Taum an den du dich noch erinnerst. Schämst du dich? Dann trinke 2 mal.;1;2;0
+Schreibe deiner Mutter, dass du ein Kind erwartest und löse es erst nachdem Spiel auf. Möchtest du deiner Mama nichts Böses, dann leide für sie und trinke 2 Mal.;1;2;0
+Schreibe deinen Geschwistern, dass du herausgefunden hast, dass du adoptiert wurdest. Möchtest du deinen Geschwistern nichts Böses, dann leide für sie und trinke 2 Mal.;1;2;0
+Beschreibe deinen verrücktesten Traum an den du dich noch erinnerst. Schämst du dich? Dann trinke 2 mal.;1;2;0
 Schneide eine Grimasse und nein wir meinen nicht dein normales Gesicht! Wenn mindestens eine Person Lacht oder auch nur schmunzelt bist du von den 2 Schlücken befreit.;1;2;0
 Wenn du mit deiner Zunge an die Nase kommst musst du keine 2 Schlücke trinken.;1;2;0
 Wenn du ein Glas Milch trinkst, dann gehst du weiter. Trinkst du 2 Schlücke Alkohol, dann bleibst du stehen.;1;2;0
