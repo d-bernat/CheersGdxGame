@@ -1,4 +1,4 @@
-You have to give -oPlayer- a kiss on the cheek, simply drink 3 times if you think that is gross!;2;3;0
+﻿You have to give -oPlayer- a kiss on the cheek, simply drink 3 times if you think that is gross!;2;3;0
 Feed -OPlayer- with a snack of his choice or drink 3 times.;2;3;0
 Do 5 push-ups, you can't do it, then 2 sips.; 2; 2; 0
 -oPlayer- reads you last 5 messages out loud or both of you drink 3 times.;2;3;0

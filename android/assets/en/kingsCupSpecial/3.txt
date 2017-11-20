@@ -1,2 +1,2 @@
-3: Drinking partner
+﻿3: Drinking partner
 You can choose your drinking bro. Everytime you need to drink your bro will drinking with you.

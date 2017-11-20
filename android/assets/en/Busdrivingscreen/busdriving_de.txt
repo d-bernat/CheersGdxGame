@@ -1,4 +1,4 @@
-1.       Black or white?
+﻿1.       Black or white?
 2.       Higher card or lower card?
 3.       Between or outside?
 4.       Which suit? 

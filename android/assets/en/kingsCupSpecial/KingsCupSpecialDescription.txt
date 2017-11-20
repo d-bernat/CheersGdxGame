@@ -1,4 +1,4 @@
-Kings Cup Special
+﻿Kings Cup Special
 
 Kings Cup Special is a drinking game that uses playing cards.  Every player must drink and dispense drinks based on cards drawn. Each card has a rule. You need one deck of cards, some players, alcoholic beverages and a large cup which will be used as the King�s Cup.  You shuffle the cards into a circle around the cup. Each player takes turn drawing cards and the players must participate in the instructions corresponding to the drawn card.
 

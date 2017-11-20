@@ -1,2 +1,2 @@
-Exchange
+﻿Exchange
 From now on you are only allowed to drink from the glas to the right of you until the icon disappears again.

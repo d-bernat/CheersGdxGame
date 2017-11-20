@@ -1,10 +1,9 @@
-﻿Zeigt wie ihr euch mögt und trinkt aus dem Bauchnabel nacheinander von eurem Teammitglied einen Shot! Unangenehm? Prost und 4 Schlücke!;5;4;0
-Ihr wolltet schon immer Moderatoren werden? Ihr glaubt ihr habt das Zeug dazu? Na dann kommentiert die nächsten 5 Minuten das Spiel! Habt ihr euch etwa überschätzt? Trinkt leider 4 Mal!;5;4;0
-Für das Vaterland! Geht raus und singt eure Nationalhymne mit Playback! Möget ihr das Spiel gewinnen! Nicht? Dann trinkt 5 Schlücke und Schande!;5;5;0
-Was hat euer Team den verbrochen? Ihr werdet mit einem Tennisball oder was Weicherem aus ca. 7 Metern abgeworfen, ihr dürft nur das Gesicht schützen. Ein Angebot besteht... trinkt ihr 5 Mal kommt ihr davon!;5;5;0
-Seid ihr stark als Team? Ihr habt 1 Minute Zeit mit allen mitteln einen Spieler auf die dunkle Seite zu ziehen. Schafft ihr es kommt ihr 10 Felder nach vorne, schafft ihr es nicht dürfen eure Gegner 30 Schlücke verteilen. Alles ist erlaubt. 30 Sekunden Beratungszeit, dann läuft der Timer automatisch.;10;30;90
-Challenge! Was ist euch wichtiger der Sieg oder die Freundschaft? Der Spieler, dessen Anfangsbuchstabedes Vornamens früher dran kommt darf dem Mitspielerwelchem der Buchstabe als letztes kommt einen Drink mixen. Ihr und -oPlayer- spielen gegeneinander, der Spieler, welcher am Ende mehr Alkohol im Glas hat und es schafft das Glas zu exen gewinnt, schafft er es nicht zu exen istder Spieler mit dem zweitmeisten Alkohol im Glas an der Reihe. Das Team, welches gewinnt muss nicht noch 5 Mal trinken. Gewinnt ihr geht ihr noch um 7 Schritte nach vorne;7;5;0
-Wenn jeder von euch 7 Mal trinkt, dann geht ihr fünf Felder nach vorne!;5;7;0
-Wenn jeder von euch 7 Mal trinkt, dann geht ihr fünf Felder nach vorne!;5;7;0
-Wenn jeder von euch 7 Mal trinkt, dann geht ihr fünf Felder nach vorne!;5;7;0
-Wenn jeder von euch 7 Mal trinkt, dann geht ihr fünf Felder nach vorne!;5;7;0
+﻿What has your team done wrong? The opposing teams will throw at you with a tennisball or something softer from about 20ft/6m, you are only allowed to protect the face. An offer exists ... you drink 5 times you get it!;5;5;0
+For your country! Go out and sing your national anthem with playback! No? Then drink 5 sips and shame on you!;5;5;0
+You always wanted to be moderators? You think you have what it takes? Well then the next 5 minutes comment the game! Have you overestimated your skills as a commentator? Unfortunately drinks 4 times!;5;4;0
+Show how you like each other and drink a shot out of the belly button from your team member! Unpleasant? Cheers and 4 sips!;5;4;0
+Are you strong as a team? -Oplayer- has 1 minute to move any player to the dark side. If you manage to move 10 spaces forward, you will not let your opponent distribute 30 sips. Everything is allowed. 30 seconds consultation time, then the timer runs automatically.;10;30;90
+If each of you drinks 7 times, then you go five fields forward;5;7;0
+If each of you drinks 7 times, then you go five fields forward;5;7;0
+If each of you drinks 7 times, then you go five fields forward;5;7;0
+If each of you drinks 7 times, then you go five fields forward;5;7;0

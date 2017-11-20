@@ -1,4 +1,4 @@
-Everyone of you passes a sip to an opponent of your choice!;0;1;0
+﻿Everyone of you passes a sip to an opponent of your choice!;0;1;0
 Your team picks 2 players out of the opposing team who will have to drink 3 sips each.;0;3;0
 Everybody drinks 2 times.;0;2;0
 2 sips for the loser! Say some random word. The following person has to find a word that rimes with it. -oPlayer- starts and it's going clockwise.;0;2;0

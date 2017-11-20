@@ -1,2 +1,2 @@
-Queen: All women
+﻿Queen: All women
 All women are drinking.

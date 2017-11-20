@@ -1,4 +1,4 @@
-Your team has to drink twice.;0;2;0
+﻿Your team has to drink twice.;0;2;0
 Decide what player is the hottest! You count from 1-5 and if everyone of your team says the same name, the person voted for hast to drink 3 times. If you weren't able to agree on one person you have to drink 3 each.;0;3;0
 You fall in love with your opponent! Propose to -+Player-. If the player doesn't say yes, you will sadly have to drink 3 times, If you hear a yes coming out of his/her mouth you are allowed to pass 5 sips to players of your choice.;0;3;0
 One game of "Never have I ever", the person who has to drink the most gets 5 punishment sips on top!;0;5;0

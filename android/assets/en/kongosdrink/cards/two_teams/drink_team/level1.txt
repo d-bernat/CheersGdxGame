@@ -1,12 +1,12 @@
-﻿Verhaltet euch für 2 Minuten wie Steine, für jedes Mal wo es nicht so ganz funktioniert, trinkt ihr 1 Schluck.;1;1;120
-Schafft es ein Freiwilliger aus eurem Team, einen Gegner der Wahl zu erraten mit verschlossenen Augen. Wäre gut, sonst trinkt ihr 2 Mal!;1;2;0
-Das Leben ist schön! Ihr geht ein Feld nach vorne! Oder wenn ihr es spannend machen wollt könnt ihr auch stehen bleiben und jeweil 1 Mal trinken.;1;1;0
-Oh nein...ist es das aus für euer Team? Ihr habt einen Familien/Ehestreit, seid überzeugend oder trinkt 2 Schlücke.;1;2;0
-Das Leben ist schön! Ihr geht ein Feld nach vorne!;1;0;0
-Ihr spielt gegen das andere Team Schere, Stein, Papier. Jedes Team stellt einen Spieler und es geht bis 3. Die Verlierer trinken 3 Schlücke, Gewinnt ihr, geht ihr ein Feld nach vorne!;1;3;0
-Challenge! Ihr gegen Die! Do or Die! Jedes Team stellt einen Spieler. Der Verlierer trinkt 2-mal, Gewinnt aber ihr, dann geht ihr noch gehen ein Feld weiter. Daumenringen!;1;2;0
-Team gegen Team! Jedes Team bekommt eine Flasche Wasser.Welches Team sie als erstes ausgetrunken hat gewinnt. Verlierer trinken 5 Schlücke und gewinnt ihr, dann geht ihr 1 Feld nach vorne;1;0;0
-Wenn jeder von euch 1 Mal trinkt, dann geht ihr ein Feld nach vorne!;1;1;0
-Wenn jeder von euch 1 Mal trinkt, dann geht ihr ein Feld nach vorne!;1;1;0
-Wenn jeder von euch 1 Mal trinkt, dann geht ihr ein Feld nach vorne!;1;1;0
-Wenn jeder von euch 1 Mal trinkt, dann geht ihr ein Feld nach vorne!;1;1;0
+﻿Act like stones for 2 minutes, for each time it does not work so well, you take 1 sip.;1;1;120
+Make it a volunteer from your team to guess an opponent of choice with closed eyes. Would be good, otherwise you will drink twice!;1;2;0
+Life is Beautiful! You go one field forward! Or if you want to make it exciting and drink it 1 time.;1;1;0
+Oh no ... is that all for your team? You have a family / marital conflict, be persuasive or drink 2 sips.;1;2;0
+Life is Beautiful! You go one field forward;1;0;0
+You play rock, paper, scissors against the other team. Each team is represented by one player and goes up to  3. The losers drink 3 sips, if you win, you'll go one field forward;1;3;0
+Challenge! You against them! Do or die! Each team is represented by a player of your choice. The loser drinks twice, but if you win, then you'll go on. Thumbwar!; 1; 2; 0
+Team against team! Each team will win a bottle of water. Which team empties their bottle first wins. Losers drink 5 sips and the winner then moves 1 field ahead.;1;0;0
+If each of you drinks 1 time, then you go one field ahead!;1;1;0
+If each of you drinks 1 time, then you go one field ahead!;1;1;0
+If each of you drinks 1 time, then you go one field ahead!;1;1;0
+If each of you drinks 1 time, then you go one field ahead!;1;1;0

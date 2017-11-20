@@ -1,4 +1,4 @@
-You choose a celebrity for -oPlayer-, you now have 35 seconds to represent your group in pantomime. If you don't guess it, you'll drink 5 sips each. You have 15 seconds to prepare;0;5;50
+﻿You choose a celebrity for -oPlayer-, you now have 35 seconds to represent your group in pantomime. If you don't guess it, you'll drink 5 sips each. You have 15 seconds to prepare;0;5;50
 Punishment! You have to drink 2 times !;0;2;0
 Each team picks a celebrity, which must be guessed. You will only answer yes or no questions and each will take a sip .;0;1;0
 A round of "Never have I ever ..." everybody in this game says something they have never done and if somebody has already done it, the person has to drink. The person who drinks the most, receives 5 more punisment sips!;0;5;0

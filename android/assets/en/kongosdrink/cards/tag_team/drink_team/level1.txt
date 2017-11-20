@@ -1,4 +1,4 @@
-Act like stones for 2 minutes, for each time it does not work so well, you take 1 sip.;1;1;120
+﻿Act like stones for 2 minutes, for each time it does not work so well, you take 1 sip.;1;1;120
 A volunteer from your team has to guess an opponent of choice with closed eyes! No talking just touching. Would be good, otherwise you will drink 2 times!;1;2;0
 Life is Beautiful! You go one field forward! Or if you want to make it more exciting you can also stop and drink 1 time.;1;1;0
 Oh no ... is it all over for your team? You have a family/marital conflict, be persuasive or drink 2 sips.;1;2;0

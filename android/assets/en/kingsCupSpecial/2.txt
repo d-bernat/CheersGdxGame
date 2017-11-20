@@ -1,2 +1,2 @@
-2: Category
+﻿2: Category
 You will pick one category like sports, car brands and so on. Everyone has to say a word fitting to that, let's say you picked sports, then you would have to say something like basketball, soccer, hockey... The first player, which has no answer needs to drink.

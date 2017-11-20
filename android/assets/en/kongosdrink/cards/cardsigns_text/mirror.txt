@@ -1,2 +1,2 @@
-Mirror
+﻿Mirror
 -oPlayer- you have to mirror -aPlayer- as long as this icon is shown. If you can't do it both of you have to drink 1 each.
