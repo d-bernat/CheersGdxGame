@@ -1,2 +1,0 @@
-﻿Overtime
-If two or more players have the same amount of cards there will be an overtime and one after another will choose if the card is higher or lower than the card on the screen. The Loser will move on to the next round.

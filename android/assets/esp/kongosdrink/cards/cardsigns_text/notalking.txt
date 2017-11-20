@@ -1,7 +1,0 @@
-﻿Sprechverbot
-Solange du dieses Zeichen siehst sind folgende Wörter nicht erlaubt zusagen:
-Ich
-Du
-Wir
-jegliche Namen
-trinken

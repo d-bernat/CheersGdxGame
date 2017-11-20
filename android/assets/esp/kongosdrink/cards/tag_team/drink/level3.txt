@@ -1,5 +1,0 @@
-﻿Strafe! Euer Tean muss 2 Mal trinken!;0;2;0
-Entscheidet gemeinsam, wenn ihr am heißesten aus der Runde findet, einigt euch und gibt dieser Person 3 Schluck oder trinkt jeweils 3 Mal.;0;3;0 
-Du verliebst dich in deinen Gegner! Mache -+Player- einen Antrag. Gibst du dir nicht genug Mühe und du hörst ein Nein, musst du leider 3 Mal trinken, hörst du ein Ja, dann verteilst du 5 Schlücke.;0;3;0
-Eine Runde "Ich hab noch nie..." jeder in der Runde sagt was er noch nie getan hat und falls es jemand schon gemacht hat, dann trinkt diejenige Person. Die Person die am meisten trinkt, bekommt noch 5 Strafschlücke!;0;5;0
-
