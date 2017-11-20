@@ -1,10 +1,6 @@
-﻿Jeder von euch vergibt einen Schluck an den Gegner eurer Wahl.;0;1;0
-Ihr wählt 2 Spieler aus dem gegnerischen Team welche 3 Schlucke trinken müssen.;0;3;0
-Jeder Spieler, egal aus welchem Team, trinkt 2 Schlücke!;0;2;0
-2 Schlücke für den Verlierer. Nennt ein Wortmit dem Anfangsbuchstaben eurer Wahl. Der nächste muss ein Wort finden welches sich daraufreimt. Der Verlierer trinkt 2 Schlücke! -oPlayer-beginnt und es geht im Uhrzeigersinn.;0;2;0
-Ihr gegen -oPlayer.-. Ihr sucht sich einen Prominenten aus, der muss erraten werde,die anderen ebenfalls. Es wird nur mit Ja oder Nein geantwortetund für jedes Nein trinkt ihr einen Schluck.;0;3;0
-Eine Runde "Ich hab noch nie..." jeder in der Runde sagt was er noch nie getan hat und falls es jemand schon gemacht hat, dann trinkt diejenige Person. Die Person die am meisten trinkt, bekommt noch 3 Strafschlücke!;0;3;0
-
-
-
- 
+Everyone of you passes a sip to an opponent of your choice!;0;1;0
+Your team picks 2 players out of the opposing team who will have to drink 3 sips each.;0;3;0
+Everybody drinks 2 times.;0;2;0
+2 sips for the loser! Say some random word. The following person has to find a word that rimes with it. -oPlayer- starts and it's going clockwise.;0;2;0
+Your team against -oPlayer-.-. You pick a celebrity who has to be guessed by simple questions. The only answers allowed are 'yes' and 'no'. For every no you will have to drink once!;0;3;0
+One game of "Never have I ever", the person who has to drink the most gets 3 punishment sips on top!;0;3;0

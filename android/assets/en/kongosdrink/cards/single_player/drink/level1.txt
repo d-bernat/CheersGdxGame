@@ -1,8 +1,8 @@
-﻿-oPlayer-, trinkt 2 mal mit dir!;0;2;0
-2 Schlücke für den Verlierer. Nennt ein Wort mit dem Anfangsbuchstaben eurer Wahl. Der nächste muss ein Wort finden welches sich darauf reimt. Der Verlierer trinkt 2 Schlücke! -oPlayer- beginnt.;0;2;0
-Ich packe meinen Koffer und nehme mit... spielt es solange weiter bis es einer nicht mehr weiter weiß. Der Verlierer trinkt 3 Schlücke. -aPlayer- Du fängst an!;0;3;0
-Wer weniger als 20Euro in Bar dabei hat muss 2 Schlücke trinken.;0;2;0
-Alle Spieler mit einem ungeraden Alter müssen 2 Schlücke trinken.;0;2;0
-Spielt ihr alle dieses Spiel gerade zum vortrinken? Wenn ja dürfen alle 2 Schlücke trinken.;0;2;0
-Du darfst dir jemanden auswählen, der mit dir einmal trinkt.;0;1;0
-Jedes Mal, wenn du einen Schluck vergibst musst du selber trinken und zwar bis zum Ende des Spiels.;0;1;0
+-oPlayer- drinks with you 2 times!;0;2;0
+2 sips for the loser. Name a word of your choice. The following player must find a word that rhymes with it. The loser drinks 2 sips! -oPlayer- starts.;0;2;0
+I pack my suitcase and take... with me. The loser drinks 3 sips. -oPlayer- you start!;0;3;0
+If you have less than 20 euros in  cash with you, drink 2 times.;0;2;0
+All players of odd ages (17, 19,...) must drink 2 sips.;0;2;0
+Are you all playing this game right now? If yes, all may drink 2 times.;0;2;0
+You may choose someone to drink with you!;0;1;0
+Every time you pass a sip to someone, you have to drink too, till the end of the game.;0;1;0

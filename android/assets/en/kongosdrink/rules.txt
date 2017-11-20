@@ -1,1 +1,1 @@
-shdshdksjnjks
+﻿Kongos Drink is a pretty easy game. Before you pick a task you decide whether you want to move 1, 2, 3 or 5 spaces. Of course the tasks get harder the more spaces you can move. The last player to cross the finish line has to do the forfeit. During the game there will be popping up some icons in the top right corner of your sceen. If you hold them down you will see a task, these tasks have to be done during the time the icon is present and the icon counts for all players.
