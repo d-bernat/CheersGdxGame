@@ -1,7 +1,3 @@
 ﻿The drinking game ,,Bus Driving,, will be played in 3 phases.
 1. Phase
 Every player will receive 4 cards. Everybody needs to answer some simple questions before they flip the card. If the question was answered you can turn your card face up. If your answer is wrong than you need to drink. If your answer right than it's the next persons turn.
-2. Phase
-In the 2. phase you'll see a pyramid. In the first row you can pass a sip to someone, in the second row two sips and so on. You don't need to lay down a card, you can wait and lay it down later, maybe you can pass on more sips. The player which has the most cards at the end of the game has to drive the bus. If two or more players have the same amount of cards there will be an overtime and one after another will choose if the card is higher or lower than the card on the screen.
-3. Phase
-Now you can drive the bus and you need to guess if the next card will be higher or lower than the card on the screen. Are you right you will be moved to the next card. If you're wrong, then you'll be set back to start and drink the amount of cards you've gotten right.
