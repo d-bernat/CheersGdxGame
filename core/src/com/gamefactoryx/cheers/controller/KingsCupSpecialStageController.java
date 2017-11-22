@@ -58,7 +58,10 @@ final class KingsCupSpecialStageController extends AbstractController {
                                 Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
                                 Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
                                 Orientation.getOrientation() == Input.Orientation.Landscape);
+            }else{
+                getScreen().getClicked()[i] = false;
             }
+
         }
 
         return true;

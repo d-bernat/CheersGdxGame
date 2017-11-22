@@ -184,26 +184,5 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
         super.dispose();
     }
 
-    private String getMessage(int credit) {
-        switch (Configuration.getLanguage()) {
-            case DE:
-                if (credit == 1)
-                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schluck!");
-                else
-                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
-            case EN:
-                if (credit == 1)
-                    return String.format(Locale.ENGLISH, "%s %d %s", "Du verteilst ", credit, " Schluck!");
-                else
-                    return String.format(Locale.ENGLISH, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
-            default:
-                if (credit == 1)
-                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schluck!");
-                else
-                    return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
-        }
-
-
-    }
 
 }

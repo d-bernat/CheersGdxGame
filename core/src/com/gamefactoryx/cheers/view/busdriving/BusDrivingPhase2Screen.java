@@ -243,9 +243,9 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
                     return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
             case EN:
                 if (credit == 1)
-                    return String.format(Locale.ENGLISH, "%s %d %s", "Du verteilst ", credit, " Schluck!");
+                    return String.format(Locale.ENGLISH, "%s %d %s", "You pass on", credit, " sip!");
                 else
-                    return String.format(Locale.ENGLISH, "%s %d %s", "Du verteilst ", credit, " Schlücke!");
+                    return String.format(Locale.ENGLISH, "%s %d %s", "You pass on", credit, " sips!");
             default:
                 if (credit == 1)
                     return String.format(Locale.GERMAN, "%s %d %s", "Du verteilst ", credit, " Schluck!");
@@ -255,5 +255,6 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
 
     }
+
 
 }

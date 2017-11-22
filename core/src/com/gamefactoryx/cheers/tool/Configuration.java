@@ -1,7 +1,10 @@
 package com.gamefactoryx.cheers.tool;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+
+import java.util.Locale;
 
 /**
  * Created by Bernat on 08.05.2017.
@@ -43,12 +46,16 @@ public class Configuration {
     private static int MAX_PLAYERS = 6;
     private static int MAX_TOP_SCORERS = 4;
     private static int MAX_PLAYERS_PRO_CONFIG_PAGE = 4;
-    private static boolean showBackButton = true;
+    private static boolean showBackButton = Gdx.app.getType() == Application.ApplicationType.iOS;
     private static boolean showRules = true;
 
     public static LanguageEnum getLanguage() {
-        if (language == null)
-            setLanguage(LanguageEnum.DE);
+        if (language == null) {
+            if("de".equals(Locale.getDefault().getLanguage()))
+                setLanguage(LanguageEnum.DE);
+            else
+                setLanguage(LanguageEnum.EN);
+        }
         return language;
     }
 
