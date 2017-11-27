@@ -8,7 +8,7 @@ import com.gamefactoryx.cheers.ScreenLock;
 public class DesktopLauncher{
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new CheersGdxGame(null), config);
+		new LwjglApplication(new CheersGdxGame(null, null), config);
 	}
 
 }

@@ -145,4 +145,6 @@ idea {
 }
 
 dependencies {
+    compile "com.badlogicgames.gdxpay:gdx-pay-android:$gdxPayVersion"
+    compile "com.badlogicgames.gdxpay:gdx-pay-android-googleplay:${gdxPayVersion}@aar"
 }

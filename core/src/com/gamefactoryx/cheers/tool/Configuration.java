@@ -38,7 +38,6 @@ public class Configuration {
             return name;
         }
     }
-
     private static boolean playMusic  = true;
 
     private static LanguageEnum language;
