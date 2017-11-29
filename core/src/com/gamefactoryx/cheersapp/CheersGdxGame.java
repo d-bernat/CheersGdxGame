@@ -27,6 +27,7 @@ public class CheersGdxGame extends Game {
 	public PurchaseObserver purchaseObserver = new PurchaseObserver() {
 		@Override
 		public void handleRestore (Transaction[] transactions) {
+			Gdx.app.log("**************", "handle restore callback invoked");
 			for (int i = 0; i < transactions.length; i++) {
 				if (checkTransaction(transactions[i].getIdentifier(), true) == true) break;
 			}
@@ -53,19 +54,26 @@ public class CheersGdxGame extends Game {
 		}
 		@Override
 		public void handlePurchaseCanceled () {	//--- will not be called by amazonIAP
+			Gdx.app.log("**************", "Transaction cancelled");
 		}
 	};
 
 	protected boolean checkTransaction (String ID, boolean isRestore) {
 		boolean returnbool = false;
 
-		if (productID_fullVersion.equals(ID)) {
+		if (productID_fullVersion.equals(ID))
 			Gdx.app.log("checkTransaction", "full version found!");
+		else
+			Gdx.app.log("checkTransaction", "full version not found!");
 
+		if(isRestore)
+			Gdx.app.log("checkTransaction", "after restore");
+		else
+			Gdx.app.log("checkTransaction", "after purchase");
 			//----- put your logic for full version here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 			returnbool = true;
-		}
+
 		return returnbool;
 	}
 

@@ -18,6 +18,8 @@ public class AndroidResolver extends com.gamefactoryx.cheersapp.PlatformResolver
         this.androidApplication = androidApplication;
 
         PurchaseManagerConfig config = cheers.purchaseManagerConfig;
+
+
         config.addStoreParam(PurchaseManagerConfig.STORE_NAME_ANDROID_GOOGLE, GOOGLEKEY);
 
         initializeIAP(null, cheers.purchaseObserver, config);
