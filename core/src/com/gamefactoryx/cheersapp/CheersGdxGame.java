@@ -19,7 +19,7 @@ public class CheersGdxGame extends Game {
 
 	private int isAppStore = APPSTORE_UNDEFINED;
 
-	public final static String productID_fullVersion = "fullVersion";
+	public final static String productID_fullVersion = "com.gamefactoryx.cheersapp.premium";
 	private static com.gamefactoryx.cheersapp.ScreenLock screenLock;
 	private static com.gamefactoryx.cheersapp.LinkHandler linkHandler;
 	static com.gamefactoryx.cheersapp.PlatformResolver m_platformResolver;
