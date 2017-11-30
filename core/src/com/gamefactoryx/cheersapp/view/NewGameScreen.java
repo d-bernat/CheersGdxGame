@@ -39,16 +39,16 @@ public class NewGameScreen extends com.gamefactoryx.cheersapp.view.AbstractScree
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[4][2]);
+        setButtons(new CheckedButton[4][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drink_clicked.png"));
-        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drink_clicked_white.png"));
-        getButtons()[1][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving.png"));
-        getButtons()[1][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving_white.png"));
-        getButtons()[2][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked.png"));
-        getButtons()[2][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked_white.png"));
-        getButtons()[3][0] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked.png"));
-        getButtons()[3][1] = new Sprite(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked_white.png"));
+        getButtons()[0][0] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drink_clicked.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kongos_drink_clicked_white.png"));
+        getButtons()[1][0] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving.png"));
+        getButtons()[1][1] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_busdriving_white.png"));
+        getButtons()[2][0] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked.png"));
+        getButtons()[2][1] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_ididnot_clicked_white.png"));
+        getButtons()[3][0] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked.png"));
+        getButtons()[3][1] = new CheckedButton(new Texture(Configuration.getLanguage() + "/newGameScreen/sekt_button_kingscup_clicked_white.png"));
 
         for (int i = 0; i < getCountOfButtons(); i++)
             for (int j = 0; j < 2; j++) {

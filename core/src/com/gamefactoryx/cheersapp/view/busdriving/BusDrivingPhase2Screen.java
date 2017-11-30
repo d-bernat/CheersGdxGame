@@ -11,6 +11,7 @@ import com.gamefactoryx.cheersapp.model.busdriving.Player;
 import com.gamefactoryx.cheersapp.model.busdriving.VCard;
 import com.gamefactoryx.cheersapp.tool.Resolution;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
+import com.gamefactoryx.cheersapp.view.CheckedButton;
 
 import java.util.Locale;
 
@@ -127,9 +128,9 @@ public class BusDrivingPhase2Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[1][2]);
-        getButtons()[0][0] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[0][1] = new Sprite(new Texture("common/continue.png"));
+        setButtons(new CheckedButton[1][2]);
+        getButtons()[0][0] = new CheckedButton(new Texture("common/continue.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture("common/continue.png"));
         getButtons()[0][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.2f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.2f);
         getButtons()[0][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.2f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
 

@@ -43,7 +43,7 @@ public class Configuration {
 
 
     private static Configuration instance;
-    private  GameSizeEnum gameSize = GameSizeEnum.FORTY;
+    private  GameSizeEnum gameSize = GameSizeEnum.THRITY;
     private  boolean penalty;
     private  int sound;
     private  List<com.gamefactoryx.cheersapp.model.kongosdrink.Player> players = new ArrayList<>();
@@ -90,7 +90,6 @@ public class Configuration {
                 p.setEnable(true);
             players.add(p);
         }
-
     }
 
     public static class KongosDrink {

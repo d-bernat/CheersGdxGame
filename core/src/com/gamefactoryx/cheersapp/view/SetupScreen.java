@@ -84,15 +84,15 @@ public class SetupScreen extends com.gamefactoryx.cheersapp.view.AbstractScreen 
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[6][2]);
+        setButtons(new CheckedButton[6][2]);
 
         Texture[] tx = {
                 new Texture(Configuration.getLanguage() + "/settings/off.png"),
                 new Texture(Configuration.getLanguage() + "/settings/on.png"),
         };
         for (int i = 0; i < getCountOfButtons(); i++) {
-            getButtons()[i][0] = new Sprite(tx[i%2]);
-            getButtons()[i][1] = new Sprite(tx[i%2]);
+            getButtons()[i][0] = new CheckedButton(tx[i%2]);
+            getButtons()[i][1] = new CheckedButton(tx[i%2]);
         }
 
 

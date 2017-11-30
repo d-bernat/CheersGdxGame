@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.gamefactoryx.cheersapp.model.kongosdrink.KongosDrinkSetupModel;
 import com.gamefactoryx.cheersapp.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
+import com.gamefactoryx.cheersapp.view.CheckedButton;
 
 
 /**
@@ -86,30 +87,30 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[10][2]);
-        getButtons()[0][0] = new Sprite(new Texture("common/kongos_drink/10.png"));
-        getButtons()[0][1] = new Sprite(new Texture("common/kongos_drink/10.png"));
-        getButtons()[1][0] = new Sprite(new Texture("common/kongos_drink/15.png"));
-        getButtons()[1][1] = new Sprite(new Texture("common/kongos_drink/15.png"));
-        getButtons()[2][0] = new Sprite(new Texture("common/kongos_drink/20.png"));
-        getButtons()[2][1] = new Sprite(new Texture("common/kongos_drink/20.png"));
-        getButtons()[3][0] = new Sprite(new Texture("common/kongos_drink/30.png"));
-        getButtons()[3][1] = new Sprite(new Texture("common/kongos_drink/30.png"));
-        getButtons()[4][0] = new Sprite(new Texture("common/kongos_drink/40.png"));
-        getButtons()[4][1] = new Sprite(new Texture("common/kongos_drink/40.png"));
-        getButtons()[5][0] = new Sprite(new Texture("common/kongos_drink/50.png"));
-        getButtons()[5][1] = new Sprite(new Texture("common/kongos_drink/50.png"));
+        setButtons(new CheckedButton[10][2]);
+        getButtons()[0][0] = new CheckedButton(new Texture("common/kongos_drink/10.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture("common/kongos_drink/10.png"));
+        getButtons()[1][0] = new CheckedButton(new Texture("common/kongos_drink/15.png"));
+        getButtons()[1][1] = new CheckedButton(new Texture("common/kongos_drink/15.png"));
+        getButtons()[2][0] = new CheckedButton(new Texture("common/kongos_drink/20.png"));
+        getButtons()[2][1] = new CheckedButton(new Texture("common/kongos_drink/20.png"));
+        getButtons()[3][0] = new CheckedButton(new Texture("common/kongos_drink/30.png"));
+        getButtons()[3][1] = new CheckedButton(new Texture("common/kongos_drink/30.png"));
+        getButtons()[4][0] = new CheckedButton(new Texture("common/kongos_drink/40.png"), true);
+        getButtons()[4][1] = new CheckedButton(new Texture("common/kongos_drink/40.png"), true);
+        getButtons()[5][0] = new CheckedButton(new Texture("common/kongos_drink/50.png"), true);
+        getButtons()[5][1] = new CheckedButton(new Texture("common/kongos_drink/50.png"), true);
 
-        getButtons()[6][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/singleplayer.png"));
-        getButtons()[6][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/singleplayer.png"));
-        getButtons()[7][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"));
-        getButtons()[7][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"));
-        getButtons()[8][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"));
-        getButtons()[8][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"));
+        getButtons()[6][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/singleplayer.png"));
+        getButtons()[6][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/singleplayer.png"));
+        getButtons()[7][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"));
+        getButtons()[7][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"));
+        getButtons()[8][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"));
+        getButtons()[8][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"));
 
 
-        getButtons()[9][0] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[9][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[9][0] = new CheckedButton(new Texture("common/continue.png"));
+        getButtons()[9][1] = new CheckedButton(new Texture("common/continue.png"));
         getButtons()[9][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.2f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.2f);
         getButtons()[9][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.2f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.2f);
 

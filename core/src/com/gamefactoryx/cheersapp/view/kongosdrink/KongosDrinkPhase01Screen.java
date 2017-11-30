@@ -13,6 +13,7 @@ import com.gamefactoryx.cheersapp.tool.FontHelper;
 import com.gamefactoryx.cheersapp.tool.Orientation;
 import com.gamefactoryx.cheersapp.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
+import com.gamefactoryx.cheersapp.view.CheckedButton;
 
 
 /**
@@ -151,22 +152,22 @@ public class KongosDrinkPhase01Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[AvatarType.values().length + 1 + 2][2]);
-        getButtons()[0][0] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[0][1] = new Sprite(new Texture("common/continue.png"));
+        setButtons(new CheckedButton[AvatarType.values().length + 1 + 2][2]);
+        getButtons()[0][0] = new CheckedButton(new Texture("common/continue.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture("common/continue.png"));
         getButtons()[0][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.2f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.2f);
         getButtons()[0][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.2f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.2f);
 
 
         for(int i = 0; i < AvatarType.values().length; i++ ){
-            getButtons()[i+1][0] = new Sprite(new Texture("common/kongos_drink/player/" + AvatarType.values()[i].toString() + "/" + AvatarType.values()[i].toString() + "_1.png"));
-            getButtons()[i+1][1] = new Sprite(new Texture("common/kongos_drink/player/" + AvatarType.values()[i].toString() + "/" + AvatarType.values()[i].toString() + "_1.png"));
+            getButtons()[i+1][0] = new CheckedButton(new Texture("common/kongos_drink/player/" + AvatarType.values()[i].toString() + "/" + AvatarType.values()[i].toString() + "_1.png"));
+            getButtons()[i+1][1] = new CheckedButton(new Texture("common/kongos_drink/player/" + AvatarType.values()[i].toString() + "/" + AvatarType.values()[i].toString() + "_1.png"));
         }
 
-        getButtons()[getButtons().length - 2][0] = new Sprite(new Texture("common/review.png"));
-        getButtons()[getButtons().length - 2][1] = new Sprite(new Texture("common/review.png"));
-        getButtons()[getButtons().length - 1][0] = new Sprite(new Texture("common/forward.png"));
-        getButtons()[getButtons().length - 1][1] = new Sprite(new Texture("common/forward.png"));
+        getButtons()[getButtons().length - 2][0] = new CheckedButton(new Texture("common/review.png"));
+        getButtons()[getButtons().length - 2][1] = new CheckedButton(new Texture("common/review.png"));
+        getButtons()[getButtons().length - 1][0] = new CheckedButton(new Texture("common/forward.png"));
+        getButtons()[getButtons().length - 1][1] = new CheckedButton(new Texture("common/forward.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }

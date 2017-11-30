@@ -31,7 +31,7 @@ public abstract class AbstractScreen implements Screen, com.gamefactoryx.cheersa
     private Sprite logo;
     private Batch spriteBatch;
     private boolean[] clicked;
-    private Sprite[][] buttons;
+    private CheckedButton[][] buttons;
     private Map<String, Sprite> cardSprites = new HashMap<>();
     private Sprite textBox;
     private Sprite backButtonSprite;
@@ -55,7 +55,7 @@ public abstract class AbstractScreen implements Screen, com.gamefactoryx.cheersa
     private Sprite rulesTextBoxLandscape;
     private Sprite rulesTextBoxPortrait;
 
-    public Sprite[][] getButtons() {
+    public CheckedButton[][] getButtons() {
         return buttons;
     }
 
@@ -96,7 +96,7 @@ public abstract class AbstractScreen implements Screen, com.gamefactoryx.cheersa
         this.clicked = clicked;
     }
 
-    public void setButtons(Sprite[][] buttons) {
+    public void setButtons(CheckedButton[][] buttons) {
         this.buttons = buttons;
     }
 

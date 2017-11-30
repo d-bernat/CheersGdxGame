@@ -10,6 +10,7 @@ import com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase4Model;
 import com.gamefactoryx.cheersapp.model.busdriving.Croupier;
 import com.gamefactoryx.cheersapp.tool.Card;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
+import com.gamefactoryx.cheersapp.view.CheckedButton;
 
 
 /**
@@ -106,15 +107,15 @@ public class BusDrivingPhase4Screen extends AbstractScreen {
     protected void initButtons() {
 
 
-        setButtons(new Sprite[2][2]);
+        setButtons(new CheckedButton[2][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
+        getButtons()[0][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
         getButtons()[0][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthLandscape() * 0.18f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() * 0.14f);
-        getButtons()[0][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_higher_busdriving.png"));
         getButtons()[0][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthLandscape() * 0.18f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() * 0.14f);
-        getButtons()[1][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
+        getButtons()[1][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
         getButtons()[1][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthLandscape() * 0.18f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() * 0.14f);
-        getButtons()[1][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
+        getButtons()[1][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/Overtime/overtime_pop_up_symbol_lower_busdriving.png"));
         getButtons()[1][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthLandscape() * 0.18f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() * 0.14f);
         setClicked(new boolean[getCountOfButtons()]);
 

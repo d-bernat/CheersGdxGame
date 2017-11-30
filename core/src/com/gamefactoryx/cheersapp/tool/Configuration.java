@@ -47,6 +47,7 @@ public class Configuration {
     private static int MAX_PLAYERS_PRO_CONFIG_PAGE = 4;
     private static boolean showBackButton = Gdx.app.getType() == Application.ApplicationType.iOS;
     private static boolean showRules = true;
+    private static boolean premium;
 
     public static LanguageEnum getLanguage() {
         if (language == null) {
@@ -118,5 +119,13 @@ public class Configuration {
 
     public static void setShowRules(boolean showRules) {
         Configuration.showRules = showRules;
+    }
+
+    public static boolean isPremium() {
+        return premium;
+    }
+
+    public static void setPremium(boolean premium) {
+        Configuration.premium = premium;
     }
 }

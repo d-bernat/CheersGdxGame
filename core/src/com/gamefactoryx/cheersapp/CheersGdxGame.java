@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.gamefactoryx.cheersapp.controller.StageEnum;
 import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageManager;
+import com.gamefactoryx.cheersapp.tool.Configuration;
 
 public class CheersGdxGame extends Game {
 
@@ -58,11 +59,12 @@ public class CheersGdxGame extends Game {
 		}
 	};
 
-	protected boolean checkTransaction (String ID, boolean isRestore) {
-		boolean returnbool = false;
-
-		if (productID_fullVersion.equals(ID))
+	private boolean checkTransaction (String ID, boolean isRestore) {
+		boolean ret = productID_fullVersion.equals(ID);
+		if (ret) {
 			Gdx.app.log("checkTransaction", "full version found!");
+			Configuration.setPremium(true);
+		}
 		else
 			Gdx.app.log("checkTransaction", "full version not found!");
 
@@ -72,9 +74,7 @@ public class CheersGdxGame extends Game {
 			Gdx.app.log("checkTransaction", "after purchase");
 			//----- put your logic for full version here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-			returnbool = true;
-
-		return returnbool;
+		return ret;
 	}
 
 	public CheersGdxGame(com.gamefactoryx.cheersapp.ScreenLock screenLock, com.gamefactoryx.cheersapp.LinkHandler linkHandler){

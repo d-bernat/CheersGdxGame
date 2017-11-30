@@ -13,6 +13,7 @@ import com.gamefactoryx.cheersapp.tool.Orientation;
 import com.gamefactoryx.cheersapp.tool.Resolution;
 import com.gamefactoryx.cheersapp.tool.kongosdrink.Configuration;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
+import com.gamefactoryx.cheersapp.view.CheckedButton;
 
 
 /**
@@ -99,31 +100,31 @@ public class KongosDrinkPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[8][2]);
+        setButtons(new CheckedButton[8][2]);
         Texture txt = new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
         for (int i = 0; i < getCountOfButtons() - 3; i++)
             for (int j = 0; j < 2; j++) {
-                getButtons()[i][j] = new Sprite(txt);
+                getButtons()[i][j] = new CheckedButton(txt);
                 getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.65f, Resolution.getGameWorldHeightPortrait() * 0.077f);
             }
 
-        getButtons()[4][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
-        getButtons()[4][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
+        getButtons()[4][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/okay.png"));
+        getButtons()[4][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/bad.png"));
         getButtons()[4][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
         getButtons()[4][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
 
-        getButtons()[5][0] = new Sprite(new Texture("common/kongos_drink/1st_side/boys.png"));
-        getButtons()[5][1] = new Sprite(new Texture("common/kongos_drink/1st_side/girls.png"));
+        getButtons()[5][0] = new CheckedButton(new Texture("common/kongos_drink/1st_side/boys.png"));
+        getButtons()[5][1] = new CheckedButton(new Texture("common/kongos_drink/1st_side/girls.png"));
         getButtons()[5][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
         getButtons()[5][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.1f);
 
-        getButtons()[6][0] = new Sprite(new Texture("common/continue.png"));
-        getButtons()[6][1] = new Sprite(new Texture("common/continue.png"));
+        getButtons()[6][0] = new CheckedButton(new Texture("common/continue.png"));
+        getButtons()[6][1] = new CheckedButton(new Texture("common/continue.png"));
         getButtons()[6][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
         getButtons()[6][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.2f);
 
-        getButtons()[7][0] = new Sprite(new Texture("common/gold.png"));
-        getButtons()[7][1] = new Sprite(new Texture("common/grey.png"));
+        getButtons()[7][0] = new CheckedButton(new Texture("common/gold.png"));
+        getButtons()[7][1] = new CheckedButton(new Texture("common/grey.png"));
         getButtons()[7][0].setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
         getButtons()[7][1].setSize(Resolution.getGameWorldWidthPortrait() * 0.03f, Resolution.getGameWorldHeightPortrait() * Resolution.getAspectRatio() * 0.03f);
 
