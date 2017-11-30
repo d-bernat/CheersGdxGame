@@ -57,7 +57,12 @@ public class KongosDrinkSetupController extends AbstractController {
                     case 0: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.TEN);break;
                     case 1: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FIFTEEN);break;
                     case 2: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.TWENTY);break;
-                    case 3: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.THRITY);break;
+                    case 3:
+                        if(getScreen().getButtons()[i][0].isAllowed())
+                            Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.THRITY);
+                        else
+                            StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
+                        break;
                     case 4:
                         if(getScreen().getButtons()[i][0].isAllowed())
                             Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FORTY);
