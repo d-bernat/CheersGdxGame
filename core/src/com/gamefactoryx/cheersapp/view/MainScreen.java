@@ -67,39 +67,39 @@ public class MainScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[9][2]);
+        setButtons(new CheckedButton[9][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game.png"));
-        getButtons()[0][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game_white.png"));
-        getButtons()[1][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails.png"));
-        getButtons()[1][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails_white.png"));
-        getButtons()[2][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help.png"));
-        getButtons()[2][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help_white.png"));
-        getButtons()[3][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
-        getButtons()[3][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame_white.png"));
-        getButtons()[4][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
-        getButtons()[4][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings_white.png"));
-        getButtons()[5][0] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory.png"));
-        getButtons()[5][1] = new Sprite(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory_white.png"));
+        getButtons()[0][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_new_game_white.png"));
+        getButtons()[1][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails.png"));
+        getButtons()[1][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_cocktails_white.png"));
+        getButtons()[2][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help.png"));
+        getButtons()[2][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_help_white.png"));
+        getButtons()[3][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame.png"));
+        getButtons()[3][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_hall_of_fame_white.png"));
+        getButtons()[4][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings.png"));
+        getButtons()[4][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_settings_white.png"));
+        getButtons()[5][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory.png"));
+        getButtons()[5][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/mainScreen/sekt_button_clicked_memory_white.png"));
 
         switch (com.gamefactoryx.cheersapp.tool.Configuration.getLanguage()) {
             case EN:
-                getButtons()[6][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
-                getButtons()[6][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
+                getButtons()[6][0] = new CheckedButton(new Texture("common/button_clicked_de_lang.png"));
+                getButtons()[6][1] = new CheckedButton(new Texture("common/button_clicked_de_lang.png"));
                 break;
             case DE:
-                getButtons()[6][0] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
-                getButtons()[6][1] = new Sprite(new Texture("common/button_clicked_eng_lang.png"));
+                getButtons()[6][0] = new CheckedButton(new Texture("common/button_clicked_eng_lang.png"));
+                getButtons()[6][1] = new CheckedButton(new Texture("common/button_clicked_eng_lang.png"));
                 break;
           //  case SK:
           //      getButtons()[5][0] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
           //      getButtons()[5][1] = new Sprite(new Texture("common/button_clicked_de_lang.png"));
           //      break;
         }
-        getButtons()[7][0] = new Sprite(new Texture("common/Facebook_icon.png"));
-        getButtons()[7][1] = new Sprite(new Texture("common/Facebook_icon.png"));
-        getButtons()[8][0] = new Sprite(new Texture("common/Instagram.png"));
-        getButtons()[8][1] = new Sprite(new Texture("common/Instagram.png"));
+        getButtons()[7][0] = new CheckedButton(new Texture("common/Facebook_icon.png"));
+        getButtons()[7][1] = new CheckedButton(new Texture("common/Facebook_icon.png"));
+        getButtons()[8][0] = new CheckedButton(new Texture("common/Instagram.png"));
+        getButtons()[8][1] = new CheckedButton(new Texture("common/Instagram.png"));
 
 
         setClicked(new boolean[getCountOfButtons()]);

@@ -1,6 +1,8 @@
 package com.gamefactoryx.cheersapp.controller;
 
 
+import com.gamefactoryx.cheersapp.CheersGdxGame;
+
 /**
  * Created by bernat on 28.04.2017.
  */
@@ -11,6 +13,7 @@ final class HallOfFameController extends AbstractController {
     HallOfFameController(final com.gamefactoryx.cheersapp.view.AbstractScreen screen){
         super(screen);
         setScreenLock(10);
+        com.gamefactoryx.cheersapp.controller.StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
     }
 
 

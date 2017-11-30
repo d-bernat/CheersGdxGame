@@ -2,6 +2,8 @@ package com.gamefactoryx.cheersapp.controller.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.gamefactoryx.cheersapp.CheersGdxGame;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 
 import java.util.*;
 
@@ -74,8 +76,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-        com.gamefactoryx.cheersapp.controller.StageManager.getInstance().getGame().getPlatformResolver().requestPurchase("");
+        //StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
         if (com.gamefactoryx.cheersapp.model.kongosdrink.KongosDrinkMainModel.getInstance().isAnimationRunning())
             return true;
 

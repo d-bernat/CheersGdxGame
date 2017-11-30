@@ -13,19 +13,17 @@ public abstract class PlatformResolver {
     public PlatformResolver () { 	}
 
     public void initializeIAP (PurchaseManager mgr, PurchaseObserver purchaseObserver, PurchaseManagerConfig config) {
-
         this.mgr = mgr;
-
         // set and install the manager manually
         if (mgr != null) {
             PurchaseSystem.setManager(mgr);
             PurchaseSystem.install(purchaseObserver, config);
         } else {
-            Gdx.app.log("", "gdx-pay: initializeIAP(): purchaseManager == null => call PurchaseSystem.hasManager()");
+
             if (PurchaseSystem.hasManager()) { // install and get the manager automatically via reflection
                 this.mgr = PurchaseSystem.getManager();
                 PurchaseSystem.install(purchaseObserver, config); // install the observer
-                Gdx.app.log("", "gdx-pay: installed manager: " + this.mgr.toString());
+                Gdx.app.log("*******************", "gdx-pay: installed manager: " + this.mgr.toString());
             }
         }
     }

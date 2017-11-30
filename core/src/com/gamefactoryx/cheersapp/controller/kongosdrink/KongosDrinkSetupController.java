@@ -3,6 +3,7 @@ package com.gamefactoryx.cheersapp.controller.kongosdrink;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheersapp.CheersGdxGame;
 import com.gamefactoryx.cheersapp.controller.AbstractController;
 import com.gamefactoryx.cheersapp.controller.StageEnum;
 import com.gamefactoryx.cheersapp.controller.StageManager;
@@ -57,8 +58,18 @@ public class KongosDrinkSetupController extends AbstractController {
                     case 1: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FIFTEEN);break;
                     case 2: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.TWENTY);break;
                     case 3: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.THRITY);break;
-                    case 4: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FORTY);break;
-                    case 5: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FIFTY);break;
+                    case 4:
+                        if(getScreen().getButtons()[i][0].isAllowed())
+                            Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FORTY);
+                        else
+                            StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
+                        break;
+                    case 5:
+                        if(getScreen().getButtons()[i][0].isAllowed())
+                            Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FIFTY);
+                        else
+                            StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
+                        break;
                 }
                 Gdx.input.vibrate(10);
                 break;

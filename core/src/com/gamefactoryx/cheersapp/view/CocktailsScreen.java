@@ -138,22 +138,22 @@ public class CocktailsScreen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length + 1 + 1] [2]);
+        setButtons(new CheckedButton[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length + 1 + 1] [2]);
 
         for (int i = 0; i < com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length; ++i) {
             for (int j = 0; j < 2; j++) {
 
-                getButtons()[i][j] = new Sprite(new Texture("common/cocktails/" + com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames[i] + ".png"));
+                getButtons()[i][j] = new CheckedButton(new Texture("common/cocktails/" + com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames[i] + ".png"));
                 getButtons()[i][j].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.65f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * 0.077f);
             }
         }
 
-        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length][0] = new Sprite(new Texture("common/gold.png"));
-        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length][1] = new Sprite(new Texture("common/grey.png"));
+        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length][0] = new CheckedButton(new Texture("common/gold.png"));
+        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length][1] = new CheckedButton(new Texture("common/grey.png"));
         getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.03f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.03f);
         getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.03f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.03f);
-        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length + 1][0] = new Sprite(new Texture("common/rules_ok.png"));
-        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length + 1][1] = new Sprite(new Texture("common/rules_ok_white.png"));
+        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length + 1][0] = new CheckedButton(new Texture("common/rules_ok.png"));
+        getButtons()[com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length + 1][1] = new CheckedButton(new Texture("common/rules_ok_white.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }

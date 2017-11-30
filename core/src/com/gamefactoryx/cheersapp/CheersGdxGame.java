@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.gamefactoryx.cheersapp.controller.StageEnum;
 import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageManager;
+import com.gamefactoryx.cheersapp.tool.Configuration;
 
 public class CheersGdxGame extends Game {
 
@@ -19,7 +20,7 @@ public class CheersGdxGame extends Game {
 
 	private int isAppStore = APPSTORE_UNDEFINED;
 
-	public final static String productID_fullVersion = "fullVersion";
+	public final static String productID_fullVersion = "com.gamefactoryx.cheersapp.premium";
 	private static com.gamefactoryx.cheersapp.ScreenLock screenLock;
 	private static com.gamefactoryx.cheersapp.LinkHandler linkHandler;
 	static com.gamefactoryx.cheersapp.PlatformResolver m_platformResolver;
@@ -27,6 +28,7 @@ public class CheersGdxGame extends Game {
 	public PurchaseObserver purchaseObserver = new PurchaseObserver() {
 		@Override
 		public void handleRestore (Transaction[] transactions) {
+			Gdx.app.log("**************", "handle restore callback invoked");
 			for (int i = 0; i < transactions.length; i++) {
 				if (checkTransaction(transactions[i].getIdentifier(), true) == true) break;
 			}
@@ -53,20 +55,26 @@ public class CheersGdxGame extends Game {
 		}
 		@Override
 		public void handlePurchaseCanceled () {	//--- will not be called by amazonIAP
+			Gdx.app.log("**************", "Transaction cancelled");
 		}
 	};
 
-	protected boolean checkTransaction (String ID, boolean isRestore) {
-		boolean returnbool = false;
-
-		if (productID_fullVersion.equals(ID)) {
+	private boolean checkTransaction (String ID, boolean isRestore) {
+		boolean ret = productID_fullVersion.equals(ID);
+		if (ret) {
 			Gdx.app.log("checkTransaction", "full version found!");
+			Configuration.setPremium(true);
+		}
+		else
+			Gdx.app.log("checkTransaction", "full version not found!");
 
+		if(isRestore)
+			Gdx.app.log("checkTransaction", "after restore");
+		else
+			Gdx.app.log("checkTransaction", "after purchase");
 			//----- put your logic for full version here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-			returnbool = true;
-		}
-		return returnbool;
+		return ret;
 	}
 
 	public CheersGdxGame(com.gamefactoryx.cheersapp.ScreenLock screenLock, com.gamefactoryx.cheersapp.LinkHandler linkHandler){

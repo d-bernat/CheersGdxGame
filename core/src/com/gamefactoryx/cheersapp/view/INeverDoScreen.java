@@ -191,16 +191,16 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[4][2]);
+        setButtons(new CheckedButton[4][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
-        getButtons()[0][1] = new Sprite(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon_white.png"));
-        getButtons()[1][0] = new Sprite(new Texture("common/ineverhave/18+.png"));
-        getButtons()[1][1] = new Sprite(new Texture("common/ineverhave/18+.png"));
-        getButtons()[2][0] = new Sprite(new Texture("common/ineverhave/mix.png"));
-        getButtons()[2][1] = new Sprite(new Texture("common/ineverhave/mix.png"));
-        getButtons()[3][0] = new Sprite(new Texture("common/ineverhave/standart.png"));
-        getButtons()[3][1] = new Sprite(new Texture("common/ineverhave/standart.png"));
+        getButtons()[0][0] = new CheckedButton(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon_white.png"));
+        getButtons()[1][0] = new CheckedButton(new Texture("common/ineverhave/18+.png"));
+        getButtons()[1][1] = new CheckedButton(new Texture("common/ineverhave/18+.png"));
+        getButtons()[2][0] = new CheckedButton(new Texture("common/ineverhave/mix.png"));
+        getButtons()[2][1] = new CheckedButton(new Texture("common/ineverhave/mix.png"));
+        getButtons()[3][0] = new CheckedButton(new Texture("common/ineverhave/standart.png"));
+        getButtons()[3][1] = new CheckedButton(new Texture("common/ineverhave/standart.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }

@@ -198,12 +198,12 @@ public class KingsCupSpecialScreen extends com.gamefactoryx.cheersapp.view.Abstr
 
     @Override
     protected void initButtons() {
-        setButtons(new Sprite[2][2]);
+        setButtons(new CheckedButton[2][2]);
 
-        getButtons()[0][0] = new Sprite(new Texture("common/kingscupbutton.png"));
-        getButtons()[0][1] = new Sprite(new Texture("common/kingscupbutton_white.png"));
-        getButtons()[1][0] = new Sprite(new Texture("common/rules_ok.png"));
-        getButtons()[1][1] = new Sprite(new Texture("common/rules_ok_white.png"));
+        getButtons()[0][0] = new CheckedButton(new Texture("common/kingscupbutton.png"));
+        getButtons()[0][1] = new CheckedButton(new Texture("common/kingscupbutton_white.png"));
+        getButtons()[1][0] = new CheckedButton(new Texture("common/rules_ok.png"));
+        getButtons()[1][1] = new CheckedButton(new Texture("common/rules_ok_white.png"));
 
         setClicked(new boolean[getCountOfButtons()]);
     }
