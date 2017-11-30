@@ -26,7 +26,7 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "com.gamefactoryx.cheers"
+        applicationId "com.gamefactoryx.cheersapp"
         minSdkVersion 9
         targetSdkVersion 25
         signingConfig signingConfigs.config
@@ -89,7 +89,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.gamefactoryx.cheers/com.gamefactoryx.cheers.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.gamefactoryx.cheers/AndroidLauncher'
 }
 // sets up the Android Eclipse project, using the old Ant based build.
 eclipse {

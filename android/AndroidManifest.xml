@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.gamefactoryx.cheers"
     android:versionCode="35"
     android:versionName="1.0.33Alpha" >
+=======
+    package="com.gamefactoryx.cheersapp"
+    android:versionCode="01"
+    android:versionName="1.0.0Beta" >
+>>>>>>> d5a1d5926060e907569df0cf8c6f354998f59560
 
     <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="25" />
 
@@ -12,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/GdxTheme" >
         <activity
-            android:name="com.gamefactoryx.cheers.AndroidLauncher"
+            android:name="com.gamefactoryx.cheersapp.AndroidLauncher"
             android:label="@string/app_name" 
             android:screenOrientation="fullSensor"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
@@ -23,4 +29,5 @@
         </activity>
     </application>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="com.android.vending.BILLING" />
 </manifest>
