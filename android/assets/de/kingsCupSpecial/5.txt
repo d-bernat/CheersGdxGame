@@ -1,2 +1,2 @@
 ﻿5: Counter
-Eine beliebige Zahl zwischen 1 – 8 darf ausgesuchen werden.  Anschließend wird reihum durchgezählt. Bei der ausgewählten Zahl und allen Zahlen, in denen die ausgewählte Zahl vorkommt oder durch die ausgewählte Zahl teilbar ist, muss ein vorher ausgedachtes Wort genannt werden.
+Eine beliebige Zahl zwischen 1 und 8 darf ausgesucht werden.  Anschließend wird reihum durchgezählt. Bei der ausgewählten Zahl und allen Zahlen, in denen die ausgewählte Zahl vorkommt oder durch die Zahl teilbar ist, muss ein vorher ausgedachtes Wort genannt werden. Zum Beispiel 3 und Chihuahua 1, 2, Chihuahua, 4, 5, Chihuahua usw.
