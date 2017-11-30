@@ -94,8 +94,8 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
         getButtons()[1][1] = new CheckedButton(new Texture("common/kongos_drink/15.png"));
         getButtons()[2][0] = new CheckedButton(new Texture("common/kongos_drink/20.png"));
         getButtons()[2][1] = new CheckedButton(new Texture("common/kongos_drink/20.png"));
-        getButtons()[3][0] = new CheckedButton(new Texture("common/kongos_drink/30.png"));
-        getButtons()[3][1] = new CheckedButton(new Texture("common/kongos_drink/30.png"));
+        getButtons()[3][0] = new CheckedButton(new Texture("common/kongos_drink/30.png"), true);
+        getButtons()[3][1] = new CheckedButton(new Texture("common/kongos_drink/30.png"), true);
         getButtons()[4][0] = new CheckedButton(new Texture("common/kongos_drink/40.png"), true);
         getButtons()[4][1] = new CheckedButton(new Texture("common/kongos_drink/40.png"), true);
         getButtons()[5][0] = new CheckedButton(new Texture("common/kongos_drink/50.png"), true);
