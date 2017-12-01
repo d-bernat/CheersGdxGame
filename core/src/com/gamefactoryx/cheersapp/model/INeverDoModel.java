@@ -83,8 +83,8 @@ public class INeverDoModel extends Model {
         if (instance == null) {
             instance = new INeverDoModel();
             Configuration.setINeverDoGameType(Configuration.getINeverDoGameType());
-            instance.initTasks();
         }
+        instance.initTasks();
         return instance;
     }
 
