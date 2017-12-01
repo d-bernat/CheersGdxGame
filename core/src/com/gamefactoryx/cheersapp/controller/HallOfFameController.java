@@ -13,7 +13,6 @@ final class HallOfFameController extends AbstractController {
     HallOfFameController(final com.gamefactoryx.cheersapp.view.AbstractScreen screen){
         super(screen);
         setScreenLock(10);
-        com.gamefactoryx.cheersapp.controller.StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
     }
 
 
