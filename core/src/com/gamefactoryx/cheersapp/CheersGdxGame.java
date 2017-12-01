@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.gamefactoryx.cheersapp.controller.StageEnum;
 import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageManager;
+import com.gamefactoryx.cheersapp.model.INeverDoModel;
 import com.gamefactoryx.cheersapp.tool.Configuration;
 
 public class CheersGdxGame extends Game {
@@ -64,6 +65,7 @@ public class CheersGdxGame extends Game {
 		if (ret) {
 			Gdx.app.log("checkTransaction", "full version found!");
 			Configuration.setPremium(true);
+			INeverDoModel.getNewInstance();
 		}
 		else
 			Gdx.app.log("checkTransaction", "full version not found!");

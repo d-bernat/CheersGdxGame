@@ -54,7 +54,12 @@ public class KongosDrinkSetupController extends AbstractController {
                     Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
                     Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
                 switch(i){
-                    case 0: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.TEN);break;
+                    case 0:
+                        if(getScreen().getButtons()[i][0].isAllowed())
+                            Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.TEN);
+                        else
+                            StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
+                        break;
                     case 1: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.FIFTEEN);break;
                     case 2: Configuration.getInstance().setGameSize(Configuration.GameSizeEnum.TWENTY);break;
                     case 3:
@@ -92,10 +97,13 @@ public class KongosDrinkSetupController extends AbstractController {
                         Gdx.input.vibrate(10);
                         break;
                     case 7:
-                        if(Configuration.getInstance().enabledPlayers() > 2 && Configuration.getInstance().enabledPlayers() % 2 == 0) {
-                            Configuration.getInstance().setGameType(Configuration.GameTypeEnum.TEAMOFTWO_VS_TEAMOFTWO);
-                            Gdx.input.vibrate(10);
-                        }
+                        if(getScreen().getButtons()[i][0].isAllowed())
+                            if(Configuration.getInstance().enabledPlayers() > 2 && Configuration.getInstance().enabledPlayers() % 2 == 0) {
+                                Configuration.getInstance().setGameType(Configuration.GameTypeEnum.TEAMOFTWO_VS_TEAMOFTWO);
+                                Gdx.input.vibrate(10);
+                            }
+                        else
+                            StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
                         break;
                     case 8:
                         if(Configuration.getInstance().enabledPlayers() > 2) {

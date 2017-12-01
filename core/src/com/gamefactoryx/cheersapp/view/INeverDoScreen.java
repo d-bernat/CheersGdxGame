@@ -128,8 +128,8 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
 //            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.92f, Resolution.getGameWorldHeightLandscape() * 0.85f);
 
         }
-        getTextBox().setSize(X * 0.8f, Y * 0.45f);
-        for (int i = 0; i < getCountOfButtons(); i++)
+        getTextBox().setSize(X * 0.8f, Y * 0.25f);
+        for (int i = 0; i < getCountOfButtons() - 1; i++)
             for (int j = 0; j < 2; j++) {
                 if (i == 0)
                     getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
@@ -139,6 +139,11 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
                             Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
                 }
             }
+
+        getButtons()[4][0].setSize(X * 0.7f,
+                X * 0.7f * getButtons()[4][0].getHeight() / getButtons()[4][0].getWidth());
+        getButtons()[4][1].setSize(X * 0.7f,
+                X * 0.7f * getButtons()[4][1].getHeight() / getButtons()[4][1].getWidth());
 
         parameter.size = FONT_SIZE;
         parameter.color = new Color(166.0f / 255.0f, 124.0f / 255.0f, 82f / 255.0f, 1f);
@@ -162,12 +167,12 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
         float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.6f;
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.4f;
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
-            getTextBox().setPosition(X * 0.1f, Y * 0.35f);
+            getTextBox().setPosition(X * 0.1f, Y * 0.55f);
             getTextBox().draw(getSpriteBatch());
             for (int i = 0; i < text.size(); i++)
                 font.draw(getSpriteBatch(), text.get(i),
                         (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                        Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
+                        Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i + getTextBox().getHeight() * 0.45f);
             font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
         } else {
             getTextBox().setPosition(X * 0.02f, Y * 0.35f);
@@ -175,7 +180,7 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
             for (int i = 0; i < text.size(); i++)
                 font.draw(getSpriteBatch(), text.get(i),
                         (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.3f,
-                        Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
+                        Y  - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
 
             font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
         }
@@ -191,7 +196,7 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
 
     @Override
     protected void initButtons() {
-        setButtons(new CheckedButton[4][2]);
+        setButtons(new CheckedButton[5][2]);
 
         getButtons()[0][0] = new CheckedButton(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon.png"));
         getButtons()[0][1] = new CheckedButton(new Texture(Configuration.getLanguage() + "/iNeverDoScreen/Ineverdoscreenicon_white.png"));
@@ -201,7 +206,8 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
         getButtons()[2][1] = new CheckedButton(new Texture("common/ineverhave/mix.png"));
         getButtons()[3][0] = new CheckedButton(new Texture("common/ineverhave/standart.png"));
         getButtons()[3][1] = new CheckedButton(new Texture("common/ineverhave/standart.png"));
-
+        getButtons()[4][0] = new CheckedButton(new Texture(Configuration.getLanguage() + "/premium_inever.png"), true);
+        getButtons()[4][1] = new CheckedButton(new Texture(Configuration.getLanguage() + "/premium_inever.png"), true);
         setClicked(new boolean[getCountOfButtons()]);
     }
 
@@ -247,6 +253,12 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
                     break;
                 case 3:
                     getButtons()[i][click_index].draw(getSpriteBatch(), Configuration.getINeverDoGameType() == Configuration.INeverDoGameTypeEnum.GAME_STANDARD ? 1 : 0.5f);
+                    break;
+                case 4:
+                    if(!Configuration.isPremium()){
+                        getButtons()[i][0].setPosition(0.5f * (X - getButtons()[i][0].getWidth()), Y - Y * 0.6f);
+                        getButtons()[i][0].draw(getSpriteBatch(), 1.0f);
+                    }
                     break;
             }
         }

@@ -61,7 +61,7 @@ public class Configuration {
 
     public static INeverDoGameTypeEnum getINeverDoGameType() {
         if (iNeverDoGameType == null)
-            setINeverDoGameType(INeverDoGameTypeEnum.GAME_MIXED);
+            setINeverDoGameType(INeverDoGameTypeEnum.GAME_STANDARD);
         return iNeverDoGameType;
     }
 

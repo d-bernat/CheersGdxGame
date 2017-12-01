@@ -3,6 +3,7 @@ package com.gamefactoryx.cheersapp.controller.busdriving;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheersapp.CheersGdxGame;
 import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.model.PlayerNameCache;
 import com.gamefactoryx.cheersapp.tool.Configuration;
@@ -50,6 +51,16 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (!super.touchUp(screenX, screenY, pointer, button))
             return true;
+
+
+        if (!Configuration.isPremium() && screenX >= getScreen().getButtons()[8][0].getX() &&
+                screenX <= getScreen().getButtons()[8][0].getX() + getScreen().getButtons()[8][0].getWidth() &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[8][0].getY() &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[8][0].getY() + getScreen().getButtons()[8][0].getHeight()) {
+            Gdx.input.vibrate(10);
+            StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
+            return true;
+        }
 
         int distance = screenX - touchPos;
         touchPos = 0;
@@ -114,14 +125,16 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
                 return true;
             }
         }
-        if (distance <= 100) {
-            if (!model.isLastPage())
-                model.setPage(model.getPage() + 1);
+        if(Configuration.isPremium()) {
+            if (distance <= 100) {
+                if (!model.isLastPage())
+                    model.setPage(model.getPage() + 1);
 
-        } else if (distance >= -100) {
-            if (!model.isFirstPage()) {
-                model.setPage(model.getPage() - 1);
+            } else if (distance >= -100) {
+                if (!model.isFirstPage()) {
+                    model.setPage(model.getPage() - 1);
 
+                }
             }
         }
 

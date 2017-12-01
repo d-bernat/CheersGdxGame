@@ -88,8 +88,8 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
     @Override
     protected void initButtons() {
         setButtons(new CheckedButton[10][2]);
-        getButtons()[0][0] = new CheckedButton(new Texture("common/kongos_drink/10.png"));
-        getButtons()[0][1] = new CheckedButton(new Texture("common/kongos_drink/10.png"));
+        getButtons()[0][0] = new CheckedButton(new Texture("common/kongos_drink/10.png"), true);
+        getButtons()[0][1] = new CheckedButton(new Texture("common/kongos_drink/10.png"), true);
         getButtons()[1][0] = new CheckedButton(new Texture("common/kongos_drink/15.png"));
         getButtons()[1][1] = new CheckedButton(new Texture("common/kongos_drink/15.png"));
         getButtons()[2][0] = new CheckedButton(new Texture("common/kongos_drink/20.png"));
@@ -103,10 +103,10 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
 
         getButtons()[6][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/singleplayer.png"));
         getButtons()[6][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/singleplayer.png"));
-        getButtons()[7][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"));
-        getButtons()[7][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"));
-        getButtons()[8][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"));
-        getButtons()[8][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"));
+        getButtons()[7][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"), true);
+        getButtons()[7][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/tagteam.png"), true);
+        getButtons()[8][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"), true);
+        getButtons()[8][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/kongosdrink/teams.png"), true);
 
 
         getButtons()[9][0] = new CheckedButton(new Texture("common/continue.png"));

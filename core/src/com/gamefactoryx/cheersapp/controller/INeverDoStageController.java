@@ -2,6 +2,8 @@ package com.gamefactoryx.cheersapp.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheersapp.CheersGdxGame;
+import com.gamefactoryx.cheersapp.model.INeverDoModel;
 import com.gamefactoryx.cheersapp.tool.Configuration;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
 
@@ -15,7 +17,7 @@ final class INeverDoStageController extends com.gamefactoryx.cheersapp.controlle
 
     INeverDoStageController(final AbstractScreen screen) {
         super(screen);
-        setScreenLock(10);
+        setScreenLock(1);
     }
 
 
@@ -58,6 +60,11 @@ final class INeverDoStageController extends com.gamefactoryx.cheersapp.controlle
                         break;
                     case 3:
                         Configuration.setINeverDoGameType(Configuration.INeverDoGameTypeEnum.GAME_STANDARD);
+                        break;
+                    case 4:
+                        if(!Configuration.isPremium()){
+                            StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
+                        }
                         break;
                 }
             }

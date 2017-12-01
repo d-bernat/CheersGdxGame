@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.gamefactoryx.cheersapp.model.busdriving.Croupier;
+import com.gamefactoryx.cheersapp.tool.Configuration;
 import com.gamefactoryx.cheersapp.tool.FontHelper;
+import com.gamefactoryx.cheersapp.tool.Resolution;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
 import com.gamefactoryx.cheersapp.view.CheckedButton;
 
@@ -98,7 +100,7 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
 
     @Override
     protected void initButtons() {
-        setButtons(new CheckedButton[8][2]);
+        setButtons(new CheckedButton[9][2]);
         Texture txt = new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() + "/Busdrivingscreen/busdriving_names/namebox_busdriving.png");
         for (int i = 0; i < getCountOfButtons() - 3; i++)
             for (int j = 0; j < 2; j++) {
@@ -125,6 +127,13 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         getButtons()[7][1] = new CheckedButton(new Texture("common/grey.png"));
         getButtons()[7][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.03f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.03f);
         getButtons()[7][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.03f, com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.03f);
+
+        getButtons()[8][0] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() +  "/premium_player.png"), true);
+        getButtons()[8][1] = new CheckedButton(new Texture(com.gamefactoryx.cheersapp.tool.Configuration.getLanguage() +  "/premium_player.png"), true);
+        getButtons()[8][0].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.7f,
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.7f * getButtons()[8][0].getHeight() / getButtons()[8][0].getWidth());
+        getButtons()[8][1].setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * 0.7f * Resolution.getAspectRatio(),
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait() * com.gamefactoryx.cheersapp.tool.Resolution.getAspectRatio() * 0.7f);
 
 
         setClicked(new boolean[getCountOfButtons()]);
@@ -175,17 +184,23 @@ public class BusDrivingPhase0Screen extends AbstractScreen {
         getButtons()[6][0].setPosition(X * 0.75f, Y * 0.02f);
         getButtons()[6][0].draw(getSpriteBatch(), 1.0f);
 
-        float x_offset =  getButtons()[7][1].getWidth() * 2.0f;
-        for(int i = 0; i < com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getMaxPages(); i++) {
-            if( com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getPage() - 1 == i) {
-                getButtons()[7][0].setPosition(X/2 - com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getMaxPages() * getButtons()[7][0].getWidth() + x_offset * i, Y * 0.36f);
-                getButtons()[7][0].draw(getSpriteBatch(), 1.0f);
-            }
-            else{
-                getButtons()[7][1].setPosition(X/2 - com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getMaxPages() * getButtons()[7][1].getWidth() + x_offset * i, Y * 0.36f);
-                getButtons()[7][1].draw(getSpriteBatch(), 1.0f);
+        if(Configuration.isPremium()) {
+            float x_offset = getButtons()[7][1].getWidth() * 2.0f;
+            for (int i = 0; i < com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getMaxPages(); i++) {
+                if (com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getPage() - 1 == i) {
+                    getButtons()[7][0].setPosition(X / 2 - com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getMaxPages() * getButtons()[7][0].getWidth() + x_offset * i, Y * 0.36f);
+                    getButtons()[7][0].draw(getSpriteBatch(), 1.0f);
+                } else {
+                    getButtons()[7][1].setPosition(X / 2 - com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getInstance().getMaxPages() * getButtons()[7][1].getWidth() + x_offset * i, Y * 0.36f);
+                    getButtons()[7][1].draw(getSpriteBatch(), 1.0f);
 
+                }
             }
+        }
+
+        if(!Configuration.isPremium()) {
+            getButtons()[8][0].setPosition(0.5f * (X - getButtons()[8][0].getWidth()), Y - Y * 0.8f);
+            getButtons()[8][0].draw(getSpriteBatch(), 1.0f);
         }
 
     }

@@ -21,21 +21,27 @@ public class INeverDoModel extends Model {
     private String[] tasks_standard;
     private String rulesText;
 
+
     public String getLine() {
+
+        int mixed_max = Configuration.isPremium() ? instance.tasks_mixed.length : Math.min(100, instance.tasks_mixed.length);
+        int plus_max = Configuration.isPremium() ? instance.tasks_18plus.length : Math.min(100, instance.tasks_18plus.length);
+        int standard_max = Configuration.isPremium() ? instance.tasks_standard.length : Math.min(100, instance.tasks_standard.length);
+
         if (listTasksMixed.size() == 0) {
-            for (int i = 0; i < instance.tasks_mixed.length; i++) {
+            for (int i = 0; i < mixed_max; i++) {
                 listTasksMixed.add(i);
             }
             Collections.shuffle(listTasksMixed);
         }
         if (listTasks18plus.size() == 0) {
-            for (int i = 0; i < instance.tasks_18plus.length; i++) {
+            for (int i = 0; i < plus_max; i++) {
                 listTasks18plus.add(i);
             }
             Collections.shuffle(listTasks18plus);
         }
         if (listTasksStandard.size() == 0) {
-            for (int i = 0; i < instance.tasks_standard.length; i++) {
+            for (int i = 0; i < standard_max; i++) {
                 listTasksStandard.add(i);
             }
             Collections.shuffle(listTasksStandard);
@@ -76,8 +82,16 @@ public class INeverDoModel extends Model {
     public static INeverDoModel getInstance() {
         if (instance == null) {
             instance = new INeverDoModel();
-            Configuration.setINeverDoGameType(Configuration.INeverDoGameTypeEnum.GAME_STANDARD);
+            Configuration.setINeverDoGameType(Configuration.getINeverDoGameType());
+            instance.initTasks();
         }
+        return instance;
+    }
+
+    public static INeverDoModel getNewInstance() {
+        lastLanguage = null;
+        instance = new INeverDoModel();
+        Configuration.setINeverDoGameType(Configuration.getINeverDoGameType());
         instance.initTasks();
         return instance;
     }

@@ -39,10 +39,10 @@ public class CheckedButton extends Sprite {
 
 
     public void draw(Batch batch, float alphaModulation) {
-        if(alphaModulation == 1.0f)
+        /*if(alphaModulation == 1.0f)
             super.draw(batch, isAllowed()? 1.0f: 0.5f);
-        else
-            super.draw(batch, alphaModulation);
+        else*/
+        super.draw(batch, alphaModulation);
         if(!isAllowed()){
             premiumSprite.setPosition(getX() + getWidth() - premiumSprite.getWidth() * 0.5f , getY() + getHeight() - premiumSprite.getHeight() * 0.5f);
             premiumSprite.draw(batch, 1.0f);
@@ -53,7 +53,7 @@ public class CheckedButton extends Sprite {
 
     private void setPremiumSprite(){
         premiumSprite = new Sprite(premiumTexture);
-        premiumSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.15f, Resolution.getGameWorldWidthPortrait() * 0.15f);
+        premiumSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldWidthPortrait() * 0.1f);
     }
 
 }
