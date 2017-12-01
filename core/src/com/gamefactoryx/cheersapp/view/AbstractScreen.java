@@ -277,8 +277,10 @@ public abstract class AbstractScreen implements Screen, com.gamefactoryx.cheersa
     @Override
     public void dispose() {
         for (int i = 0; i < getCountOfButtons(); i++)
-            for (int j = 0; j < getButtons()[i].length; j++)
+            for (int j = 0; j < getButtons()[i].length; j++) {
                 getButtons()[i][j].getTexture().dispose();
+                getButtons()[i][j].getPremiumSprite().getTexture().dispose();
+            }
 
         if (getTextBox() != null)
             getTextBox().getTexture().dispose();

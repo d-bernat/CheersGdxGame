@@ -9,8 +9,9 @@ import com.gamefactoryx.cheersapp.tool.Resolution;
 public class CheckedButton extends Sprite {
 
     private boolean checked;
-    private static Texture premiumTexture = new Texture("common/premium.png");
+    private Texture premiumTexture;
     private Sprite premiumSprite;
+
 
     public CheckedButton(Texture txt){
         super(txt);
@@ -52,8 +53,12 @@ public class CheckedButton extends Sprite {
 
 
     private void setPremiumSprite(){
+        premiumTexture =  new Texture("common/premium.png");
         premiumSprite = new Sprite(premiumTexture);
         premiumSprite.setSize(Resolution.getGameWorldWidthPortrait() * 0.1f, Resolution.getGameWorldWidthPortrait() * 0.1f);
     }
 
+    public Sprite getPremiumSprite(){
+        return premiumSprite;
+    }
 }
