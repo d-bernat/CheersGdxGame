@@ -77,7 +77,8 @@ public class BusDrivingStagePhase4Controller extends com.gamefactoryx.cheersapp.
     private void updateHallOfFame() {
         String name = com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase4Model.getInstance().getBusDriver().getName();
         int  drunk =  com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase4Model.getInstance().getTotalDrunk();
-        com.gamefactoryx.cheersapp.model.HallOfFameModel.getInstance().put(drunk, name);
+        if(drunk > 0)
+            com.gamefactoryx.cheersapp.model.HallOfFameModel.getInstance().put(drunk, name);
 
     }
 

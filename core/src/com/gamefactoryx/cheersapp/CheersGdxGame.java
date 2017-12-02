@@ -19,6 +19,7 @@ public class CheersGdxGame extends Game {
 	public static final int APPSTORE_AMAZON 	= 3;
 	public static final int APPSTORE_DESKTOP 	= 4;
 
+
 	private int isAppStore = APPSTORE_UNDEFINED;
 
 	public final static String productID_fullVersion = "com.gamefactoryx.cheersapp.premium";
@@ -26,6 +27,7 @@ public class CheersGdxGame extends Game {
 	private static com.gamefactoryx.cheersapp.LinkHandler linkHandler;
 	static com.gamefactoryx.cheersapp.PlatformResolver m_platformResolver;
 	public PurchaseManagerConfig purchaseManagerConfig;
+	private boolean playMusicFlag;
 	public PurchaseObserver purchaseObserver = new PurchaseObserver() {
 		@Override
 		public void handleRestore (Transaction[] transactions) {
@@ -97,6 +99,26 @@ public class CheersGdxGame extends Game {
 		com.gamefactoryx.cheersapp.tool.Resolution.setResolution();
 		StageManager.getInstance().showStage(StageEnum.SPLASH_STAGE);
 
+	}
+
+	@Override
+	public void pause(){
+		super.pause();
+		if(Configuration.isPlayMusic()){
+			playMusicFlag = true;
+			Configuration.setPlayMusic(false);
+			Configuration.playMusic();
+		}
+	}
+
+	@Override
+	public void resume(){
+		super.resume();
+		if(playMusicFlag){
+			Configuration.setPlayMusic(true);
+			Configuration.playMusic();
+			playMusicFlag = false;
+		}
 	}
 
 	public static com.gamefactoryx.cheersapp.ScreenLock getScreenLock(){

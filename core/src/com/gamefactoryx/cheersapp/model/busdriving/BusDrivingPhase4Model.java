@@ -18,7 +18,7 @@ public final class BusDrivingPhase4Model extends com.gamefactoryx.cheersapp.mode
     private boolean phaseIsFinished;
     private com.gamefactoryx.cheersapp.model.busdriving.Player busDriver;
     private int drinkPoints;
-    private int totalDrunk;
+    private int totalDrunk = 0;
     private int activeCardIndex;
 
 
