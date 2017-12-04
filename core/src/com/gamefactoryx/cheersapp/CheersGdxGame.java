@@ -2,6 +2,7 @@ package com.gamefactoryx.cheersapp;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.pay.*;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.gamefactoryx.cheersapp.controller.StageEnum;
@@ -31,7 +32,6 @@ public class CheersGdxGame extends Game {
 	public PurchaseObserver purchaseObserver = new PurchaseObserver() {
 		@Override
 		public void handleRestore (Transaction[] transactions) {
-			Gdx.app.log("**************", "handle restore callback invoked");
 			for (int i = 0; i < transactions.length; i++) {
 				if (checkTransaction(transactions[i].getIdentifier(), true) == true) break;
 			}
@@ -45,7 +45,6 @@ public class CheersGdxGame extends Game {
 
 		@Override
 		public void handleInstallError (Throwable e) {
-			Gdx.app.log("ERROR", "PurchaseObserver: handleInstallError!: " + e.getMessage());
 			throw new GdxRuntimeException(e);
 		}
 		@Override
@@ -58,26 +57,16 @@ public class CheersGdxGame extends Game {
 		}
 		@Override
 		public void handlePurchaseCanceled () {	//--- will not be called by amazonIAP
-			Gdx.app.log("**************", "Transaction cancelled");
 		}
 	};
 
 	private boolean checkTransaction (String ID, boolean isRestore) {
 		boolean ret = productID_fullVersion.equals(ID);
 		if (ret) {
-			Gdx.app.log("checkTransaction", "full version found!");
 			Configuration.setPremium(true);
+			persistPurchase();
 			INeverDoModel.getNewInstance();
 		}
-		else
-			Gdx.app.log("checkTransaction", "full version not found!");
-
-		if(isRestore)
-			Gdx.app.log("checkTransaction", "after restore");
-		else
-			Gdx.app.log("checkTransaction", "after purchase");
-			//----- put your logic for full version here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 		return ret;
 	}
 
@@ -93,7 +82,13 @@ public class CheersGdxGame extends Game {
 	@Override
 	public void create () {
 		//screenLock.setOrientationPortrait();
-		getPlatformResolver().requestPurchaseRestore();	// check for purchases in the past
+		try{
+			checkPurchase();
+			Configuration.setPremium(true);
+		}catch(Exception e) {
+			getPlatformResolver().requestPurchaseRestore();    // check for purchases in the past
+		}
+
 		StageManager.getInstance().initialize(this);
 		KongosDrinkStageManager.getInstance().initialize(this);
 		com.gamefactoryx.cheersapp.tool.Resolution.setResolution();
@@ -142,4 +137,17 @@ public class CheersGdxGame extends Game {
 		this.isAppStore = isAppStore;
 	}
 
+	private void checkPurchase() throws Exception{
+		FileHandle fHandle = Gdx.files.local("premium.txt");
+		if(fHandle== null) throw new Exception();
+		String[] tokens = fHandle.readString().split(":");
+		if(tokens.length != 2) throw new Exception();
+		if(!"true".equals(tokens[1])) throw new Exception();
+	}
+
+	private void persistPurchase(){
+		FileHandle fHandle = Gdx.files.local("premium.txt");
+		fHandle.writeString("purchase:true", false);
+	}
 }
+
