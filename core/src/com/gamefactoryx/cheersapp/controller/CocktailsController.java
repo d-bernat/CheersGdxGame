@@ -63,7 +63,7 @@ public class CocktailsController extends AbstractController {
         int page = model.getPage();
         int maxCocktailsProPage = 4;
         //for (int i = 0; i < CocktailsModel.cocktailNames.length; i++) {
-        if (model.getCocktailToDisplay() git checkou== -1) {
+        if (model.getCocktailToDisplay() == -1) {
             getScreen().getClicked()[getScreen().getCountOfButtons() - 1] = false;
             for (int i = (page - 1) * maxCocktailsProPage; i < maxCocktailsProPage + (page - 1) * maxCocktailsProPage; i++) {
                 if (i >= 0 && i < com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length) {
