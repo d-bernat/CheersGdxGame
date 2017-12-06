@@ -17,6 +17,7 @@ final class SetupController extends com.gamefactoryx.cheersapp.controller.Abstra
     SetupController(final AbstractScreen screen) {
         super(screen);
         setScreenLock(10);
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
     }
 
 

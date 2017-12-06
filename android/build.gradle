@@ -27,7 +27,7 @@ android {
     }
     defaultConfig {
         applicationId "com.gamefactoryx.cheersapp"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 25
         signingConfig signingConfigs.config
     }

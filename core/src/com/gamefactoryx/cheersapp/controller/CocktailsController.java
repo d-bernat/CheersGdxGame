@@ -3,6 +3,8 @@ package com.gamefactoryx.cheersapp.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheersapp.tool.Configuration;
+import com.gamefactoryx.cheersapp.tool.Resolution;
 
 /**
  * Created by bernat on 16.05.2017.
@@ -17,6 +19,7 @@ public class CocktailsController extends AbstractController {
         super(screen);
         setScreenLock(1);
         model = com.gamefactoryx.cheersapp.model.CocktailsModel.getInstance().getNewInstance();
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
     }
 
 
@@ -28,18 +31,18 @@ public class CocktailsController extends AbstractController {
 
         if (com.gamefactoryx.cheersapp.model.CocktailsModel.getInstance().getCocktailToDisplay() > -1) {
             int i = getScreen().getCountOfButtons() - 1;
+            float y = Configuration.isPremium() ? getScreen().getButtons()[i][0].getY(): getScreen().getButtons()[i][0].getY() + 50;
             getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight() &&
                     com.gamefactoryx.cheersapp.tool.Orientation.getOrientation() == Input.Orientation.Portrait
                     ||
                     screenX >= getScreen().getButtons()[i][0].getX() &&
                             screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= y &&
+                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= y + getScreen().getButtons()[i][0].getHeight() &&
                             com.gamefactoryx.cheersapp.tool.Orientation.getOrientation() == Input.Orientation.Landscape);
-            Gdx.app.log("***************", getScreen().getClicked()[i] + "");
         }
         return true;
     }
@@ -64,10 +67,11 @@ public class CocktailsController extends AbstractController {
             getScreen().getClicked()[getScreen().getCountOfButtons() - 1] = false;
             for (int i = (page - 1) * maxCocktailsProPage; i < maxCocktailsProPage + (page - 1) * maxCocktailsProPage; i++) {
                 if (i >= 0 && i < com.gamefactoryx.cheersapp.model.CocktailsModel.cocktailNames.length) {
+                    float y = Configuration.isPremium() ? getScreen().getButtons()[i][0].getY(): getScreen().getButtons()[i][0].getY() + 50;
                     if (screenX >= getScreen().getButtons()[i][0].getX() &&
                             screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                            com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
                         model.setCocktailToDisplay(i);
 
                         Gdx.input.vibrate(20);

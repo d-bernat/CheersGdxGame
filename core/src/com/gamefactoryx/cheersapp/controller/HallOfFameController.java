@@ -10,9 +10,11 @@ import com.gamefactoryx.cheersapp.CheersGdxGame;
 final class HallOfFameController extends AbstractController {
 
     private static int counter;
+
     HallOfFameController(final com.gamefactoryx.cheersapp.view.AbstractScreen screen){
         super(screen);
         setScreenLock(10);
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
     }
 
 
@@ -25,6 +27,7 @@ final class HallOfFameController extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         super.touchUp(screenX, screenY, pointer, button);
+
         return true;
     }
 

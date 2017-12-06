@@ -19,6 +19,7 @@ final class KingsCupSpecialStageController extends AbstractController {
         super(screen);
         animationRunning = false;
         setScreenLock(10);
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
         com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getNewInstance();
     }
 

@@ -29,6 +29,8 @@ public class CheersGdxGame extends Game {
 	static com.gamefactoryx.cheersapp.PlatformResolver m_platformResolver;
 	public PurchaseManagerConfig purchaseManagerConfig;
 	private boolean playMusicFlag;
+	private ActivityRequestHandler adMobRequestHandler;
+
 	public PurchaseObserver purchaseObserver = new PurchaseObserver() {
 		@Override
 		public void handleRestore (Transaction[] transactions) {
@@ -38,14 +40,14 @@ public class CheersGdxGame extends Game {
 		}
 		@Override
 		public void handleRestoreError (Throwable e) {
-			throw new GdxRuntimeException(e);
+			//throw new GdxRuntimeException(e);
 		}
 		@Override
 		public void handleInstall () {	}
 
 		@Override
 		public void handleInstallError (Throwable e) {
-			throw new GdxRuntimeException(e);
+			//throw new GdxRuntimeException(e);
 		}
 		@Override
 		public void handlePurchase (Transaction transaction) {
@@ -53,7 +55,7 @@ public class CheersGdxGame extends Game {
 		}
 		@Override
 		public void handlePurchaseError (Throwable e) {	//--- Amazon IAP: this will be called for cancelled
-			throw new GdxRuntimeException(e);
+			//throw new GdxRuntimeException(e);
 		}
 		@Override
 		public void handlePurchaseCanceled () {	//--- will not be called by amazonIAP
@@ -70,9 +72,11 @@ public class CheersGdxGame extends Game {
 		return ret;
 	}
 
-	public CheersGdxGame(com.gamefactoryx.cheersapp.ScreenLock screenLock, com.gamefactoryx.cheersapp.LinkHandler linkHandler){
+	public CheersGdxGame(com.gamefactoryx.cheersapp.ScreenLock screenLock, com.gamefactoryx.cheersapp.LinkHandler linkHandler,
+						ActivityRequestHandler adMobRequestHandler ){
 		this.screenLock = screenLock;
 		this.linkHandler = linkHandler;
+		this.adMobRequestHandler = adMobRequestHandler;
 		setAppStore(APPSTORE_GOOGLE);	// change this if you deploy to another platform
 
 		// ---- IAP: define products ---------------------
@@ -137,7 +141,11 @@ public class CheersGdxGame extends Game {
 		this.isAppStore = isAppStore;
 	}
 
-	private void checkPurchase() throws Exception{
+    public ActivityRequestHandler getAdMobRequestHandler() {
+        return adMobRequestHandler;
+    }
+
+    private void checkPurchase() throws Exception{
 		FileHandle fHandle = Gdx.files.local("premium.txt");
 		if(fHandle== null) throw new Exception();
 		String[] tokens = fHandle.readString().split(":");

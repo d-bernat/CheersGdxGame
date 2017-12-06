@@ -16,7 +16,7 @@ final class MainStageController extends com.gamefactoryx.cheersapp.controller.Ab
     MainStageController(final AbstractScreen screen){
         super(screen);
         setScreenLock(10);
-
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
     }
 
 

@@ -15,6 +15,7 @@ final class CreditController extends AbstractController {
     CreditController(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
     }
 
     @Override

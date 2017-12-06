@@ -26,6 +26,7 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
     public BusDrivingStagePhase0Controller(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
         enableKeyboard(false);
 
         model = com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getNewInstance();

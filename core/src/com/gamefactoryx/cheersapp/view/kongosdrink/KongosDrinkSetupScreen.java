@@ -57,13 +57,17 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
         }
 
         final float FACTOR = 0.15f;
-        for(int  i = 0; i < getButtons().length - 4; i++){
+        /*for(int  i = 0; i < getButtons().length - 4; i++){
             getButtons()[i][0].setSize(X * FACTOR, X * FACTOR
                     * getButtons()[i][0].getHeight()/getButtons()[i][0].getWidth());
             getButtons()[i][1].setSize(X * FACTOR, X * FACTOR
                     * getButtons()[i][1].getHeight()/getButtons()[i][1].getWidth());
-
+        }*/
+        for(int  i = 0; i < getButtons().length - 4; i++){
+            getButtons()[i][0].setSize(X * FACTOR, X * FACTOR);
+            getButtons()[i][1].setSize(X * FACTOR, X * FACTOR);
         }
+
         for(int  i = 6; i < getButtons().length - 1; i++) {
             getButtons()[i][0].setSize(X * 0.6f, Y * 0.07f);
             getButtons()[i][1].setSize(X * FACTOR, X * FACTOR
@@ -136,7 +140,8 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
                 y_offset = getButtons()[i][0].getHeight() * 1.3f;
             }
             x_offset = getButtons()[i][0].getWidth() * 1.3f * x_index++;
-            getButtons()[i][0].setPosition(X * 0.5f - (getButtons()[i][0].getWidth() * 1.3f * 2 + getButtons()[i][0].getWidth())  * 0.5f   + x_offset, Y * 0.75f - y_offset);
+            //getButtons()[i][0].setPosition(X * 0.5f - (getButtons()[i][0].getWidth() * 1.3f * 2 + getButtons()[i][0].getWidth())  * 0.5f   + x_offset, Y * 0.75f - y_offset);
+            getButtons()[i][0].setPosition(X * 0.5f - ( 2 * getButtons()[i][0].getWidth() * 1.3f +  getButtons()[i][0].getWidth()) * 0.5f   + x_offset, Y * 0.75f - y_offset);
             float alpha = 1.0f;
             if( i == 0 ) alpha = Configuration.getInstance().getGameSize().getValue() == 10 ? 1.0f : 0.5f;
             else if( i == 1 ) alpha = Configuration.getInstance().getGameSize().getValue() == 15 ? 1.0f : 0.5f;
@@ -147,7 +152,7 @@ public class KongosDrinkSetupScreen extends AbstractScreen {
         }
 
         for(int i = 6; i < getButtons().length - 1; i++){
-            float alpha = 1.0f;
+            float alpha;
             if( i == 6 ) alpha = Configuration.getInstance().getGameType() == Configuration.GameTypeEnum.DOGFIGHT ? 1.0f : 0.5f;
             else if( i == 7 ) alpha = Configuration.getInstance().getGameType() == Configuration.GameTypeEnum.TEAMOFTWO_VS_TEAMOFTWO ? 1.0f : 0.5f;
             else  alpha = Configuration.getInstance().getGameType() == Configuration.GameTypeEnum.TEAM_VS_TEAM ? 1.0f : 0.5f;
