@@ -155,7 +155,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
     }
 
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -164,6 +164,6 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         ll.setOrientation(LinearLayout.VERTICAL);
         dialog.setContentView(ll);
         dialog.show();
-    }
+    }*/
 
 }
