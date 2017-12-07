@@ -43,7 +43,7 @@ final public class KongosDrinkMainController extends KongosDrinkAbstractControll
                 while (!com.gamefactoryx.cheersapp.model.kongosdrink.KongosDrinkMainModel.getInstance().isFinished()) {
                     long time = System.currentTimeMillis();
 
-                    while (System.currentTimeMillis() < time + com.gamefactoryx.cheersapp.tool.kongosdrink.Configuration.getInstance().getModusTypeInterval() &&
+                    while (System.currentTimeMillis() < time +  com.gamefactoryx.cheersapp.tool.kongosdrink.Configuration.getInstance().getModusTypeInterval() &&
                             !com.gamefactoryx.cheersapp.model.kongosdrink.KongosDrinkMainModel.getInstance().isFinished()) {
                     }
                     accInterval += com.gamefactoryx.cheersapp.tool.kongosdrink.Configuration.getInstance().getModusTypeInterval();

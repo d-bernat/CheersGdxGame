@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">cheers</string>
+    <string name="app_name">CheersApp</string>
+    <item type="id" name="adViewId">12345</item>
 
 </resources>

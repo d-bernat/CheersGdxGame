@@ -20,6 +20,17 @@ public class Card {
             return instance;
     }
 
+    public static Card getNewInstance()
+    {
+        if(instance != null && instance.cardTextures != null && instance.cardTextures.size() > 0){
+            for(Texture txt: instance.cardTextures.values())
+                if(txt != null ) txt.dispose();
+        }
+        instance = new Card();
+       return instance;
+    }
+
+
     public Texture getCardTexture(int cardIndex, CardSize cardSize, CardOrientation cardOrientation) {
 
         return cardTextures.get(getFileName(cardIndex, cardSize, cardOrientation));

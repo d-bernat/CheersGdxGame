@@ -102,7 +102,8 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId(AD_UNIT_ID);
-        adView.setId(12345); // this is an arbitrary id, allows for relative positioning in createGameView()
+        //adView.setId(12345); // this is an arbitrary id, allows for relative positioning in createGameView()
+        adView.setId(R.id.adViewId);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
@@ -161,26 +162,6 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
 
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
-
-        Button b1 = new Button(this);
-        b1.setText("Quit");
-        b1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        ll.addView(b1);
-
-        Button b2 = new Button(this);
-        b2.setText("TheInvader360");
-        b2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-               //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_URL)));
-                dialog.dismiss();
-            }
-        });
-        ll.addView(b2);
-
         dialog.setContentView(ll);
         dialog.show();
     }

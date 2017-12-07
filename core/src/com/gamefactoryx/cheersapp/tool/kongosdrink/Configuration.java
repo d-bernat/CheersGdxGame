@@ -49,7 +49,7 @@ public class Configuration {
     private  List<com.gamefactoryx.cheersapp.model.kongosdrink.Player> players = new ArrayList<>();
 
     private  GameTypeEnum gameType = GameTypeEnum.DOGFIGHT;
-    private  long modusTypeInterval = 600_000;
+    private  long modusTypeInterval = 300_000;
     private  int MAX_PLAYERS = 16;
 
     public static  Configuration getInstance(){
