@@ -126,6 +126,6 @@ public class Configuration {
     }
 
     public static void setPremium(boolean premium) {
-        Configuration.premium = false;
+        Configuration.premium = premium;
     }
 }
