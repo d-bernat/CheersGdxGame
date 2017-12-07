@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.gamefactoryx.cheersapp.model.SplashScreenModel;
+import com.gamefactoryx.cheersapp.tool.Resolution;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -34,13 +35,13 @@ public class SplashScreen extends com.gamefactoryx.cheersapp.view.AbstractScreen
             X = com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait();
             Y = com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait();
             getLogo().setSize(X * 1.5f, X * 1.5f
-                    * getLogo().getHeight()/getLogo().getWidth());
+                    * Resolution.getAspectRatio());
 
         } else {
             X = com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthLandscape();
             Y = com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape();
             getLogo().setSize(X, X
-                    * getLogo().getWidth()/getLogo().getHeight());
+                    * Resolution.getAspectRatio());
 
         }
         getLogo().setPosition(X * 0.5f - getLogo().getWidth() * 0.5f, Y * 0.5f - getLogo().getHeight() * 0.5f);

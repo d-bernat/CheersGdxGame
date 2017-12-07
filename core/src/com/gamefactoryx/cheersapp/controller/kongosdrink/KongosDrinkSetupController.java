@@ -21,7 +21,6 @@ public class KongosDrinkSetupController extends AbstractController {
     public KongosDrinkSetupController(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
     }
 
 

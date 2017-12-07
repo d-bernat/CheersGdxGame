@@ -128,13 +128,18 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
 //            getTextBox().setSize(Resolution.getGameWorldWidthLandscape() * 0.92f, Resolution.getGameWorldHeightLandscape() * 0.85f);
 
         }
-        getTextBox().setSize(X * 0.8f, Y * 0.25f);
+
+        if (Configuration.isPremium())
+            getTextBox().setSize(X * 0.8f, Y * 0.45f);
+        else
+            getTextBox().setSize(X * 0.8f, Y * 0.25f);
+
         for (int i = 0; i < getCountOfButtons() - 1; i++)
             for (int j = 0; j < 2; j++) {
                 if (i == 0)
                     getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.77f,
                             Resolution.getGameWorldHeightPortrait() * 0.17f * Resolution.getAspectRatio());
-                else{
+                else {
                     getButtons()[i][j].setSize(Resolution.getGameWorldWidthPortrait() * 0.2f,
                             Resolution.getGameWorldHeightPortrait() * 0.2f * Resolution.getAspectRatio());
                 }
@@ -167,20 +172,36 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
         float EMPTYCHAR_CHAR_WIDTH_RATIO = 1.6f;
         float DISTANCE_FROM_TEXTBOX_BOTTOM = 0.4f;
         if (Orientation.getOrientation() == Input.Orientation.Portrait) {
-            getTextBox().setPosition(X * 0.1f, Y * 0.55f);
+            if (Configuration.isPremium())
+                getTextBox().setPosition(X * 0.1f, Y * 0.35f);
+            else
+                getTextBox().setPosition(X * 0.1f, Y * 0.55f);
+
+
             getTextBox().draw(getSpriteBatch());
-            for (int i = 0; i < text.size(); i++)
-                font.draw(getSpriteBatch(), text.get(i),
-                        (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
-                        Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i + getTextBox().getHeight() * 0.45f);
-            font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
+
+            if (Configuration.isPremium()) {
+                for (int i = 0; i < text.size(); i++)
+                    font.draw(getSpriteBatch(), text.get(i),
+                            (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                            Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
+                font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
+
+            } else {
+                for (int i = 0; i < text.size(); i++)
+                    font.draw(getSpriteBatch(), text.get(i),
+                            (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.5f,
+                            Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i + getTextBox().getHeight() * 0.45f);
+                font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
+
+            }
         } else {
             getTextBox().setPosition(X * 0.02f, Y * 0.35f);
             getTextBox().draw(getSpriteBatch());
             for (int i = 0; i < text.size(); i++)
                 font.draw(getSpriteBatch(), text.get(i),
                         (X - text.get(i).length() * font.getSpaceWidth() * EMPTYCHAR_CHAR_WIDTH_RATIO) * 0.3f,
-                        Y  - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
+                        Y - (Y - font.getCapHeight() * text.size()) * DISTANCE_FROM_TEXTBOX_BOTTOM - font.getCapHeight() * 1.3f * i);
 
             font.draw(getSpriteBatch(), Configuration.getINeverDoGameType().toString(), getTextBox().getX() * 1.1f, getTextBox().getY() + getTextBox().getHeight() * 0.98f);
         }
@@ -243,7 +264,7 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
 
             switch (i) {
                 case 0:
-                    getButtons()[i][click_index].draw(getSpriteBatch(),1);
+                    getButtons()[i][click_index].draw(getSpriteBatch(), 1);
                     break;
                 case 1:
                     getButtons()[i][click_index].draw(getSpriteBatch(), Configuration.getINeverDoGameType() == Configuration.INeverDoGameTypeEnum.GAME_18PLUS ? 1 : 0.5f);
@@ -255,7 +276,7 @@ public class INeverDoScreen extends com.gamefactoryx.cheersapp.view.AbstractScre
                     getButtons()[i][click_index].draw(getSpriteBatch(), Configuration.getINeverDoGameType() == Configuration.INeverDoGameTypeEnum.GAME_STANDARD ? 1 : 0.5f);
                     break;
                 case 4:
-                    if(!Configuration.isPremium()){
+                    if (!Configuration.isPremium()) {
                         getButtons()[i][0].setPosition(0.5f * (X - getButtons()[i][0].getWidth()), Y - Y * 0.6f);
                         getButtons()[i][0].draw(getSpriteBatch(), 1.0f);
                     }

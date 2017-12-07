@@ -13,7 +13,7 @@ final class NewGameStageController extends AbstractController {
     NewGameStageController(final AbstractScreen screen){
         super(screen);
         setScreenLock(1);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
     }
 
 

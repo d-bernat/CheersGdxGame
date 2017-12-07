@@ -33,6 +33,7 @@ public class KongosDrinkPhase0Controller extends AbstractController {
         enableKeyboard(false);
         model = KongosDrinkPhase0Model.getNewInstance();
         Configuration.getNewInstance();
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
     }
 
 

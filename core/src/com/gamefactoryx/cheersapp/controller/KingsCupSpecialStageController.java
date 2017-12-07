@@ -1,6 +1,7 @@
 package com.gamefactoryx.cheersapp.controller;
 
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheersapp.tool.Configuration;
 
 import java.util.Random;
 
@@ -19,7 +20,7 @@ final class KingsCupSpecialStageController extends AbstractController {
         super(screen);
         animationRunning = false;
         setScreenLock(10);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
         com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getNewInstance();
     }
 
@@ -29,30 +30,31 @@ final class KingsCupSpecialStageController extends AbstractController {
         super.touchDown(screenX, screenY, pointer, button);
         lastYPointerPos = screenY;
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+            float y = Configuration.isPremium() ? getScreen().getButtons()[i][0].getY(): getScreen().getButtons()[i][0].getY() + 50;
             if (i == 0 && !com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getInstance().isShowTask()) {
                 getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                         screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight() &&
                         com.gamefactoryx.cheersapp.tool.Orientation.getOrientation() == Input.Orientation.Portrait
                         ||
                         screenX >= getScreen().getButtons()[i][0].getX() &&
                                 screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= y &&
+                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= y + getScreen().getButtons()[i][0].getHeight() &&
                                 com.gamefactoryx.cheersapp.tool.Orientation.getOrientation() == Input.Orientation.Landscape);
 
             } else if (i == 1 && com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getInstance().isShowTask()) {
                 getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                         screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight() &&
                         com.gamefactoryx.cheersapp.tool.Orientation.getOrientation() == Input.Orientation.Portrait
                         ||
                         screenX >= getScreen().getButtons()[i][0].getX() &&
                                 screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight() &&
+                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= y &&
+                                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= y + getScreen().getButtons()[i][0].getHeight() &&
                                 com.gamefactoryx.cheersapp.tool.Orientation.getOrientation() == Input.Orientation.Landscape);
             }else{
                 getScreen().getClicked()[i] = false;

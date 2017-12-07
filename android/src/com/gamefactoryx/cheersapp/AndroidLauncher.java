@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -100,7 +101,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
 
     private AdView createAdView() {
         adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
+        adView.setAdSize(AdSize.SMART_BANNER);
         adView.setAdUnitId(AD_UNIT_ID);
         //adView.setId(12345); // this is an arbitrary id, allows for relative positioning in createGameView()
         adView.setId(R.id.adViewId);
@@ -137,7 +138,24 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
 
         //  InApp: dispose payment system(s)
         game.getPlatformResolver().dispose();
+        adView.destroy();
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        adView.resume();
+        gameView.requestFocus();
+        gameView.requestFocusFromTouch();
+
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        adView.pause();
+    }
+
 
     @Override
     public void lock(int type) {
@@ -154,16 +172,5 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
     }
 
-
-    /*@Override
-    public void onBackPressed() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        dialog.setContentView(ll);
-        dialog.show();
-    }*/
 
 }
