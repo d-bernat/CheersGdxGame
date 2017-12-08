@@ -48,6 +48,7 @@ public class Configuration {
     private static boolean showBackButton = Gdx.app.getType() == Application.ApplicationType.iOS;
     private static boolean showRules = true;
     private static boolean premium;
+    private static boolean admin;
 
     public static LanguageEnum getLanguage() {
         if (language == null) {
@@ -127,5 +128,13 @@ public class Configuration {
 
     public static void setPremium(boolean premium) {
         Configuration.premium = premium;
+    }
+
+    public static boolean isAdmin() {
+        return admin;
+    }
+
+    public static void setAdmin(boolean admin) {
+        Configuration.admin = admin;
     }
 }

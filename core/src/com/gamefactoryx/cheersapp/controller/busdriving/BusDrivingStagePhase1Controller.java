@@ -3,6 +3,7 @@ package com.gamefactoryx.cheersapp.controller.busdriving;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 
 /**
  * Created by bernat on 16.05.2017.
@@ -21,6 +22,7 @@ public class BusDrivingStagePhase1Controller extends com.gamefactoryx.cheersapp.
         model = com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase1Model.getNewInstance();
         putNewCardToBoard(com.gamefactoryx.cheersapp.tool.CardOrientation.BACK);
         setScreenLock(1);
+        StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
     }
 
     private void putNewCardToBoard(com.gamefactoryx.cheersapp.tool.CardOrientation cardOrientation) {
@@ -46,6 +48,7 @@ public class BusDrivingStagePhase1Controller extends com.gamefactoryx.cheersapp.
                     com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
                 Gdx.input.vibrate(10);
                 com.gamefactoryx.cheersapp.controller.StageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
+                StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
                 return true;
             }
         } else {

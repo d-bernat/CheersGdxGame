@@ -30,6 +30,7 @@ public class CheersGdxGame extends Game {
 	public PurchaseManagerConfig purchaseManagerConfig;
 	private boolean playMusicFlag;
 	private ActivityRequestHandler adMobRequestHandler;
+	private InterstitialResolver interstitialResolver;
 
 	public PurchaseObserver purchaseObserver = new PurchaseObserver() {
 		@Override
@@ -73,10 +74,12 @@ public class CheersGdxGame extends Game {
 	}
 
 	public CheersGdxGame(com.gamefactoryx.cheersapp.ScreenLock screenLock, com.gamefactoryx.cheersapp.LinkHandler linkHandler,
-						ActivityRequestHandler adMobRequestHandler ){
+						ActivityRequestHandler adMobRequestHandler, InterstitialResolver interstitialResolver ){
 		this.screenLock = screenLock;
 		this.linkHandler = linkHandler;
 		this.adMobRequestHandler = adMobRequestHandler;
+		this.interstitialResolver = interstitialResolver;
+
 		setAppStore(APPSTORE_GOOGLE);	// change this if you deploy to another platform
 
 		// ---- IAP: define products ---------------------
@@ -134,6 +137,7 @@ public class CheersGdxGame extends Game {
 		m_platformResolver = platformResolver;
 	}
 
+
 	public int getAppStore () {
 		return isAppStore;
 	}
@@ -145,7 +149,11 @@ public class CheersGdxGame extends Game {
         return adMobRequestHandler;
     }
 
-    private void checkPurchase() throws Exception{
+	public InterstitialResolver getInterstitialResolver() {
+		return interstitialResolver;
+	}
+
+	private void checkPurchase() throws Exception{
 		FileHandle fHandle = Gdx.files.local("premium.txt");
 		if(fHandle== null) throw new Exception();
 		String[] tokens = fHandle.readString().split(":");

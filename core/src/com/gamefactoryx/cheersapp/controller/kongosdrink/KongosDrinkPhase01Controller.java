@@ -28,6 +28,7 @@ public class KongosDrinkPhase01Controller extends AbstractController {
         super(screen);
         setScreenLock(1);
         KongosDrinkPhase01Model.getInstance().setPlayerToConfigureIndex(0);
+        StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
         //enableKeyboard(false);
         //model = KongosDrinkPhase0Model.getInstance();
         //Configuration.getInstance();
@@ -99,6 +100,7 @@ public class KongosDrinkPhase01Controller extends AbstractController {
                 com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
             Gdx.input.vibrate(10);
             com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
+            StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
             return true;
         }
 

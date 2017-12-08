@@ -27,7 +27,6 @@ final class HallOfFameController extends AbstractController {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         super.touchUp(screenX, screenY, pointer, button);
-
         return true;
     }
 

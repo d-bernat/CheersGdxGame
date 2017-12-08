@@ -1,35 +1,27 @@
 package com.gamefactoryx.cheersapp;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.gamefactoryx.cheersapp.tool.Configuration;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.*;
 
-public class AndroidLauncher extends AndroidApplication implements ScreenLock, ActivityRequestHandler {
+public class AndroidLauncher extends AndroidApplication implements ScreenLock, ActivityRequestHandler, InterstitialResolver {
     private CheersGdxGame game;
     protected AdView adView;
     protected View gameView;
+    private InterstitialAd interstitialAd;
 
     private final int SHOW_ADS = 1;
     private final int HIDE_ADS = 0;
@@ -41,7 +33,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SHOW_ADS: {
-                    if(!Configuration.isPremium())
+                    if (!Configuration.isPremium())
                         adView.setVisibility(View.VISIBLE);
                     else
                         adView.setVisibility(View.GONE);
@@ -91,6 +83,8 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         setContentView(layout);
         adView.setVisibility(View.GONE);
         startAdvertising(adView);
+        initInterstitial();
+
     }
 
     /*@Override
@@ -98,6 +92,21 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
     }*/
 
+    private void initInterstitial(){
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-4210471520715681/6129196875");
+        interstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded(){
+                //Toast.makeText(getApplicationContext(), "Finished Loading Interstitial", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdClosed(){
+                //Toast.makeText(getApplicationContext(), "Closed Interstitial", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private AdView createAdView() {
         adView = new AdView(this);
@@ -114,7 +123,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
     }
 
     private View createGameView(AndroidApplicationConfiguration cfg) {
-        game = new CheersGdxGame(this, new AndroidFacebookLinkHandler(this), this);
+        game = new CheersGdxGame(this, new AndroidFacebookLinkHandler(this), this, this);
         gameView = initializeForView(game, cfg);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
@@ -123,13 +132,40 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         gameView.setLayoutParams(params);
         return gameView;
     }
+
     private void startAdvertising(AdView adView) {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void showOrLoadInterstitial() {
+        if(!Configuration.isPremium()) {
+            try {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        if (interstitialAd.isLoaded()) {
+                            interstitialAd.show();
+                            if(Configuration.isAdmin())
+                                Toast.makeText(getApplicationContext(), "Showing Interstitial", Toast.LENGTH_SHORT).show();
+                        } else {
+                            AdRequest interstitialRequest = new AdRequest.Builder().build();
+                            interstitialAd.loadAd(interstitialRequest);
+                            if(Configuration.isAdmin())
+                                Toast.makeText(getApplicationContext(), "Loading Interstitial", Toast.LENGTH_SHORT).show();
+                            if(Configuration.isAdmin() && !interstitialAd.isLoaded())
+                                Toast.makeText(getApplicationContext(), "No Interstitial", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            } catch (Exception e) {
+            }
+        }
     }
 
     @Override
@@ -142,7 +178,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         adView.resume();
         gameView.requestFocus();
@@ -151,7 +187,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         adView.pause();
     }
