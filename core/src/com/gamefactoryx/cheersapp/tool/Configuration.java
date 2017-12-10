@@ -49,6 +49,8 @@ public class Configuration {
     private static boolean showRules = true;
     private static boolean premium;
     private static boolean admin;
+    private static long adMobTimeout = 600_000L;
+
 
     public static LanguageEnum getLanguage() {
         if (language == null) {
@@ -127,7 +129,7 @@ public class Configuration {
     }
 
     public static void setPremium(boolean premium) {
-        Configuration.premium = false;
+        Configuration.premium = premium;
     }
 
     public static boolean isAdmin() {
@@ -136,5 +138,13 @@ public class Configuration {
 
     public static void setAdmin(boolean admin) {
         Configuration.admin = admin;
+    }
+
+    public static long getAdMobTimeout() {
+        return adMobTimeout;
+    }
+
+    public static void setAdMobTimeout(long adMobTimeout) {
+        Configuration.adMobTimeout = adMobTimeout;
     }
 }

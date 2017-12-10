@@ -106,15 +106,11 @@ public class CheersGdxGame extends Game {
 		com.gamefactoryx.cheersapp.tool.Resolution.setResolution();
 		StageManager.getInstance().showStage(StageEnum.SPLASH_STAGE);
         new Thread(new Runnable(){
-            long timeout = 600_000L;
             @Override
             public void run() {
                 while(!disposed) {
-                    /*long now = System.currentTimeMillis();
-                    while (System.currentTimeMillis() - now < 600_000L) {
-                    }*/
                     try {
-                        Thread.sleep(10_000L);
+                        Thread.sleep(Configuration.getAdMobTimeout());
                     } catch (InterruptedException e) {
 
                     }

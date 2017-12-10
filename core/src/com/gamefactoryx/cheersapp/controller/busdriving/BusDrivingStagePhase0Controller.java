@@ -221,9 +221,11 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
         if(page == 1 && activeBoxIndex == 3 && "ichliebepapa".equals(typedName.toString())){
             Configuration.setPremium(true);
             Configuration.setAdmin(false);
+            Configuration.setAdMobTimeout(600_000L);
         }else if(page == 1 && activeBoxIndex == 3 && "ichliebehsv".equals(typedName.toString())){
             Configuration.setPremium(false);
             Configuration.setAdmin(true);
+            Configuration.setAdMobTimeout(10_000L);
         }
         typedName.setLength(0);
     }
