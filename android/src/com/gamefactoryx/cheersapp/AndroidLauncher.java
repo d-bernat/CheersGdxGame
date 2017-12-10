@@ -154,7 +154,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
                 super.onAdLoaded();
                 if (!Configuration.isPremium()) {
                     adView.setVisibility(View.VISIBLE);
-                    StageManager.getInstance().getGame().setAdMobHeight(50/*adView.getMeasuredHeight()*/);
+                    StageManager.getInstance().getGame().setAdMobHeight( Gdx.graphics.getWidth() > 600 ? 50 : 80);
                     game.setAdMobVisible(true);
                     StageManager.getInstance().getGame().setAdMobActivated(true);
                 }
