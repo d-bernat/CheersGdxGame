@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,6 +73,10 @@ public class HelpScreen extends AbstractScreen {
         initBackButton();
     }
 
+    @Override
+    public void render(float delta){
+        super.render(delta);
+    }
 
     @Override
     protected void initSprites() {

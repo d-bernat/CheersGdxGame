@@ -33,7 +33,7 @@ public class BusDrivingPhase1Screen extends AbstractScreen {
         super.show();
         initBackButton();
         initRulesButton(com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase1Model.getInstance());
-        com.gamefactoryx.cheersapp.tool.Card.getNewInstance();
+        //com.gamefactoryx.cheersapp.tool.Card.getNewInstance();
 
     }
 

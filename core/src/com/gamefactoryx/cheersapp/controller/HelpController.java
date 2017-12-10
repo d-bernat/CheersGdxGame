@@ -15,7 +15,6 @@ final class HelpController extends com.gamefactoryx.cheersapp.controller.Abstrac
     HelpController(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
     }
 
 

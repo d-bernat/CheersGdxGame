@@ -26,7 +26,6 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
     public BusDrivingStagePhase0Controller(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
         enableKeyboard(false);
 
         model = com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase0Model.getNewInstance();
@@ -35,11 +34,13 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
+        float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[6][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[6][0].getY();
         if (screenX >= getScreen().getButtons()[6][0].getX() &&
                 screenX <= getScreen().getButtons()[6][0].getX() + getScreen().getButtons()[6][0].getWidth() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight())
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[6][0].getHeight())
             model.setLoadingNextStage(true);
 
 
@@ -53,11 +54,14 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
         if (!super.touchUp(screenX, screenY, pointer, button))
             return true;
 
+        float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[8][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[8][0].getY();
 
         if (!Configuration.isPremium() && screenX >= getScreen().getButtons()[8][0].getX() &&
                 screenX <= getScreen().getButtons()[8][0].getX() + getScreen().getButtons()[8][0].getWidth() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[8][0].getY() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[8][0].getY() + getScreen().getButtons()[8][0].getHeight()) {
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[8][0].getHeight()) {
             Gdx.input.vibrate(10);
             StageManager.getInstance().getGame().getPlatformResolver().requestPurchase(CheersGdxGame.productID_fullVersion);
             return true;
@@ -74,10 +78,13 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
             return true;
         }
 
+        y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[6][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[6][0].getY();
         if (screenX >= getScreen().getButtons()[6][0].getX() &&
                 screenX <= getScreen().getButtons()[6][0].getX() + getScreen().getButtons()[6][0].getWidth() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[6][0].getHeight()) {
             Gdx.input.vibrate(10);
             StageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.StageEnum.BUS_DRIVING_STAGE_FIRST_PHASE);
             return true;
@@ -88,11 +95,13 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
 
 
         for (int i = 0; i < /*getScreen().getCountOfButtons() - 3*/ getMaxPlayers(); i++) {
-
+            y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                    getScreen().getButtons()[i][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                    getScreen().getButtons()[i][0].getY();
             if (screenX >= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.9f &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
 
                 activeBoxIndex = i;
 
@@ -107,15 +116,15 @@ public class BusDrivingStagePhase0Controller extends com.gamefactoryx.cheersapp.
 
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
                 model.getPlayers().get(i + maxPlayersProPage * (page - 1)).setSex(
                         model.getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == com.gamefactoryx.cheersapp.model.Subject.Sex.MALE ? com.gamefactoryx.cheersapp.model.Subject.Sex.FEMALE : com.gamefactoryx.cheersapp.model.Subject.Sex.MALE);
                 return true;
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.85f &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
 
                 if (model.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable()) {
                     activeBoxIndex = i;

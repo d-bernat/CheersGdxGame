@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.pay.*;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.gamefactoryx.cheersapp.controller.StageEnum;
 import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageManager;
@@ -26,11 +25,16 @@ public class CheersGdxGame extends Game {
 	public final static String productID_fullVersion = "com.gamefactoryx.cheersapp.premium";
 	private static com.gamefactoryx.cheersapp.ScreenLock screenLock;
 	private static com.gamefactoryx.cheersapp.LinkHandler linkHandler;
+	private boolean adMobActivated;
+	private boolean adMobVisible;
 	static com.gamefactoryx.cheersapp.PlatformResolver m_platformResolver;
 	public PurchaseManagerConfig purchaseManagerConfig;
 	private boolean playMusicFlag;
 	private ActivityRequestHandler adMobRequestHandler;
 	private InterstitialResolver interstitialResolver;
+	private boolean disposed;
+	private int adMobHeight;
+
 
 	public PurchaseObserver purchaseObserver = new PurchaseObserver() {
 		@Override
@@ -85,6 +89,7 @@ public class CheersGdxGame extends Game {
 		// ---- IAP: define products ---------------------
 		purchaseManagerConfig = new PurchaseManagerConfig();
 		purchaseManagerConfig.addOffer(new Offer().setType(OfferType.ENTITLEMENT).setIdentifier(productID_fullVersion));
+		//adMobActivated = true;
 	}
 	@Override
 	public void create () {
@@ -100,6 +105,23 @@ public class CheersGdxGame extends Game {
 		KongosDrinkStageManager.getInstance().initialize(this);
 		com.gamefactoryx.cheersapp.tool.Resolution.setResolution();
 		StageManager.getInstance().showStage(StageEnum.SPLASH_STAGE);
+        new Thread(new Runnable(){
+            long timeout = 600_000L;
+            @Override
+            public void run() {
+                while(!disposed) {
+                    /*long now = System.currentTimeMillis();
+                    while (System.currentTimeMillis() - now < 600_000L) {
+                    }*/
+                    try {
+                        Thread.sleep(10_000L);
+                    } catch (InterruptedException e) {
+
+                    }
+                    adMobActivated = true;
+                }
+            }
+        }).start();
 
 	}
 
@@ -123,7 +145,13 @@ public class CheersGdxGame extends Game {
 		}
 	}
 
-	public static com.gamefactoryx.cheersapp.ScreenLock getScreenLock(){
+    @Override
+    public void dispose() {
+        super.dispose();
+        disposed = true;
+    }
+
+    public static com.gamefactoryx.cheersapp.ScreenLock getScreenLock(){
 		return screenLock;
 	}
 	public static com.gamefactoryx.cheersapp.LinkHandler getLinkHandler(){
@@ -164,6 +192,30 @@ public class CheersGdxGame extends Game {
 	private void persistPurchase(){
 		FileHandle fHandle = Gdx.files.local("premium.txt");
 		fHandle.writeString("purchase:true", false);
+	}
+
+	public boolean isAdMobActivated() {
+		return adMobActivated;
+	}
+
+	public void setAdMobActivated(boolean adMobActivated) {
+		this.adMobActivated = adMobActivated;
+	}
+
+	public int getAdMobHeight() {
+		return adMobHeight;
+	}
+
+	public void setAdMobHeight(int adMobHeight) {
+		this.adMobHeight = adMobHeight;
+	}
+
+	public boolean isAdMobVisible() {
+		return adMobVisible;
+	}
+
+	public void setAdMobVisible(boolean adMobVisible) {
+		this.adMobVisible = adMobVisible;
 	}
 }
 

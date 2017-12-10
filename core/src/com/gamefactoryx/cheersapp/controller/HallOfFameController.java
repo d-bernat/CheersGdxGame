@@ -14,7 +14,6 @@ final class HallOfFameController extends AbstractController {
     HallOfFameController(final com.gamefactoryx.cheersapp.view.AbstractScreen screen){
         super(screen);
         setScreenLock(10);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
     }
 
 

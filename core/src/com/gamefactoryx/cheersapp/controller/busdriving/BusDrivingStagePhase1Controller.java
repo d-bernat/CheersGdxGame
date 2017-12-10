@@ -22,7 +22,6 @@ public class BusDrivingStagePhase1Controller extends com.gamefactoryx.cheersapp.
         model = com.gamefactoryx.cheersapp.model.busdriving.BusDrivingPhase1Model.getNewInstance();
         putNewCardToBoard(com.gamefactoryx.cheersapp.tool.CardOrientation.BACK);
         setScreenLock(1);
-        StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
     }
 
     private void putNewCardToBoard(com.gamefactoryx.cheersapp.tool.CardOrientation cardOrientation) {
@@ -40,15 +39,17 @@ public class BusDrivingStagePhase1Controller extends com.gamefactoryx.cheersapp.
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if(!super.touchUp(screenX, screenY, pointer, button))
             return true;
-
+        float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[0][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[0][0].getY();
         if (model.isPhaseFinished()) {
             if(screenX >= getScreen().getButtons()[0][0].getX() &&
                     screenX <= getScreen().getButtons()[0][0].getX() + getScreen().getButtons()[0][0].getWidth()&&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[0][0].getY() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[0][0].getHeight()) {
                 Gdx.input.vibrate(10);
-                com.gamefactoryx.cheersapp.controller.StageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
                 StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
+                com.gamefactoryx.cheersapp.controller.StageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.StageEnum.BUS_DRIVING_STAGE_SECOND_PHASE);
                 return true;
             }
         } else {

@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Card {
     private static Card instance;
-    private Map<String, Texture> cardTextures;
+    private static Map<String, Texture> cardTextures = new HashMap<>();;
 
     public static Card getInstance()
     {
@@ -20,15 +20,15 @@ public class Card {
             return instance;
     }
 
-    public static Card getNewInstance()
+    /*public static Card getNewInstance()
     {
-        if(instance != null && instance.cardTextures != null && instance.cardTextures.size() > 0){
-            for(Texture txt: instance.cardTextures.values())
+        if(instance != null && cardTextures.size() > 0){
+            for(Texture txt: cardTextures.values())
                 if(txt != null ) txt.dispose();
         }
         instance = new Card();
        return instance;
-    }
+    }*/
 
 
     public Texture getCardTexture(int cardIndex, CardSize cardSize, CardOrientation cardOrientation) {
@@ -37,7 +37,6 @@ public class Card {
     }
 
     private Card() {
-        cardTextures = new HashMap<>();
         setCardTextures();
     }
 
@@ -69,6 +68,9 @@ public class Card {
     }
 
     private void setCardTextures() {
+        for(Texture txt: cardTextures.values())
+            if(txt != null) txt.dispose();
+        cardTextures.clear();
         if (cardTextures.size() == 0) {
             for (int i = 2; i < 53; i++) {
                 cardTextures.put(getFileName(i, CardSize.BIG, CardOrientation.FACE), new Texture(getFileName(i, CardSize.BIG, CardOrientation.FACE)));
@@ -150,7 +152,4 @@ public class Card {
         return "X";
     }
 
-    private void dispose(){
-
-    }
 }

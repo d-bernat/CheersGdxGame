@@ -28,7 +28,6 @@ public class KongosDrinkPhase01Controller extends AbstractController {
         super(screen);
         setScreenLock(1);
         KongosDrinkPhase01Model.getInstance().setPlayerToConfigureIndex(0);
-        StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
         //enableKeyboard(false);
         //model = KongosDrinkPhase0Model.getInstance();
         //Configuration.getInstance();
@@ -40,10 +39,13 @@ public class KongosDrinkPhase01Controller extends AbstractController {
 
         //touchPos = screenX;
         //int lastButtonIndex = getScreen().getButtons().length - 1;
+        float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[0][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[0][0].getY();
         if (screenX >= getScreen().getButtons()[0][0].getX() &&
                 screenX <= getScreen().getButtons()[0][0].getX() + getScreen().getButtons()[0][0].getWidth() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[0][0].getY() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[0][0].getHeight()) {
             KongosDrinkMainModel.getInstance().setLoadingNextStage(true);
         }
 
@@ -65,10 +67,13 @@ public class KongosDrinkPhase01Controller extends AbstractController {
         }
 
         for (int i = 1; i < getScreen().getButtons().length; i++) {
+            float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                    getScreen().getButtons()[i][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                    getScreen().getButtons()[i][0].getY();
             if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
 
                 if (i < getScreen().getButtons().length - 2) {
                     if (!isDisabled(i)) {
@@ -93,21 +98,26 @@ public class KongosDrinkPhase01Controller extends AbstractController {
                 }
             }
         }
-
+        float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[0][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[0][0].getY();
         if (screenX >= getScreen().getButtons()[0][0].getX() &&
                 screenX <= getScreen().getButtons()[0][0].getX() + getScreen().getButtons()[0][0].getWidth() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[0][0].getY() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[0][0].getHeight()) {
             Gdx.input.vibrate(10);
-            com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
             StageManager.getInstance().getGame().getInterstitialResolver().showOrLoadInterstitial();
+            com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.kongosdrink.KongosDrinkStageEnum.KONGOS_DRINK_MAIN_STAGE);
             return true;
         }
 
+        y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getTextBox().getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getTextBox().getY();
         if (screenX >= getScreen().getTextBox().getX() &&
                 screenX <= getScreen().getTextBox().getX() + getScreen().getTextBox().getWidth() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getTextBox().getY() &&
-                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getTextBox().getY() + getScreen().getTextBox().getHeight()) {
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getTextBox().getHeight()) {
             tempName = Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).getName();
             Configuration.getInstance().getPlayers().get(KongosDrinkPhase01Model.getInstance().getPlayerToConfigureIndex()).setName("");
             enableKeyboard(true);

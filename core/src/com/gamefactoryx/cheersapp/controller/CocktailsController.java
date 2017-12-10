@@ -19,7 +19,6 @@ public class CocktailsController extends AbstractController {
         super(screen);
         setScreenLock(1);
         model = com.gamefactoryx.cheersapp.model.CocktailsModel.getInstance().getNewInstance();
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
     }
 
 

@@ -19,6 +19,7 @@ public class KingsCupSpecialModel extends Model {
     private int itemPosition;
     private boolean clicked;
     private boolean showTask;
+    private boolean suspended;
 
     private String[] radValues = {
             "9",
@@ -130,5 +131,13 @@ public class KingsCupSpecialModel extends Model {
 
     public HashMap<String, String> getTasks() {
         return tasks;
+    }
+
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
     }
 }

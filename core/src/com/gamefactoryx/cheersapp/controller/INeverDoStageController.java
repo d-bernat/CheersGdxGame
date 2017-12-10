@@ -18,7 +18,6 @@ final class INeverDoStageController extends com.gamefactoryx.cheersapp.controlle
     INeverDoStageController(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
     }
 
 

@@ -3,6 +3,7 @@ package com.gamefactoryx.cheersapp.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 
 /**
  * Created by bernat on 28.04.2017.
@@ -19,6 +20,7 @@ public class MainScreen extends AbstractScreen {
         getLandscapeSprite().setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthLandscape(), com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait(), com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait());
     }
+
 
     @Override
     public void resize(int width, int height) {
@@ -53,6 +55,18 @@ public class MainScreen extends AbstractScreen {
                             /*Y * 0.13f * Resolution.getAspectRatio()*/ Y * 0.13f);
                 }
             }
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
+
+    }
+
+    @Override
+    public void render(float delta){
+        super.render(delta);
     }
 
     @Override

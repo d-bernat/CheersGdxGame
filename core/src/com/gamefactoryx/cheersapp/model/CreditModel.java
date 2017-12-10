@@ -5,7 +5,8 @@ public class CreditModel {
     private CreditModel(){}
     private float yOffset;
     private float maxYOffset;
-    private boolean animate = true;
+    private boolean animate;
+
 
     public static CreditModel getInstance() {
         if (instance == null) {
@@ -31,10 +32,11 @@ public class CreditModel {
     }
 
     public void startAnimation(){
+        animate = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (CreditModel.getInstance().getyOffset() > CreditModel.getInstance().getMaxYOffset()) {
+                while (CreditModel.getInstance().getyOffset() > CreditModel.getInstance().getMaxYOffset() && animate) {
                     long time = System.currentTimeMillis();
                     while (System.currentTimeMillis() < time + 5L) {
                     }
@@ -49,6 +51,10 @@ public class CreditModel {
 
     public boolean isAnimate() {
         return animate;
+    }
+
+    public void setAnimate(boolean animate) {
+        this.animate = animate;
     }
 }
 

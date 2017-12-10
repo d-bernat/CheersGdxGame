@@ -127,7 +127,7 @@ public class Configuration {
     }
 
     public static void setPremium(boolean premium) {
-        Configuration.premium = premium;
+        Configuration.premium = false;
     }
 
     public static boolean isAdmin() {

@@ -1,5 +1,6 @@
 package com.gamefactoryx.cheersapp.controller;
 
+import com.badlogic.gdx.Input;
 import com.gamefactoryx.cheersapp.model.CreditModel;
 import com.gamefactoryx.cheersapp.view.AbstractScreen;
 
@@ -15,7 +16,6 @@ final class CreditController extends AbstractController {
     CreditController(final AbstractScreen screen) {
         super(screen);
         setScreenLock(1);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
     }
 
     @Override
@@ -34,6 +34,17 @@ final class CreditController extends AbstractController {
             return true;
         }
 
+        return true;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+
+        switch (keycode) {
+            case Input.Keys.BACK:
+                CreditModel.getInstance().setAnimate(false);
+                com.gamefactoryx.cheersapp.controller.StageManager.getInstance().showLastStage();
+        }
         return true;
     }
 

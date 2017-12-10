@@ -2,6 +2,7 @@ package com.gamefactoryx.cheersapp.controller.busdriving;
 
 
 import com.badlogic.gdx.Gdx;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,13 @@ public class BusDrivingStagePhase4Controller extends com.gamefactoryx.cheersapp.
             return true;
 
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
+            float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                    getScreen().getButtons()[i][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                    getScreen().getButtons()[i][0].getY();
             getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight());
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY >= y &&
+                    com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape() - screenY <= y + getScreen().getButtons()[i][0].getHeight());
         }
         return true;
     }

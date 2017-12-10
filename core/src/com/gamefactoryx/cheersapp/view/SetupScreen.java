@@ -3,6 +3,7 @@ package com.gamefactoryx.cheersapp.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.tool.Configuration;
 import com.gamefactoryx.cheersapp.tool.Orientation;
 import com.gamefactoryx.cheersapp.tool.Resolution;
@@ -26,6 +27,10 @@ public class SetupScreen extends com.gamefactoryx.cheersapp.view.AbstractScreen 
         initBackButton();
     }
 
+    @Override
+    public void render(float delta){
+        super.render(delta);
+    }
 
     @Override
     protected void initSprites() {

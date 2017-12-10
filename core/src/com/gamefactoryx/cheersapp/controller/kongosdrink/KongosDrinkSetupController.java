@@ -38,10 +38,13 @@ public class KongosDrinkSetupController extends AbstractController {
             return true;
 
         int lastButtonIndex = getScreen().getButtons().length - 1;
+        float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[lastButtonIndex][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[lastButtonIndex][0].getY();
         if (screenX >= getScreen().getButtons()[lastButtonIndex][0].getX() &&
                 screenX <= getScreen().getButtons()[lastButtonIndex][0].getX() + getScreen().getButtons()[lastButtonIndex][0].getWidth() &&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[lastButtonIndex][0].getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[lastButtonIndex][0].getY() + getScreen().getButtons()[lastButtonIndex][0].getHeight()) {
+                Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[lastButtonIndex][0].getHeight()) {
             Gdx.input.vibrate(10);
             Configuration.getInstance().setPlayers(PlayerToTeamsTransformator.toTeams(Configuration.getInstance().getPlayers()));
             StageManager.getInstance().showStage(StageEnum.KONGOS_DRINK_ZERO_ONE_STAGE);
@@ -49,10 +52,13 @@ public class KongosDrinkSetupController extends AbstractController {
         }
 
         for (int i = 0; i < 6; ++i) {
+            y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                    getScreen().getButtons()[i][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                    getScreen().getButtons()[i][0].getY();
             if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
+                    Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[6][0].getHeight()) {
                 switch (i) {
                     case 0:
                         if (getScreen().getButtons()[i][0].isAllowed())
@@ -91,10 +97,13 @@ public class KongosDrinkSetupController extends AbstractController {
         }
 
         for (int i = 6; i < 9; ++i) {
+            y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                    getScreen().getButtons()[i][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                    getScreen().getButtons()[i][0].getY();
             if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
                 Gdx.input.vibrate(10);
                 switch (i) {
                     case 6:

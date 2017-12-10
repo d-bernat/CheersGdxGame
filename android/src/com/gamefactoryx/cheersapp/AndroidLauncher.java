@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.tool.Configuration;
 import com.google.android.gms.ads.*;
 
@@ -26,21 +26,23 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
     private final int SHOW_ADS = 1;
     private final int HIDE_ADS = 0;
     private static final String AD_UNIT_ID = "ca-app-pub-4210471520715681/8370424825";
-    private static final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/developer?id=TheInvader360";
 
     protected Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SHOW_ADS: {
-                    if (!Configuration.isPremium())
-                        adView.setVisibility(View.VISIBLE);
-                    else
-                        adView.setVisibility(View.GONE);
+                    if (!Configuration.isPremium() && !game.isAdMobVisible()) {
+                        AdRequest adRequest = new AdRequest.Builder().build();
+                        adView.loadAd(adRequest);
+                    }
                     break;
                 }
                 case HIDE_ADS: {
-                    adView.setVisibility(View.GONE);
+                    if (!Configuration.isPremium()) {
+                        adView.setVisibility(View.GONE);
+                        game.setAdMobVisible(false);
+                    }
                     break;
                 }
             }
@@ -82,8 +84,8 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
 
         setContentView(layout);
         adView.setVisibility(View.GONE);
-        startAdvertising(adView);
         initInterstitial();
+        startAdvertising(adView);
 
     }
 
@@ -92,20 +94,33 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
     }*/
 
-    private void initInterstitial(){
+    private void initInterstitial() {
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-4210471520715681/6129196875");
-        interstitialAd.setAdListener(new AdListener(){
+        interstitialAd.setAdListener(new AdListener() {
             @Override
-            public void onAdLoaded(){
+            public void onAdLoaded() {
                 //Toast.makeText(getApplicationContext(), "Finished Loading Interstitial", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onAdClosed(){
+            public void onAdClosed() {
+                loadInterstitial();
                 //Toast.makeText(getApplicationContext(), "Closed Interstitial", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void loadInterstitial() {
+        try {
+            AdRequest interstitialRequest = new AdRequest.Builder().build();
+            if (!interstitialAd.isLoading()) {
+                interstitialAd.loadAd(interstitialRequest);
+            }
+        } catch (Exception e) {
+
+        }
+
     }
 
     private AdView createAdView() {
@@ -119,6 +134,33 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         adView.setLayoutParams(params);
         adView.setBackgroundColor(Color.BLACK);
+        adView.setAdListener(new AdListener() {
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                StageManager.getInstance().getGame().setAdMobActivated(false);
+                StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                StageManager.getInstance().getGame().setAdMobActivated(false);
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                if (!Configuration.isPremium()) {
+                    adView.setVisibility(View.VISIBLE);
+                    StageManager.getInstance().getGame().setAdMobHeight(50/*adView.getMeasuredHeight()*/);
+                    game.setAdMobVisible(true);
+                    StageManager.getInstance().getGame().setAdMobActivated(true);
+                }
+
+            }
+        });
         return adView;
     }
 
@@ -136,6 +178,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
     private void startAdvertising(AdView adView) {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+        showOrLoadInterstitial();
     }
 
     @Override
@@ -145,21 +188,18 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
 
     @Override
     public void showOrLoadInterstitial() {
-        if(!Configuration.isPremium()) {
+        if (!Configuration.isPremium()) {
             try {
                 runOnUiThread(new Runnable() {
+                    @Override
                     public void run() {
-                        if (interstitialAd.isLoaded()) {
-                            interstitialAd.show();
-                            if(Configuration.isAdmin())
-                                Toast.makeText(getApplicationContext(), "Showing Interstitial", Toast.LENGTH_SHORT).show();
-                        } else {
-                            AdRequest interstitialRequest = new AdRequest.Builder().build();
-                            interstitialAd.loadAd(interstitialRequest);
-                            if(Configuration.isAdmin())
-                                Toast.makeText(getApplicationContext(), "Loading Interstitial", Toast.LENGTH_SHORT).show();
-                            if(Configuration.isAdmin() && !interstitialAd.isLoaded())
-                                Toast.makeText(getApplicationContext(), "No Interstitial", Toast.LENGTH_SHORT).show();
+                        try {
+                            if (interstitialAd.isLoaded()) {
+                                interstitialAd.show();
+                            } else {
+                                loadInterstitial();
+                            }
+                        } catch (Exception e) {
                         }
                     }
                 });
@@ -175,6 +215,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
         //  InApp: dispose payment system(s)
         game.getPlatformResolver().dispose();
         adView.destroy();
+
     }
 
     @Override
@@ -205,8 +246,7 @@ public class AndroidLauncher extends AndroidApplication implements ScreenLock, A
 
     @Override
     public void showAds(boolean show) {
-        handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
+        handler.sendEmptyMessage(show && StageManager.getInstance().getGame().isAdMobActivated() && !Configuration.isPremium() ? SHOW_ADS : HIDE_ADS);
     }
-
 
 }

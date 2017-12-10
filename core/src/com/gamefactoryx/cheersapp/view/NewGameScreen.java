@@ -3,6 +3,7 @@ package com.gamefactoryx.cheersapp.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.tool.Configuration;
 import com.gamefactoryx.cheersapp.tool.Orientation;
 
@@ -25,6 +26,11 @@ public class NewGameScreen extends com.gamefactoryx.cheersapp.view.AbstractScree
     public void show(){
         super.show();
         initBackButton();
+    }
+
+    @Override
+    public void render(float delta){
+        super.render(delta);
     }
 
     @Override
@@ -107,5 +113,10 @@ public class NewGameScreen extends com.gamefactoryx.cheersapp.view.AbstractScree
 
     }
 
+
+    @Override
+    public void dispose(){
+        super.dispose();
+    }
 
 }

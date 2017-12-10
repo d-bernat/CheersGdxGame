@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.model.HallOfFameModel;
 import com.gamefactoryx.cheersapp.tool.Configuration;
 import com.gamefactoryx.cheersapp.tool.FontHelper;
@@ -35,6 +36,10 @@ public class HallOfFameScreen extends com.gamefactoryx.cheersapp.view.AbstractSc
         initBackButton();
     }
 
+    @Override
+    public void render(float delta){
+        super.render(delta);
+    }
 
     @Override
     protected void initSprites() {
@@ -166,6 +171,7 @@ public class HallOfFameScreen extends com.gamefactoryx.cheersapp.view.AbstractSc
             medal.getTexture().dispose();
         if (font != null)
             font.dispose();
+
         super.dispose();
     }
 }

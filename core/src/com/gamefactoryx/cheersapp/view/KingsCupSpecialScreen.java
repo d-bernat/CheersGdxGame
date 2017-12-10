@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 import com.gamefactoryx.cheersapp.tool.Configuration;
 import com.gamefactoryx.cheersapp.model.KingsCupSpecialModel;
 import com.gamefactoryx.cheersapp.tool.FontHelper;
@@ -79,6 +80,10 @@ public class KingsCupSpecialScreen extends com.gamefactoryx.cheersapp.view.Abstr
         initRulesButton(dataModel);
     }
 
+    @Override
+    public void render(float delta){
+        super.render(delta);
+    }
 
     @Override
     protected void initSprites() {
@@ -256,6 +261,7 @@ public class KingsCupSpecialScreen extends com.gamefactoryx.cheersapp.view.Abstr
 
     @Override
     public void dispose() {
+
         if (font != null)
             font.dispose();
         if (fontLabel != null)

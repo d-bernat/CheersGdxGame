@@ -2,6 +2,7 @@ package com.gamefactoryx.cheersapp.controller.busdriving;
 
 
 import com.badlogic.gdx.Gdx;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 
 /**
  * Created by bernat on 16.05.2017.
@@ -94,10 +95,13 @@ public class BusDrivingStagePhase2Controller extends com.gamefactoryx.cheersapp.
                 }
             } else {
                 //todo next phase
+                float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                        getScreen().getButtons()[0][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                        getScreen().getButtons()[0][0].getY();
                 if(screenX >= getScreen().getButtons()[0][0].getX() &&
                         screenX <= getScreen().getButtons()[0][0].getX() + getScreen().getButtons()[0][0].getWidth()&&
-                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[0][0].getY() &&
-                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[0][0].getY() + getScreen().getButtons()[0][0].getHeight()) {
+                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                        com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[0][0].getHeight()) {
                     Gdx.input.vibrate(10);
                     if (isThereMoreThenOneLooser())
                         com.gamefactoryx.cheersapp.controller.StageManager.getInstance().showStage(com.gamefactoryx.cheersapp.controller.StageEnum.BUS_DRIVING_STAGE_THIRD_PHASE);

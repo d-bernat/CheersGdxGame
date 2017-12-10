@@ -12,7 +12,6 @@ final class SplashStageController extends com.gamefactoryx.cheersapp.controller.
     SplashStageController(final AbstractScreen screen) {
         super(screen);
         setScreenLock(10);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
         Configuration.playMusic();
     }
 

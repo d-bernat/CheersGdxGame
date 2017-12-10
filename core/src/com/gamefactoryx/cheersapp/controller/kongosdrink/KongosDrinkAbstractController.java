@@ -27,6 +27,7 @@ abstract public class KongosDrinkAbstractController extends InputAdapter {
 
         switch (keycode){
             case Input.Keys.BACK:
+                com.gamefactoryx.cheersapp.model.kongosdrink.KongosDrinkMainModel.getInstance().setFinished(true);
                 StageManager.getInstance().showLastStage();
         }
         return true;

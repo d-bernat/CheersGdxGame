@@ -230,7 +230,7 @@ public class KongosDrinkMainScreen implements Screen/*extends AbstractScreen*/ {
 
     @Override
     public void hide() {
-
+        com.gamefactoryx.cheersapp.model.kongosdrink.KongosDrinkMainModel.getInstance().isFinished();
     }
 
     @Override

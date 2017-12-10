@@ -33,7 +33,6 @@ public class KongosDrinkPhase0Controller extends AbstractController {
         enableKeyboard(false);
         model = KongosDrinkPhase0Model.getNewInstance();
         Configuration.getNewInstance();
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(false);
     }
 
 
@@ -60,10 +59,13 @@ public class KongosDrinkPhase0Controller extends AbstractController {
             return true;
         }
 
+        float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                getScreen().getButtons()[6][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                getScreen().getButtons()[6][0].getY();
         if (screenX >= getScreen().getButtons()[6][0].getX() &&
                 screenX <= getScreen().getButtons()[6][0].getX() + getScreen().getButtons()[6][0].getWidth() &&
-                Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[6][0].getY() &&
-                Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[6][0].getY() + getScreen().getButtons()[6][0].getHeight()) {
+                Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[6][0].getHeight()) {
             Gdx.input.vibrate(10);
             StageManager.getInstance().showStage(StageEnum.KONGOS_DRINK_SETUP_STAGE);
             return true;
@@ -73,11 +75,13 @@ public class KongosDrinkPhase0Controller extends AbstractController {
         int page = model.getPage();
 
         for (int i = 0; i < /*getScreen().getCountOfButtons() - 3*/ getMaxPlayers(); i++) {
-
+            y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                    getScreen().getButtons()[i][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                    getScreen().getButtons()[i][0].getY();
             if (screenX >= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.9f &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
 
                 activeBoxIndex = i;
 
@@ -91,15 +95,15 @@ public class KongosDrinkPhase0Controller extends AbstractController {
                 return true;
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() * 0.1f &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
                 Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).setSex(
                         Configuration.getInstance().getPlayers().get(i + maxPlayersProPage * (page - 1)).getSex() == Subject.Sex.MALE ? Subject.Sex.FEMALE : Subject.Sex.MALE);
                 return true;
             } else if (screenX >= getScreen().getButtons()[i][0].getX() &&
                     screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY >= getScreen().getButtons()[i][0].getY() &&
-                    Resolution.getGameWorldHeightPortrait() - screenY <= getScreen().getButtons()[i][0].getY() + getScreen().getButtons()[i][0].getHeight()) {
+                    Resolution.getGameWorldHeightPortrait() - screenY >= y &&
+                    Resolution.getGameWorldHeightPortrait() - screenY <= y + getScreen().getButtons()[i][0].getHeight()) {
 
                 if (model.getPlayers().get(i + maxPlayersProPage * (page - 1)).isEnable()) {
                     activeBoxIndex = i;

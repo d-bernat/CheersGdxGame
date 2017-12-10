@@ -20,17 +20,29 @@ final class KingsCupSpecialStageController extends AbstractController {
         super(screen);
         animationRunning = false;
         setScreenLock(10);
-        StageManager.getInstance().getGame().getAdMobRequestHandler().showAds(true);
         com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getNewInstance();
     }
 
+    @Override
+    public boolean keyDown(int keycode) {
+
+        switch (keycode) {
+            case Input.Keys.BACK:
+                com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getInstance().setSuspended(true);
+                com.gamefactoryx.cheersapp.controller.StageManager.getInstance().showLastStage();
+        }
+        return true;
+    }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         super.touchDown(screenX, screenY, pointer, button);
         lastYPointerPos = screenY;
         for (int i = 0; i < getScreen().getCountOfButtons(); i++) {
-            float y = Configuration.isPremium() ? getScreen().getButtons()[i][0].getY(): getScreen().getButtons()[i][0].getY() + 50;
+            float y = StageManager.getInstance().getGame().isAdMobVisible() ?
+                    getScreen().getButtons()[i][0].getY() + StageManager.getInstance().getGame().getAdMobHeight() :
+                    getScreen().getButtons()[i][0].getY();
+
             if (i == 0 && !com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getInstance().isShowTask()) {
                 getScreen().getClicked()[i] = (screenX >= getScreen().getButtons()[i][0].getX() &&
                         screenX <= getScreen().getButtons()[i][0].getX() + getScreen().getButtons()[i][0].getWidth() &&
@@ -132,7 +144,7 @@ final class KingsCupSpecialStageController extends AbstractController {
             public void run() {
                 int i = 0;
                 int cykles = n * 20;
-                while (animationRunning && i < cykles) {
+                while (animationRunning && i < cykles && !com.gamefactoryx.cheersapp.model.KingsCupSpecialModel.getInstance().isSuspended()) {
                     long time = System.currentTimeMillis();
                     while (System.currentTimeMillis() < time + 50L) {
                     }

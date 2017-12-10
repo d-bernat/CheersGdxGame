@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.gamefactoryx.cheersapp.controller.StageManager;
 
 import java.util.List;
 
@@ -44,6 +45,11 @@ public class CocktailsScreen extends AbstractScreen {
         setPortraitSprite(new Sprite(new Texture("common/cocktails/background.png")));
         getLandscapeSprite().setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthLandscape(), com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightLandscape());
         getPortraitSprite().setSize(com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldWidthPortrait(), com.gamefactoryx.cheersapp.tool.Resolution.getGameWorldHeightPortrait());
+    }
+
+    @Override
+    public void render(float delta){
+        super.render(delta);
     }
 
     @Override
